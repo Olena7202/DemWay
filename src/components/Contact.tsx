@@ -171,7 +171,7 @@ export function Contact() {
             <fieldset className="contact__full contact__picks">
               <legend>Що запускаємо *</legend>
               <input type="hidden" name="service" value={direction} />
-              <div className="contact__chips">
+              <div className="contact__chips contact__chips--services">
                 {directions.map((item) => (
                   <button
                     key={item}
@@ -189,7 +189,7 @@ export function Contact() {
               Задача *
               <textarea
                 name="task"
-                rows={5}
+                rows={4}
                 required
                 placeholder="Що вже є і що має зʼявитись після запуску"
               />
@@ -197,7 +197,7 @@ export function Contact() {
             <fieldset className="contact__full contact__picks">
               <legend>Як відповісти *</legend>
               <input type="hidden" name="channel" value={channel} />
-              <div className="contact__chips">
+              <div className="contact__chips contact__chips--channels">
                 {channels.map((item) => (
                   <button
                     key={item}
