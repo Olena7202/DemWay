@@ -392,18 +392,50 @@
     radial-gradient(circle at 28% 30%, rgba(var(--pink-rgb), 0.12) 0%, transparent 42%),
     radial-gradient(circle at 48% 52%, rgba(var(--pink-rgb), 0.06) 0%, transparent 58%);
   filter: blur(56px);
-  animation: moon-glow 8s ease-in-out infinite;
+  animation: moon-glow-in 1.5s ease 2s both, moon-glow 9s ease-in-out 3.5s infinite;
+}
+
+@keyframes moon-glow-in {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 0.55;
+    transform: scale(0.94);
+  }
 }
 
 @keyframes moon-glow {
   0%,
   100% {
-    opacity: 0.32;
-    transform: scale(0.9);
+    opacity: 0.55;
+    transform: scale(0.94);
   }
   50% {
     opacity: 1;
-    transform: scale(1.14);
+    transform: scale(1.08);
+  }
+}
+
+.hero__ring {
+  position: absolute;
+  inset: 2%;
+  z-index: 0;
+  pointer-events: none;
+  border: 1px solid rgba(var(--pink-rgb), 0.55);
+  border-radius: 50%;
+  animation: hero-ring 1.8s cubic-bezier(0.22, 1, 0.36, 1) 1.85s both;
+}
+
+@keyframes hero-ring {
+  0% {
+    opacity: 0.55;
+    transform: scale(0.88);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.34);
   }
 }
 
@@ -421,14 +453,14 @@
   -webkit-mask-image: radial-gradient(circle closest-side, #000 99.6%, transparent 100%);
   mask-image: radial-gradient(circle closest-side, #000 99.6%, transparent 100%);
   transform-origin: 50% 48%;
-  animation: hero-orb 8s ease-in-out 2.15s infinite;
+  animation: hero-orb 10s ease-in-out 3.4s infinite;
 }
 
 .hero__planet {
   position: absolute;
   inset: 0;
   z-index: 1;
-  animation: hero-planet-roll 1.35s cubic-bezier(0.22, 0.82, 0.28, 1) both;
+  animation: hero-planet-roll 2.15s cubic-bezier(0.33, 0.05, 0.18, 1) both;
 }
 
 .hero__planet img {
@@ -444,7 +476,7 @@
   top: 27%;
   width: 74%;
   z-index: 3;
-  animation: hero-brand-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1.22s both;
+  animation: hero-brand-in 1.45s cubic-bezier(0.33, 0.05, 0.18, 1) 1.95s both;
   pointer-events: none;
 }
 
@@ -457,10 +489,7 @@
 @keyframes hero-planet-roll {
   0% {
     opacity: 0;
-    transform: translateX(78%) rotate(210deg);
-  }
-  62% {
-    opacity: 1;
+    transform: translateX(58%) rotate(96deg) scale(0.94);
   }
   100% {
     opacity: 1;
@@ -471,11 +500,7 @@
 @keyframes hero-brand-in {
   0% {
     opacity: 0;
-    transform: translateY(-40%) scale(0.35);
-  }
-  70% {
-    opacity: 1;
-    transform: translateY(4%) scale(1.05);
+    transform: translateY(-12%) scale(0.9);
   }
   100% {
     opacity: 1;
@@ -486,10 +511,10 @@
 @keyframes hero-orb {
   0%,
   100% {
-    transform: translate3d(0, 3px, -8px) scale(0.98);
+    transform: none;
   }
   50% {
-    transform: translate3d(0, -4px, 12px) scale(1.02);
+    transform: translate3d(0, -4px, 0) scale(1.01);
   }
 }
 
@@ -1758,18 +1783,18 @@ h1 em {
     border-radius: 50%;
     -webkit-mask-image: radial-gradient(circle closest-side, #000 99.6%, transparent 100%);
     mask-image: radial-gradient(circle closest-side, #000 99.6%, transparent 100%);
-    animation: hero-orb 8s ease-in-out 2.15s infinite;
+    animation: hero-orb 10s ease-in-out 3.4s infinite;
   }
 
   .hero__planet {
-    animation: hero-planet-roll 1.35s cubic-bezier(0.22, 0.82, 0.28, 1) both;
+    animation: hero-planet-roll 2.15s cubic-bezier(0.33, 0.05, 0.18, 1) both;
   }
 
   .hero__brand {
     left: 16%;
     top: 27%;
     width: 74%;
-    animation: hero-brand-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1.22s both;
+    animation: hero-brand-in 1.45s cubic-bezier(0.33, 0.05, 0.18, 1) 1.95s both;
   }
 
   .hero__grid,
@@ -1900,6 +1925,7 @@ h1 em {
   .hero__stage,
   .hero__planet,
   .hero__brand,
+  .hero__ring,
   .hero__mark img,
   .hero__mark::before,
   .hero__mark::after,
@@ -1922,6 +1948,7 @@ h1 em {
   .hero__stage,
   .hero__planet,
   .hero__brand,
+  .hero__ring,
   .hero__mark img,
   .hero__mark::before,
   .hero__mark::after,
@@ -1929,6 +1956,10 @@ h1 em {
   .page-bg__veil {
     transform: none;
     animation: none;
+  }
+
+  .hero__ring {
+    display: none;
   }
 
   .hero__planet,
