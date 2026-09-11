@@ -1,8 +1,9 @@
 {
-  "name": "postup",
+  "name": "demway",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://olena7202.github.io/DemWay/",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
