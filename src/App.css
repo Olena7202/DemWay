@@ -1648,11 +1648,11 @@ h1 em {
   @keyframes planet-wash-mobile {
     0%,
     100% {
-      transform: translate(-50%, -50%) scale(0.92);
-      opacity: 0.7;
+      transform: translate(-50%, -50%) scale(0.88);
+      opacity: 0.55;
     }
     50% {
-      transform: translate(-50%, -50%) scale(1.1);
+      transform: translate(-50%, -50%) scale(1.16);
       opacity: 1;
     }
   }
@@ -1660,6 +1660,36 @@ h1 em {
   .hero__mark {
     justify-self: center;
     width: min(100%, 320px);
+  }
+
+  .hero__mark img {
+    animation-name: hero-orb-mobile;
+  }
+
+  @keyframes hero-orb-mobile {
+    0%,
+    100% {
+      transform: translateY(10px) scale(0.94);
+    }
+    50% {
+      transform: translateY(-14px) scale(1.07);
+    }
+  }
+
+  .hero__mark::after {
+    animation-name: moon-glow-mobile;
+  }
+
+  @keyframes moon-glow-mobile {
+    0%,
+    100% {
+      opacity: 0.28;
+      transform: scale(0.86);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
   }
 
   .hero__grid,
@@ -1812,6 +1842,7 @@ h1 em {
   .hero::before,
   .page-bg__veil {
     transform: none;
+    animation: none;
   }
 
   .reveal {
