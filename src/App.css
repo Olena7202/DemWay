@@ -1642,7 +1642,7 @@ h1 em {
       rgba(0, 0, 0, 0.15) 80%,
       transparent 100%
     );
-    animation: planet-wash-mobile 8s ease-in-out infinite;
+    animation: planet-wash-mobile 5.5s ease-in-out infinite;
   }
 
   @keyframes planet-wash-mobile {
@@ -1664,6 +1664,7 @@ h1 em {
 
   .hero__mark img {
     animation-name: hero-orb-mobile;
+    animation-duration: 5.5s;
   }
 
   @keyframes hero-orb-mobile {
@@ -1678,6 +1679,7 @@ h1 em {
 
   .hero__mark::after {
     animation-name: moon-glow-mobile;
+    animation-duration: 5.5s;
   }
 
   @keyframes moon-glow-mobile {
