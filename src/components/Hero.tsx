@@ -34,7 +34,7 @@ export function Hero() {
         <figure className="hero__mark">
           <Reveal from="scale">
             <img
-              src="/logo-orb.png?v=full"
+              src={`${import.meta.env.BASE_URL}logo-orb.png?v=full`}
               alt="DemWay"
               width={1100}
               height={1100}
