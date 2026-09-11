@@ -60,6 +60,7 @@ export function Approach() {
     let frame = 0
     let current = 0
     let lastActive = 0
+    let lastProgress = 0
 
     const tick = () => {
       frame = requestAnimationFrame(tick)
@@ -67,7 +68,9 @@ export function Approach() {
       const next = Math.min(1, Math.max(0, -pin.getBoundingClientRect().top / total))
       const max = Math.max(0, rail.scrollWidth - stage.clientWidth)
       const target = next * max
-      current += (target - current) * 0.09
+      const rising = next >= lastProgress
+      lastProgress = next
+      current += (target - current) * (rising ? 0.09 : 0.28)
       if (Math.abs(target - current) < 0.4) current = target
       rail.style.transform = `translate3d(${-current}px, 0, 0)`
       const p = max > 0 ? current / max : 0
