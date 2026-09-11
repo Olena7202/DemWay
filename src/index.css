@@ -5,8 +5,8 @@
   --khaki-line: rgba(243, 243, 241, 0.12);
   --cream: #f3f3f1;
   --cream-dim: rgba(243, 243, 241, 0.68);
-  --pink: #777e5b;
-  --pink-rgb: 119, 126, 91;
+  --pink: #767f5b;
+  --pink-rgb: 118, 127, 91;
   --pink-soft: rgba(var(--pink-rgb), 0.22);
   --radius: 12px; 
   --card-radius: 16px;
@@ -46,8 +46,8 @@ html {
 
 @media (min-width: 961px) {
   :root {
-    --pink: #74815c;
-    --pink-rgb: 116, 129, 92;
+    --pink: #73825c;
+    --pink-rgb: 115, 130, 92;
   }
 }
 
