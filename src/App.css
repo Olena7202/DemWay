@@ -1778,6 +1778,14 @@ h1 em {
     width: min(92vw, 380px);
   }
 
+  .hero__mark::after {
+    animation: moon-glow-in 1.5s ease 2s both, moon-glow 9s ease-in-out 3.5s infinite;
+  }
+
+  .hero__ring {
+    animation: hero-ring 1.8s cubic-bezier(0.22, 1, 0.36, 1) 1.85s both;
+  }
+
   .hero__stage {
     overflow: hidden;
     border-radius: 50%;
