@@ -36,11 +36,20 @@ html {
   color-scheme: dark;
 }
 
+@media (max-width: 960px) {
+  :root {
+    --pink: #72825e;
+    --pink-rgb: 114, 130, 94;
+  }
+}
+
 @media (max-width: 720px) {
   :root {
     --pad-x: 5vw;
     --pad-section: 3rem;
     --h2: clamp(1.7rem, 8vw, 2.2rem);
+    --pink: #72825e;
+    --pink-rgb: 114, 130, 94;
   }
 }
 
