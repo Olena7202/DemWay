@@ -6,7 +6,8 @@
   --cream: #f3f3f1;
   --cream-dim: rgba(243, 243, 241, 0.68);
   --pink: #777e5b;
-  --pink-soft: rgba(119, 126, 91, 0.22);
+  --pink-rgb: 119, 126, 91;
+  --pink-soft: rgba(var(--pink-rgb), 0.22);
   --radius: 12px; 
   --card-radius: 16px;
   --font: 'Montserrat', system-ui, sans-serif;
@@ -40,6 +41,13 @@ html {
     --pad-x: 5vw;
     --pad-section: 3rem;
     --h2: clamp(1.7rem, 8vw, 2.2rem);
+  }
+}
+
+@media (min-width: 961px) {
+  :root {
+    --pink: #74815c;
+    --pink-rgb: 116, 129, 92;
   }
 }
 
