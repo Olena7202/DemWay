@@ -1642,17 +1642,17 @@ h1 em {
       rgba(0, 0, 0, 0.15) 80%,
       transparent 100%
     );
-    animation: planet-wash-mobile 6.5s ease-in-out infinite;
+    animation: planet-wash-mobile 7.5s cubic-bezier(0.4, 0.05, 0.45, 1) infinite;
   }
 
   @keyframes planet-wash-mobile {
     0%,
     100% {
-      transform: translate(-50%, -50%) scale(0.88);
-      opacity: 0.55;
+      transform: translate(-50%, -50%) scale(0.9);
+      opacity: 0.6;
     }
     50% {
-      transform: translate(-50%, -50%) scale(1.16);
+      transform: translate(-50%, -50%) scale(1.12);
       opacity: 1;
     }
   }
@@ -1664,33 +1664,35 @@ h1 em {
 
   .hero__mark img {
     animation-name: hero-orb-mobile;
-    animation-duration: 6.5s;
+    animation-duration: 7.5s;
+    animation-timing-function: cubic-bezier(0.4, 0.05, 0.45, 1);
   }
 
   @keyframes hero-orb-mobile {
     0%,
     100% {
-      transform: translateY(10px) scale(0.94);
+      transform: translateY(8px) scale(0.95);
     }
     50% {
-      transform: translateY(-14px) scale(1.07);
+      transform: translateY(-11px) scale(1.055);
     }
   }
 
   .hero__mark::after {
     animation-name: moon-glow-mobile;
-    animation-duration: 6.5s;
+    animation-duration: 7.5s;
+    animation-timing-function: cubic-bezier(0.4, 0.05, 0.45, 1);
   }
 
   @keyframes moon-glow-mobile {
     0%,
     100% {
-      opacity: 0.28;
-      transform: scale(0.86);
+      opacity: 0.32;
+      transform: scale(0.9);
     }
     50% {
       opacity: 1;
-      transform: scale(1.2);
+      transform: scale(1.14);
     }
   }
 
