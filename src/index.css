@@ -5,8 +5,8 @@
   --khaki-line: rgba(243, 243, 241, 0.12);
   --cream: #f3f3f1;
   --cream-dim: rgba(243, 243, 241, 0.68);
-  --pink: #73825c;
-  --pink-rgb: 115, 130, 92;
+  --pink: #72825e;
+  --pink-rgb: 114, 130, 94;
   --pink-soft: rgba(var(--pink-rgb), 0.22);
   --radius: 12px; 
   --card-radius: 16px;
