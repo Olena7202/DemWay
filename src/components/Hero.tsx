@@ -1,5 +1,6 @@
+import moon from '../assets/logo-moon.png'
+import mark from '../assets/logo-dw.png'
 import { Reveal } from './Reveal'
-import planet from '../assets/logo-orb.png'
 
 export function Hero() {
   return (
@@ -32,15 +33,15 @@ export function Hero() {
             </div>
           </Reveal>
         </div>
-        <figure className="hero__mark">
-          <Reveal from="scale">
-            <img
-              src={planet}
-              alt="DemWay"
-              width={1100}
-              height={1100}
-            />
-          </Reveal>
+        <figure className="hero__mark" aria-label="DemWay">
+          <div className="hero__stage">
+            <div className="hero__planet">
+              <img src={moon} alt="" width={1100} height={1100} />
+            </div>
+            <div className="hero__brand">
+              <img src={mark} alt="" width={740} height={414} />
+            </div>
+          </div>
         </figure>
       </div>
     </section>
