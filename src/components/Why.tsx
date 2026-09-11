@@ -22,7 +22,7 @@ export function Why() {
   return (
     <section className="why" id="why" data-scene="why">
       <Reveal>
-        <div className="section-head">
+        <div className="section-head why__head">
           <p className="eyebrow">Про нас</p>
           <h2>DemWay збирає просування в одну систему</h2>
           <p>
@@ -33,12 +33,12 @@ export function Why() {
           </p>
         </div>
       </Reveal>
-      <ul className="why__grid">
+      <ul className="why__rail">
         {points.map((point, index) => (
           <li key={point.n}>
-            <Reveal delay={index * 120} from="right">
-              <article className={`why__card why__card--${index + 1}`}>
-                <span>{point.n}</span>
+            <Reveal delay={index * 100} from="soft">
+              <article className="why__stat">
+                <span className="why__n">{point.n}</span>
                 <h3>{point.title}</h3>
                 <p>{point.text}</p>
               </article>

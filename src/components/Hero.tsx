@@ -34,7 +34,6 @@ export function Hero() {
           </Reveal>
         </div>
         <figure className="hero__mark" aria-label="DemWay">
-          <span className="hero__ring" aria-hidden="true" />
           <div className="hero__stage">
             <div className="hero__planet">
               <img src={moon} alt="" width={1100} height={1100} />
