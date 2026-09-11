@@ -13,11 +13,11 @@
   overflow: hidden;
   --s1x: 72%;
   --s1y: 38%;
-  --s1a: 0.11;
-  --s1w: 46%;
-  --s1h: 52%;
-  --s2a: 0.03;
-  --veil-o: 0.55;
+  --s1a: 0.17;
+  --s1w: 50%;
+  --s1h: 56%;
+  --s2a: 0.045;
+  --veil-o: 0.5;
   --grid-o: 0.07;
 }
 
@@ -82,32 +82,32 @@
 }
 
 .page-bg[data-scene='why'] {
-  --s1a: 0.1;
-  --veil-o: 0.5;
+  --s1a: 0.15;
+  --veil-o: 0.48;
   --grid-o: 0.06;
 }
 
 .page-bg[data-scene='blush'] {
-  --s1a: 0.13;
-  --veil-o: 0.58;
+  --s1a: 0.18;
+  --veil-o: 0.55;
   --grid-o: 0.05;
 }
 
 .page-bg[data-scene='cases'] {
-  --s1a: 0.09;
-  --veil-o: 0.48;
+  --s1a: 0.14;
+  --veil-o: 0.46;
   --grid-o: 0.05;
 }
 
 .page-bg[data-scene='ink'] {
-  --s1a: 0.06;
-  --veil-o: 0.32;
+  --s1a: 0.1;
+  --veil-o: 0.34;
   --grid-o: 0.04;
 }
 
 .page-bg[data-scene='close'] {
-  --s1a: 0.1;
-  --veil-o: 0.45;
+  --s1a: 0.15;
+  --veil-o: 0.44;
   --grid-o: 0.05;
 }
 
@@ -123,12 +123,13 @@
   background:
     radial-gradient(
       ellipse var(--s1w) var(--s1h) at var(--s1x) var(--s1y),
-      rgba(142, 148, 108, var(--s1a)),
-      transparent 62%
+      rgba(142, 148, 108, calc(var(--s1a) * 1.7)) 0%,
+      rgba(110, 116, 84, calc(var(--s1a) * 0.75)) 42%,
+      transparent 68%
     ),
     radial-gradient(
       ellipse 40% 48% at 18% 20%,
-      rgba(142, 148, 108, var(--s2a)),
+      rgba(142, 148, 108, calc(var(--s2a) * 1.5)),
       transparent 58%
     ),
     #000;
@@ -139,7 +140,7 @@
   background: linear-gradient(
     118deg,
     transparent 38%,
-    rgba(142, 148, 108, 0.055) 49.5%,
+    rgba(142, 148, 108, 0.1) 49.5%,
     transparent 61%
   );
 }
@@ -1584,6 +1585,54 @@ h1 em {
 }
 
 @media (max-width: 960px) {
+  .page-bg {
+    --s1x: 50%;
+    --s1y: 64%;
+    --s1w: 108%;
+    --s1h: 62%;
+    --s1a: 0.3;
+    --s2a: 0.1;
+    --veil-o: 0.62;
+  }
+
+  .page-bg[data-scene='why'] {
+    --s1a: 0.26;
+    --s1y: 42%;
+  }
+
+  .page-bg[data-scene='blush'] {
+    --s1a: 0.28;
+    --s1y: 48%;
+  }
+
+  .page-bg[data-scene='cases'] {
+    --s1a: 0.24;
+    --s1y: 45%;
+  }
+
+  .page-bg[data-scene='ink'] {
+    --s1a: 0.18;
+    --s1y: 40%;
+  }
+
+  .page-bg[data-scene='close'] {
+    --s1a: 0.26;
+    --s1y: 70%;
+  }
+
+  .page-bg__veil {
+    background: linear-gradient(
+      180deg,
+      transparent 22%,
+      rgba(142, 148, 108, 0.18) 58%,
+      transparent 88%
+    );
+  }
+
+  .page-bg__grid {
+    mask-image: radial-gradient(ellipse 88% 58% at 50% 68%, #000 10%, transparent 72%);
+  }
+
   .hero__grid,
   .contact,
   .why,
