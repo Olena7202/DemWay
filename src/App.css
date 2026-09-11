@@ -102,8 +102,8 @@
 
 .page-bg__wash {
   background:
-    radial-gradient(ellipse 85% 70% at 50% 18%, rgba(132, 152, 106, 0.055), transparent 68%),
-    radial-gradient(ellipse 70% 60% at 82% 72%, rgba(132, 152, 106, 0.04), transparent 64%),
+    radial-gradient(ellipse 85% 70% at 50% 18%, rgba(119, 126, 91, 0.055), transparent 68%),
+    radial-gradient(ellipse 70% 60% at 82% 72%, rgba(119, 126, 91, 0.04), transparent 64%),
     #070806;
 }
 
@@ -190,7 +190,7 @@
 .site-header.is-scrolled {
   background: rgba(0, 0, 0, 0.72);
   backdrop-filter: blur(18px);
-  border-bottom-color: rgba(132, 152, 106, 0.14);
+  border-bottom-color: rgba(119, 126, 91, 0.14);
 }
 
 .site-header .wordmark {
@@ -254,7 +254,7 @@
   color: var(--cream) !important;
   opacity: 1 !important;
   letter-spacing: 0.16em;
-  box-shadow: 0 0 24px rgba(132, 152, 106, 0.08);
+  box-shadow: 0 0 24px rgba(119, 126, 91, 0.08);
   transition:
     background-color 0.3s ease,
     color 0.3s ease,
@@ -270,14 +270,14 @@
   background: var(--pink) !important;
   border-color: var(--pink) !important;
   color: #000 !important;
-  box-shadow: 0 0 28px rgba(132, 152, 106, 0.28);
+  box-shadow: 0 0 28px rgba(119, 126, 91, 0.28);
 }
 
 .menu-btn {
   display: none;
   width: 44px;
   height: 44px;
-  border: 1px solid rgba(132, 152, 106, 0.28);
+  border: 1px solid rgba(119, 126, 91, 0.28);
   border-radius: 0;
   background: transparent;
   padding: 0;
@@ -340,8 +340,8 @@
   margin-left: -50vw;
   background: radial-gradient(
     ellipse 50% 56% at 72% 38%,
-    rgba(132, 152, 106, 0.289) 0%,
-    rgba(132, 152, 106, 0.128) 42%,
+    rgba(119, 126, 91, 0.289) 0%,
+    rgba(119, 126, 91, 0.128) 42%,
     transparent 68%
   );
   -webkit-mask-image: linear-gradient(90deg, transparent 42%, #000 58%);
@@ -389,8 +389,8 @@
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 28% 30%, rgba(132, 152, 106, 0.12) 0%, transparent 42%),
-    radial-gradient(circle at 48% 52%, rgba(132, 152, 106, 0.06) 0%, transparent 58%);
+    radial-gradient(circle at 28% 30%, rgba(119, 126, 91, 0.12) 0%, transparent 42%),
+    radial-gradient(circle at 48% 52%, rgba(119, 126, 91, 0.06) 0%, transparent 58%);
   filter: blur(56px);
   animation: moon-glow 8s ease-in-out infinite;
 }
@@ -761,7 +761,7 @@ h1 em {
   border-color: var(--pink);
   background: var(--khaki-deep);
   transform: translateY(-6px);
-  box-shadow: 0 16px 40px rgba(132, 152, 106, 0.16);
+  box-shadow: 0 16px 40px rgba(119, 126, 91, 0.16);
 }
 
 .service-card__code {
@@ -836,15 +836,15 @@ h1 em {
       0deg,
       transparent,
       transparent 28px,
-      rgba(132, 152, 106, 0.06) 27px,
-      rgba(132, 152, 106, 0.06) 28px
+      rgba(119, 126, 91, 0.06) 27px,
+      rgba(119, 126, 91, 0.06) 28px
     ),
     repeating-linear-gradient(
       90deg,
       transparent,
       transparent 28px,
-      rgba(132, 152, 106, 0.06) 27px,
-      rgba(132, 152, 106, 0.06) 28px
+      rgba(119, 126, 91, 0.06) 27px,
+      rgba(119, 126, 91, 0.06) 28px
     ),
     var(--khaki-deep);
   transition:
@@ -856,7 +856,7 @@ h1 em {
 .case-card:hover {
   border-color: var(--pink);
   transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(132, 152, 106, 0.14);
+  box-shadow: 0 16px 40px rgba(119, 126, 91, 0.14);
 }
 
 .case-card__top {
@@ -1622,8 +1622,8 @@ h1 em {
     transform: translate(-50%, -50%);
     background: radial-gradient(
       ellipse at center,
-      rgba(132, 152, 106, 0.51) 0%,
-      rgba(132, 152, 106, 0.225) 42%,
+      rgba(119, 126, 91, 0.51) 0%,
+      rgba(119, 126, 91, 0.225) 42%,
       transparent 70%
     );
     -webkit-mask-image: linear-gradient(
@@ -1747,7 +1747,7 @@ h1 em {
   .site-header.is-open {
     background: #000;
     backdrop-filter: none;
-    border-bottom-color: rgba(132, 152, 106, 0.14);
+    border-bottom-color: rgba(119, 126, 91, 0.14);
   }
 
   .site-header.is-open .menu-btn span:first-child {
@@ -1781,7 +1781,7 @@ h1 em {
 
   .nav--sheet a {
     padding: 0.95rem 0;
-    border-bottom: 1px solid rgba(132, 152, 106, 0.12);
+    border-bottom: 1px solid rgba(119, 126, 91, 0.12);
     letter-spacing: 0.12em;
     font-size: 0.92rem;
     opacity: 1;
