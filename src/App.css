@@ -346,6 +346,17 @@
   );
   -webkit-mask-image: linear-gradient(90deg, transparent 42%, #000 58%);
   mask-image: linear-gradient(90deg, transparent 42%, #000 58%);
+  animation: planet-wash 8s ease-in-out infinite;
+}
+
+@keyframes planet-wash {
+  0%,
+  100% {
+    opacity: 0.62;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 .hero__grid {
@@ -381,18 +392,18 @@
     radial-gradient(circle at 28% 30%, rgba(186, 192, 148, 0.12) 0%, transparent 42%),
     radial-gradient(circle at 48% 52%, rgba(142, 148, 108, 0.06) 0%, transparent 58%);
   filter: blur(56px);
-  animation: moon-glow 16s ease-in-out infinite;
+  animation: moon-glow 8s ease-in-out infinite;
 }
 
 @keyframes moon-glow {
   0%,
   100% {
-    opacity: 0.48;
-    transform: scale(0.98);
+    opacity: 0.32;
+    transform: scale(0.9);
   }
   50% {
-    opacity: 0.7;
-    transform: scale(1.04);
+    opacity: 1;
+    transform: scale(1.14);
   }
 }
 
@@ -409,16 +420,16 @@
   mix-blend-mode: screen;
   opacity: 0.82;
   transform-origin: 50% 48%;
-  animation: hero-orb 16s ease-in-out infinite;
+  animation: hero-orb 8s ease-in-out infinite;
 }
 
 @keyframes hero-orb {
   0%,
   100% {
-    transform: translateZ(-40px) scale(0.97);
+    transform: translate3d(0, 4px, -16px) scale(0.97);
   }
   50% {
-    transform: translateZ(48px) scale(1.035);
+    transform: translate3d(0, -6px, 22px) scale(1.03);
   }
 }
 
@@ -1631,6 +1642,19 @@ h1 em {
       rgba(0, 0, 0, 0.15) 80%,
       transparent 100%
     );
+    animation: planet-wash-mobile 8s ease-in-out infinite;
+  }
+
+  @keyframes planet-wash-mobile {
+    0%,
+    100% {
+      transform: translate(-50%, -50%) scale(0.92);
+      opacity: 0.7;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.1);
+      opacity: 1;
+    }
   }
 
   .hero__mark {
@@ -1764,7 +1788,9 @@ h1 em {
 @media (prefers-reduced-motion: reduce) {
   .hero-enter,
   .hero__mark img,
+  .hero__mark::before,
   .hero__mark::after,
+  .hero::before,
   .page-bg,
   .page-bg__veil,
   .page-bg__grid,
@@ -1781,7 +1807,9 @@ h1 em {
   }
 
   .hero__mark img,
+  .hero__mark::before,
   .hero__mark::after,
+  .hero::before,
   .page-bg__veil {
     transform: none;
   }
