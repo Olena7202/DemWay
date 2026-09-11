@@ -245,6 +245,10 @@
   text-transform: uppercase;
 }
 
+.nav--sheet {
+  display: none;
+}
+
 .nav a {
   position: relative;
   opacity: 0.62;
@@ -310,14 +314,24 @@
   border-radius: 0;
   background: transparent;
   padding: 0;
+  place-items: center;
 }
 
 .menu-btn span {
-  display: block;
+  grid-area: 1 / 1;
   width: 18px;
   height: 1.5px;
-  margin: 5px auto;
+  margin: 0;
   background: var(--cream);
+  transition: transform 0.25s ease;
+}
+
+.menu-btn span:first-child {
+  transform: translateY(-4px);
+}
+
+.menu-btn span:last-child {
+  transform: translateY(4px);
 }
 
 .hero,
@@ -1613,39 +1627,65 @@ h1 em {
 
 @media (max-width: 720px) {
   .menu-btn {
-    display: block;
+    display: grid;
+    position: relative;
+    z-index: 32;
   }
 
-  .site-header .nav {
+  .site-header {
+    z-index: 32;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.35) 70%, transparent 100%);
+  }
+
+  .site-header.is-open {
+    background: #000;
+    backdrop-filter: none;
+    border-bottom-color: rgba(142, 148, 108, 0.14);
+  }
+
+  .site-header.is-open .menu-btn span:first-child {
+    transform: rotate(45deg);
+  }
+
+  .site-header.is-open .menu-btn span:last-child {
+    transform: rotate(-45deg);
+  }
+
+  .nav--bar {
     display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
+  }
+
+  .nav--sheet {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 31;
     flex-direction: column;
     align-items: stretch;
+    justify-content: center;
     gap: 0;
-    padding: 0.6rem 6vw 1.2rem;
+    padding: 5.8rem var(--pad-x) 2.4rem;
     background: #000;
-    border-bottom: 1px solid rgba(142, 148, 108, 0.16);
   }
 
-  .site-header .nav--open {
+  .nav--sheet.is-open {
     display: flex;
   }
 
-  .site-header .nav a {
-    padding: 0.75rem 0;
+  .nav--sheet a {
+    padding: 0.95rem 0;
     border-bottom: 1px solid rgba(142, 148, 108, 0.12);
     letter-spacing: 0.12em;
+    font-size: 0.92rem;
+    opacity: 1;
   }
 
-  .site-header .nav a::after {
+  .nav--sheet a::after {
     display: none;
   }
 
-  .site-header .nav__cta {
-    margin-top: 0.6rem;
+  .nav--sheet .nav__cta {
+    margin-top: 1.2rem;
     text-align: center;
   }
 

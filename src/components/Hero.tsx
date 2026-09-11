@@ -1,4 +1,5 @@
 import { Reveal } from './Reveal'
+import planet from '../assets/logo-orb.png'
 
 export function Hero() {
   return (
@@ -34,7 +35,7 @@ export function Hero() {
         <figure className="hero__mark">
           <Reveal from="scale">
             <img
-              src={`${import.meta.env.BASE_URL}logo-orb.png?v=full`}
+              src={planet}
               alt="DemWay"
               width={1100}
               height={1100}
