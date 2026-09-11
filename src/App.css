@@ -13,12 +13,12 @@
   overflow: hidden;
   --s1x: 72%;
   --s1y: 38%;
-  --s1a: 0.17;
+  --s1a: 0;
   --s1w: 50%;
   --s1h: 56%;
-  --s2a: 0.045;
-  --veil-o: 0.5;
-  --grid-o: 0.07;
+  --s2a: 0;
+  --veil-o: 0;
+  --grid-o: 0.06;
 }
 
 @property --s1x {
@@ -81,34 +81,15 @@
     --grid-o 2.2s ease;
 }
 
-.page-bg[data-scene='why'] {
-  --s1a: 0.15;
-  --veil-o: 0.48;
-  --grid-o: 0.06;
-}
-
-.page-bg[data-scene='blush'] {
-  --s1a: 0.18;
-  --veil-o: 0.55;
-  --grid-o: 0.05;
-}
-
-.page-bg[data-scene='cases'] {
-  --s1a: 0.14;
-  --veil-o: 0.46;
-  --grid-o: 0.05;
-}
-
-.page-bg[data-scene='ink'] {
-  --s1a: 0.1;
-  --veil-o: 0.34;
-  --grid-o: 0.04;
-}
-
+.page-bg[data-scene='why'],
+.page-bg[data-scene='blush'],
+.page-bg[data-scene='cases'],
+.page-bg[data-scene='ink'],
 .page-bg[data-scene='close'] {
-  --s1a: 0.15;
-  --veil-o: 0.44;
-  --grid-o: 0.05;
+  --s1a: 0;
+  --s2a: 0;
+  --veil-o: 0;
+  --grid-o: 0.04;
 }
 
 .page-bg__wash,
@@ -120,29 +101,11 @@
 }
 
 .page-bg__wash {
-  background:
-    radial-gradient(
-      ellipse var(--s1w) var(--s1h) at var(--s1x) var(--s1y),
-      rgba(142, 148, 108, calc(var(--s1a) * 1.7)) 0%,
-      rgba(110, 116, 84, calc(var(--s1a) * 0.75)) 42%,
-      transparent 68%
-    ),
-    radial-gradient(
-      ellipse 40% 48% at 18% 20%,
-      rgba(142, 148, 108, calc(var(--s2a) * 1.5)),
-      transparent 58%
-    ),
-    #000;
+  background: #000;
 }
 
 .page-bg__veil {
-  opacity: var(--veil-o);
-  background: linear-gradient(
-    118deg,
-    transparent 38%,
-    rgba(142, 148, 108, 0.1) 49.5%,
-    transparent 61%
-  );
+  display: none;
 }
 
 .page-bg__grid {
@@ -355,13 +318,34 @@
 }
 
 .hero {
+  position: relative;
   min-height: 0;
   display: flex;
   align-items: center;
   padding: 6.1rem var(--pad-x) 2.6rem;
 }
 
+.hero::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  top: 0;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  margin-left: -50vw;
+  background: radial-gradient(
+    ellipse 50% 56% at 72% 38%,
+    rgba(126, 132, 90, 0.289) 0%,
+    rgba(96, 102, 72, 0.128) 42%,
+    transparent 68%
+  );
+}
+
 .hero__grid {
+  position: relative;
+  z-index: 1;
   width: 100%;
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(220px, 0.9fr);
@@ -1585,52 +1569,29 @@ h1 em {
 }
 
 @media (max-width: 960px) {
-  .page-bg {
-    --s1x: 50%;
-    --s1y: 64%;
-    --s1w: 108%;
-    --s1h: 62%;
-    --s1a: 0.3;
-    --s2a: 0.1;
-    --veil-o: 0.62;
-  }
-
-  .page-bg[data-scene='why'] {
-    --s1a: 0.26;
-    --s1y: 42%;
-  }
-
-  .page-bg[data-scene='blush'] {
-    --s1a: 0.28;
-    --s1y: 48%;
-  }
-
-  .page-bg[data-scene='cases'] {
-    --s1a: 0.24;
-    --s1y: 45%;
-  }
-
-  .page-bg[data-scene='ink'] {
-    --s1a: 0.18;
-    --s1y: 40%;
-  }
-
+  .page-bg,
+  .page-bg[data-scene='why'],
+  .page-bg[data-scene='blush'],
+  .page-bg[data-scene='cases'],
+  .page-bg[data-scene='ink'],
   .page-bg[data-scene='close'] {
-    --s1a: 0.26;
-    --s1y: 70%;
-  }
-
-  .page-bg__veil {
-    background: linear-gradient(
-      180deg,
-      transparent 22%,
-      rgba(142, 148, 108, 0.18) 58%,
-      transparent 88%
-    );
+    --s1a: 0;
+    --s2a: 0;
+    --veil-o: 0;
+    --grid-o: 0.035;
   }
 
   .page-bg__grid {
-    mask-image: radial-gradient(ellipse 88% 58% at 50% 68%, #000 10%, transparent 72%);
+    mask-image: radial-gradient(ellipse 80% 50% at 50% 28%, #000 8%, transparent 70%);
+  }
+
+  .hero::before {
+    background: radial-gradient(
+      ellipse 108% 62% at 50% 64%,
+      rgba(126, 132, 90, 0.51) 0%,
+      rgba(96, 102, 72, 0.225) 42%,
+      transparent 70%
+    );
   }
 
   .hero__grid,
