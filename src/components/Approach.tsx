@@ -39,14 +39,23 @@ export function Approach() {
   const railRef = useRef<HTMLUListElement>(null)
   const barRef = useRef<HTMLSpanElement>(null)
   const [active, setActive] = useState(0)
-  const [reduced, setReduced] = useState(false)
+  const [reduced, setReduced] = useState(() =>
+    typeof window !== 'undefined' &&
+    (window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      window.matchMedia('(max-width: 720px)').matches),
+  )
 
   useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
-    setReduced(mq.matches)
-    const onChange = () => setReduced(mq.matches)
-    mq.addEventListener('change', onChange)
-    return () => mq.removeEventListener('change', onChange)
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const phone = window.matchMedia('(max-width: 720px)')
+    const sync = () => setReduced(motion.matches || phone.matches)
+    sync()
+    motion.addEventListener('change', sync)
+    phone.addEventListener('change', sync)
+    return () => {
+      motion.removeEventListener('change', sync)
+      phone.removeEventListener('change', sync)
+    }
   }, [])
 
   useEffect(() => {

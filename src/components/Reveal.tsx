@@ -4,7 +4,7 @@ type RevealProps = {
   children: ReactNode
   className?: string
   delay?: number
-  from?: 'up' | 'left' | 'right' | 'soft' | 'scale' | 'slide'
+  from?: 'up' | 'left' | 'right' | 'soft' | 'scale' | 'slide' | 'orb'
 }
 
 export function Reveal({
@@ -28,10 +28,12 @@ export function Reveal({
 
     const read = () => {
       frame = 0
+      if (el.classList.contains('is-visible')) return
       const box = el.getBoundingClientRect()
       const view = window.innerHeight
-      const on = box.top < view * 0.88 && box.bottom > 96
-      el.classList.toggle('is-visible', on)
+      if (box.top < view * 0.9 && box.bottom > 48) {
+        el.classList.add('is-visible')
+      }
     }
 
     const onScroll = () => {

@@ -1,35 +1,36 @@
-import { Wordmark } from "./Wordmark";
-import { Reveal } from "./Reveal";
-
-const links = [
-  { href: "#why", label: "Про нас" },
-  { href: "#services", label: "Послуги" },
-  { href: "#cases", label: "Кейси" },
-  { href: "#approach", label: "Підхід" },
-  { href: "#contact", label: "Контакти" },
-];
+import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Wordmark } from './Wordmark'
+import { Reveal } from './Reveal'
 
 export function Footer() {
+  const location = useLocation()
+  const onServices = location.pathname.replace(/\/$/, '').endsWith('/poslugy')
+  const contactTo = onServices
+    ? { pathname: '/poslugy', hash: '#contact' }
+    : { pathname: '/', hash: '#contact' }
+  const topTo = onServices ? '/poslugy' : { pathname: '/', hash: '#top' }
+
   return (
     <footer className="site-footer" data-scene="close">
       <Reveal from="soft">
         <div className="site-footer__top">
-          <a
-            href="#top"
-            className="brand"
-            aria-label="DemWay digital agency"
-          >
+          <Link to="/" className="brand" aria-label="DemWay digital agency">
             <Wordmark />
-          </a>
+          </Link>
           <nav className="site-footer__nav" aria-label="Нижня навігація">
-            {links.map((item) => (
-              <a key={item.href} href={item.href}>
-                {item.label}
-              </a>
-            ))}
-            <a className="nav__cta" href="#contact">
+            <Link to={{ pathname: '/', hash: '#why' }}>Про нас</Link>
+            <NavLink
+              to="/poslugy"
+              className={({ isActive }) => (isActive ? 'is-current' : '')}
+            >
+              Послуги
+            </NavLink>
+            <Link to={{ pathname: '/', hash: '#cases' }}>Кейси</Link>
+            <Link to={{ pathname: '/', hash: '#approach' }}>Підхід</Link>
+            <Link to={contactTo}>Контакти</Link>
+            <Link className="nav__cta" to={contactTo}>
               Бриф
-            </a>
+            </Link>
           </nav>
         </div>
         <p className="site-footer__line">
@@ -38,9 +39,9 @@ export function Footer() {
         </p>
         <div className="site-footer__bar">
           <span>© {new Date().getFullYear()} DemWay</span>
-          <a href="#top">Нагору</a>
+          <Link to={topTo}>Нагору</Link>
         </div>
       </Reveal>
     </footer>
-  );
+  )
 }

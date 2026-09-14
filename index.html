@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="uk">
+<html lang="uk" class="is-booting">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="%BASE_URL%favicon.png" />
     <link rel="apple-touch-icon" href="%BASE_URL%apple-touch-icon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta
       name="description"
       content="DemWay — digital агенція: лендінг, каса POS, CRM, SEO, Google Ads, Meta Ads, аналіз ринку, банери та логотип."
@@ -16,8 +16,110 @@
       rel="stylesheet"
     />
     <title>DemWay — digital agency</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: #070707;
+      }
+      html.is-booting {
+        overflow: hidden;
+      }
+      #boot {
+        position: fixed;
+        inset: 0;
+        z-index: 80;
+        display: grid;
+        place-items: center;
+        background: #070707;
+      }
+      #boot.is-away {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.7s ease;
+      }
+      .boot__core {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: min(58vw, 220px);
+        aspect-ratio: 1;
+      }
+      .boot__halo {
+        position: absolute;
+        inset: -0.85rem;
+        border-radius: 50%;
+        border: 1px dashed rgba(114, 130, 94, 0.42);
+        animation: boot-orbit 18s linear infinite;
+      }
+      .boot__halo::after {
+        content: '';
+        position: absolute;
+        top: -0.22rem;
+        left: 50%;
+        width: 0.44rem;
+        height: 0.44rem;
+        margin-left: -0.22rem;
+        border-radius: 50%;
+        background: #72825e;
+        box-shadow: 0 0 12px rgba(114, 130, 94, 0.6);
+      }
+      .boot__disc {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1;
+        overflow: hidden;
+        border-radius: 50%;
+        -webkit-mask-image: radial-gradient(circle closest-side, #000 99.6%, transparent 100%);
+        mask-image: radial-gradient(circle closest-side, #000 99.6%, transparent 100%);
+      }
+      .boot__planet,
+      .boot__brand {
+        position: absolute;
+      }
+      .boot__planet {
+        inset: 0;
+      }
+      .boot__planet img,
+      .boot__brand img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .boot__planet img {
+        border-radius: 50%;
+      }
+      .boot__brand {
+        left: 16%;
+        top: 27%;
+        width: 74%;
+      }
+      @keyframes boot-orbit {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .boot__halo {
+          animation: none;
+        }
+      }
+    </style>
   </head>
   <body>
+    <div id="boot">
+      <div class="boot__core">
+        <span class="boot__halo" aria-hidden="true"></span>
+        <div class="boot__disc">
+          <div class="boot__planet">
+            <img src="%BASE_URL%logo-moon.png" alt="" width="1100" height="1100" />
+          </div>
+          <div class="boot__brand">
+            <img src="%BASE_URL%logo-dw.png" alt="" width="740" height="414" />
+          </div>
+        </div>
+      </div>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
