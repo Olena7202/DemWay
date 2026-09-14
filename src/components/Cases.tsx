@@ -15,7 +15,7 @@ export function Cases() {
       <ul className="case-grid">
         {cases.map((item, index) => (
           <li key={item.code}>
-            <Reveal delay={index * 70} from="scale">
+            <Reveal delay={index * 100} from="scale">
               <a className="case-card" href="#contact">
                 <span className="case-card__top">
                   <span className="case-card__code">{item.code}</span>

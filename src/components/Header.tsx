@@ -1,25 +1,38 @@
 import { useEffect, useState } from 'react'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Wordmark } from './Wordmark'
 
-const links = [
-  { href: '#why', label: 'Про нас' },
-  { href: '#services', label: 'Послуги' },
-  { href: '#cases', label: 'Кейси' },
-  { href: '#approach', label: 'Підхід' },
-  { href: '#contact', label: 'Контакти' },
-]
-
 function NavLinks({ onSelect }: { onSelect: () => void }) {
+  const location = useLocation()
+  const onServices = location.pathname.replace(/\/$/, '').endsWith('/poslugy')
+  const contactTo = onServices
+    ? { pathname: '/poslugy', hash: '#contact' }
+    : { pathname: '/', hash: '#contact' }
+
   return (
     <>
-      {links.map((link) => (
-        <a key={link.href} href={link.href} onClick={onSelect}>
-          {link.label}
-        </a>
-      ))}
-      <a className="nav__cta" href="#contact" onClick={onSelect}>
+      <Link to={{ pathname: '/', hash: '#why' }} onClick={onSelect}>
+        Про нас
+      </Link>
+      <NavLink
+        to="/poslugy"
+        className={({ isActive }) => (isActive ? 'is-current' : '')}
+        onClick={onSelect}
+      >
+        Послуги
+      </NavLink>
+      <Link to={{ pathname: '/', hash: '#cases' }} onClick={onSelect}>
+        Кейси
+      </Link>
+      <Link to={{ pathname: '/', hash: '#approach' }} onClick={onSelect}>
+        Підхід
+      </Link>
+      <Link to={contactTo} onClick={onSelect}>
+        Контакти
+      </Link>
+      <Link className="nav__cta" to={contactTo} onClick={onSelect}>
         Бриф
-      </a>
+      </Link>
     </>
   )
 }
@@ -51,9 +64,14 @@ export function Header() {
       <header
         className={`site-header${scrolled && !open ? ' is-scrolled' : ''}${open ? ' is-open' : ''}`}
       >
-        <a href="#top" className="brand" aria-label="DemWay digital agency" onClick={close}>
+        <Link
+          to="/"
+          className="brand"
+          aria-label="DemWay digital agency"
+          onClick={close}
+        >
           <Wordmark />
-        </a>
+        </Link>
         <nav className="nav nav--bar" aria-label="Навігація">
           <NavLinks onSelect={close} />
         </nav>
