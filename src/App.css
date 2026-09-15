@@ -1,8 +1,9 @@
 .page {
   position: relative;
+  z-index: 1;
   overflow-x: clip;
   min-height: 100svh;
-  background: #000;
+  background: transparent;
 }
 
 .page-bg {
@@ -105,7 +106,7 @@
   z-index: 1;
   width: 100%;
   height: 100%;
-  opacity: 0.28;
+  opacity: 0.52;
   mask-image: none;
 }
 
@@ -875,10 +876,9 @@ h1 em {
 .service-tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.15rem 1.55rem;
+  gap: 0.4rem;
   margin: 0;
   padding: 0;
-  border-bottom: 1px solid var(--khaki-line);
   max-width: 100%;
 }
 
@@ -893,38 +893,36 @@ h1 em {
 .service-tab {
   position: relative;
   min-height: 44px;
-  padding: 0.35rem 0 0.7rem;
-  border: 0;
+  padding: 0.42rem 0.95rem;
+  border: 1px solid var(--khaki-line);
+  border-radius: 999px;
   background: transparent;
   color: var(--cream-dim);
   font-weight: 600;
   letter-spacing: 0.04em;
-  transition: color 0.2s ease;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .service-tab::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -1px;
-  height: 1px;
-  background: var(--pink);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.25s ease;
+  display: none;
 }
 
 .service-tab:hover {
   color: var(--cream);
+  border-color: color-mix(in srgb, var(--pink) 45%, var(--khaki-line));
 }
 
 .service-tab--active {
-  color: var(--cream);
+  color: var(--khaki-deep);
+  background: var(--pink);
+  border-color: var(--pink);
 }
 
 .service-tab--active::after {
-  transform: scaleX(1);
+  display: none;
 }
 
 .teaser-board {
@@ -989,8 +987,8 @@ h1 em {
 
 @keyframes svc-in {
   from {
-    opacity: 0;
-    transform: translateY(18px);
+    opacity: 0.4;
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -1004,11 +1002,14 @@ h1 em {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 0.85rem 1rem;
   align-items: start;
-  padding: 0.95rem 0;
+  padding: 0.85rem 0.8rem;
+  border: 0;
   border-bottom: 1px solid color-mix(in srgb, var(--khaki-line) 70%, transparent);
+  border-radius: 10px;
   transition:
     color 0.28s ease,
-    transform 0.35s cubic-bezier(0.16, 1.12, 0.32, 1);
+    background-color 0.28s ease,
+    box-shadow 0.28s ease;
 }
 
 .teaser-row::after {
@@ -1027,7 +1028,11 @@ h1 em {
 .teaser-row:hover,
 .teaser-row.is-on {
   color: var(--cream);
-  transform: translateX(8px);
+}
+
+.teaser-row.is-on {
+  background: color-mix(in srgb, var(--pink) 10%, transparent);
+  box-shadow: inset 2px 0 0 var(--pink);
 }
 
 .teaser-row:hover::after,
@@ -1081,7 +1086,16 @@ h1 em {
 }
 
 .services--page .teaser-board {
-  margin-bottom: var(--gap-block);
+  margin-bottom: 0;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.svc-catalog {
+  display: grid;
+  grid-template-columns: minmax(16rem, 0.86fr) minmax(0, 1.14fr);
+  gap: 1.8rem 2.4rem;
+  align-items: start;
 }
 
 button.teaser-row {
@@ -1160,12 +1174,21 @@ button.teaser-row {
 
 .svc-picked {
   display: grid;
-  gap: var(--gap-block);
+  gap: 1.2rem;
+  position: sticky;
+  top: 5.6rem;
+  padding: 1.35rem 1.4rem 1.45rem;
+  border: 1px solid color-mix(in srgb, var(--pink) 22%, var(--khaki-line));
+  border-radius: var(--card-radius);
+  background:
+    radial-gradient(ellipse 80% 50% at 0% 0%, rgba(var(--pink-rgb), 0.1), transparent 58%),
+    #080808;
+  scroll-margin-top: 5.6rem;
 }
 
 .svc-detail__head {
   min-width: 0;
-  max-width: 38rem;
+  max-width: none;
   scroll-margin-top: 6rem;
   animation: svc-in 0.5s cubic-bezier(0.16, 1.12, 0.32, 1) both;
 }
@@ -1178,10 +1201,10 @@ button.teaser-row {
   color: var(--pink);
 }
 
-.svc-detail__head h2 {
+.svc-picked .svc-detail__head h2 {
   margin: 0 0 0.55rem;
   font-family: var(--display);
-  font-size: var(--h2);
+  font-size: clamp(1.5rem, 2.5vw, 2.05rem);
   letter-spacing: -0.04em;
   line-height: 1.12;
 }
@@ -1199,7 +1222,7 @@ button.teaser-row {
 }
 
 .svc__plans--1 {
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
 }
 
 .svc__plans--3 {
@@ -1207,12 +1230,14 @@ button.teaser-row {
 }
 
 .plan {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
   height: 100%;
   padding: 1.2rem 1.3rem 1.25rem;
   border: 1px solid var(--khaki-line);
+  border-radius: var(--card-radius);
   background: var(--khaki-deep);
   animation: svc-plan-in 0.65s cubic-bezier(0.16, 1.12, 0.32, 1) both;
   transition:
@@ -1241,8 +1266,8 @@ button.teaser-row {
 
 @keyframes svc-plan-in {
   from {
-    opacity: 0;
-    transform: translateY(22px) scale(0.96);
+    opacity: 0.4;
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -1251,7 +1276,27 @@ button.teaser-row {
 }
 
 .plan--plus {
-  background: color-mix(in srgb, var(--pink) 7%, var(--khaki-deep));
+  background: color-mix(in srgb, var(--pink) 8%, var(--khaki-deep));
+  border-color: color-mix(in srgb, var(--pink) 38%, var(--khaki-line));
+}
+
+.plan__tag {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.15rem;
+  margin: 0;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--khaki-deep);
+  background: var(--pink);
+  padding: 0.22rem 0.5rem;
+  border-radius: 999px;
+}
+
+.plan--plus .plan__name {
+  padding-right: 8.5rem;
 }
 
 .plan .btn {
@@ -2693,6 +2738,16 @@ button.teaser-row {
     position: static;
   }
 
+  .svc-catalog {
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+  }
+
+  .svc-picked {
+    position: static;
+    padding: 1.15rem 1.1rem 1.2rem;
+  }
+
   .svc__plans,
   .svc__plans--3 {
     grid-template-columns: 1fr;
@@ -2700,7 +2755,7 @@ button.teaser-row {
 
   .service-tabs {
     width: 100%;
-    gap: 0.15rem 1.1rem;
+    gap: 0.4rem;
   }
 
   .services--page {
