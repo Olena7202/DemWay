@@ -15,8 +15,8 @@ export function Hero() {
           </Reveal>
           <Reveal delay={90} from="soft">
             <p className="lede">
-              Кожне рішення будуємо навколо вашого бізнесу: сайти й лендінги, CRM
-              і POS, пошук, реклама та айдентика — від першого контакту до покупки.
+              Кожне рішення будуємо навколо вашого бізнесу: сайти й лендінги, CRM,
+              пошук, реклама та айдентика — від першого контакту до покупки.
             </p>
           </Reveal>
           <Reveal delay={160} from="soft">
@@ -27,20 +27,27 @@ export function Hero() {
                   <span>Обговорити задачу</span>
                 </span>
               </a>
-              <a className="btn btn--ghost" href="#cases">
+              <a className="btn btn--ink" href="#cases">
                 Дивитись кейси
               </a>
             </div>
           </Reveal>
         </div>
-        <figure className="hero__mark" aria-label="DemWay">
+        <figure
+          className="hero__mark"
+          aria-label="DemWay"
+          onContextMenu={(event) => event.preventDefault()}
+          onDragStart={(event) => event.preventDefault()}
+        >
           <div className="hero__stage">
-            <div className="hero__planet">
-              <img src={moon} alt="" width={1100} height={1100} />
-            </div>
-            <div className="hero__brand">
-              <img src={mark} alt="" width={740} height={414} />
-            </div>
+            <div
+              className="hero__planet"
+              style={{ backgroundImage: `url(${moon})` }}
+            />
+            <div
+              className="hero__brand"
+              style={{ backgroundImage: `url(${mark})` }}
+            />
           </div>
         </figure>
       </div>

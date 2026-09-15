@@ -21,7 +21,9 @@ function ScrollTo() {
   const location = useLocation()
 
   useEffect(() => {
-    if (!location.hash) {
+    const path = location.pathname.replace(/\/$/, '')
+    const onCatalog = path.endsWith('/poslugy')
+    if (!location.hash || (onCatalog && location.hash !== '#contact')) {
       window.scrollTo(0, 0)
       return
     }
@@ -83,18 +85,20 @@ function App() {
   }, [])
 
   return (
-    <div className="page">
-      <ScrollTo />
-      <PageBg />
+    <>
       <Header />
-      <main>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/poslugy" element={<ServicesPage />} />
-        </Routes>
-      </main>
-      <Footer />
-    </div>
+      <div className="page">
+        <ScrollTo />
+        <PageBg />
+        <main>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/poslugy" element={<ServicesPage />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </>
   )
 }
 
