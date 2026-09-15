@@ -86,10 +86,10 @@ function App() {
 
   return (
     <>
+      <PageBg />
       <Header />
       <div className="page">
         <ScrollTo />
-        <PageBg />
         <main>
           <Routes>
             <Route path="/" element={<HomePage />} />

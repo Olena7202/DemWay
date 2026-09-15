@@ -35,11 +35,12 @@ export function MeshField() {
     let height = 0
     let dpr = 1
     let frame = 0
-    let mouseX: number | null = null
-    let mouseY: number | null = null
+    let mouseX = 0
+    let mouseY = 0
+    let hasPointer = false
 
     const createPoints = () => {
-      const step = Math.sqrt(width < 720 ? 8200 : DENSITY)
+      const step = Math.sqrt(width < 720 ? 7800 : DENSITY)
       points = []
       for (let x = 0; x < width; x += step) {
         for (let y = 0; y < height; y += step) {
@@ -101,8 +102,8 @@ export function MeshField() {
       if (t >= 1) {
         point.startX = point.x
         point.startY = point.y
-        point.targetX = point.originX + (Math.random() * 40 - 20)
-        point.targetY = point.originY + (Math.random() * 40 - 20)
+        point.targetX = point.originX + (Math.random() * 48 - 24)
+        point.targetY = point.originY + (Math.random() * 48 - 24)
         point.startTime = now
         point.duration = 1000 + Math.random() * 1000
         t = 0
@@ -113,10 +114,10 @@ export function MeshField() {
     }
 
     const updateActivity = () => {
-      if (mouseX === null || mouseY === null) {
+      if (!hasPointer) {
         for (const point of points) {
-          point.active *= 0.96
-          point.circle *= 0.96
+          point.active *= 0.9
+          point.circle *= 0.9
         }
         return
       }
@@ -125,18 +126,18 @@ export function MeshField() {
         const dx = mouseX - point.x
         const dy = mouseY - point.y
         const dist = dx * dx + dy * dy
-        if (dist < 2800) {
-          point.active = 0.32
-          point.circle = 0.55
+        if (dist < 3200) {
+          point.active = 0.4
+          point.circle = 0.85
         } else if (dist < 11000) {
-          point.active = 0.14
-          point.circle = 0.28
-        } else if (dist < 22000) {
-          point.active = 0.06
-          point.circle = 0.12
+          point.active = 0.18
+          point.circle = 0.4
+        } else if (dist < 20000) {
+          point.active = 0.07
+          point.circle = 0.16
         } else {
-          point.active *= 0.92
-          point.circle *= 0.92
+          point.active *= 0.88
+          point.circle *= 0.88
         }
       }
     }
@@ -150,12 +151,12 @@ export function MeshField() {
 
       ctx.lineWidth = 1
       for (const point of points) {
-        if (point.active <= 0) continue
+        if (point.active <= 0.02) continue
         for (const neighbor of point.closest) {
           const dist = Math.hypot(point.x - neighbor.x, point.y - neighbor.y)
-          const alpha = point.active * (1 - dist / 100)
-          if (alpha <= 0) continue
-          ctx.strokeStyle = `rgba(${STROKE}, ${Math.min(alpha * 0.36, 0.14)})`
+          const alpha = point.active * (1 - dist / 130)
+          if (alpha <= 0.02) continue
+          ctx.strokeStyle = `rgba(${STROKE}, ${Math.min(alpha, 0.32)})`
           ctx.beginPath()
           ctx.moveTo(point.x, point.y)
           ctx.lineTo(neighbor.x, neighbor.y)
@@ -164,10 +165,10 @@ export function MeshField() {
       }
 
       for (const point of points) {
-        if (point.circle <= 0.02) continue
-        ctx.fillStyle = `rgba(${STROKE}, ${0.04 + point.circle * 0.14})`
+        if (point.circle <= 0.04) continue
+        ctx.fillStyle = `rgba(${STROKE}, ${0.06 + point.circle * 0.28})`
         ctx.beginPath()
-        ctx.arc(point.x, point.y, 0.7, 0, Math.PI * 2)
+        ctx.arc(point.x, point.y, 0.9, 0, Math.PI * 2)
         ctx.fill()
       }
     }
@@ -178,18 +179,15 @@ export function MeshField() {
     }
 
     const onMouseMove = (event: MouseEvent) => {
+      hasPointer = true
       mouseX = event.clientX
       mouseY = event.clientY
-    }
-
-    const onMouseLeave = () => {
-      mouseX = null
-      mouseY = null
     }
 
     const onTouch = (event: TouchEvent) => {
       const touch = event.touches[0]
       if (!touch) return
+      hasPointer = true
       mouseX = touch.clientX
       mouseY = touch.clientY
     }
@@ -204,12 +202,9 @@ export function MeshField() {
     }
 
     resize()
-    mouseX = width * 0.22
-    mouseY = height * 0.38
     draw()
     window.addEventListener('resize', resize)
     window.addEventListener('mousemove', onMouseMove)
-    document.documentElement.addEventListener('mouseleave', onMouseLeave)
     window.addEventListener('touchmove', onTouch, { passive: true })
     document.addEventListener('visibilitychange', onHide)
     frame = requestAnimationFrame(tick)
@@ -218,7 +213,6 @@ export function MeshField() {
       cancelAnimationFrame(frame)
       window.removeEventListener('resize', resize)
       window.removeEventListener('mousemove', onMouseMove)
-      document.documentElement.removeEventListener('mouseleave', onMouseLeave)
       window.removeEventListener('touchmove', onTouch)
       document.removeEventListener('visibilitychange', onHide)
     }
