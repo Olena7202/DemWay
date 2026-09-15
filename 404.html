@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta
       name="description"
-      content="DemWay — digital агенція: лендінг, каса POS, CRM, SEO, Google Ads, Meta Ads, аналіз ринку, банери та логотип."
+      content="DemWay — digital агенція: лендінг, CRM, SEO, Google Ads, Meta Ads, аналіз ринку, банери та логотип."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,7 +20,7 @@
       html,
       body {
         margin: 0;
-        background: #070707;
+        background: #000;
       }
       html.is-booting {
         overflow: hidden;
@@ -31,7 +31,7 @@
         z-index: 80;
         display: grid;
         place-items: center;
-        background: #070707;
+        background: #000;
       }
       #boot.is-away {
         opacity: 0;
@@ -44,6 +44,11 @@
         place-items: center;
         width: min(58vw, 220px);
         aspect-ratio: 1;
+      }
+      @media (max-width: 720px) {
+        .boot__core {
+          width: min(46vw, 168px);
+        }
       }
       .boot__halo {
         position: absolute;
@@ -72,53 +77,80 @@
         border-radius: 50%;
         -webkit-mask-image: radial-gradient(circle closest-side, #000 99.6%, transparent 100%);
         mask-image: radial-gradient(circle closest-side, #000 99.6%, transparent 100%);
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
       }
       .boot__planet,
       .boot__brand {
         position: absolute;
+        pointer-events: none;
       }
       .boot__planet {
         inset: 0;
-      }
-      .boot__planet img,
-      .boot__brand img {
-        display: block;
-        width: 100%;
-        height: auto;
-      }
-      .boot__planet img {
         border-radius: 50%;
+        background: url('/DemWay/logo-moon.png') center / cover no-repeat;
       }
       .boot__brand {
         left: 16%;
         top: 27%;
         width: 74%;
+        aspect-ratio: 740 / 414;
+        opacity: 0;
+        transform-origin: 50% 55%;
+        background: url('/DemWay/logo-dw.png') center / contain no-repeat;
+        animation: boot-brand-out 1.55s cubic-bezier(0.16, 1.05, 0.28, 1) 0.4s both;
+      }
+      .boot__shield {
+        position: absolute;
+        inset: 0;
+        z-index: 5;
+        border-radius: 50%;
       }
       @keyframes boot-orbit {
         to {
           transform: rotate(360deg);
         }
       }
+      @keyframes boot-brand-out {
+        0% {
+          opacity: 0;
+          transform: translate3d(12%, 10%, -80px) scale(0.18);
+          filter: brightness(0.2);
+        }
+        42% {
+          opacity: 1;
+          filter: brightness(0.72);
+        }
+        100% {
+          opacity: 1;
+          transform: none;
+          filter: none;
+        }
+      }
       @media (prefers-reduced-motion: reduce) {
-        .boot__halo {
+        .boot__halo,
+        .boot__brand {
           animation: none;
+        }
+        .boot__brand {
+          opacity: 1;
+          transform: none;
+          filter: none;
         }
       }
     </style>
-    <script type="module" crossorigin src="/DemWay/assets/index-DD-Nm57q.js"></script>
-    <link rel="stylesheet" crossorigin href="/DemWay/assets/index-C71DNcYX.css">
+    <script type="module" crossorigin src="/DemWay/assets/index-BEMQ5H-m.js"></script>
+    <link rel="stylesheet" crossorigin href="/DemWay/assets/index-UO5EU23w.css">
   </head>
   <body>
-    <div id="boot">
+    <div id="boot" oncontextmenu="return false">
       <div class="boot__core">
         <span class="boot__halo" aria-hidden="true"></span>
         <div class="boot__disc">
-          <div class="boot__planet">
-            <img src="/DemWay/logo-moon.png" alt="" width="1100" height="1100" />
-          </div>
-          <div class="boot__brand">
-            <img src="/DemWay/logo-dw.png" alt="" width="740" height="414" />
-          </div>
+          <div class="boot__planet"></div>
+          <div class="boot__brand"></div>
+          <span class="boot__shield" aria-hidden="true"></span>
         </div>
       </div>
     </div>
