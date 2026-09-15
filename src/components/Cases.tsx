@@ -12,21 +12,18 @@ export function Cases() {
         </div>
       </Reveal>
 
-      <ul className="case-grid">
+      <ul className="service-tiles">
         {cases.map((item, index) => (
           <li key={item.code}>
-            <Reveal delay={index * 100} from="scale">
-              <a className="case-card" href="#contact">
-                <span className="case-card__top">
-                  <span className="case-card__code">{item.code}</span>
-                  <span className="case-card__cat">{item.category}</span>
+            <Reveal delay={index * 80} from="scale">
+              <a className="service-tile" href="#contact">
+                <span className="service-tile__cat">{item.category}</span>
+                <span className="service-tile__mark" aria-hidden="true">
+                  {item.mark}
                 </span>
-                <span className="case-card__visual" aria-hidden="true">
-                  <span className="case-card__mark">{item.mark}</span>
-                </span>
-                <span className="case-card__copy">
-                  <span className="case-card__title">{item.title}</span>
-                  <span className="case-card__text">{item.text}</span>
+                <span className="service-tile__copy">
+                  <span className="service-tile__name">{item.title}</span>
+                  <span className="service-tile__text">{item.text}</span>
                 </span>
               </a>
             </Reveal>

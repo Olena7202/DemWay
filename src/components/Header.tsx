@@ -38,8 +38,13 @@ function NavLinks({ onSelect }: { onSelect: () => void }) {
 }
 
 export function Header() {
+  const location = useLocation()
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    setOpen(false)
+  }, [location.pathname, location.hash])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)

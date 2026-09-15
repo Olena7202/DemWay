@@ -1,18 +1,25 @@
 import { useEffect, useMemo, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import {
   clusterServices,
-  serviceGroups,
+  groupFromAnchor,
+  serviceGroupAnchors,
   services,
   type Service,
+  type ServiceGroup,
 } from '../data/services'
 import { Reveal } from './Reveal'
 import { ScrollReveal } from './ScrollReveal'
 import { ServiceTabs } from './ServiceTabs'
 
+function firstSlug(next: ServiceGroup) {
+  return clusterServices(next)[0]?.items[0]?.slug ?? services[0].slug
+}
+
 export function Services() {
   const location = useLocation()
-  const [group, setGroup] = useState<(typeof serviceGroups)[number]>('Сайти')
+  const navigate = useNavigate()
+  const [group, setGroup] = useState<ServiceGroup>('Сайти')
   const [open, setOpen] = useState(services[0].slug)
   const clusters = useMemo(() => clusterServices(group), [group])
   const current =
@@ -20,17 +27,28 @@ export function Services() {
     clusters[0]?.items[0]
 
   useEffect(() => {
-    const slug = location.hash.replace('#', '')
-    const found = services.find((service) => service.slug === slug)
+    const napryam = new URLSearchParams(location.search).get('napryam')
+    const hash = location.hash.replace('#', '')
+    const fromGroup = groupFromAnchor(napryam) ?? groupFromAnchor(hash)
+    if (fromGroup) {
+      setGroup(fromGroup)
+      setOpen(firstSlug(fromGroup))
+      return
+    }
+    const found = services.find((service) => service.slug === hash)
     if (!found) return
     setGroup(found.group)
     setOpen(found.slug)
-  }, [location.hash])
+  }, [location.search, location.hash])
 
-  function pickGroup(next: (typeof serviceGroups)[number]) {
+  function pickGroup(next: ServiceGroup) {
     setGroup(next)
-    const first = clusterServices(next)[0]?.items[0]
-    if (first) setOpen(first.slug)
+    setOpen(firstSlug(next))
+    navigate(
+      { pathname: '/poslugy', search: `?napryam=${serviceGroupAnchors[next]}` },
+      { replace: true },
+    )
+    document.getElementById('services')?.scrollIntoView({ block: 'start' })
   }
 
   return (
@@ -41,14 +59,18 @@ export function Services() {
             <p className="eyebrow">Послуги</p>
             <h1 className="services__h1">Каталог пакетів</h1>
             <p>
-              Оберіть напрям, потім послугу. Ціни — орієнтир «від». Фінал після
-              короткого брифу.
+              Зверху вкладки напрямів, під ними — увесь список пакетів. Натисніть
+              рядок, щоб побачити склад і ціну нижче. Ціни — орієнтир «від».
             </p>
           </div>
         </Reveal>
         <Reveal delay={60} from="soft">
           <ServiceTabs group={group} onChange={pickGroup} />
         </Reveal>
+        <p className="svc-orient">
+          Зараз вкладка «{group}». Нижче — усі пакети цього напряму. Натисніть
+          рядок, щоб побачити склад і ціну.
+        </p>
       </div>
 
       <div
@@ -60,10 +82,7 @@ export function Services() {
         {clusters.map((cluster, clusterIndex) => (
           <div key={cluster.label} className="teaser-cluster">
             <ScrollReveal delay={clusterIndex * 70}>
-              <p className="teaser-cluster__label">
-                {cluster.label}
-                <span> · {String(cluster.items.length).padStart(2, '0')}</span>
-              </p>
+              <p className="teaser-cluster__label">{cluster.label}</p>
             </ScrollReveal>
             <div className="teaser-list">
               {cluster.items.map((service, index) => (
@@ -77,7 +96,6 @@ export function Services() {
                     aria-current={open === service.slug ? 'true' : undefined}
                     onClick={() => setOpen(service.slug)}
                   >
-                    <span className="teaser-row__code">{service.code}</span>
                     <span className="teaser-row__body">
                       <span className="teaser-row__title">{service.title}</span>
                     </span>
@@ -92,8 +110,7 @@ export function Services() {
 
       {current ? (
         <div key={current.slug} className="svc-picked">
-          <header className="section-head svc-detail__head" id={current.slug}>
-            <p className="eyebrow">{current.code}</p>
+          <header className="section-head svc-detail__head">
             <h2>{current.title}</h2>
             <p>{current.text}</p>
           </header>
@@ -123,10 +140,7 @@ function ServicePlans({ service }: { service: Service }) {
                 <li key={item}>{item}</li>
               ))}
             </ul>
-            <a
-              className={`btn ${featured ? 'btn--pink' : 'btn--ghost'}`}
-              href="#contact"
-            >
+            <a className="btn btn--pink" href="#contact">
               Обговорити пакет
             </a>
           </article>

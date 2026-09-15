@@ -2,17 +2,14 @@ import { Reveal } from './Reveal'
 
 const points = [
   {
-    n: '01',
     title: 'Експертиза',
     text: 'Розуміємо бізнес комплексно та поєднуємо розробку, маркетинг і технології в одну систему',
   },
   {
-    n: '02',
     title: 'Чесність',
     text: 'Дедлайни й зона відповідальності прозорі. Не обіцяємо неможливе і не зникаємо після запуску.',
   },
   {
-    n: '03',
     title: 'Результат',
     text: 'Кожен інструмент працює на спільну ціль - більше клієнтів, продажів і розвиток бізнесу.',
   },
@@ -21,23 +18,24 @@ const points = [
 export function Why() {
   return (
     <section className="why" id="why" data-scene="why">
-      <Reveal>
+      <Reveal className="why__kicker">
+        <p className="eyebrow">Про нас</p>
+      </Reveal>
+      <Reveal className="why__copy">
         <div className="section-head why__head">
-          <p className="eyebrow">Про нас</p>
           <h2>Перетворюємо ідеї на бізнес, який рухається вперед</h2>
           <p>
-            Ми створюємо сайти та лендінги, впроваджуємо CRM та POS-рішення, працюємо з SEO та рекламою, 
+            Ми створюємо сайти та лендінги, впроваджуємо CRM-рішення, працюємо з SEO та рекламою, 
             формуємо айдентику бренду. Кожне рішення будуємо навколо вашого бізнесу, його цілей і шляху клієнта - 
             від першого контакту до покупки. 
           </p>
         </div>
       </Reveal>
-      <ul className="why__orbs">
+      <ul className="why__grid">
         {points.map((point, index) => (
-          <li key={point.n}>
-            <Reveal delay={index * 160} from="orb">
-              <article className="why__orb">
-                <span className="why__n">{point.n}</span>
+          <li key={point.title}>
+            <Reveal delay={index * 120} from="right">
+              <article className={`why__card why__card--${index + 1}`}>
                 <h3>{point.title}</h3>
                 <p>{point.text}</p>
               </article>

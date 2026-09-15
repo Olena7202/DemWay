@@ -14,7 +14,7 @@ const steps = [
   {
     n: '03',
     title: 'Стратегія',
-    text: 'Обираємо пріоритети: лендінг, каса POS, CRM, SEO чи реклама. План робіт і терміни — до першого макета.',
+    text: 'Обираємо пріоритети: лендінг, CRM, SEO чи реклама. План робіт і терміни — до першого макета.',
   },
   {
     n: '04',
@@ -42,12 +42,12 @@ export function Approach() {
   const [reduced, setReduced] = useState(() =>
     typeof window !== 'undefined' &&
     (window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-      window.matchMedia('(max-width: 720px)').matches),
+      window.matchMedia('(max-width: 960px)').matches),
   )
 
   useEffect(() => {
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const phone = window.matchMedia('(max-width: 720px)')
+    const phone = window.matchMedia('(max-width: 960px)')
     const sync = () => setReduced(motion.matches || phone.matches)
     sync()
     motion.addEventListener('change', sync)
@@ -79,8 +79,8 @@ export function Approach() {
       const target = next * max
       const rising = next >= lastProgress
       lastProgress = next
-      current += (target - current) * (rising ? 0.09 : 0.28)
-      if (Math.abs(target - current) < 0.4) current = target
+      current += (target - current) * (rising ? 0.055 : 0.4)
+      if (Math.abs(target - current) < 0.35) current = target
       rail.style.transform = `translate3d(${-current}px, 0, 0)`
       const p = max > 0 ? current / max : 0
       if (bar) bar.style.width = `${p * 100}%`

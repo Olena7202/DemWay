@@ -1,9 +1,8 @@
-import { useState, type FormEvent } from 'react'
+import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { contactInbox } from '../data/contact'
-import { services } from '../data/services'
+import { serviceGroups, services } from '../data/services'
 import { Reveal } from './Reveal'
 
-const directions = ['Система під ключ', ...services.map((service) => service.title)]
 const channels = ['Телефон', 'Telegram', 'Email'] as const
 
 type Channel = (typeof channels)[number]
@@ -41,6 +40,94 @@ function field(data: FormData, name: string) {
 
 function isActivateMessage(message: string) {
   return /activat/i.test(message)
+}
+
+function ServiceSelect({
+  value,
+  onChange,
+}: {
+  value: string
+  onChange: (value: string) => void
+}) {
+  const [open, setOpen] = useState(false)
+  const box = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!open) return
+    const onDoc = (event: MouseEvent) => {
+      if (!box.current?.contains(event.target as Node)) setOpen(false)
+    }
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('mousedown', onDoc)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', onDoc)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [open])
+
+  function pick(next: string) {
+    onChange(next)
+    setOpen(false)
+  }
+
+  return (
+    <div className={`contact-select${open ? ' is-open' : ''}`} ref={box}>
+      <input type="hidden" name="service" value={value} />
+      <button
+        className="contact-select__btn"
+        type="button"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        onClick={() => setOpen((current) => !current)}
+      >
+        {value}
+      </button>
+      {open ? (
+        <div className="contact-select__menu" role="listbox" aria-label="Що запускаємо">
+          <button
+            type="button"
+            role="option"
+            aria-selected={value === 'Система під ключ'}
+            className={value === 'Система під ключ' ? 'is-on' : ''}
+            onClick={() => pick('Система під ключ')}
+          >
+            Система під ключ
+          </button>
+          {serviceGroups.map((group) => (
+            <div key={group} className="contact-select__group">
+              <p>{group}</p>
+              {services
+                .filter((service) => service.group === group)
+                .map((service) => (
+                  <button
+                    key={service.slug}
+                    type="button"
+                    role="option"
+                    aria-selected={value === service.title}
+                    className={value === service.title ? 'is-on' : ''}
+                    onClick={() => pick(service.title)}
+                  >
+                    {service.title}
+                  </button>
+                ))}
+            </div>
+          ))}
+          <button
+            type="button"
+            role="option"
+            aria-selected={value === 'Інше'}
+            className={value === 'Інше' ? 'is-on' : ''}
+            onClick={() => pick('Інше')}
+          >
+            Інше
+          </button>
+        </div>
+      ) : null}
+    </div>
+  )
 }
 
 export function Contact() {
@@ -168,23 +255,10 @@ export function Contact() {
               Компанія
               <input name="company" type="text" placeholder="Назва бренду" />
             </label>
-            <fieldset className="contact__full contact__picks">
-              <legend>Що запускаємо *</legend>
-              <input type="hidden" name="service" value={direction} />
-              <div className="contact__chips contact__chips--services">
-                {directions.map((item) => (
-                  <button
-                    key={item}
-                    type="button"
-                    className={`contact__chip${direction === item ? ' contact__chip--on' : ''}`}
-                    aria-pressed={direction === item}
-                    onClick={() => setDirection(item)}
-                  >
-                    {item}
-                  </button>
-                ))}
-              </div>
-            </fieldset>
+            <label className="contact__full">
+              Що запускаємо *
+              <ServiceSelect value={direction} onChange={setDirection} />
+            </label>
             <label className="contact__full">
               Задача *
               <textarea

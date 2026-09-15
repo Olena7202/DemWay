@@ -1,6 +1,6 @@
 :root {
   --khaki: #121212;
-  --khaki-deep: #070707;
+  --khaki-deep: #000000;
   --khaki-mid: #1a1a1a;
   --khaki-line: rgba(243, 243, 241, 0.12);
   --cream: #f3f3f1;
@@ -34,10 +34,14 @@
 html {
   scroll-behavior: smooth;
   color-scheme: dark;
+  overflow-x: hidden;
 }
 
 @media (max-width: 960px) {
   :root {
+    --pad-x: 1.5rem;
+    --pad-section: 3.4rem;
+    --h2: clamp(1.75rem, 5vw, 2.35rem);
     --pink: #72825e;
     --pink-rgb: 114, 130, 94;
   }
@@ -45,17 +49,27 @@ html {
 
 @media (max-width: 720px) {
   :root {
-    --pad-x: 5vw;
-    --pad-section: 3rem;
-    --h2: clamp(1.7rem, 8vw, 2.2rem);
+    --pad-x: 1.15rem;
+    --pad-section: 2.6rem;
+    --h2: clamp(1.55rem, 8vw, 2.05rem);
+    --h3: 1.12rem;
     --pink: #72825e;
     --pink-rgb: 114, 130, 94;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --pad-x: 1rem;
+    --pad-section: 2.2rem;
+    --text: 0.95rem;
   }
 }
 
 body {
   margin: 0;
   min-width: 320px;
+  overflow-x: hidden;
   color: var(--cream);
   background: var(--khaki-deep);
   font-family: var(--sans);
