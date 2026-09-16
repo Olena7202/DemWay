@@ -34,7 +34,7 @@ export function Why() {
       <ul className="why__grid">
         {points.map((point, index) => (
           <li key={point.title}>
-            <Reveal delay={index * 120} from="right">
+            <Reveal delay={index * 200} from="right">
               <article className={`why__card why__card--${index + 1}`}>
                 <h3>{point.title}</h3>
                 <p>{point.text}</p>
