@@ -1,7 +1,13 @@
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Wordmark } from './Wordmark'
 import { Reveal } from './Reveal'
-import { contactInbox, instagramUrl } from '../data/contact'
+import {
+  contactInbox,
+  facebookUrl,
+  instagramUrl,
+  telegramHandle,
+  telegramUrl,
+} from '../data/contact'
 import { serviceGroupAnchors, serviceGroups } from '../data/services'
 import { useLocale } from '../i18n/locale'
 
@@ -23,10 +29,7 @@ export function Footer() {
           <Link to="/" className="brand" aria-label="DemWay digital agency">
             <Wordmark />
           </Link>
-          <p className="site-footer__aside">
-            <span>UA · online</span>
-            <span>{t.footer.aside}</span>
-          </p>
+          <p className="site-footer__aside">{t.footer.aside}</p>
         </div>
 
         <div className="site-footer__cols">
@@ -41,7 +44,7 @@ export function Footer() {
                 </li>
               ))}
               <li>
-                <Link className="site-footer__more" to="/poslugy">
+                <Link className="site-footer__more" to="/poslugy?napryam=sayty">
                   {t.footer.catalog}
                 </Link>
               </li>
@@ -55,9 +58,6 @@ export function Footer() {
                 <Link to={{ pathname: '/', hash: '#why' }}>{t.nav.about}</Link>
               </li>
               <li>
-                <Link to={{ pathname: '/', hash: '#cases' }}>{t.nav.cases}</Link>
-              </li>
-              <li>
                 <Link to={{ pathname: '/', hash: '#approach' }}>{t.nav.approach}</Link>
               </li>
               <li>
@@ -65,7 +65,7 @@ export function Footer() {
               </li>
               <li>
                 <NavLink
-                  to="/poslugy"
+                  to="/poslugy?napryam=sayty"
                   className={({ isActive }) => (isActive ? 'is-current' : '')}
                 >
                   {t.catalog.title}
@@ -86,7 +86,9 @@ export function Footer() {
               </li>
               <li>
                 <span>{t.footer.channel}</span>
-                <Link to={contactTo}>{t.footer.channelValue}</Link>
+                <a href={telegramUrl} target="_blank" rel="noreferrer">
+                  {telegramHandle}
+                </a>
               </li>
               <li>
                 <span>{t.footer.format}</span>
@@ -101,21 +103,53 @@ export function Footer() {
         </div>
 
         <div className="site-footer__bar">
-          <a
-            className="site-footer__social"
-            href={instagramUrl}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Instagram DemWay"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                fill="currentColor"
-                d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7ZM17.5 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"
-              />
-            </svg>
-          </a>
-          <span>© {new Date().getFullYear()} DemWay</span>
+          <p className="site-footer__legal">
+            © {new Date().getFullYear()} DemWay. {t.footer.rights}
+          </p>
+          <div className="site-footer__socials">
+            <a
+              className="site-footer__social"
+              href={telegramUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Telegram DemWay"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="currentColor"
+                  d="M21.8 4.4c.2-.9-.7-1.6-1.5-1.3L2.6 10.2c-.9.3-.8 1.6.1 1.8l4.6 1.4 1.8 5.6c.2.8 1.3 1 1.8.3l2.6-3.3 4.6 3.4c.7.5 1.7.1 1.9-.7l2.4-14.3ZM8.4 12.7 17.7 7l-7.2 7.4-.3 2.4-1.8-4.1Z"
+                />
+              </svg>
+            </a>
+            <a
+              className="site-footer__social"
+              href={instagramUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram DemWay"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="currentColor"
+                  d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7ZM17.5 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"
+                />
+              </svg>
+            </a>
+            <a
+              className="site-footer__social"
+              href={facebookUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Facebook DemWay"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="currentColor"
+                  d="M13.5 21v-7.2h2.42l.36-2.8H13.5V9.18c0-.81.22-1.36 1.39-1.36H16.5V5.32A18.9 18.9 0 0 0 13.86 5C11.2 5 9.4 6.63 9.4 9.02v1.98H7v2.8h2.4V21h4.1Z"
+                />
+              </svg>
+            </a>
+          </div>
         </div>
       </Reveal>
     </footer>

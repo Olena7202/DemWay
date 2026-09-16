@@ -255,7 +255,6 @@ export function Contact() {
 
       {sent ? (
         <div className="contact__receipt" role="status">
-          <p className="eyebrow">{t.contact.done}</p>
           <h3>{t.contact.received}</h3>
           <p>{t.contact.reply}</p>
         </div>

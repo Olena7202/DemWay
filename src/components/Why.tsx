@@ -1,3 +1,4 @@
+import moon from '../assets/logo-moon.png'
 import { Reveal } from './Reveal'
 import { useLocale } from '../i18n/locale'
 
@@ -19,6 +20,11 @@ export function Why() {
           <li key={point.title}>
             <Reveal delay={index * 200} from="right">
               <article className={`why__card why__card--${index + 1}`}>
+                <span
+                  className="why__planet"
+                  aria-hidden="true"
+                  style={{ backgroundImage: `url(${moon})` }}
+                />
                 <h3>{point.title}</h3>
                 <p>{point.text}</p>
               </article>

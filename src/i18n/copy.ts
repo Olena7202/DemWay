@@ -41,8 +41,9 @@ export type Copy = {
     tabsAria: string
     packagesAria: string
     picked: string
-    featured: string
     discuss: string
+    expand: string
+    collapse: string
   }
   cases: {
     kicker: string
@@ -66,7 +67,6 @@ export type Copy = {
     title: string
     text: string
     notes: [string, string]
-    done: string
     received: string
     reply: string
     name: string
@@ -105,15 +105,16 @@ export type Copy = {
     formatValue: string
     hours: string
     hoursValue: string
+    rights: string
   }
 }
 
 export const copy: Record<Locale, Copy> = {
   uk: {
     meta: {
-      title: 'DemWay — digital agency',
+      title: 'DemWay - digital agency',
       description:
-        'DemWay — digital агенція: лендінг, CRM, SEO, Google Ads, Meta Ads, аналіз ринку, банери та логотип.',
+        'DemWay - digital агенція: лендінг, CRM, SEO, Google Ads, Meta Ads, аналіз ринку, банери та логотип.',
     },
     nav: {
       about: 'Про нас',
@@ -130,7 +131,7 @@ export const copy: Record<Locale, Copy> = {
     hero: {
       lede: 'Кожне рішення будуємо навколо вашого бізнесу: сайти й лендінги, CRM, пошук, реклама та айдентика — від першого контакту до покупки.',
       discuss: 'Обговорити задачу',
-      cases: 'Дивитись кейси',
+      cases: 'Дивитись послуги',
     },
     why: {
       kicker: 'Про нас',
@@ -161,6 +162,7 @@ export const copy: Record<Locale, Copy> = {
     },
     groups: {
       Сайти: 'Сайти',
+      Редизайн: 'Редизайн',
       SEO: 'SEO',
       Реклама: 'Реклама',
       Системи: 'Системи',
@@ -169,8 +171,8 @@ export const copy: Record<Locale, Copy> = {
     clusters: {
       'Новий сайт': 'Новий сайт',
       Оновлення: 'Оновлення',
-      'Аудит і супровід': 'Аудит і супровід',
-      'Локально і тексти': 'Локально і тексти',
+      'Лендінг і сайт': 'Лендінг і сайт',
+      'SEO-оптимізація': 'SEO-оптимізація',
       Google: 'Google',
       'Meta і листи': 'Meta і листи',
       Продажі: 'Продажі',
@@ -178,7 +180,8 @@ export const copy: Record<Locale, Copy> = {
     },
     teaserBlurbs: {
       Сайти: 'Лендінг, візитка чи каталог — сайт під заявку й запуск реклами.',
-      SEO: 'Аудит, оптимізація й тексти, щоб вас знаходили в пошуку.',
+      Редизайн: 'Оновлюємо лендінг, візитку, корпоративний сайт чи каталог.',
+      SEO: 'Ключові слова, метатеги і URL — базова оптимізація під пошук.',
       Реклама: 'Google, Meta й аналітика в одному контурі під заявку.',
       Системи: 'CRM, щоб продажі не губились між чатами.',
       Айдентика: 'Логотип і носії, які тримають бренд разом.',
@@ -190,8 +193,9 @@ export const copy: Record<Locale, Copy> = {
       tabsAria: 'Напрями послуг',
       packagesAria: 'Пакети',
       picked: 'обраний пакет',
-      featured: 'Частіше обирають',
       discuss: 'Обговорити пакет',
+      expand: 'Розгорнути',
+      collapse: 'Згорнути',
     },
     cases: {
       kicker: 'Кейси',
@@ -276,7 +280,7 @@ export const copy: Record<Locale, Copy> = {
           a: 'Так. Можна стартувати з лендінгу, SEO, реклами, CRM або айдентики. Якщо далі знадобиться повний контур — зберемо його навколо вже зробленого, без перезапуску з нуля.',
         },
         {
-          q: 'Що потрібно від вас, щоб стартувати?',
+          q: 'Що потрібно від мене, щоб стартувати?',
           a: 'Короткий опис бізнесу, доступ до поточних каналів, якщо вони вже є, і людина з вашого боку для швидких рішень. Тексти й фото можемо зібрати разом. Ідеальне ТЗ не чекаємо.',
         },
       ],
@@ -289,9 +293,8 @@ export const copy: Record<Locale, Copy> = {
         'Відповідаємо в той самий канал, який оберете.',
         'Спочатку обсяг і строки, потім цифри — без шаблонної презентації.',
       ],
-      done: 'Готово',
-      received: 'Запит отримано',
-      reply: 'Звʼяжемось у канал, який ви обрали — без шаблонної презентації.',
+      received: 'Ми вже отримали вашу заявку.',
+      reply: 'Скоро зв’яжемося з вами, щоб почати вашу digital-історію',
       name: 'Імʼя *',
       namePh: 'Олена',
       company: 'Компанія',
@@ -328,11 +331,12 @@ export const copy: Record<Locale, Copy> = {
       formatValue: 'Україна · онлайн',
       hours: 'Години',
       hoursValue: 'Пн–Пт, 10:00–18:00',
+      rights: 'Усі права захищені',
     },
   },
   en: {
     meta: {
-      title: 'DemWay — digital agency',
+      title: 'DemWay - digital agency',
       description:
         'DemWay is a digital agency: landing pages, CRM, SEO, Google Ads, Meta Ads, market analysis, banners and logo.',
     },
@@ -351,7 +355,7 @@ export const copy: Record<Locale, Copy> = {
     hero: {
       lede: 'Every solution is built around your business: websites and landing pages, CRM, search, ads and identity — from first contact to purchase.',
       discuss: 'Discuss a project',
-      cases: 'See the work',
+      cases: 'See services',
     },
     why: {
       kicker: 'About',
@@ -382,6 +386,7 @@ export const copy: Record<Locale, Copy> = {
     },
     groups: {
       Сайти: 'Websites',
+      Редизайн: 'Redesign',
       SEO: 'SEO',
       Реклама: 'Ads',
       Системи: 'Systems',
@@ -390,8 +395,8 @@ export const copy: Record<Locale, Copy> = {
     clusters: {
       'Новий сайт': 'New site',
       Оновлення: 'Refresh',
-      'Аудит і супровід': 'Audit & retainers',
-      'Локально і тексти': 'Local & copy',
+      'Лендінг і сайт': 'Landing & site',
+      'SEO-оптимізація': 'SEO optimization',
       Google: 'Google',
       'Meta і листи': 'Meta & email',
       Продажі: 'Sales',
@@ -399,7 +404,8 @@ export const copy: Record<Locale, Copy> = {
     },
     teaserBlurbs: {
       Сайти: 'Landing, brochure or catalog — a site built for leads and ads.',
-      SEO: 'Audit, optimization and copy so people can find you in search.',
+      Редизайн: 'Refresh a landing, brochure, corporate site or catalog.',
+      SEO: 'Keywords, meta tags and URLs — core on-site SEO.',
       Реклама: 'Google, Meta and analytics in one loop built for inquiries.',
       Системи: 'CRM so sales do not get lost between chats.',
       Айдентика: 'Logo and assets that keep the brand together.',
@@ -411,8 +417,9 @@ export const copy: Record<Locale, Copy> = {
       tabsAria: 'Service directions',
       packagesAria: 'Packages',
       picked: 'selected package',
-      featured: 'Most chosen',
       discuss: 'Discuss this package',
+      expand: 'Show more',
+      collapse: 'Show less',
     },
     cases: {
       kicker: 'Work',
@@ -497,7 +504,7 @@ export const copy: Record<Locale, Copy> = {
           a: 'Yes. You can start with a landing page, SEO, ads, CRM or identity. If you later need the full loop, we build it around what is already done — without starting from scratch.',
         },
         {
-          q: 'What do you need from us to start?',
+          q: 'What do you need from me to start?',
           a: 'A short description of the business, access to current channels if they exist, and someone on your side for fast decisions. Copy and photos we can gather together. We do not wait for a perfect brief.',
         },
       ],
@@ -510,9 +517,8 @@ export const copy: Record<Locale, Copy> = {
         'We reply in the same channel you choose.',
         'Scope and timeline first, then numbers — no template pitch.',
       ],
-      done: 'Done',
-      received: 'Request received',
-      reply: 'We will write in the channel you chose — no template pitch.',
+      received: 'We already received your request.',
+      reply: 'We’ll be in touch soon to start your digital story',
       name: 'Name *',
       namePh: 'Helen',
       company: 'Company',
@@ -549,6 +555,7 @@ export const copy: Record<Locale, Copy> = {
       formatValue: 'Ukraine · online',
       hours: 'Hours',
       hoursValue: 'Mon–Fri, 10:00–18:00',
+      rights: 'All rights reserved',
     },
   },
 }

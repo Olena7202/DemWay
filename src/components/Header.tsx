@@ -23,9 +23,6 @@ function NavLinks({ onSelect }: { onSelect: () => void }) {
       >
         {t.nav.services}
       </NavLink>
-      <Link to={{ pathname: '/', hash: '#cases' }} onClick={onSelect}>
-        {t.nav.cases}
-      </Link>
       <Link to={{ pathname: '/', hash: '#approach' }} onClick={onSelect}>
         {t.nav.approach}
       </Link>

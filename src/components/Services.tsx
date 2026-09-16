@@ -39,9 +39,14 @@ export function Services() {
       return
     }
     const found = services.find((service) => service.slug === hash)
-    if (!found) return
-    setGroup(found.group)
-    setOpen(found.slug)
+    if (found) {
+      setGroup(found.group)
+      setOpen(found.slug)
+      return
+    }
+    if (hash === 'contact' || hash === 'faq') return
+    setGroup('Сайти')
+    setOpen(firstSlug('Сайти'))
   }, [location.search, location.hash])
 
   function pickGroup(next: ServiceGroup) {
@@ -111,7 +116,9 @@ export function Services() {
                         {localizeService(service, locale).title}
                       </span>
                       </span>
-                      <span className="teaser-row__from">{service.plans[0].price}</span>
+                      {service.plans[0].price ? (
+                        <span className="teaser-row__from">{service.plans[0].price}</span>
+                      ) : null}
                     </button>
                   </ScrollReveal>
                 ))}
@@ -141,29 +148,57 @@ function ServicePlans({ service }: { service: Service }) {
   const { t } = useLocale()
   return (
     <div className={`svc__plans svc__plans--${service.plans.length}`}>
-      {service.plans.map((plan, planIndex) => {
-        const featured =
-          service.plans.length > 1 && planIndex === service.plans.length - 1
-        return (
+      {service.plans.map((plan, planIndex) => (
           <article
             key={plan.name}
-            className={`plan${planIndex === 0 ? ' plan--base' : ''}${featured ? ' plan--plus' : ''}`}
+            className={`plan${planIndex === 0 ? ' plan--base' : ''}`}
           >
-            <p className="plan__name">{plan.name}</p>
-            {featured ? <p className="plan__tag">{t.catalog.featured}</p> : null}
-            <p className="plan__price">{plan.price}</p>
+            {plan.name ? <p className="plan__name">{plan.name}</p> : null}
+            {plan.price ? <p className="plan__price">{plan.price}</p> : null}
             {plan.note ? <p className="plan__note">{plan.note}</p> : null}
-            <ul className="plan__items">
-              {plan.items.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
+            {plan.items.length ? (
+              <PlanItems key={`${service.slug}-${plan.name}`} slug={service.slug} items={plan.items} />
+            ) : null}
             <a className="btn btn--pink" href="#contact">
               {t.catalog.discuss}
             </a>
           </article>
-        )
-      })}
+      ))}
+    </div>
+  )
+}
+
+const clipSlugs = new Set([
+  'korporatyvnyy',
+  'katalog',
+  'redyzayn-korporatyvnyy',
+  'crm',
+])
+
+function PlanItems({ slug, items }: { slug: string; items: string[] }) {
+  const { t } = useLocale()
+  const clip = clipSlugs.has(slug) && items.length > 4
+  const preview = Math.ceil(items.length / 2)
+  const [open, setOpen] = useState(false)
+  const visible = clip && !open ? items.slice(0, preview) : items
+
+  return (
+    <div className={`plan__scope${clip && !open ? ' is-clip' : ''}`}>
+      <ul className="plan__items">
+        {visible.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+      {clip ? (
+        <button
+          type="button"
+          className="plan__more"
+          aria-expanded={open}
+          onClick={() => setOpen((current) => !current)}
+        >
+          {open ? t.catalog.collapse : t.catalog.expand}
+        </button>
+      ) : null}
     </div>
   )
 }

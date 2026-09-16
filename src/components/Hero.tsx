@@ -11,7 +11,7 @@ export function Hero() {
         <div className="hero__copy">
           <Reveal>
             <h1 className="hero__title">
-              <span className="hero__title-name">DemWay —</span>
+              <span className="hero__title-name">DemWay -</span>
               <span className="hero__title-agency">digital agency</span>
             </h1>
           </Reveal>
@@ -26,7 +26,7 @@ export function Hero() {
                   <span>{t.hero.discuss}</span>
                 </span>
               </a>
-              <a className="btn btn--ink" href="#cases">
+              <a className="btn btn--ink" href="#services">
                 {t.hero.cases}
               </a>
             </div>

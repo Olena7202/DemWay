@@ -150,6 +150,27 @@ const en: Record<string, ServiceCopy> = {
       },
     ],
   },
+  'redyzayn-vizytka': {
+    title: 'Brochure site redesign',
+    text: 'We refresh a short company site: who you are, what you do, how to reach you — without a rebuild from scratch.',
+    plans: [
+      {
+        name: 'Start',
+        items: [
+          'Review of the current site',
+          'Updated structure for 3–5 pages',
+          'Custom modern design',
+          'UI/UX improvements',
+          'Responsive version for all devices',
+          'Company / services block update',
+          'Better contact form',
+          'Updated social buttons',
+          'Front-end of the new design',
+          'QA after redesign',
+        ],
+      },
+    ],
+  },
   'redyzayn-korporatyvnyy': {
     title: 'Corporate redesign',
     text: 'We refresh look and ease of a multi-page site while keeping the content you need.',
@@ -169,6 +190,28 @@ const en: Record<string, ServiceCopy> = {
           'Better feedback forms',
           'Updated CTAs',
           'Mobile adaptation of the design',
+          'Front-end of the new design',
+          'QA after redesign',
+          'Support after launch',
+        ],
+      },
+    ],
+  },
+  'redyzayn-katalog': {
+    title: 'Catalog site redesign',
+    text: 'We refresh a product or service catalog: categories, cards, search and inquiry — keeping your content.',
+    plans: [
+      {
+        name: 'Start',
+        items: [
+          'Review of the current catalog',
+          'Updated category and card structure',
+          'Custom modern design',
+          'Catalog and filter UI/UX improvements',
+          'Responsive design for all devices',
+          'Product / service card update',
+          'Search and navigation optimization',
+          'Better inquiry / order form',
           'Front-end of the new design',
           'QA after redesign',
           'Support after launch',
@@ -217,107 +260,16 @@ const en: Record<string, ServiceCopy> = {
       },
     ],
   },
-  'seo-audyt': {
-    title: 'SEO audit',
-    text: 'A review of the site: tech, content, visibility. What blocks growth in Google and where to start.',
-    plans: [
-      {
-        name: 'Start',
-        items: [
-          'Technical audit',
-          'Semantics and page review',
-          'Priority fix list',
-          'Written report',
-        ],
-      },
-      {
-        name: 'Plus',
-        items: [
-          'Everything in Start',
-          'SERP competitor review',
-          '1–3 month work plan',
-          'Short call on findings',
-        ],
-      },
-    ],
-  },
   'seo-optymizatsiya': {
     title: 'SEO optimization',
-    text: 'Ongoing visibility work: tech, content, pages. Three retainer levels.',
+    text: 'Core on-site SEO: keywords, meta and page URLs.',
     plans: [
       {
-        name: 'Small business',
+        name: 'Scope',
         items: [
-          'Support for a small site',
-          'Technical fixes by priority',
-          'Optimization of key pages',
-          'Monthly report',
-        ],
-      },
-      {
-        name: 'Business',
-        items: [
-          'Everything in Small business',
-          'Content plan and new landings',
-          'Semantics expansion',
-          'Regular edits for growing queries',
-        ],
-      },
-      {
-        name: 'Pro',
-        items: [
-          'Everything in Business',
-          'Several directions and a competitive niche',
-          'Deeper analytics and priorities',
-          'Tighter retainer and recommendations',
-        ],
-      },
-    ],
-  },
-  'lokalne-seo': {
-    title: 'Local SEO',
-    text: 'Visibility in the city and on the map: Google Business, local queries, reviews.',
-    plans: [
-      {
-        name: 'Start',
-        items: [
-          'Google Business Profile setup',
-          'Local keyword set',
-          'Basic on-site edits',
-          'Review recommendations',
-        ],
-      },
-      {
-        name: 'Plus',
-        items: [
-          'Everything in Start',
-          'Ongoing profile management',
-          'Local pages for areas or services',
-          'Monthly visibility report',
-        ],
-      },
-    ],
-  },
-  'seo-teksty': {
-    title: 'SEO copy',
-    text: 'Search copy: clear for people and built around queries they use to find you.',
-    plans: [
-      {
-        name: 'Start',
-        items: [
-          'Semantics for a set of pages',
-          'Up to 5 SEO texts',
-          'Headlines and meta descriptions',
-          'Two revision rounds',
-        ],
-      },
-      {
-        name: 'Plus',
-        items: [
-          'Up to 12 SEO texts',
-          'Structure by query clusters',
-          'Internal linking',
-          'Publishing recommendations',
+          'Core keyword research',
+          'Meta tags and descriptions',
+          'URL optimization',
         ],
       },
     ],
@@ -575,6 +527,7 @@ export function localizeGroup(group: ServiceGroup, locale: Locale) {
   return (
     {
       Сайти: 'Websites',
+      Редизайн: 'Redesign',
       SEO: 'SEO',
       Реклама: 'Ads',
       Системи: 'Systems',

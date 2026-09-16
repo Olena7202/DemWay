@@ -8,7 +8,7 @@ export function ServicesPage() {
   const { t, locale } = useLocale()
 
   useEffect(() => {
-    document.title = `${t.catalog.title} — DemWay`
+    document.title = `${t.catalog.title} - DemWay`
     return () => {
       document.title = t.meta.title
     }

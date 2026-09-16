@@ -8,6 +8,7 @@ import { useLocale } from '../i18n/locale'
 
 const marks: Record<(typeof serviceGroups)[number], string> = {
   Сайти: 'WEB',
+  Редизайн: 'RE',
   SEO: 'SEO',
   Реклама: 'ADS',
   Системи: 'SYS',
