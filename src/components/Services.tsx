@@ -11,12 +11,15 @@ import {
 import { Reveal } from './Reveal'
 import { ScrollReveal } from './ScrollReveal'
 import { ServiceTabs } from './ServiceTabs'
+import { useLocale } from '../i18n/locale'
+import { localizeService } from '../i18n/services'
 
 function firstSlug(next: ServiceGroup) {
   return clusterServices(next)[0]?.items[0]?.slug ?? services[0].slug
 }
 
 export function Services() {
+  const { t, locale } = useLocale()
   const location = useLocation()
   const navigate = useNavigate()
   const [group, setGroup] = useState<ServiceGroup>('Сайти')
@@ -67,9 +70,9 @@ export function Services() {
       <div className="services__top">
         <Reveal>
           <div className="section-head">
-            <p className="eyebrow">Послуги</p>
-            <h1 className="services__h1">Каталог пакетів</h1>
-            <p>Оберіть напрям і пакет — склад і ціна відкриються поруч. Суми орієнтовні, «від».</p>
+            <p className="eyebrow">{t.catalog.kicker}</p>
+            <h1 className="services__h1">{t.catalog.title}</h1>
+            <p>{t.catalog.text}</p>
           </div>
         </Reveal>
         <Reveal delay={60} from="soft">
@@ -82,12 +85,14 @@ export function Services() {
           key={group}
           className={`teaser-board${clusters.length === 1 ? ' teaser-board--one' : ''}`}
           role="navigation"
-          aria-label={`Пакети: ${group}`}
+          aria-label={`${t.catalog.packagesAria}: ${t.groups[group]}`}
         >
           {clusters.map((cluster, clusterIndex) => (
             <div key={cluster.label} className="teaser-cluster">
               <ScrollReveal delay={clusterIndex * 70}>
-                <p className="teaser-cluster__label">{cluster.label}</p>
+                <p className="teaser-cluster__label">
+                  {t.clusters[cluster.label] ?? cluster.label}
+                </p>
               </ScrollReveal>
               <div className="teaser-list">
                 {cluster.items.map((service, index) => (
@@ -102,7 +107,9 @@ export function Services() {
                       onClick={() => pickService(service.slug)}
                     >
                       <span className="teaser-row__body">
-                        <span className="teaser-row__title">{service.title}</span>
+                      <span className="teaser-row__title">
+                        {localizeService(service, locale).title}
+                      </span>
                       </span>
                       <span className="teaser-row__from">{service.plans[0].price}</span>
                     </button>
@@ -117,12 +124,12 @@ export function Services() {
           <div key={current.slug} className="svc-picked" id="svc-detail">
             <header className="section-head svc-detail__head">
               <p className="svc-detail__code">
-                {group} · обраний пакет
+                {t.groups[group]} · {t.catalog.picked}
               </p>
-              <h2>{current.title}</h2>
-              <p>{current.text}</p>
+              <h2>{localizeService(current, locale).title}</h2>
+              <p>{localizeService(current, locale).text}</p>
             </header>
-            <ServicePlans service={current} />
+            <ServicePlans service={localizeService(current, locale)} />
           </div>
         ) : null}
       </div>
@@ -131,6 +138,7 @@ export function Services() {
 }
 
 function ServicePlans({ service }: { service: Service }) {
+  const { t } = useLocale()
   return (
     <div className={`svc__plans svc__plans--${service.plans.length}`}>
       {service.plans.map((plan, planIndex) => {
@@ -142,7 +150,7 @@ function ServicePlans({ service }: { service: Service }) {
             className={`plan${planIndex === 0 ? ' plan--base' : ''}${featured ? ' plan--plus' : ''}`}
           >
             <p className="plan__name">{plan.name}</p>
-            {featured ? <p className="plan__tag">Частіше обирають</p> : null}
+            {featured ? <p className="plan__tag">{t.catalog.featured}</p> : null}
             <p className="plan__price">{plan.price}</p>
             {plan.note ? <p className="plan__note">{plan.note}</p> : null}
             <ul className="plan__items">
@@ -151,7 +159,7 @@ function ServicePlans({ service }: { service: Service }) {
               ))}
             </ul>
             <a className="btn btn--pink" href="#contact">
-              Обговорити пакет
+              {t.catalog.discuss}
             </a>
           </article>
         )

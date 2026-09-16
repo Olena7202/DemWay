@@ -2,36 +2,40 @@ import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { contactInbox } from '../data/contact'
 import { serviceGroups, services } from '../data/services'
 import { Reveal } from './Reveal'
+import { useLocale } from '../i18n/locale'
+import { localizeService } from '../i18n/services'
+import type { Copy } from '../i18n/copy'
 
-const channels = ['Телефон', 'Telegram', 'Email'] as const
+const channels = ['phone', 'telegram', 'email'] as const
 
 type Channel = (typeof channels)[number]
 
-const replyField: Record<
-  Channel,
-  { label: string; name: string; type: string; placeholder: string; autoComplete: string }
-> = {
-  Телефон: {
-    label: 'Номер телефону *',
-    name: 'phone',
-    type: 'tel',
-    placeholder: '+380',
-    autoComplete: 'tel',
-  },
-  Telegram: {
-    label: 'Нік у Telegram *',
-    name: 'telegram',
-    type: 'text',
-    placeholder: '@nickname',
-    autoComplete: 'username',
-  },
-  Email: {
-    label: 'Email *',
+function replyMeta(t: Copy, channel: Channel) {
+  if (channel === 'phone') {
+    return {
+      label: t.contact.phoneLabel,
+      name: 'phone',
+      type: 'tel',
+      placeholder: '+380',
+      autoComplete: 'tel',
+    }
+  }
+  if (channel === 'telegram') {
+    return {
+      label: t.contact.telegramLabel,
+      name: 'telegram',
+      type: 'text',
+      placeholder: '@nickname',
+      autoComplete: 'username',
+    }
+  }
+  return {
+    label: t.contact.emailLabel,
     name: 'email',
     type: 'email',
     placeholder: 'name@company.com',
     autoComplete: 'email',
-  },
+  }
 }
 
 function field(data: FormData, name: string) {
@@ -49,6 +53,7 @@ function ServiceSelect({
   value: string
   onChange: (value: string) => void
 }) {
+  const { t, locale } = useLocale()
   const [open, setOpen] = useState(false)
   const box = useRef<HTMLDivElement>(null)
 
@@ -86,43 +91,46 @@ function ServiceSelect({
         {value}
       </button>
       {open ? (
-        <div className="contact-select__menu" role="listbox" aria-label="Що запускаємо">
+        <div className="contact-select__menu" role="listbox" aria-label={t.contact.service}>
           <button
             type="button"
             role="option"
-            aria-selected={value === 'Система під ключ'}
-            className={value === 'Система під ключ' ? 'is-on' : ''}
-            onClick={() => pick('Система під ключ')}
+            aria-selected={value === t.contact.fullSystem}
+            className={value === t.contact.fullSystem ? 'is-on' : ''}
+            onClick={() => pick(t.contact.fullSystem)}
           >
-            Система під ключ
+            {t.contact.fullSystem}
           </button>
           {serviceGroups.map((group) => (
             <div key={group} className="contact-select__group">
-              <p>{group}</p>
+              <p>{t.groups[group]}</p>
               {services
                 .filter((service) => service.group === group)
-                .map((service) => (
-                  <button
-                    key={service.slug}
-                    type="button"
-                    role="option"
-                    aria-selected={value === service.title}
-                    className={value === service.title ? 'is-on' : ''}
-                    onClick={() => pick(service.title)}
-                  >
-                    {service.title}
-                  </button>
-                ))}
+                .map((service) => {
+                  const title = localizeService(service, locale).title
+                  return (
+                    <button
+                      key={service.slug}
+                      type="button"
+                      role="option"
+                      aria-selected={value === title}
+                      className={value === title ? 'is-on' : ''}
+                      onClick={() => pick(title)}
+                    >
+                      {title}
+                    </button>
+                  )
+                })}
             </div>
           ))}
           <button
             type="button"
             role="option"
-            aria-selected={value === 'Інше'}
-            className={value === 'Інше' ? 'is-on' : ''}
-            onClick={() => pick('Інше')}
+            aria-selected={value === t.contact.other}
+            className={value === t.contact.other ? 'is-on' : ''}
+            onClick={() => pick(t.contact.other)}
           >
-            Інше
+            {t.contact.other}
           </button>
         </div>
       ) : null}
@@ -131,12 +139,20 @@ function ServiceSelect({
 }
 
 export function Contact() {
+  const { t, locale } = useLocale()
   const [sent, setSent] = useState(false)
   const [sending, setSending] = useState(false)
   const [error, setError] = useState('')
-  const [direction, setDirection] = useState('Система під ключ')
-  const [channel, setChannel] = useState<Channel>('Telegram')
-  const reply = replyField[channel]
+  const [localeTick, setLocaleTick] = useState(locale)
+  const [direction, setDirection] = useState(t.contact.fullSystem)
+  const [channel, setChannel] = useState<Channel>('telegram')
+  const reply = replyMeta(t, channel)
+
+  if (localeTick !== locale) {
+    setLocaleTick(locale)
+    setDirection(t.contact.fullSystem)
+    setError('')
+  }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -154,7 +170,7 @@ export function Contact() {
     const task = field(data, 'task')
 
     if (!name || !replyValue || !task) {
-      setError('Заповніть обовʼязкові поля.')
+      setError(t.contact.error)
       return
     }
 
@@ -173,7 +189,7 @@ export function Contact() {
       Контакт: replyValue,
     }
 
-    if (channel === 'Email') {
+    if (channel === 'email') {
       payload._replyto = replyValue
     }
 
@@ -205,30 +221,33 @@ export function Contact() {
 
       throw new Error(message || 'send failed')
     } catch {
-      setError('Не вдалось надіслати. Спробуйте ще раз.')
+      setError(t.contact.sendFail)
     } finally {
       setSending(false)
     }
+  }
+
+  const channelLabel: Record<Channel, string> = {
+    phone: t.contact.phone,
+    telegram: t.contact.telegram,
+    email: t.contact.email,
   }
 
   return (
     <section className="contact" id="contact" data-scene="close">
       <Reveal from="left">
         <div className="contact__intro">
-          <p className="eyebrow">Контакти</p>
-          <h2>Напишіть задачу — зберемо прорахунок</h2>
-          <p>
-            Без анкети на два екрани. Коротко: хто ви, що треба запустити, як зручно
-            відповісти.
-          </p>
+          <p className="eyebrow">{t.contact.kicker}</p>
+          <h2>{t.contact.title}</h2>
+          <p>{t.contact.text}</p>
           <ul className="contact__notes">
             <li>
               <span>01</span>
-              Відповідаємо в той самий канал, який оберете.
+              {t.contact.notes[0]}
             </li>
             <li>
               <span>02</span>
-              Спочатку обсяг і строки, потім цифри — без шаблонної презентації.
+              {t.contact.notes[1]}
             </li>
           </ul>
         </div>
@@ -236,40 +255,50 @@ export function Contact() {
 
       {sent ? (
         <div className="contact__receipt" role="status">
-          <p className="eyebrow">Готово</p>
-          <h3>Запит отримано</h3>
-          <p>Звʼяжемось у канал, який ви обрали — без шаблонної презентації.</p>
+          <p className="eyebrow">{t.contact.done}</p>
+          <h3>{t.contact.received}</h3>
+          <p>{t.contact.reply}</p>
         </div>
       ) : (
         <Reveal delay={80} from="right">
-          <form className="contact__form" onSubmit={onSubmit}>
+          <form className="contact__form" key={locale} onSubmit={onSubmit}>
             <label className="contact__honey" aria-hidden="true">
-              Сайт
+              {t.contact.honey}
               <input name="website" type="text" tabIndex={-1} autoComplete="off" />
             </label>
             <label>
-              Імʼя *
-              <input name="name" type="text" required autoComplete="name" placeholder="Олена" />
+              {t.contact.name}
+              <input
+                name="name"
+                type="text"
+                required
+                autoComplete="name"
+                placeholder={t.contact.namePh}
+              />
             </label>
             <label>
-              Компанія
-              <input name="company" type="text" placeholder="Назва бренду" />
+              {t.contact.company}
+              <input
+                name="company"
+                type="text"
+                placeholder={t.contact.companyPh}
+              />
             </label>
             <label className="contact__full">
-              Що запускаємо *
+              {t.contact.service}
               <ServiceSelect value={direction} onChange={setDirection} />
             </label>
             <label className="contact__full">
-              Задача *
+              {t.contact.task}
               <textarea
                 name="task"
                 rows={4}
                 required
-                placeholder="Що вже є і що має зʼявитись після запуску"
+                placeholder={t.contact.taskPh}
               />
             </label>
             <fieldset className="contact__full contact__picks">
-              <legend>Як відповісти *</legend>
+              <legend>{t.contact.channel}</legend>
               <input type="hidden" name="channel" value={channel} />
               <div className="contact__chips contact__chips--channels">
                 {channels.map((item) => (
@@ -280,7 +309,7 @@ export function Contact() {
                     aria-pressed={channel === item}
                     onClick={() => setChannel(item)}
                   >
-                    {item}
+                    {channelLabel[item]}
                   </button>
                 ))}
               </div>
@@ -297,7 +326,7 @@ export function Contact() {
             </label>
             <label className="contact__check">
               <input name="consent" type="checkbox" required />
-              <span>Погоджуюсь на обробку даних для відповіді по запиту.</span>
+              <span>{t.contact.consent}</span>
             </label>
             {error ? (
               <p className="contact__error" role="alert">
@@ -306,8 +335,8 @@ export function Contact() {
             ) : null}
             <button className="btn btn--pink btn--slide" type="submit" disabled={sending}>
               <span>
-                <span>{sending ? 'Надсилаємо…' : 'Надіслати'}</span>
-                <span>{sending ? 'Надсилаємо…' : 'Надіслати'}</span>
+                <span>{sending ? t.contact.sending : t.contact.send}</span>
+                <span>{sending ? t.contact.sending : t.contact.send}</span>
               </span>
             </button>
           </form>

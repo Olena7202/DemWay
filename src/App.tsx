@@ -54,7 +54,7 @@ function ScrollTo() {
         return
       }
 
-      if (!hash || (onCatalog && hash !== '#contact')) {
+      if (!hash || (onCatalog && hash !== '#contact' && hash !== '#faq')) {
         window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
         return
       }

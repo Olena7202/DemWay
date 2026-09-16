@@ -1,4 +1,5 @@
 import { serviceGroups, type ServiceGroup } from '../data/services'
+import { useLocale } from '../i18n/locale'
 
 type ServiceTabsProps = {
   group: ServiceGroup
@@ -6,8 +7,9 @@ type ServiceTabsProps = {
 }
 
 export function ServiceTabs({ group, onChange }: ServiceTabsProps) {
+  const { t } = useLocale()
   return (
-    <div className="service-tabs" role="tablist" aria-label="Напрями послуг">
+    <div className="service-tabs" role="tablist" aria-label={t.catalog.tabsAria}>
       {serviceGroups.map((item) => (
         <button
           key={item}
@@ -17,7 +19,7 @@ export function ServiceTabs({ group, onChange }: ServiceTabsProps) {
           className={`service-tab${group === item ? ' service-tab--active' : ''}`}
           onClick={() => onChange(item)}
         >
-          {item}
+          {t.groups[item]}
         </button>
       ))}
     </div>

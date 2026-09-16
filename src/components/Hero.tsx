@@ -1,8 +1,10 @@
 import moon from '../assets/logo-moon.png'
 import mark from '../assets/logo-dw.png'
 import { Reveal } from './Reveal'
+import { useLocale } from '../i18n/locale'
 
 export function Hero() {
+  const { t } = useLocale()
   return (
     <section className="hero" id="top" data-scene="khaki">
       <div className="hero__grid">
@@ -14,21 +16,18 @@ export function Hero() {
             </h1>
           </Reveal>
           <Reveal delay={90} from="soft">
-            <p className="lede">
-              Кожне рішення будуємо навколо вашого бізнесу: сайти й лендінги, CRM,
-              пошук, реклама та айдентика — від першого контакту до покупки.
-            </p>
+            <p className="lede">{t.hero.lede}</p>
           </Reveal>
           <Reveal delay={160} from="soft">
             <div className="hero__actions">
               <a className="btn btn--pink btn--slide" href="#contact">
                 <span>
-                  <span>Обговорити задачу</span>
-                  <span>Обговорити задачу</span>
+                  <span>{t.hero.discuss}</span>
+                  <span>{t.hero.discuss}</span>
                 </span>
               </a>
               <a className="btn btn--ink" href="#cases">
-                Дивитись кейси
+                {t.hero.cases}
               </a>
             </div>
           </Reveal>

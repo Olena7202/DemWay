@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Wordmark } from './Wordmark'
+import { useLocale } from '../i18n/locale'
 
 function NavLinks({ onSelect }: { onSelect: () => void }) {
+  const { t } = useLocale()
   const location = useLocation()
   const onServices = location.pathname.replace(/\/$/, '').endsWith('/poslugy')
   const contactTo = onServices
@@ -12,32 +14,56 @@ function NavLinks({ onSelect }: { onSelect: () => void }) {
   return (
     <>
       <Link to={{ pathname: '/', hash: '#why' }} onClick={onSelect}>
-        Про нас
+        {t.nav.about}
       </Link>
       <NavLink
         to="/poslugy"
         className={({ isActive }) => (isActive ? 'is-current' : '')}
         onClick={onSelect}
       >
-        Послуги
+        {t.nav.services}
       </NavLink>
       <Link to={{ pathname: '/', hash: '#cases' }} onClick={onSelect}>
-        Кейси
+        {t.nav.cases}
       </Link>
       <Link to={{ pathname: '/', hash: '#approach' }} onClick={onSelect}>
-        Підхід
+        {t.nav.approach}
       </Link>
       <Link to={contactTo} onClick={onSelect}>
-        Контакти
+        {t.nav.contact}
       </Link>
       <Link className="nav__cta" to={contactTo} onClick={onSelect}>
-        Бриф
+        {t.nav.brief}
       </Link>
     </>
   )
 }
 
+function LangSwitch() {
+  const { locale, setLocale, t } = useLocale()
+  return (
+    <div className="lang-switch" role="group" aria-label={t.nav.language}>
+      <button
+        type="button"
+        className={locale === 'uk' ? 'is-on' : ''}
+        onClick={() => setLocale('uk')}
+      >
+        UA
+      </button>
+      <span aria-hidden="true">/</span>
+      <button
+        type="button"
+        className={locale === 'en' ? 'is-on' : ''}
+        onClick={() => setLocale('en')}
+      >
+        EN
+      </button>
+    </div>
+  )
+}
+
 export function Header() {
+  const { t } = useLocale()
   const location = useLocation()
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -77,26 +103,30 @@ export function Header() {
         >
           <Wordmark />
         </Link>
-        <nav className="nav nav--bar" aria-label="Навігація">
+        <nav className="nav nav--bar" aria-label={t.nav.aria}>
           <NavLinks onSelect={close} />
         </nav>
-        <button
-          className="menu-btn"
-          type="button"
-          aria-expanded={open}
-          aria-label={open ? 'Закрити меню' : 'Відкрити меню'}
-          onClick={() => setOpen((value) => !value)}
-        >
-          <span />
-          <span />
-        </button>
+        <div className="header-end">
+          <LangSwitch />
+          <button
+            className="menu-btn"
+            type="button"
+            aria-expanded={open}
+            aria-label={open ? t.nav.closeMenu : t.nav.openMenu}
+            onClick={() => setOpen((value) => !value)}
+          >
+            <span />
+            <span />
+          </button>
+        </div>
       </header>
       <nav
         className={`nav nav--sheet${open ? ' is-open' : ''}`}
-        aria-label="Мобільне меню"
+        aria-label={t.nav.aria}
         aria-hidden={!open}
       >
         <NavLinks onSelect={close} />
+        <LangSwitch />
       </nav>
     </>
   )

@@ -1,38 +1,21 @@
 import { Reveal } from './Reveal'
-
-const points = [
-  {
-    title: 'Експертиза',
-    text: 'Розуміємо бізнес комплексно та поєднуємо розробку, маркетинг і технології в одну систему',
-  },
-  {
-    title: 'Чесність',
-    text: 'Дедлайни й зона відповідальності прозорі. Не обіцяємо неможливе і не зникаємо після запуску.',
-  },
-  {
-    title: 'Результат',
-    text: 'Кожен інструмент працює на спільну ціль - більше клієнтів, продажів і розвиток бізнесу.',
-  },
-]
+import { useLocale } from '../i18n/locale'
 
 export function Why() {
+  const { t } = useLocale()
   return (
     <section className="why" id="why" data-scene="why">
       <Reveal className="why__kicker">
-        <p className="eyebrow">Про нас</p>
+        <p className="eyebrow">{t.why.kicker}</p>
       </Reveal>
       <Reveal className="why__copy">
         <div className="section-head why__head">
-          <h2>Перетворюємо ідеї на бізнес, який рухається вперед</h2>
-          <p>
-            Ми створюємо сайти та лендінги, впроваджуємо CRM-рішення, працюємо з SEO та рекламою, 
-            формуємо айдентику бренду. Кожне рішення будуємо навколо вашого бізнесу, його цілей і шляху клієнта - 
-            від першого контакту до покупки. 
-          </p>
+          <h2>{t.why.title}</h2>
+          <p>{t.why.text}</p>
         </div>
       </Reveal>
       <ul className="why__grid">
-        {points.map((point, index) => (
+        {t.why.points.map((point, index) => (
           <li key={point.title}>
             <Reveal delay={index * 200} from="right">
               <article className={`why__card why__card--${index + 1}`}>

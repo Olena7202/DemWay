@@ -1,39 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
+import { useLocale } from '../i18n/locale'
 
-const steps = [
-  {
-    n: '01',
-    title: 'Знайомство',
-    text: 'Обговорюємо бізнес, продукт, цілі й очікування. Фіксуємо, що має змінитись після запуску.',
-  },
-  {
-    n: '02',
-    title: 'Аналіз',
-    text: 'Дивимось нішу, конкурентів, попит і поточні канали. Без цього не збираємо архітектуру навмання.',
-  },
-  {
-    n: '03',
-    title: 'Стратегія',
-    text: 'Обираємо пріоритети: лендінг, CRM, SEO чи реклама. План робіт і терміни — до першого макета.',
-  },
-  {
-    n: '04',
-    title: 'Реалізація',
-    text: 'Дизайн, збірка, інтеграції, креативи. Віддаємо робочий продукт, а не концепт на слайді.',
-  },
-  {
-    n: '05',
-    title: 'Запуск',
-    text: 'Публікуємо, підключаємо форми, касу, рекламу. Система починає збирати заявки.',
-  },
-  {
-    n: '06',
-    title: 'Аналіз і розвиток',
-    text: 'Міряємо заявки, видимість, угоди. Тестуємо й підкручуємо, щоб ріст не зупинявся після старту.',
-  },
-]
+const stepNs = ['01', '02', '03', '04', '05', '06'] as const
 
 export function Approach() {
+  const { t } = useLocale()
+  const steps = stepNs.map((n, index) => ({
+    n,
+    title: t.approach.steps[index].title,
+    text: t.approach.steps[index].text,
+  }))
   const trackRef = useRef<HTMLDivElement>(null)
   const stageRef = useRef<HTMLDivElement>(null)
   const railRef = useRef<HTMLUListElement>(null)
@@ -144,8 +120,8 @@ export function Approach() {
     return (
       <section className="approach approach--plain" id="approach" data-scene="ink">
         <div className="section-head">
-          <p className="eyebrow">Підхід</p>
-          <h2>Від першої розмови до системного результату</h2>
+          <p className="eyebrow">{t.approach.kicker}</p>
+          <h2>{t.approach.title}</h2>
         </div>
         <ol className="steps">
           {steps.map((step) => (
@@ -167,12 +143,12 @@ export function Approach() {
       <div className="approach-pin">
         <div className="approach-pin__sticky">
           <header className="approach-pin__head">
-            <p className="eyebrow">Підхід</p>
+            <p className="eyebrow">{t.approach.kicker}</p>
             <p className="approach-pin__count" aria-live="polite">
               {steps[active].n}
               <span> / 06</span>
             </p>
-            <h2>Від першої розмови до системного результату</h2>
+            <h2>{t.approach.title}</h2>
           </header>
 
           <div className="approach-track" ref={trackRef}>

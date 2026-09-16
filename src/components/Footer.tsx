@@ -3,13 +3,18 @@ import { Wordmark } from './Wordmark'
 import { Reveal } from './Reveal'
 import { contactInbox, instagramUrl } from '../data/contact'
 import { serviceGroupAnchors, serviceGroups } from '../data/services'
+import { useLocale } from '../i18n/locale'
 
 export function Footer() {
+  const { t } = useLocale()
   const location = useLocation()
   const onServices = location.pathname.replace(/\/$/, '').endsWith('/poslugy')
   const contactTo = onServices
     ? { pathname: '/poslugy', hash: '#contact' }
     : { pathname: '/', hash: '#contact' }
+  const faqTo = onServices
+    ? { pathname: '/poslugy', hash: '#faq' }
+    : { pathname: '/', hash: '#faq' }
 
   return (
     <footer className="site-footer" data-scene="close">
@@ -20,73 +25,76 @@ export function Footer() {
           </Link>
           <p className="site-footer__aside">
             <span>UA · online</span>
-            <span>Від контакту до угоди</span>
+            <span>{t.footer.aside}</span>
           </p>
         </div>
 
         <div className="site-footer__cols">
-          <nav className="site-footer__col" aria-label="Послуги">
-            <p className="site-footer__label">Послуги</p>
+          <nav className="site-footer__col" aria-label={t.footer.services}>
+            <p className="site-footer__label">{t.footer.services}</p>
             <ul>
               {serviceGroups.map((group) => (
                 <li key={group}>
                   <Link to={`/poslugy?napryam=${serviceGroupAnchors[group]}`}>
-                    {group}
+                    {t.groups[group]}
                   </Link>
                 </li>
               ))}
               <li>
                 <Link className="site-footer__more" to="/poslugy">
-                  Увесь каталог
+                  {t.footer.catalog}
                 </Link>
               </li>
             </ul>
           </nav>
 
-          <nav className="site-footer__col" aria-label="Компанія">
-            <p className="site-footer__label">Компанія</p>
+          <nav className="site-footer__col" aria-label={t.footer.company}>
+            <p className="site-footer__label">{t.footer.company}</p>
             <ul>
               <li>
-                <Link to={{ pathname: '/', hash: '#why' }}>Про нас</Link>
+                <Link to={{ pathname: '/', hash: '#why' }}>{t.nav.about}</Link>
               </li>
               <li>
-                <Link to={{ pathname: '/', hash: '#cases' }}>Кейси</Link>
+                <Link to={{ pathname: '/', hash: '#cases' }}>{t.nav.cases}</Link>
               </li>
               <li>
-                <Link to={{ pathname: '/', hash: '#approach' }}>Підхід</Link>
+                <Link to={{ pathname: '/', hash: '#approach' }}>{t.nav.approach}</Link>
+              </li>
+              <li>
+                <Link to={faqTo}>FAQ</Link>
               </li>
               <li>
                 <NavLink
                   to="/poslugy"
                   className={({ isActive }) => (isActive ? 'is-current' : '')}
                 >
-                  Каталог пакетів
+                  {t.catalog.title}
                 </NavLink>
               </li>
               <li>
-                <Link to={contactTo}>Бриф</Link>
+                <Link to={contactTo}>{t.nav.brief}</Link>
               </li>
             </ul>
           </nav>
 
           <div className="site-footer__col site-footer__col--contact">
-            <p className="site-footer__label">Контакти</p>
+            <p className="site-footer__label">{t.footer.contacts}</p>
             <ul>
               <li>
-                <span>Пошта</span>
+                <span>{t.footer.mail}</span>
                 <a href={`mailto:${contactInbox}`}>{contactInbox}</a>
               </li>
               <li>
-                <span>Канал</span>
-                <Link to={contactTo}>Telegram, телефон, email</Link>
+                <span>{t.footer.channel}</span>
+                <Link to={contactTo}>{t.footer.channelValue}</Link>
               </li>
               <li>
-                <span>Формат</span>
-                <p>Україна · онлайн</p>
+                <span>{t.footer.format}</span>
+                <p>{t.footer.formatValue}</p>
               </li>
               <li>
-                <span>Години</span>
-                <p>Пн–Пт, 10:00–18:00</p>
+                <span>{t.footer.hours}</span>
+                <p>{t.footer.hoursValue}</p>
               </li>
             </ul>
           </div>
