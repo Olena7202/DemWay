@@ -36,6 +36,31 @@ html {
   color-scheme: dark;
   overflow-x: hidden;
   overflow-anchor: none;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--pink) 62%, #1c1c1c) #070707;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #070707;
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--pink) 58%, #222);
+  border: 2px solid #070707;
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--pink);
+}
+
+::-webkit-scrollbar-corner {
+  background: #070707;
 }
 
 html.is-booted {
