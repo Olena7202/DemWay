@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import { PageBg } from './components/PageBg'
 import { Header } from './components/Header'
@@ -12,6 +12,7 @@ function dismissBoot() {
   const boot = document.getElementById('boot')
   html.classList.remove('is-booting')
   html.classList.add('is-booted')
+  window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
   if (!boot) return
   boot.classList.add('is-away')
   window.setTimeout(() => boot.remove(), 800)
@@ -19,29 +20,62 @@ function dismissBoot() {
 
 function ScrollTo() {
   const location = useLocation()
+  const firstPaint = useRef(true)
+
+  useEffect(() => {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
+  }, [])
 
   useEffect(() => {
     const path = location.pathname.replace(/\/$/, '')
     const onCatalog = path.endsWith('/poslugy')
-    if (!location.hash || (onCatalog && location.hash !== '#contact')) {
-      window.scrollTo(0, 0)
-      return
-    }
-
-    let attempts = 0
+    const hash = location.hash
+    let timer = 0
     let frame = 0
-    const seek = () => {
-      const node = document.querySelector(location.hash)
-      if (node) {
-        node.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    let attempts = 0
+
+    const afterBoot = (fn: () => void) => {
+      if (document.documentElement.classList.contains('is-booting')) {
+        timer = window.setTimeout(() => afterBoot(fn), 32)
         return
       }
-      attempts += 1
-      if (attempts < 40) frame = window.requestAnimationFrame(seek)
+      fn()
     }
-    frame = window.requestAnimationFrame(seek)
-    return () => window.cancelAnimationFrame(frame)
-  }, [location.pathname, location.hash])
+
+    afterBoot(() => {
+      if (firstPaint.current) {
+        firstPaint.current = false
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+        if (hash && !onCatalog) {
+          history.replaceState(null, '', `${location.pathname}${location.search}`)
+        }
+        window.setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' }), 80)
+        window.setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' }), 400)
+        return
+      }
+
+      if (!hash || (onCatalog && hash !== '#contact')) {
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+        return
+      }
+
+      const seek = () => {
+        const node = document.querySelector(hash)
+        if (node) {
+          node.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          return
+        }
+        attempts += 1
+        if (attempts < 40) frame = window.requestAnimationFrame(seek)
+      }
+      frame = window.requestAnimationFrame(seek)
+    })
+
+    return () => {
+      window.clearTimeout(timer)
+      window.cancelAnimationFrame(frame)
+    }
+  }, [location.pathname, location.hash, location.search])
 
   return null
 }

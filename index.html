@@ -22,8 +22,11 @@
         margin: 0;
         background: #000;
       }
-      html.is-booting {
+      html.is-booting,
+      html.is-booting body {
         overflow: hidden;
+        height: 100%;
+        overscroll-behavior: none;
       }
       #boot {
         position: fixed;

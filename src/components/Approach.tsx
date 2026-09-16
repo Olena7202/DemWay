@@ -34,7 +34,7 @@ const steps = [
 ]
 
 export function Approach() {
-  const pinRef = useRef<HTMLDivElement>(null)
+  const trackRef = useRef<HTMLDivElement>(null)
   const stageRef = useRef<HTMLDivElement>(null)
   const railRef = useRef<HTMLUListElement>(null)
   const barRef = useRef<HTMLSpanElement>(null)
@@ -60,39 +60,84 @@ export function Approach() {
 
   useEffect(() => {
     if (reduced) return
-    const pin = pinRef.current
+    const track = trackRef.current
     const stage = stageRef.current
     const rail = railRef.current
     const bar = barRef.current
-    if (!pin || !stage || !rail) return
+    if (!track || !stage || !rail) return
 
     let frame = 0
     let current = 0
+    let goal = 0
     let lastActive = 0
-    let lastProgress = 0
+    let touchX = 0
+
+    const maxOf = () => Math.max(0, rail.scrollWidth - stage.clientWidth)
+
+    const consume = (delta: number) => {
+      const max = maxOf()
+      if (max <= 0) return false
+      const scale = max / Math.max(1, window.innerHeight * 0.95)
+      const step = delta * scale
+      if (delta > 0 && current < max - 1) {
+        goal = Math.min(max, goal + step)
+        return true
+      }
+      if (delta < 0 && current > 1) {
+        goal = Math.max(0, goal + step)
+        return true
+      }
+      return false
+    }
 
     const tick = () => {
       frame = requestAnimationFrame(tick)
-      const total = Math.max(1, pin.offsetHeight - window.innerHeight)
-      const next = Math.min(1, Math.max(0, -pin.getBoundingClientRect().top / total))
-      const max = Math.max(0, rail.scrollWidth - stage.clientWidth)
-      const target = next * max
-      const rising = next >= lastProgress
-      lastProgress = next
-      current += (target - current) * (rising ? 0.055 : 0.4)
-      if (Math.abs(target - current) < 0.35) current = target
+      const max = maxOf()
+      const rising = goal >= current
+      current += (goal - current) * (rising ? 0.055 : 0.4)
+      if (Math.abs(goal - current) < 0.35) current = goal
       rail.style.transform = `translate3d(${-current}px, 0, 0)`
       const p = max > 0 ? current / max : 0
       if (bar) bar.style.width = `${p * 100}%`
-      const index = Math.min(steps.length - 1, Math.round(p * (steps.length - 1)))
+      const index = Math.min(
+        steps.length - 1,
+        Math.max(0, Math.floor(p * steps.length - 0.0001)),
+      )
       if (index !== lastActive) {
         lastActive = index
         setActive(index)
       }
     }
 
+    const onWheel = (event: WheelEvent) => {
+      if (event.ctrlKey) return
+      const delta = event.deltaY + event.deltaX
+      if (!consume(delta)) return
+      event.preventDefault()
+    }
+
+    const onTouchStart = (event: TouchEvent) => {
+      touchX = event.touches[0]?.clientX ?? 0
+    }
+
+    const onTouchMove = (event: TouchEvent) => {
+      const x = event.touches[0]?.clientX ?? touchX
+      const delta = touchX - x
+      touchX = x
+      if (!consume(delta)) return
+      event.preventDefault()
+    }
+
     frame = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(frame)
+    track.addEventListener('wheel', onWheel, { passive: false })
+    track.addEventListener('touchstart', onTouchStart, { passive: true })
+    track.addEventListener('touchmove', onTouchMove, { passive: false })
+    return () => {
+      cancelAnimationFrame(frame)
+      track.removeEventListener('wheel', onWheel)
+      track.removeEventListener('touchstart', onTouchStart)
+      track.removeEventListener('touchmove', onTouchMove)
+    }
   }, [reduced])
 
   if (reduced) {
@@ -119,7 +164,7 @@ export function Approach() {
 
   return (
     <section className="approach" id="approach" data-scene="ink">
-      <div className="approach-pin" ref={pinRef}>
+      <div className="approach-pin">
         <div className="approach-pin__sticky">
           <header className="approach-pin__head">
             <p className="eyebrow">Підхід</p>
@@ -130,36 +175,38 @@ export function Approach() {
             <h2>Від першої розмови до системного результату</h2>
           </header>
 
-          <div className="approach-stage" ref={stageRef}>
-            <ul className="approach-rail" ref={railRef}>
-              {steps.map((step, index) => (
-                <li key={step.n}>
-                  <article
-                    className={`approach-slide${index === active ? ' is-active' : ''}`}
-                  >
-                    <span className="approach-slide__ghost" aria-hidden="true">
-                      {step.n}
-                    </span>
-                    <p className="approach-slide__n">{step.n}</p>
-                    <h3>{step.title}</h3>
-                    <p>{step.text}</p>
-                  </article>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <div className="approach-track" ref={trackRef}>
+            <div className="approach-stage" ref={stageRef}>
+              <ul className="approach-rail" ref={railRef}>
+                {steps.map((step, index) => (
+                  <li key={step.n}>
+                    <article
+                      className={`approach-slide${index === active ? ' is-active' : ''}`}
+                    >
+                      <span className="approach-slide__ghost" aria-hidden="true">
+                        {step.n}
+                      </span>
+                      <p className="approach-slide__n">{step.n}</p>
+                      <h3>{step.title}</h3>
+                      <p>{step.text}</p>
+                    </article>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div className="approach-nav" aria-hidden="true">
-            <ol className="approach-dots">
-              {steps.map((step, index) => (
-                <li
-                  key={step.n}
-                  className={index === active ? 'is-on' : ''}
-                />
-              ))}
-            </ol>
-            <div className="approach-progress">
-              <span ref={barRef} />
+            <div className="approach-nav" aria-hidden="true">
+              <ol className="approach-dots">
+                {steps.map((step, index) => (
+                  <li
+                    key={step.n}
+                    className={index === active ? 'is-on' : ''}
+                  />
+                ))}
+              </ol>
+              <div className="approach-progress">
+                <span ref={barRef} />
+              </div>
             </div>
           </div>
         </div>

@@ -1,7 +1,22 @@
 import { useEffect, useRef } from 'react'
-import moon from '../assets/logo-moon.png'
 
-const RING = '114, 130, 94'
+type Point = {
+  x: number
+  y: number
+  originX: number
+  originY: number
+  startX: number
+  startY: number
+  targetX: number
+  targetY: number
+  startTime: number
+  duration: number
+  closest: Point[]
+}
+
+const DENSITY = 4000
+const NEAREST = 5
+const STROKE = '114, 130, 94'
 
 export function MeshField() {
   const ref = useRef<HTMLCanvasElement>(null)
@@ -13,20 +28,54 @@ export function MeshField() {
     if (!ctx) return
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const texture = new Image()
-    texture.src = moon
-
+    let points: Point[] = []
     let width = 0
     let height = 0
     let dpr = 1
     let frame = 0
-    let mouseX = 0
-    let mouseY = 0
-    let drawX = 0
-    let drawY = 0
-    let hasPointer = false
-    let seeded = false
-    let glow = 0
+
+    const createPoints = () => {
+      const step = Math.sqrt(width < 720 ? 5600 : DENSITY)
+      points = []
+      for (let x = 0; x < width; x += step) {
+        for (let y = 0; y < height; y += step) {
+          const px = x + Math.random() * step
+          const py = y + Math.random() * step
+          points.push({
+            x: px,
+            y: py,
+            originX: px,
+            originY: py,
+            startX: px,
+            startY: py,
+            targetX: px,
+            targetY: py,
+            startTime: performance.now(),
+            duration: 1000 + Math.random() * 1000,
+            closest: [],
+          })
+        }
+      }
+
+      for (const p1 of points) {
+        const closest: { point: Point; distance: number }[] = []
+        for (const p2 of points) {
+          if (p1 === p2) continue
+          const dx = p1.x - p2.x
+          const dy = p1.y - p2.y
+          const distance = dx * dx + dy * dy
+          if (closest.length < NEAREST) {
+            closest.push({ point: p2, distance })
+            closest.sort((a, b) => a.distance - b.distance)
+          } else if (distance < closest[closest.length - 1].distance) {
+            closest.pop()
+            closest.push({ point: p2, distance })
+            closest.sort((a, b) => a.distance - b.distance)
+          }
+        }
+        p1.closest = closest.map((item) => item.point)
+      }
+    }
 
     const resize = () => {
       dpr = Math.min(window.devicePixelRatio || 1, 2)
@@ -37,115 +86,62 @@ export function MeshField() {
       canvas.style.width = `${width}px`
       canvas.style.height = `${height}px`
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+      createPoints()
+    }
+
+    const shiftPoint = (point: Point, now: number) => {
+      if (reduce) {
+        point.x = point.originX
+        point.y = point.originY
+        return
+      }
+      let t = (now - point.startTime) / point.duration
+      if (t >= 1) {
+        point.startX = point.x
+        point.startY = point.y
+        point.targetX = point.originX + (Math.random() * 100 - 50)
+        point.targetY = point.originY + (Math.random() * 100 - 50)
+        point.startTime = now
+        point.duration = 1000 + Math.random() * 1000
+        t = 0
+      }
+      t = t < 0.5 ? 4 * t * t * t : 1 - ((-2 * t + 2) ** 3) / 2
+      point.x = point.startX + (point.targetX - point.startX) * t
+      point.y = point.startY + (point.targetY - point.startY) * t
     }
 
     const draw = () => {
       ctx.clearRect(0, 0, width, height)
-      glow += ((hasPointer ? 1 : 0) - glow) * 0.08
-      if (glow < 0.02) return
+      const now = performance.now()
 
-      drawX += (mouseX - drawX) * 0.14
-      drawY += (mouseY - drawY) * 0.14
+      for (const point of points) shiftPoint(point, now)
 
-      const now = reduce ? 0 : performance.now()
-      const radius = 34
-      const spin = now * 0.00028
-      const alpha = glow * 0.55
-
-      const atmosphere = ctx.createRadialGradient(
-        drawX,
-        drawY,
-        radius * 0.2,
-        drawX,
-        drawY,
-        radius * 2.4,
-      )
-      atmosphere.addColorStop(0, `rgba(${RING}, ${0.16 * alpha})`)
-      atmosphere.addColorStop(0.45, `rgba(${RING}, ${0.06 * alpha})`)
-      atmosphere.addColorStop(1, 'rgba(0, 0, 0, 0)')
-      ctx.fillStyle = atmosphere
-      ctx.beginPath()
-      ctx.arc(drawX, drawY, radius * 2.4, 0, Math.PI * 2)
-      ctx.fill()
-
-      ctx.save()
-      ctx.globalAlpha = alpha
-      ctx.beginPath()
-      ctx.arc(drawX, drawY, radius, 0, Math.PI * 2)
-      ctx.clip()
-      if (texture.complete && texture.naturalWidth) {
-        ctx.drawImage(texture, drawX - radius, drawY - radius, radius * 2, radius * 2)
-      } else {
-        const body = ctx.createRadialGradient(
-          drawX - radius * 0.28,
-          drawY - radius * 0.32,
-          4,
-          drawX,
-          drawY,
-          radius,
-        )
-        body.addColorStop(0, '#3a4334')
-        body.addColorStop(0.55, '#12140f')
-        body.addColorStop(1, '#050505')
-        ctx.fillStyle = body
-        ctx.fillRect(drawX - radius, drawY - radius, radius * 2, radius * 2)
+      ctx.lineWidth = 1
+      for (const point of points) {
+        for (const neighbor of point.closest) {
+          if (neighbor.x < point.x) continue
+          const dist = Math.hypot(point.x - neighbor.x, point.y - neighbor.y)
+          const alpha = 0.22 * (1 - dist / 160)
+          if (alpha <= 0.02) continue
+          ctx.strokeStyle = `rgba(${STROKE}, ${alpha})`
+          ctx.beginPath()
+          ctx.moveTo(point.x, point.y)
+          ctx.lineTo(neighbor.x, neighbor.y)
+          ctx.stroke()
+        }
       }
-      ctx.restore()
 
-      ctx.strokeStyle = `rgba(${RING}, ${0.22 * glow})`
-      ctx.lineWidth = 1
-      ctx.beginPath()
-      ctx.arc(drawX, drawY, radius, 0, Math.PI * 2)
-      ctx.stroke()
-
-      ctx.save()
-      ctx.translate(drawX, drawY)
-      ctx.rotate(spin)
-      ctx.strokeStyle = `rgba(${RING}, ${0.38 * glow})`
-      ctx.lineWidth = 1
-      ctx.setLineDash([5, 9])
-      ctx.beginPath()
-      ctx.ellipse(0, 0, radius * 1.72, radius * 0.52, 0.18, 0, Math.PI * 2)
-      ctx.stroke()
-      ctx.setLineDash([])
-
-      const sat = now * 0.0011
-      const sx = Math.cos(sat) * radius * 1.72
-      const sy = Math.sin(sat) * radius * 0.52
-      ctx.fillStyle = `rgba(${RING}, ${0.85 * glow})`
-      ctx.beginPath()
-      ctx.arc(sx, sy, 2.2, 0, Math.PI * 2)
-      ctx.fill()
-      ctx.restore()
+      for (const point of points) {
+        ctx.fillStyle = `rgba(${STROKE}, 0.22)`
+        ctx.beginPath()
+        ctx.arc(point.x, point.y, 1, 0, Math.PI * 2)
+        ctx.fill()
+      }
     }
 
     const tick = () => {
       frame = requestAnimationFrame(tick)
       draw()
-    }
-
-    const onMouseMove = (event: MouseEvent) => {
-      hasPointer = true
-      mouseX = event.clientX
-      mouseY = event.clientY
-      if (!seeded) {
-        drawX = mouseX
-        drawY = mouseY
-        seeded = true
-      }
-    }
-
-    const onTouch = (event: TouchEvent) => {
-      const touch = event.touches[0]
-      if (!touch) return
-      hasPointer = true
-      mouseX = touch.clientX
-      mouseY = touch.clientY
-      if (!seeded) {
-        drawX = mouseX
-        drawY = mouseY
-        seeded = true
-      }
     }
 
     const onHide = () => {
@@ -160,16 +156,12 @@ export function MeshField() {
     resize()
     draw()
     window.addEventListener('resize', resize)
-    window.addEventListener('mousemove', onMouseMove)
-    window.addEventListener('touchmove', onTouch, { passive: true })
     document.addEventListener('visibilitychange', onHide)
     frame = requestAnimationFrame(tick)
 
     return () => {
       cancelAnimationFrame(frame)
       window.removeEventListener('resize', resize)
-      window.removeEventListener('mousemove', onMouseMove)
-      window.removeEventListener('touchmove', onTouch)
       document.removeEventListener('visibilitychange', onHide)
     }
   }, [])

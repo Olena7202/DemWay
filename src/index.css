@@ -32,9 +32,14 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   color-scheme: dark;
   overflow-x: hidden;
+  overflow-anchor: none;
+}
+
+html.is-booted {
+  scroll-behavior: smooth;
 }
 
 @media (max-width: 960px) {

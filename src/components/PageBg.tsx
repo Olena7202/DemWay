@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { MeshField } from './MeshField'
 
 const scenes = ['khaki', 'why', 'blush', 'cases', 'ink', 'close'] as const
 type Scene = (typeof scenes)[number]
@@ -47,7 +46,6 @@ export function PageBg() {
   return (
     <div className="page-bg" data-scene={scene} aria-hidden="true">
       <div className="page-bg__wash" />
-      <MeshField />
       <div className="page-bg__veil" />
       <div className="page-bg__grid" />
       <div className="page-bg__grain" />
