@@ -1,14 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { useLocale } from '../i18n/locale'
 
-const stepNs = ['01', '02', '03', '04', '05', '06'] as const
-
 export function Approach() {
   const { t } = useLocale()
-  const steps = stepNs.map((n, index) => ({
-    n,
-    title: t.approach.steps[index].title,
-    text: t.approach.steps[index].text,
+  const steps = t.approach.steps.map((step, index) => ({
+    n: String(index + 1),
+    title: step.title,
+    text: step.text,
   }))
   const trackRef = useRef<HTMLDivElement>(null)
   const stageRef = useRef<HTMLDivElement>(null)
@@ -146,7 +144,7 @@ export function Approach() {
             <p className="eyebrow">{t.approach.kicker}</p>
             <p className="approach-pin__count" aria-live="polite">
               {steps[active].n}
-              <span> / 06</span>
+              <span> / {steps.length}</span>
             </p>
             <h2>{t.approach.title}</h2>
           </header>

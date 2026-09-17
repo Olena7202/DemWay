@@ -242,11 +242,11 @@ export function Contact() {
           <p>{t.contact.text}</p>
           <ul className="contact__notes">
             <li>
-              <span>01</span>
+              <span>1</span>
               {t.contact.notes[0]}
             </li>
             <li>
-              <span>02</span>
+              <span>2</span>
               {t.contact.notes[1]}
             </li>
           </ul>
@@ -254,10 +254,39 @@ export function Contact() {
       </Reveal>
 
       {sent ? (
-        <div className="contact__receipt" role="status">
-          <h3>{t.contact.received}</h3>
-          <p>{t.contact.reply}</p>
-        </div>
+        <Reveal delay={80} from="right">
+          <div className="contact__receipt" role="status">
+            <h3>{t.contact.received}</h3>
+            <p className="contact__receipt-note">
+              {t.contact.reply.replace(/\s+\S+$/, '')}{' '}
+              <span className="contact__end">
+                {t.contact.reply.trim().split(/\s+/).at(-1)}
+                <span className="contact__stars" aria-hidden="true">
+                <svg viewBox="0 0 36 28" fill="none">
+                  <path
+                    d="M13 3.2 14.55 10.15 21.7 11.7 14.55 13.25 13 20.2 11.45 13.25 4.3 11.7 11.45 10.15Z"
+                    stroke="currentColor"
+                    strokeWidth="1.2"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M27.2 2.4 27.85 5.2l2.9.65-2.9.65-.65 2.8-.65-2.8-2.9-.65 2.9-.65Z"
+                    stroke="currentColor"
+                    strokeWidth="1.05"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M32.4 8.6 32.85 10.5l1.95.45-1.95.45-.45 1.9-.45-1.9-1.95-.45 1.95-.45Z"
+                    stroke="currentColor"
+                    strokeWidth="1"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+              </span>
+            </p>
+          </div>
+        </Reveal>
       ) : (
         <Reveal delay={80} from="right">
           <form className="contact__form" key={locale} onSubmit={onSubmit}>

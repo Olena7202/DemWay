@@ -24,32 +24,19 @@ export function Reveal({
       return
     }
 
-    let frame = 0
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add('is-visible')
+          return
+        }
+        el.classList.remove('is-visible')
+      },
+      { threshold: 0.14, rootMargin: '0px 0px -10% 0px' },
+    )
 
-    const read = () => {
-      frame = 0
-      if (el.classList.contains('is-visible')) return
-      const box = el.getBoundingClientRect()
-      const view = window.innerHeight
-      if (box.top < view * 0.9 && box.bottom > 48) {
-        el.classList.add('is-visible')
-      }
-    }
-
-    const onScroll = () => {
-      if (frame) return
-      frame = requestAnimationFrame(read)
-    }
-
-    read()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onScroll)
-
-    return () => {
-      cancelAnimationFrame(frame)
-      window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onScroll)
-    }
+    io.observe(el)
+    return () => io.disconnect()
   }, [])
 
   return (

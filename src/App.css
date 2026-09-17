@@ -298,6 +298,10 @@
   text-transform: uppercase;
 }
 
+.lang-switch__item {
+  display: contents;
+}
+
 .lang-switch button {
   margin: 0;
   padding: 0.2rem 0.15rem;
@@ -674,8 +678,8 @@ html.is-booting .hero::before {
 }
 
 .eyebrow {
-  font-size: var(--text-sm);
-  letter-spacing: var(--track);
+  font-size: 0.94rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--cream-dim);
   margin-bottom: 0.85rem;
@@ -1764,6 +1768,33 @@ button.teaser-row {
   transition: none;
 }
 
+.why__grid .reveal.is-visible .why__card--1,
+.why__grid .reveal.is-visible .why__card--2,
+.why__grid .reveal.is-visible .why__card--3 {
+  animation: why-card-float 14s ease-in-out infinite;
+}
+
+.why__grid .reveal.is-visible .why__card--2 {
+  animation-delay: 0.7s;
+}
+
+.why__grid .reveal.is-visible .why__card--3 {
+  animation-delay: 1.4s;
+}
+
+@keyframes why-card-float {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  35% {
+    transform: translate(1.15rem, -0.35rem);
+  }
+  70% {
+    transform: translate(0.35rem, 0.28rem);
+  }
+}
+
 @keyframes why-stair-in {
   from {
     opacity: 0;
@@ -2043,7 +2074,7 @@ button.teaser-row {
   font-family: var(--display);
   font-weight: 800;
   font-size: 0.78rem;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--pink);
 }
@@ -2251,6 +2282,7 @@ button.teaser-row {
 .faq__list {
   display: grid;
   gap: 0.55rem;
+  padding-top: 2.4rem;
 }
 
 .faq-item {
@@ -2299,7 +2331,7 @@ button.teaser-row {
   font-family: var(--display);
   font-size: 0.64rem;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   color: var(--khaki-deep);
   background: var(--pink);
 }
@@ -2417,14 +2449,14 @@ button.teaser-row {
   font-size: 0.68rem;
   line-height: 1.5;
   color: var(--pink);
-  letter-spacing: 0.06em;
+  letter-spacing: 0;
 }
 
 .contact__form {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.05rem 1.25rem;
-  padding: 0;
+  padding: 2.7rem 0 0;
   border: 0;
   border-radius: 0;
   background: transparent;
@@ -2694,28 +2726,44 @@ button.teaser-row {
 }
 
 .contact__receipt {
-  max-width: 28rem;
-  align-self: start;
+  max-width: 32rem;
+  padding-top: 2.7rem;
 }
 
 .contact__receipt h3 {
-  margin: 0.35rem 0 0.9rem;
+  margin: 0.3rem 0 0.85rem;
   font-family: var(--display);
-  font-size: var(--h2);
+  font-size: clamp(1.55rem, 2.7vw, 2.15rem);
   font-weight: 800;
   letter-spacing: -0.045em;
-  line-height: 0.98;
+  line-height: 1.12;
   color: var(--cream);
 }
 
-.contact__receipt > p {
+.contact__receipt-note {
+  margin: 0;
   color: var(--cream-dim);
   font-size: var(--text);
   line-height: 1.55;
 }
 
-.contact__receipt > p span {
+.contact__end {
+  white-space: nowrap;
+}
+
+.contact__stars {
+  display: inline-block;
+  width: 1.55em;
+  height: 1.2em;
+  margin-left: 0.28em;
+  vertical-align: -0.16em;
   color: var(--pink);
+}
+
+.contact__stars svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .contact__notes--on li {
@@ -3062,6 +3110,12 @@ button.teaser-row {
     align-items: start;
   }
 
+  .contact__form,
+  .contact__receipt,
+  .faq__list {
+    padding-top: 0;
+  }
+
   .why__kicker,
   .why__copy,
   .why__grid {
@@ -3097,6 +3151,25 @@ button.teaser-row {
 
   .why__grid .reveal.is-visible {
     animation-name: why-stair-in-phone;
+  }
+
+  .why__grid .reveal.is-visible .why__card--1,
+  .why__grid .reveal.is-visible .why__card--2,
+  .why__grid .reveal.is-visible .why__card--3 {
+    animation-name: why-card-float-phone;
+  }
+
+  @keyframes why-card-float-phone {
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+    35% {
+      transform: translate(0.42rem, -0.22rem);
+    }
+    70% {
+      transform: translate(0.14rem, 0.16rem);
+    }
   }
 
   .faq,
@@ -3414,7 +3487,7 @@ button.teaser-row {
   }
 
   .contact__receipt h3 {
-    font-size: clamp(1.55rem, 8.5vw, 2.1rem);
+    font-size: clamp(1.4rem, 6vw, 1.85rem);
   }
 }
 

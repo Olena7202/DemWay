@@ -19,7 +19,7 @@ export function Faq() {
             <details key={item.q} className="faq-item" name="faq">
               <summary>
                 <span className="faq-item__n">
-                  {String(index + 1).padStart(2, '0')}
+                  {index + 1}
                 </span>
                 <span className="faq-item__q">{item.q}</span>
                 <span className="faq-item__mark" aria-hidden="true" />

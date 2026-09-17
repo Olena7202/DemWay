@@ -47,7 +47,7 @@ export function ServicesTeaser() {
                 >
                   <span className="case-card__top">
                     <span className="case-card__code">
-                      {String(index + 1).padStart(2, '0')}
+                      {index + 1}
                     </span>
                   </span>
                   <span className="case-card__visual" aria-hidden="true">

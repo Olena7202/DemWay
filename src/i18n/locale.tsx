@@ -21,7 +21,7 @@ const LocaleContext = createContext<LocaleContextValue | null>(null)
 function readLocale(): Locale {
   try {
     const stored = localStorage.getItem(storageKey)
-    if (stored === 'en' || stored === 'uk') return stored
+    if (stored === 'en' || stored === 'uk' || stored === 'pl') return stored
   } catch {
     /* ignore */
   }
@@ -36,7 +36,7 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
   }, [])
 
   useEffect(() => {
-    document.documentElement.lang = locale === 'uk' ? 'uk' : 'en'
+    document.documentElement.lang = locale
     document.title = copy[locale].meta.title
     const meta = document.querySelector('meta[name="description"]')
     if (meta) meta.setAttribute('content', copy[locale].meta.description)

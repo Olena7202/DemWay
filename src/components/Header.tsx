@@ -38,23 +38,26 @@ function NavLinks({ onSelect }: { onSelect: () => void }) {
 
 function LangSwitch() {
   const { locale, setLocale, t } = useLocale()
+  const langs = [
+    { id: 'uk' as const, label: 'UA' },
+    { id: 'en' as const, label: 'EN' },
+    { id: 'pl' as const, label: 'PL' },
+  ]
+
   return (
     <div className="lang-switch" role="group" aria-label={t.nav.language}>
-      <button
-        type="button"
-        className={locale === 'uk' ? 'is-on' : ''}
-        onClick={() => setLocale('uk')}
-      >
-        UA
-      </button>
-      <span aria-hidden="true">/</span>
-      <button
-        type="button"
-        className={locale === 'en' ? 'is-on' : ''}
-        onClick={() => setLocale('en')}
-      >
-        EN
-      </button>
+      {langs.map((lang, index) => (
+        <span key={lang.id} className="lang-switch__item">
+          {index > 0 ? <span aria-hidden="true">/</span> : null}
+          <button
+            type="button"
+            className={locale === lang.id ? 'is-on' : ''}
+            onClick={() => setLocale(lang.id)}
+          >
+            {lang.label}
+          </button>
+        </span>
+      ))}
     </div>
   )
 }

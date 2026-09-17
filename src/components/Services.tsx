@@ -173,6 +173,7 @@ const clipSlugs = new Set([
   'katalog',
   'redyzayn-korporatyvnyy',
   'crm',
+  'crm-business',
 ])
 
 function PlanItems({ slug, items }: { slug: string; items: string[] }) {
