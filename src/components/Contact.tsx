@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { contactInbox } from '../data/contact'
 import { serviceGroups, services } from '../data/services'
 import { Reveal } from './Reveal'
+import { sendBriefToTelegram } from '../data/telegram'
 import { useLocale } from '../i18n/locale'
 import { localizeService } from '../i18n/services'
 import type { Copy } from '../i18n/copy'
@@ -44,6 +45,32 @@ function field(data: FormData, name: string) {
 
 function isActivateMessage(message: string) {
   return /activat/i.test(message)
+}
+
+async function sendBriefToMail(payload: Record<string, string>) {
+  try {
+    const response = await fetch(`https://formsubmit.co/ajax/${contactInbox}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+    const raw = await response.text()
+    let result: { success?: string | boolean; message?: string } = {}
+    try {
+      result = JSON.parse(raw) as { success?: string | boolean; message?: string }
+    } catch {
+      return false
+    }
+    const ok = result.success === true || result.success === 'true'
+    if (ok) return true
+    if (isActivateMessage(String(result.message ?? ''))) return false
+    return false
+  } catch {
+    return false
+  }
 }
 
 function ServiceSelect({
@@ -160,8 +187,8 @@ export function Contact() {
 
     const data = new FormData(event.currentTarget)
 
-    if (field(data, 'website')) {
-      setSent(true)
+    if (field(data, 'fax_line')) {
+      setError(t.contact.sendFail)
       return
     }
 
@@ -174,6 +201,14 @@ export function Contact() {
       return
     }
 
+    const company = field(data, 'company') || '—'
+    const service = field(data, 'service') || direction
+    const channelLabel: Record<Channel, string> = {
+      phone: t.contact.phone,
+      telegram: t.contact.telegram,
+      email: t.contact.email,
+    }
+
     setSending(true)
     setError('')
 
@@ -181,9 +216,10 @@ export function Contact() {
       _subject: `DemWay: запит від ${name}`,
       _template: 'table',
       _captcha: 'false',
+      _honey: '',
       "Ім'я": name,
-      Компанія: field(data, 'company') || '—',
-      Послуга: field(data, 'service') || direction,
+      Компанія: company,
+      Послуга: service,
       Задача: task,
       'Канал відповіді': channel,
       Контакт: replyValue,
@@ -194,32 +230,24 @@ export function Contact() {
     }
 
     try {
-      const response = await fetch(`https://formsubmit.co/ajax/${contactInbox}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify(payload),
-      })
+      const [mailOk, telegramOk] = await Promise.all([
+        sendBriefToMail(payload),
+        sendBriefToTelegram({
+          name,
+          company,
+          service,
+          task,
+          channel: channelLabel[channel],
+          contact: replyValue,
+        }),
+      ])
 
-      const raw = await response.text()
-      let result: { success?: string | boolean; message?: string } = {}
-      try {
-        result = JSON.parse(raw) as { success?: string | boolean; message?: string }
-      } catch {
-        throw new Error('bad response')
-      }
-
-      const message = String(result.message ?? '')
-      const ok = result.success === true || result.success === 'true'
-
-      if (ok || isActivateMessage(message)) {
+      if (mailOk || telegramOk) {
         setSent(true)
         return
       }
 
-      throw new Error(message || 'send failed')
+      throw new Error('send failed')
     } catch {
       setError(t.contact.sendFail)
     } finally {
@@ -290,10 +318,22 @@ export function Contact() {
       ) : (
         <Reveal delay={80} from="right">
           <form className="contact__form" key={locale} onSubmit={onSubmit}>
-            <label className="contact__honey" aria-hidden="true">
-              {t.contact.honey}
-              <input name="website" type="text" tabIndex={-1} autoComplete="off" />
-            </label>
+            <div className="contact__honey" aria-hidden="true">
+              <input
+                name="fax_line"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="off"
+                spellCheck={false}
+                defaultValue=""
+                aria-hidden="true"
+                data-lpignore="true"
+                data-1p-ignore="true"
+                data-form-type="other"
+              />
+            </div>
             <label>
               {t.contact.name}
               <input

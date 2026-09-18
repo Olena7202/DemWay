@@ -86,59 +86,64 @@ export function Services() {
       </div>
 
       <div className="svc-catalog">
-        <div
-          key={group}
-          className={`teaser-board${clusters.length === 1 ? ' teaser-board--one' : ''}`}
-          role="navigation"
-          aria-label={`${t.catalog.packagesAria}: ${t.groups[group]}`}
-        >
-          {clusters.map((cluster, clusterIndex) => (
-            <div key={cluster.label} className="teaser-cluster">
-              <ScrollReveal delay={clusterIndex * 70}>
-                <p className="teaser-cluster__label">
-                  {t.clusters[cluster.label] ?? cluster.label}
-                </p>
-              </ScrollReveal>
-              <div className="teaser-list">
-                {cluster.items.map((service, index) => (
-                  <ScrollReveal
-                    key={service.slug}
-                    delay={clusterIndex * 70 + (index + 1) * 55}
-                  >
-                    <button
-                      type="button"
-                      className={`teaser-row${open === service.slug ? ' is-on' : ''}`}
-                      aria-current={open === service.slug ? 'true' : undefined}
-                      onClick={() => pickService(service.slug)}
-                    >
-                      <span className="teaser-row__body">
-                      <span className="teaser-row__title">
-                        {localizeService(service, locale).title}
-                      </span>
-                      </span>
-                      {service.plans[0].price ? (
-                        <span className="teaser-row__from">{service.plans[0].price}</span>
-                      ) : null}
-                    </button>
-                  </ScrollReveal>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {current ? (
-          <div key={current.slug} className="svc-picked" id="svc-detail">
-            <header className="section-head svc-detail__head">
-              <p className="svc-detail__code">
-                {t.groups[group]} · {t.catalog.picked}
-              </p>
-              <h2>{localizeService(current, locale).title}</h2>
-              <p>{localizeService(current, locale).text}</p>
-            </header>
-            <ServicePlans service={localizeService(current, locale)} />
-          </div>
+        {t.groupLeads[group] ? (
+          <p className="svc-catalog__lead">{t.groupLeads[group]}</p>
         ) : null}
+        <div className="svc-catalog__split">
+          <div
+            key={group}
+            className={`teaser-board${clusters.length === 1 ? ' teaser-board--one' : ''}`}
+            role="navigation"
+            aria-label={`${t.catalog.packagesAria}: ${t.groups[group]}`}
+          >
+            {clusters.map((cluster, clusterIndex) => (
+              <div key={cluster.label} className="teaser-cluster">
+                <ScrollReveal delay={clusterIndex * 70}>
+                  <p className="teaser-cluster__label">
+                    {t.clusters[cluster.label] ?? cluster.label}
+                  </p>
+                </ScrollReveal>
+                <div className="teaser-list">
+                  {cluster.items.map((service, index) => (
+                    <ScrollReveal
+                      key={service.slug}
+                      delay={clusterIndex * 70 + (index + 1) * 55}
+                    >
+                      <button
+                        type="button"
+                        className={`teaser-row${open === service.slug ? ' is-on' : ''}`}
+                        aria-current={open === service.slug ? 'true' : undefined}
+                        onClick={() => pickService(service.slug)}
+                      >
+                        <span className="teaser-row__body">
+                        <span className="teaser-row__title">
+                          {localizeService(service, locale).title}
+                        </span>
+                        </span>
+                        {service.plans[0].price ? (
+                          <span className="teaser-row__from">{service.plans[0].price}</span>
+                        ) : null}
+                      </button>
+                    </ScrollReveal>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {current ? (
+            <div key={current.slug} className="svc-picked" id="svc-detail">
+              <header className="section-head svc-detail__head">
+                <p className="svc-detail__code">
+                  {t.groups[group]} · {t.catalog.picked}
+                </p>
+                <h2>{localizeService(current, locale).title}</h2>
+                <p>{localizeService(current, locale).text}</p>
+              </header>
+              <ServicePlans service={localizeService(current, locale)} />
+            </div>
+          ) : null}
+        </div>
       </div>
     </section>
   )
@@ -146,6 +151,7 @@ export function Services() {
 
 function ServicePlans({ service }: { service: Service }) {
   const { t } = useLocale()
+  const hintWithPrice = service.group === 'Реклама'
   return (
     <div className={`svc__plans svc__plans--${service.plans.length}`}>
       {service.plans.map((plan, planIndex) => (
@@ -155,9 +161,20 @@ function ServicePlans({ service }: { service: Service }) {
           >
             {plan.name ? <p className="plan__name">{plan.name}</p> : null}
             {plan.price ? <p className="plan__price">{plan.price}</p> : null}
-            {plan.note ? <p className="plan__note">{plan.note}</p> : null}
+            {hintWithPrice && plan.note ? (
+              <p className="plan__hint">{plan.note}</p>
+            ) : null}
+            {plan.term ? (
+              <p className="plan__term">
+                <span>{t.catalog.term}</span>
+                {plan.term}
+              </p>
+            ) : null}
             {plan.items.length ? (
               <PlanItems key={`${service.slug}-${plan.name}`} slug={service.slug} items={plan.items} />
+            ) : null}
+            {!hintWithPrice && plan.note ? (
+              <p className="plan__note">{plan.note}</p>
             ) : null}
             <a className="btn btn--pink" href="#contact">
               {t.catalog.discuss}

@@ -13,27 +13,33 @@ export function Approach() {
   const railRef = useRef<HTMLUListElement>(null)
   const barRef = useRef<HTMLSpanElement>(null)
   const [active, setActive] = useState(0)
-  const [reduced, setReduced] = useState(() =>
-    typeof window !== 'undefined' &&
-    (window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-      window.matchMedia('(max-width: 960px)').matches),
+  const [reduced, setReduced] = useState(
+    () =>
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  )
+  const [phone, setPhone] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(max-width: 960px)').matches,
   )
 
   useEffect(() => {
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const phone = window.matchMedia('(max-width: 960px)')
-    const sync = () => setReduced(motion.matches || phone.matches)
+    const narrow = window.matchMedia('(max-width: 960px)')
+    const sync = () => {
+      setReduced(motion.matches)
+      setPhone(narrow.matches)
+    }
     sync()
     motion.addEventListener('change', sync)
-    phone.addEventListener('change', sync)
+    narrow.addEventListener('change', sync)
     return () => {
       motion.removeEventListener('change', sync)
-      phone.removeEventListener('change', sync)
+      narrow.removeEventListener('change', sync)
     }
   }, [])
 
   useEffect(() => {
-    if (reduced) return
+    if (reduced || phone) return
     const track = trackRef.current
     const stage = stageRef.current
     const rail = railRef.current
@@ -112,7 +118,36 @@ export function Approach() {
       track.removeEventListener('touchstart', onTouchStart)
       track.removeEventListener('touchmove', onTouchMove)
     }
-  }, [reduced])
+  }, [reduced, phone, steps.length])
+
+  useEffect(() => {
+    if (reduced || !phone) return
+    const stage = stageRef.current
+    const bar = barRef.current
+    if (!stage) return
+
+    const sync = () => {
+      const cards = [...stage.querySelectorAll<HTMLElement>(':scope > .approach-rail > li')]
+      if (!cards.length) return
+      const left = stage.getBoundingClientRect().left
+      let best = 0
+      let bestDist = Number.POSITIVE_INFINITY
+      cards.forEach((card, index) => {
+        const dist = Math.abs(card.getBoundingClientRect().left - left)
+        if (dist < bestDist) {
+          bestDist = dist
+          best = index
+        }
+      })
+      setActive(best)
+      const max = Math.max(1, stage.scrollWidth - stage.clientWidth)
+      if (bar) bar.style.width = `${(stage.scrollLeft / max) * 100}%`
+    }
+
+    sync()
+    stage.addEventListener('scroll', sync, { passive: true })
+    return () => stage.removeEventListener('scroll', sync)
+  }, [reduced, phone, steps.length])
 
   if (reduced) {
     return (
@@ -137,7 +172,11 @@ export function Approach() {
   }
 
   return (
-    <section className="approach" id="approach" data-scene="ink">
+    <section
+      className={`approach${phone ? ' approach--swipe' : ''}`}
+      id="approach"
+      data-scene="ink"
+    >
       <div className="approach-pin">
         <div className="approach-pin__sticky">
           <header className="approach-pin__head">
@@ -160,7 +199,6 @@ export function Approach() {
                       <span className="approach-slide__ghost" aria-hidden="true">
                         {step.n}
                       </span>
-                      <p className="approach-slide__n">{step.n}</p>
                       <h3>{step.title}</h3>
                       <p>{step.text}</p>
                     </article>

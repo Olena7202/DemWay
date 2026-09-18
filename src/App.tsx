@@ -12,7 +12,9 @@ function dismissBoot() {
   const boot = document.getElementById('boot')
   html.classList.remove('is-booting')
   html.classList.add('is-booted')
-  window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+  if (!window.location.hash) {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+  }
   if (!boot) return
   boot.classList.add('is-away')
   window.setTimeout(() => boot.remove(), 800)
@@ -42,19 +44,14 @@ function ScrollTo() {
       fn()
     }
 
-    afterBoot(() => {
-      if (firstPaint.current) {
-        firstPaint.current = false
-        window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
-        if (hash && !onCatalog) {
-          history.replaceState(null, '', `${location.pathname}${location.search}`)
-        }
-        window.setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' }), 80)
-        window.setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' }), 400)
-        return
-      }
+    const instant = firstPaint.current
+    firstPaint.current = false
 
-      if (!hash || (onCatalog && hash !== '#contact' && hash !== '#faq')) {
+    afterBoot(() => {
+      const allowed =
+        Boolean(hash) && (!onCatalog || hash === '#contact' || hash === '#faq')
+
+      if (!allowed) {
         window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
         return
       }
@@ -62,11 +59,14 @@ function ScrollTo() {
       const seek = () => {
         const node = document.querySelector(hash)
         if (node) {
-          node.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          node.scrollIntoView({
+            behavior: instant ? 'auto' : 'smooth',
+            block: 'start',
+          })
           return
         }
         attempts += 1
-        if (attempts < 40) frame = window.requestAnimationFrame(seek)
+        if (attempts < 80) frame = window.requestAnimationFrame(seek)
       }
       frame = window.requestAnimationFrame(seek)
     })

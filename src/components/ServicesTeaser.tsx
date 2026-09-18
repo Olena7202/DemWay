@@ -45,11 +45,6 @@ export function ServicesTeaser() {
                   to={`/poslugy?napryam=${serviceGroupAnchors[name]}`}
                   aria-label={t.servicesTeaser.openTab.replace('{name}', label)}
                 >
-                  <span className="case-card__top">
-                    <span className="case-card__code">
-                      {index + 1}
-                    </span>
-                  </span>
                   <span className="case-card__visual" aria-hidden="true">
                     <span className="case-card__mark">{marks[name]}</span>
                   </span>

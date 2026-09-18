@@ -28,29 +28,31 @@ function readLocale(): Locale {
   return 'uk'
 }
 
-export function LocaleProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>('uk')
+function persistLocale(next: Locale) {
+  try {
+    localStorage.setItem(storageKey, next)
+  } catch {
+    /* ignore */
+  }
+}
 
-  useEffect(() => {
-    setLocaleState(readLocale())
-  }, [])
+export function LocaleProvider({ children }: { children: ReactNode }) {
+  const [locale, setLocaleState] = useState<Locale>(readLocale)
 
   useEffect(() => {
     document.documentElement.lang = locale
     document.title = copy[locale].meta.title
     const meta = document.querySelector('meta[name="description"]')
     if (meta) meta.setAttribute('content', copy[locale].meta.description)
-    try {
-      localStorage.setItem(storageKey, locale)
-    } catch {
-      /* ignore */
-    }
   }, [locale])
 
   const value = useMemo(
     () => ({
       locale,
-      setLocale: setLocaleState,
+      setLocale: (next: Locale) => {
+        persistLocale(next)
+        setLocaleState(next)
+      },
       t: copy[locale],
     }),
     [locale],

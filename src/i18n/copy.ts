@@ -31,8 +31,18 @@ export type Copy = {
     openTab: string
     go: string
   }
+  openingOffers: {
+    kicker: string
+    title: string
+    text: string
+    badge: string
+    discuss: string
+    note: string
+    items: { name: string; for: string; was: string; now: string; items: [string, string, string] }[]
+  }
   groups: Record<ServiceGroup, string>
   clusters: Record<string, string>
+  groupLeads: Partial<Record<ServiceGroup, string>>
   teaserBlurbs: Record<ServiceGroup, string>
   catalog: {
     kicker: string
@@ -42,6 +52,7 @@ export type Copy = {
     packagesAria: string
     picked: string
     discuss: string
+    term: string
     expand: string
     collapse: string
   }
@@ -86,9 +97,9 @@ export type Copy = {
     consent: string
     send: string
     sending: string
-  error: string
-  sendFail: string
-  fullSystem: string
+    error: string
+    sendFail: string
+    fullSystem: string
     other: string
     honey: string
   }
@@ -160,6 +171,37 @@ export const copy: Record<Locale, Copy> = {
       openTab: 'Відкрити вкладку «{name}» і подивитись пакети',
       go: 'Відкрити вкладку з пакетами',
     },
+    openingOffers: {
+      kicker: 'Пакети',
+      title: 'Пропонуємо готові збірки під задачу',
+      text: 'Три послуги в кожному, зі знижкою 15%. Під запуск, під сайт який уже є, і під коротку вітрину компанії.',
+      badge: '−15%',
+      discuss: 'Хочу цей пакет',
+      note: 'Медіабюджет реклами, хостинг і домен — не входять у вартість.',
+      items: [
+        {
+          name: 'Старт заявки',
+          for: 'Немає сторінки під рекламу.',
+          was: '16 000 грн',
+          now: '13 500 грн',
+          items: ['Лендінг Старт', 'Пошукова реклама', 'Email-маркетинг'],
+        },
+        {
+          name: 'Сайт уже є',
+          for: 'Сайт стоїть, заявок мало.',
+          was: '15 500 грн',
+          now: '12 900 грн',
+          items: ['SEO-оптимізація', 'Пошукова реклама', 'A/B тестування'],
+        },
+        {
+          name: 'Вітрина в мережі',
+          for: 'Коротка компанія в інтернеті, не корпоратив.',
+          was: '22 000 грн',
+          now: '18 500 грн',
+          items: ['Сайт-візитка', 'Instagram Ads', 'SEO-оптимізація'],
+        },
+      ],
+    },
     groups: {
       Сайти: 'Сайти',
       Редизайн: 'Редизайн',
@@ -174,15 +216,17 @@ export const copy: Record<Locale, Copy> = {
       'Лендінг і сайт': 'Лендінг і сайт',
       'SEO-оптимізація': 'SEO-оптимізація',
       'Google Ads': 'Google Ads',
-      'Таргетована реклама': 'Таргетована реклама',
+      'Meta Ads': 'Meta Ads',
+      'Email і тести': 'Email і тести',
       Продажі: 'Продажі',
       Бренд: 'Бренд',
     },
+    groupLeads: {},
     teaserBlurbs: {
       Сайти: 'Лендінг, візитка чи каталог — сайт під заявку й запуск реклами.',
       Редизайн: 'Оновлюємо лендінг, візитку, корпоративний сайт чи каталог.',
       SEO: 'Ключові слова, метатеги і URL — базова оптимізація під пошук.',
-      Реклама: 'Пошук, медійка й товари в Google, Instagram і Facebook Ads.',
+      Реклама: 'Пошук, медійка й товари в Google, Instagram, Facebook Ads, email і A/B тести.',
       Системи: 'CRM, щоб продажі не губились між чатами.',
       Айдентика: 'Логотип і носії, які тримають бренд разом.',
     },
@@ -194,6 +238,7 @@ export const copy: Record<Locale, Copy> = {
       packagesAria: 'Пакети',
       picked: 'обраний пакет',
       discuss: 'Обговорити пакет',
+      term: 'Термін',
       expand: 'Розгорнути',
       collapse: 'Згорнути',
     },
@@ -384,6 +429,37 @@ export const copy: Record<Locale, Copy> = {
       openTab: 'Open the “{name}” tab and see packages',
       go: 'Open the packages tab',
     },
+    openingOffers: {
+      kicker: 'Bundles',
+      title: 'Ready packages we put together for you',
+      text: 'Three services in each, 15% off. Built for a first launch, for a site you already have, and for a short company presence.',
+      badge: '−15%',
+      discuss: 'I want this bundle',
+      note: 'Ad spend, hosting and domain are not included.',
+      items: [
+        {
+          name: 'Lead start',
+          for: 'No page ready for ads yet.',
+          was: '16 000 UAH',
+          now: '13 500 UAH',
+          items: ['Landing Start', 'Search ads', 'Email marketing'],
+        },
+        {
+          name: 'Site already live',
+          for: 'The site exists, leads are thin.',
+          was: '15 500 UAH',
+          now: '12 900 UAH',
+          items: ['SEO', 'Search ads', 'A/B testing'],
+        },
+        {
+          name: 'Presence online',
+          for: 'A short company site, not a full corporate build.',
+          was: '22 000 UAH',
+          now: '18 500 UAH',
+          items: ['Brochure site', 'Instagram Ads', 'SEO'],
+        },
+      ],
+    },
     groups: {
       Сайти: 'Websites',
       Редизайн: 'Redesign',
@@ -398,15 +474,17 @@ export const copy: Record<Locale, Copy> = {
       'Лендінг і сайт': 'Landing & site',
       'SEO-оптимізація': 'SEO optimization',
       'Google Ads': 'Google Ads',
-      'Таргетована реклама': 'Targeted ads',
+      'Meta Ads': 'Meta Ads',
+      'Email і тести': 'Email & tests',
       Продажі: 'Sales',
       Бренд: 'Brand',
     },
+    groupLeads: {},
     teaserBlurbs: {
       Сайти: 'Landing, brochure or catalog — a site built for leads and ads.',
       Редизайн: 'Refresh a landing, brochure, corporate site or catalog.',
       SEO: 'Keywords, meta tags and URLs — core on-site SEO.',
-      Реклама: 'Search, display and shopping in Google, plus Instagram and Facebook Ads.',
+      Реклама: 'Search, display and shopping in Google, Instagram and Facebook Ads, plus email and A/B tests.',
       Системи: 'CRM so sales do not get lost between chats.',
       Айдентика: 'Logo and assets that keep the brand together.',
     },
@@ -418,6 +496,7 @@ export const copy: Record<Locale, Copy> = {
       packagesAria: 'Packages',
       picked: 'selected package',
       discuss: 'Discuss this package',
+      term: 'Timeline',
       expand: 'Show more',
       collapse: 'Show less',
     },
@@ -608,6 +687,37 @@ export const copy: Record<Locale, Copy> = {
       openTab: 'Otwórz zakładkę «{name}» i zobacz pakiety',
       go: 'Otwórz zakładkę z pakietami',
     },
+    openingOffers: {
+      kicker: 'Pakiety',
+      title: 'Proponujemy gotowe zestawy pod zadanie',
+      text: 'Trzy usługi w każdym, ze zniżką 15%. Pod pierwszy start, pod stronę która już jest, i pod krótką witrynę firmy.',
+      badge: '−15%',
+      discuss: 'Chcę ten pakiet',
+      note: 'Budżet reklamowy, hosting i domena nie wchodzą w cenę.',
+      items: [
+        {
+          name: 'Start zgłoszeń',
+          for: 'Nie ma jeszcze strony pod reklamę.',
+          was: '16 000 UAH',
+          now: '13 500 UAH',
+          items: ['Landing Start', 'Reklama w wyszukiwarce', 'E-mail marketing'],
+        },
+        {
+          name: 'Strona już jest',
+          for: 'Strona stoi, zgłoszeń mało.',
+          was: '15 500 UAH',
+          now: '12 900 UAH',
+          items: ['SEO', 'Reklama w wyszukiwarce', 'Testy A/B'],
+        },
+        {
+          name: 'Witryna w sieci',
+          for: 'Krótka firma w internecie, nie korporacja.',
+          was: '22 000 UAH',
+          now: '18 500 UAH',
+          items: ['Strona wizytówka', 'Instagram Ads', 'SEO'],
+        },
+      ],
+    },
     groups: {
       Сайти: 'Strony',
       Редизайн: 'Redesign',
@@ -622,15 +732,17 @@ export const copy: Record<Locale, Copy> = {
       'Лендінг і сайт': 'Landing i strona',
       'SEO-оптимізація': 'Optymalizacja SEO',
       'Google Ads': 'Google Ads',
-      'Таргетована реклама': 'Reklama targetowana',
+      'Meta Ads': 'Meta Ads',
+      'Email і тести': 'E-mail i testy',
       Продажі: 'Sprzedaż',
       Бренд: 'Marka',
     },
+    groupLeads: {},
     teaserBlurbs: {
       Сайти: 'Landing, wizytówka albo katalog — strona pod zgłoszenia i reklamy.',
       Редизайн: 'Odświeżamy landing, wizytówkę, stronę korporacyjną albo katalog.',
       SEO: 'Słowa kluczowe, metatagi i URL — podstawowe SEO on-site.',
-      Реклама: 'Wyszukiwanie, display i produkty w Google, Instagram i Facebook Ads.',
+      Реклама: 'Wyszukiwanie, display i produkty w Google, Instagram i Facebook Ads, e-mail i testy A/B.',
       Системи: 'CRM, żeby sprzedaż nie ginęła między czatami.',
       Айдентика: 'Logo i nośniki, które trzymają markę razem.',
     },
@@ -642,6 +754,7 @@ export const copy: Record<Locale, Copy> = {
       packagesAria: 'Pakiety',
       picked: 'wybrany pakiet',
       discuss: 'Omówić pakiet',
+      term: 'Termin',
       expand: 'Rozwiń',
       collapse: 'Zwiń',
     },

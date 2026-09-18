@@ -1,16 +1,18 @@
 import type { Service, ServiceGroup } from '../data/services'
 import type { Locale } from './copy'
 
-type PlanCopy = { name?: string; note?: string; items?: string[] }
+type PlanCopy = { name?: string; note?: string; term?: string; items?: string[] }
 type ServiceCopy = { title?: string; text?: string; plans?: PlanCopy[] }
 
 const en: Record<string, ServiceCopy> = {
   lending: {
     title: 'Landing page',
-    text: 'A one-page site for inquiries: structure, design and a form ready for ads.',
+    text: 'A landing page to advertise one product or service — a clear path and high conversion.',
     plans: [
       {
         name: 'Start',
+        note: 'Hosting and domain are not included',
+        term: '5–7 days',
         items: [
           'Custom design',
           'Up to 6 sections',
@@ -22,6 +24,8 @@ const en: Record<string, ServiceCopy> = {
       },
       {
         name: 'Plus',
+        note: 'Hosting and domain are not included',
+        term: '5–7 days',
         items: [
           'Custom design for the brand',
           '8–12 sections',
@@ -35,10 +39,12 @@ const en: Record<string, ServiceCopy> = {
   },
   vizytka: {
     title: 'Brochure site',
-    text: 'A short company site: who you are, what you do, how to reach you — no extra sections.',
+    text: 'A multi-page site for a company or specialist: services, portfolio, reviews, blog and contacts.',
     plans: [
       {
         name: 'Start',
+        note: 'Hosting and domain are not included',
+        term: '10–15 days',
         items: [
           'Custom design',
           '3–5 core pages',
@@ -53,10 +59,12 @@ const en: Record<string, ServiceCopy> = {
   },
   korporatyvnyy: {
     title: 'Corporate website',
-    text: 'A multi-page company site: services, about, blog, careers — a system you can grow.',
+    text: 'A company system site: practices, cases, team, careers, blog and marketing integrations.',
     plans: [
       {
         name: 'Start',
+        note: 'Hosting and domain are not included',
+        term: '14–21 days',
         items: [
           'Custom site design',
           'Visual identity concept',
@@ -71,7 +79,6 @@ const en: Record<string, ServiceCopy> = {
           'Feedback forms',
           'Social and messenger buttons',
           'Map with the company location',
-          'Domain and hosting setup',
           'Content upload from the client',
           'QA before launch',
           '1 month of free support',
@@ -81,10 +88,12 @@ const en: Record<string, ServiceCopy> = {
   },
   katalog: {
     title: 'Catalog site',
-    text: 'A catalog of products or services: categories, cards, search and inquiry. Business adds a cart and online payment.',
+    text: 'A product showcase with inquiries — no cart, not a webshop. For B2B, manufacturers and suppliers.',
     plans: [
       {
-        name: 'Start',
+        name: 'No checkout',
+        note: 'Hosting and domain are not included',
+        term: '21–29 days',
         items: [
           'Custom site design',
           'Responsive layout for all devices',
@@ -93,12 +102,11 @@ const en: Record<string, ServiceCopy> = {
           'Product card: photos, copy, specs, price',
           'Product search',
           'Basic filters',
-          'Inquiry / order form',
+          'Inquiry / contact form',
           'Social and messenger buttons',
           'About page',
           'Contact page',
           'Blog or news feed',
-          'Domain and hosting setup',
           'Content upload from the client',
           'QA before launch',
           '1 month of free support',
@@ -106,6 +114,8 @@ const en: Record<string, ServiceCopy> = {
       },
       {
         name: 'Business',
+        note: 'Hosting and domain are not included',
+        term: '21–29 days',
         items: [
           'Custom design and brand look',
           'Responsive layout for all devices',
@@ -121,7 +131,6 @@ const en: Record<string, ServiceCopy> = {
           'Feedback forms',
           'Multilingual setup',
           'Social and messenger buttons',
-          'Domain and hosting setup',
           'Content upload from the client',
           'QA before launch',
           '2 months of free support',
@@ -135,6 +144,7 @@ const en: Record<string, ServiceCopy> = {
     plans: [
       {
         name: 'Start',
+        term: '5–7 days',
         items: [
           'Review of the current site',
           'Updated structure and messaging',
@@ -156,6 +166,7 @@ const en: Record<string, ServiceCopy> = {
     plans: [
       {
         name: 'Start',
+        term: '10–12 days',
         items: [
           'Review of the current site',
           'Updated structure for 3–5 pages',
@@ -177,6 +188,7 @@ const en: Record<string, ServiceCopy> = {
     plans: [
       {
         name: 'Start',
+        term: '14–21 days',
         items: [
           'Review of the current site',
           'Structure and usability review',
@@ -203,6 +215,7 @@ const en: Record<string, ServiceCopy> = {
     plans: [
       {
         name: 'Start',
+        term: '14–21 days',
         items: [
           'Review of the current catalog',
           'Updated category and card structure',
@@ -225,6 +238,7 @@ const en: Record<string, ServiceCopy> = {
     plans: [
       {
         name: 'Start',
+        term: '14–21 days',
         items: [
           'Review of the current site',
           'Move of structure and content',
@@ -246,6 +260,7 @@ const en: Record<string, ServiceCopy> = {
     plans: [
       {
         name: 'Start',
+        term: '5–7 days',
         items: [
           'Adaptation for phones and tablets',
           'Block placement optimization',
@@ -280,7 +295,7 @@ const en: Record<string, ServiceCopy> = {
     plans: [
       {
         name: 'Launch',
-        note: 'Ad spend is billed separately',
+        note: 'media budget billed separately',
         items: [
           'Account and tag setup',
           '1–2 campaigns around the offer',
@@ -293,11 +308,11 @@ const en: Record<string, ServiceCopy> = {
   },
   'poshukova-reklama': {
     title: 'Search ads',
-    text: 'Google Search ads around the query and the offer. Media budget is separate.',
+    text: 'For customers already looking for your product or service.',
     plans: [
       {
         name: 'Launch',
-        note: 'Ad spend is billed separately',
+        note: 'media budget billed separately',
         items: [
           'Account and tag setup',
           '1–2 search campaigns around the offer',
@@ -310,11 +325,11 @@ const en: Record<string, ServiceCopy> = {
   },
   'mediyna-reklama': {
     title: 'Display ads',
-    text: 'Banners and remarketing in the Google Display Network. Media budget is separate.',
+    text: 'For reach, recognition and bringing potential clients back.',
     plans: [
       {
         name: 'Launch',
-        note: 'Ad spend is billed separately',
+        note: 'media budget billed separately',
         items: [
           'Account and tag setup',
           'Display campaigns and remarketing',
@@ -327,11 +342,11 @@ const en: Record<string, ServiceCopy> = {
   },
   'tovarna-reklama': {
     title: 'Shopping ads',
-    text: 'Google Shopping: feed, product cards, purchase-intent queries. Media budget is separate.',
+    text: 'For online stores: products with photo, price and a link to the site.',
     plans: [
       {
         name: 'Launch',
-        note: 'Ad spend is billed separately',
+        note: 'media budget billed separately',
         items: [
           'Merchant Center setup',
           'Product feed and cards',
@@ -348,7 +363,7 @@ const en: Record<string, ServiceCopy> = {
     plans: [
       {
         name: 'Retainer',
-        note: 'Ad spend is billed separately',
+        note: 'media budget billed separately',
         items: [
           'Regular campaign edits',
           'Ad tests',
@@ -358,7 +373,7 @@ const en: Record<string, ServiceCopy> = {
       },
       {
         name: 'Business',
-        note: 'Ad spend is billed separately',
+        note: 'media budget billed separately',
         items: [
           'Everything in Retainer',
           'Several campaigns and remarketing',
@@ -374,7 +389,7 @@ const en: Record<string, ServiceCopy> = {
     plans: [
       {
         name: 'Start',
-        note: 'Ad spend is billed separately',
+        note: 'media budget billed separately',
         items: [
           'Account and pixel setup',
           '1–2 campaigns',
@@ -385,7 +400,7 @@ const en: Record<string, ServiceCopy> = {
       },
       {
         name: 'Business',
-        note: 'Ad spend is billed separately',
+        note: 'media budget billed separately',
         items: [
           'Funnel: leads and remarketing',
           'Creative series and tests',
@@ -397,11 +412,11 @@ const en: Record<string, ServiceCopy> = {
   },
   'instagram-ads': {
     title: 'Instagram Ads',
-    text: 'Instagram ads: audiences, creatives, leads into the product. Media budget is separate.',
+    text: 'Attracting attention, a new audience and potential clients.',
     plans: [
       {
         name: 'Start',
-        note: 'Ad spend is billed separately',
+        note: 'media budget billed separately',
         items: [
           'Account and pixel setup',
           '1–2 Instagram campaigns',
@@ -414,11 +429,11 @@ const en: Record<string, ServiceCopy> = {
   },
   'facebook-ads': {
     title: 'Facebook Ads',
-    text: 'Facebook ads: audiences, creatives, leads into the product. Media budget is separate.',
+    text: 'Targeted ads for acquisition, engagement and sales.',
     plans: [
       {
         name: 'Start',
-        note: 'Ad spend is billed separately',
+        note: 'media budget billed separately',
         items: [
           'Account and pixel setup',
           '1–2 Facebook campaigns',
@@ -440,15 +455,6 @@ const en: Record<string, ServiceCopy> = {
           '1–2 sequences (lead, reminder)',
           'Branded email template',
           'Basic segmentation',
-        ],
-      },
-      {
-        name: 'Business',
-        items: [
-          'Everything in Start',
-          'Several scenarios and a nurture path',
-          'Site and CRM integration',
-          'Cadence recommendations',
         ],
       },
     ],
@@ -490,14 +496,6 @@ const en: Record<string, ServiceCopy> = {
           'Conclusion after data comes in',
         ],
       },
-      {
-        name: 'Business',
-        items: [
-          'A series of tests across the funnel',
-          'Several hypotheses (offer, form, CTA)',
-          'Report and next-test priorities',
-        ],
-      },
     ],
   },
   crm: {
@@ -506,6 +504,7 @@ const en: Record<string, ServiceCopy> = {
     plans: [
       {
         name: 'Start',
+        term: '21–30 days',
         items: [
           'Business needs review',
           'CRM structure',
@@ -526,7 +525,6 @@ const en: Record<string, ServiceCopy> = {
           'Basic email integration',
           'System QA',
           'Setup and launch',
-          'CRM training',
           '1 month of technical support',
         ],
       },
@@ -538,6 +536,7 @@ const en: Record<string, ServiceCopy> = {
     plans: [
       {
         name: 'Business',
+        term: '21–30 days',
         items: [
           'Needs and business-process review',
           'CRM structure',
@@ -575,6 +574,7 @@ const en: Record<string, ServiceCopy> = {
     plans: [
       {
         name: 'Start',
+        term: '4–5 days',
         items: [
           '3 logo concepts',
           'One option chosen for refinement',
@@ -594,6 +594,7 @@ const en: Record<string, ServiceCopy> = {
     plans: [
       {
         name: 'Start',
+        term: '4–5 days',
         items: [
           'Business card design',
           'Letterhead design',
@@ -613,10 +614,12 @@ const en: Record<string, ServiceCopy> = {
 const pl: Record<string, ServiceCopy> = {
   lending: {
     title: 'Landing page',
-    text: 'Jednostronicowa strona pod zgłoszenia: struktura, projekt i formularz gotowy pod reklamy.',
+    text: 'Strona lądowania do reklamy jednego produktu lub usługi — jasny scenariusz i wysoka konwersja.',
     plans: [
       {
         name: 'Start',
+        note: 'Hosting i domena nie wchodzą w cenę',
+        term: '5–7 dni',
         items: [
           'Indywidualny projekt',
           'Do 6 sekcji',
@@ -628,6 +631,8 @@ const pl: Record<string, ServiceCopy> = {
       },
       {
         name: 'Plus',
+        note: 'Hosting i domena nie wchodzą w cenę',
+        term: '5–7 dni',
         items: [
           'Indywidualny projekt pod markę',
           '8–12 sekcji',
@@ -641,10 +646,12 @@ const pl: Record<string, ServiceCopy> = {
   },
   vizytka: {
     title: 'Strona wizytówka',
-    text: 'Krótka strona firmy: kim jesteście, co robicie, jak się skontaktować — bez zbędnych działów.',
+    text: 'Wielostronicowa strona firmy lub specjalisty: usługi, portfolio, opinie, blog i kontakt.',
     plans: [
       {
         name: 'Start',
+        note: 'Hosting i domena nie wchodzą w cenę',
+        term: '10–15 dni',
         items: [
           'Indywidualny projekt',
           '3–5 kluczowych podstron',
@@ -659,10 +666,12 @@ const pl: Record<string, ServiceCopy> = {
   },
   korporatyvnyy: {
     title: 'Strona korporacyjna',
-    text: 'Wielostronicowa strona firmy: usługi, o nas, blog, kariera — system, który można rozwijać.',
+    text: 'Systemowa strona firmy: kierunki, case’y, zespół, oferty pracy, blog i integracje marketingowe.',
     plans: [
       {
         name: 'Start',
+        note: 'Hosting i domena nie wchodzą w cenę',
+        term: '14–21 dni',
         items: [
           'Indywidualny projekt strony',
           'Koncepcja identyfikacji wizualnej',
@@ -677,7 +686,6 @@ const pl: Record<string, ServiceCopy> = {
           'Formularze zwrotne',
           'Przyciski social i komunikatorów',
           'Mapa z lokalizacją firmy',
-          'Konfiguracja domeny i hostingu',
           'Wgranie treści od klienta',
           'QA przed startem',
           '1 miesiąc bezpłatnego wsparcia',
@@ -687,10 +695,12 @@ const pl: Record<string, ServiceCopy> = {
   },
   katalog: {
     title: 'Strona katalogowa',
-    text: 'Katalog produktów lub usług: kategorie, karty, wyszukiwanie i zgłoszenie. W Business — koszyk i płatność online.',
+    text: 'Witryna asortymentu i zapytania. Bez koszyka i płatności — nie sklep internetowy. Dla B2B, producentów i dostawców.',
     plans: [
       {
-        name: 'Start',
+        name: 'Bez płatności',
+        note: 'Hosting i domena nie wchodzą w cenę',
+        term: '21–29 dni',
         items: [
           'Indywidualny projekt strony',
           'Wersja responsywna na wszystkie urządzenia',
@@ -699,12 +709,11 @@ const pl: Record<string, ServiceCopy> = {
           'Karta produktu: zdjęcia, opis, parametry, cena',
           'Wyszukiwanie produktów',
           'Podstawowe filtry',
-          'Formularz zgłoszenia / zamówienia',
+          'Formularz zapytania / kontaktu',
           'Przyciski social i komunikatorów',
           'Strona O nas',
           'Strona kontaktu',
           'Blog lub aktualności',
-          'Konfiguracja domeny i hostingu',
           'Wgranie treści od klienta',
           'QA przed startem',
           '1 miesiąc bezpłatnego wsparcia',
@@ -712,6 +721,8 @@ const pl: Record<string, ServiceCopy> = {
       },
       {
         name: 'Business',
+        note: 'Hosting i domena nie wchodzą w cenę',
+        term: '21–29 dni',
         items: [
           'Indywidualny projekt i wygląd marki',
           'Wersja responsywna na wszystkie urządzenia',
@@ -727,7 +738,6 @@ const pl: Record<string, ServiceCopy> = {
           'Formularze zwrotne',
           'Przygotowanie wersji wielojęzycznej',
           'Przyciski social i komunikatorów',
-          'Konfiguracja domeny i hostingu',
           'Wgranie treści od klienta',
           'QA przed startem',
           '2 miesiące bezpłatnego wsparcia',
@@ -741,6 +751,7 @@ const pl: Record<string, ServiceCopy> = {
     plans: [
       {
         name: 'Start',
+        term: '5–7 dni',
         items: [
           'Przegląd obecnej strony',
           'Zaktualizowana struktura i przekaz',
@@ -762,6 +773,7 @@ const pl: Record<string, ServiceCopy> = {
     plans: [
       {
         name: 'Start',
+        term: '10–12 dni',
         items: [
           'Przegląd obecnej strony',
           'Zaktualizowana struktura 3–5 podstron',
@@ -783,6 +795,7 @@ const pl: Record<string, ServiceCopy> = {
     plans: [
       {
         name: 'Start',
+        term: '14–21 dni',
         items: [
           'Przegląd obecnej strony',
           'Przegląd struktury i użyteczności',
@@ -809,6 +822,7 @@ const pl: Record<string, ServiceCopy> = {
     plans: [
       {
         name: 'Start',
+        term: '14–21 dni',
         items: [
           'Przegląd obecnego katalogu',
           'Zaktualizowana struktura kategorii i kart',
@@ -831,6 +845,7 @@ const pl: Record<string, ServiceCopy> = {
     plans: [
       {
         name: 'Start',
+        term: '14–21 dni',
         items: [
           'Przegląd obecnej strony',
           'Przeniesienie struktury i treści',
@@ -852,6 +867,7 @@ const pl: Record<string, ServiceCopy> = {
     plans: [
       {
         name: 'Start',
+        term: '5–7 dni',
         items: [
           'Adaptacja na telefony i tablety',
           'Optymalizacja układu bloków',
@@ -886,7 +902,7 @@ const pl: Record<string, ServiceCopy> = {
     plans: [
       {
         name: 'Start',
-        note: 'Budżet reklamowy rozliczany osobno',
+        note: 'budżet mediowy osobno',
         items: [
           'Konfiguracja konta i tagów',
           '1–2 kampanie wokół oferty',
@@ -899,11 +915,11 @@ const pl: Record<string, ServiceCopy> = {
   },
   'poshukova-reklama': {
     title: 'Reklama w wyszukiwarce',
-    text: 'Ogłoszenia w wyszukiwarce Google pod zapytanie i ofertę. Budżet mediowy rozliczany osobno.',
+    text: 'Dla klientów, którzy już szukają Twojego produktu lub usługi.',
     plans: [
       {
         name: 'Start',
-        note: 'Budżet reklamowy rozliczany osobno',
+        note: 'budżet mediowy osobno',
         items: [
           'Konfiguracja konta i tagów',
           '1–2 kampanie wyszukiwania wokół oferty',
@@ -916,11 +932,11 @@ const pl: Record<string, ServiceCopy> = {
   },
   'mediyna-reklama': {
     title: 'Reklama display',
-    text: 'Banery i remarketing w sieci Google. Budżet mediowy rozliczany osobno.',
+    text: 'Dla zasięgu, rozpoznawalności i powrotu potencjalnych klientów.',
     plans: [
       {
         name: 'Start',
-        note: 'Budżet reklamowy rozliczany osobno',
+        note: 'budżet mediowy osobno',
         items: [
           'Konfiguracja konta i tagów',
           'Kampanie display i remarketing',
@@ -933,11 +949,11 @@ const pl: Record<string, ServiceCopy> = {
   },
   'tovarna-reklama': {
     title: 'Reklama produktowa',
-    text: 'Ogłoszenia produktowe w Google: feed, karty, zapytania zakupowe. Budżet mediowy rozliczany osobno.',
+    text: 'Dla sklepów internetowych: produkty ze zdjęciem, ceną i linkiem do strony.',
     plans: [
       {
         name: 'Start',
-        note: 'Budżet reklamowy rozliczany osobno',
+        note: 'budżet mediowy osobno',
         items: [
           'Konfiguracja Merchant Center',
           'Feed i karty produktów',
@@ -954,7 +970,7 @@ const pl: Record<string, ServiceCopy> = {
     plans: [
       {
         name: 'Retainer',
-        note: 'Budżet reklamowy rozliczany osobno',
+        note: 'budżet mediowy osobno',
         items: [
           'Regularne korekty kampanii',
           'Testy reklam',
@@ -964,7 +980,7 @@ const pl: Record<string, ServiceCopy> = {
       },
       {
         name: 'Business',
-        note: 'Budżet reklamowy rozliczany osobno',
+        note: 'budżet mediowy osobno',
         items: [
           'Wszystko z pakietu Retainer',
           'Kilka kampanii i remarketing',
@@ -980,7 +996,7 @@ const pl: Record<string, ServiceCopy> = {
     plans: [
       {
         name: 'Start',
-        note: 'Budżet reklamowy rozliczany osobno',
+        note: 'budżet mediowy osobno',
         items: [
           'Konfiguracja konta i piksela',
           '1–2 kampanie',
@@ -991,7 +1007,7 @@ const pl: Record<string, ServiceCopy> = {
       },
       {
         name: 'Business',
-        note: 'Budżet reklamowy rozliczany osobno',
+        note: 'budżet mediowy osobno',
         items: [
           'Lejek: zgłoszenia i remarketing',
           'Serie kreacji i testy',
@@ -1003,11 +1019,11 @@ const pl: Record<string, ServiceCopy> = {
   },
   'instagram-ads': {
     title: 'Instagram Ads',
-    text: 'Reklama na Instagramie: grupy odbiorców, kreacje, zgłoszenia do produktu. Budżet mediowy rozliczany osobno.',
+    text: 'Przyciąganie uwagi, nowej publiczności i potencjalnych klientów.',
     plans: [
       {
         name: 'Start',
-        note: 'Budżet reklamowy rozliczany osobno',
+        note: 'budżet mediowy osobno',
         items: [
           'Konfiguracja konta i piksela',
           '1–2 kampanie na Instagramie',
@@ -1020,11 +1036,11 @@ const pl: Record<string, ServiceCopy> = {
   },
   'facebook-ads': {
     title: 'Facebook Ads',
-    text: 'Reklama na Facebooku: grupy odbiorców, kreacje, zgłoszenia do produktu. Budżet mediowy rozliczany osobno.',
+    text: 'Reklama targetowana do pozyskania, interakcji i sprzedaży.',
     plans: [
       {
         name: 'Start',
-        note: 'Budżet reklamowy rozliczany osobno',
+        note: 'budżet mediowy osobno',
         items: [
           'Konfiguracja konta i piksela',
           '1–2 kampanie na Facebooku',
@@ -1046,15 +1062,6 @@ const pl: Record<string, ServiceCopy> = {
           '1–2 sekwencje (zgłoszenie, przypomnienie)',
           'Szablon e-maila w identyfikacji marki',
           'Podstawowa segmentacja',
-        ],
-      },
-      {
-        name: 'Business',
-        items: [
-          'Wszystko z pakietu Start',
-          'Kilka scenariuszy i ścieżka nurture',
-          'Integracja ze stroną i CRM',
-          'Rekomendacje rytmu wysyłki',
         ],
       },
     ],
@@ -1096,14 +1103,6 @@ const pl: Record<string, ServiceCopy> = {
           'Wniosek po zebraniu danych',
         ],
       },
-      {
-        name: 'Business',
-        items: [
-          'Seria testów w lejku',
-          'Kilka hipotez (oferta, formularz, CTA)',
-          'Raport i priorytety kolejnych testów',
-        ],
-      },
     ],
   },
   crm: {
@@ -1112,6 +1111,7 @@ const pl: Record<string, ServiceCopy> = {
     plans: [
       {
         name: 'Start',
+        term: '21–30 dni',
         items: [
           'Analiza potrzeb biznesu',
           'Opracowanie struktury CRM',
@@ -1132,7 +1132,6 @@ const pl: Record<string, ServiceCopy> = {
           'Podstawowa integracja z e-mail',
           'Testowanie systemu',
           'Konfiguracja i start',
-          'Szkolenie z CRM',
           '1 miesiąc wsparcia technicznego',
         ],
       },
@@ -1144,6 +1143,7 @@ const pl: Record<string, ServiceCopy> = {
     plans: [
       {
         name: 'Business',
+        term: '21–30 dni',
         items: [
           'Analiza potrzeb i procesów biznesowych',
           'Opracowanie struktury CRM',
@@ -1181,6 +1181,7 @@ const pl: Record<string, ServiceCopy> = {
     plans: [
       {
         name: 'Start',
+        term: '4–5 dni',
         items: [
           '3 koncepcje logo',
           'Jeden wariant wybrany do dopracowania',
@@ -1200,6 +1201,7 @@ const pl: Record<string, ServiceCopy> = {
     plans: [
       {
         name: 'Start',
+        term: '4–5 dni',
         items: [
           'Projekt wizytówki',
           'Projekt papieru firmowego',
@@ -1230,6 +1232,7 @@ export function localizeService(service: Service, locale: Locale): Service {
       ...plan,
       name: overlay.plans?.[index]?.name ?? plan.name,
       note: overlay.plans?.[index]?.note ?? plan.note,
+      term: overlay.plans?.[index]?.term ?? plan.term,
       items: overlay.plans?.[index]?.items ?? plan.items,
     })),
   }
