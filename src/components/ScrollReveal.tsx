@@ -6,25 +6,6 @@ type ScrollRevealProps = {
   delay?: number
 }
 
-let lastY = 0
-let goingDown = true
-let scrollBound = false
-
-function bindScroll() {
-  if (scrollBound) return
-  scrollBound = true
-  lastY = window.scrollY
-  window.addEventListener(
-    'scroll',
-    () => {
-      const y = window.scrollY
-      if (y !== lastY) goingDown = y > lastY
-      lastY = y
-    },
-    { passive: true },
-  )
-}
-
 export function ScrollReveal({
   children,
   className = '',
@@ -41,26 +22,24 @@ export function ScrollReveal({
       return
     }
 
-    bindScroll()
+    const show = () => el.classList.add('is-in')
+    const fallback = window.setTimeout(show, 160)
 
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.toggle('from-up', !goingDown)
-          el.classList.toggle('from-down', goingDown)
-          el.classList.add('is-in')
-          return
-        }
-
-        el.classList.toggle('from-up', goingDown)
-        el.classList.toggle('from-down', !goingDown)
-        el.classList.remove('is-in')
+        if (!entry.isIntersecting) return
+        window.clearTimeout(fallback)
+        show()
+        io.disconnect()
       },
-      { threshold: 0.18, rootMargin: '-6% 0px -12% 0px' },
+      { threshold: 0.01, rootMargin: '48px 0px 48px 0px' },
     )
 
     io.observe(el)
-    return () => io.disconnect()
+    return () => {
+      window.clearTimeout(fallback)
+      io.disconnect()
+    }
   }, [])
 
   return (

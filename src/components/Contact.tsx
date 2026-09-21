@@ -1,11 +1,12 @@
-import { useEffect, useRef, useState, type FormEvent } from 'react'
+import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { contactInbox } from '../data/contact'
 import { serviceGroups, services } from '../data/services'
 import { Reveal } from './Reveal'
 import { sendBriefToTelegram } from '../data/telegram'
 import { useLocale } from '../i18n/locale'
 import { localizeService } from '../i18n/services'
-import type { Copy } from '../i18n/copy'
+import type { Copy, Locale } from '../i18n/copy'
 
 const channels = ['phone', 'telegram', 'email'] as const
 
@@ -41,6 +42,18 @@ function replyMeta(t: Copy, channel: Channel) {
 
 function field(data: FormData, name: string) {
   return String(data.get(name) ?? '').trim()
+}
+
+function serviceFromPaket(paket: string, t: Copy, locale: Locale) {
+  const key = paket.trim()
+  if (!key) return t.contact.fullSystem
+  const offer = t.openingOffers.items.find((item) => item.id === key || item.name === key)
+  if (offer) return offer.name
+  const listed = services.find((service) => service.slug === key)
+  if (listed) return localizeService(listed, locale).title
+  const titled = services.find((service) => localizeService(service, locale).title === key)
+  if (titled) return localizeService(titled, locale).title
+  return key
 }
 
 function isActivateMessage(message: string) {
@@ -128,6 +141,21 @@ function ServiceSelect({
           >
             {t.contact.fullSystem}
           </button>
+          <div className="contact-select__group">
+            <p>{t.openingOffers.kicker}</p>
+            {t.openingOffers.items.map((pack) => (
+              <button
+                key={pack.id}
+                type="button"
+                role="option"
+                aria-selected={value === pack.name}
+                className={value === pack.name ? 'is-on' : ''}
+                onClick={() => pick(pack.name)}
+              >
+                {pack.name}
+              </button>
+            ))}
+          </div>
           {serviceGroups.map((group) => (
             <div key={group} className="contact-select__group">
               <p>{t.groups[group]}</p>
@@ -167,19 +195,22 @@ function ServiceSelect({
 
 export function Contact() {
   const { t, locale } = useLocale()
+  const location = useLocation()
+  const picked = useMemo(
+    () => serviceFromPaket(new URLSearchParams(location.search).get('paket') ?? '', t, locale),
+    [location.search, t, locale],
+  )
   const [sent, setSent] = useState(false)
   const [sending, setSending] = useState(false)
   const [error, setError] = useState('')
-  const [localeTick, setLocaleTick] = useState(locale)
-  const [direction, setDirection] = useState(t.contact.fullSystem)
+  const [direction, setDirection] = useState(picked)
   const [channel, setChannel] = useState<Channel>('telegram')
   const reply = replyMeta(t, channel)
 
-  if (localeTick !== locale) {
-    setLocaleTick(locale)
-    setDirection(t.contact.fullSystem)
+  useEffect(() => {
+    setDirection(picked)
     setError('')
-  }
+  }, [picked])
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -394,7 +425,13 @@ export function Contact() {
             </label>
             <label className="contact__check">
               <input name="consent" type="checkbox" required />
-              <span>{t.contact.consent}</span>
+              <span>
+                {t.contact.consent}{' '}
+                <Link to="/polityka">{t.contact.privacy}</Link>
+                {' '}
+                {t.contact.consentJoin}{' '}
+                <Link to="/polityka#oferta">{t.contact.offer}</Link>.
+              </span>
             </label>
             {error ? (
               <p className="contact__error" role="alert">

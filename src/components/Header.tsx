@@ -8,8 +8,8 @@ function NavLinks({ onSelect }: { onSelect: () => void }) {
   const location = useLocation()
   const onServices = location.pathname.replace(/\/$/, '').endsWith('/poslugy')
   const contactTo = onServices
-    ? { pathname: '/poslugy', hash: '#contact' }
-    : { pathname: '/', hash: '#contact' }
+    ? { pathname: '/poslugy', search: '', hash: '#contact' }
+    : { pathname: '/', search: '', hash: '#contact' }
 
   return (
     <>
@@ -23,6 +23,9 @@ function NavLinks({ onSelect }: { onSelect: () => void }) {
       >
         {t.nav.services}
       </NavLink>
+      <Link to={{ pathname: '/', hash: '#offers' }} onClick={onSelect}>
+        {t.nav.packages}
+      </Link>
       <Link to={{ pathname: '/', hash: '#approach' }} onClick={onSelect}>
         {t.nav.approach}
       </Link>
@@ -126,7 +129,6 @@ export function Header() {
         aria-hidden={!open}
       >
         <NavLinks onSelect={close} />
-        <LangSwitch />
       </nav>
     </>
   )

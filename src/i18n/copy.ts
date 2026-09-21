@@ -7,7 +7,6 @@ export type Copy = {
   nav: {
     about: string
     services: string
-    cases: string
     approach: string
     contact: string
     brief: string
@@ -15,6 +14,7 @@ export type Copy = {
     closeMenu: string
     aria: string
     language: string
+    packages: string
   }
   hero: { lede: string; discuss: string; cases: string }
   why: {
@@ -41,6 +41,7 @@ export type Copy = {
     discuss: string
     note: string
     items: {
+      id: string
       label: string
       name: string
       for: string
@@ -67,12 +68,6 @@ export type Copy = {
     term: string
     expand: string
     collapse: string
-  }
-  cases: {
-    kicker: string
-    title: string
-    text: string
-    items: { category: string; title: string; text: string }[]
   }
   approach: {
     kicker: string
@@ -114,6 +109,19 @@ export type Copy = {
     fullSystem: string
     other: string
     honey: string
+    privacy: string
+    offer: string
+    consentJoin: string
+  }
+  legal: {
+    kicker: string
+    title: string
+    description: string
+    updated: string
+    privacyTitle: string
+    privacy: { title: string; text: string }[]
+    offerTitle: string
+    offer: { title: string; text: string }[]
   }
   footer: {
     aside: string
@@ -142,10 +150,10 @@ export const copy: Record<Locale, Copy> = {
     nav: {
       about: 'Про нас',
       services: 'Послуги',
-      cases: 'Кейси',
       approach: 'Підхід',
       contact: 'Контакти',
       brief: 'Бриф',
+      packages: 'Пакети',
       openMenu: 'Відкрити меню',
       closeMenu: 'Закрити меню',
       aria: 'Навігація',
@@ -194,6 +202,7 @@ export const copy: Record<Locale, Copy> = {
       note: 'Медіабюджет реклами, хостинг і домен — не входять у вартість.',
       items: [
         {
+          id: 'start-leads',
           label: 'Для нового бізнесу',
           name: 'Запуск заявок',
           for: 'Немає сторінки під рекламу. Потрібна коротка посадка, пошук і лист, щоб перші звернення не губились.',
@@ -203,6 +212,7 @@ export const copy: Record<Locale, Copy> = {
           items: ['Лендінг Старт', 'Пошукова реклама', 'Email-маркетинг'],
         },
         {
+          id: 'site-exists',
           label: 'Найчастіше обирають',
           name: 'Сайт уже є',
           for: 'Сторінка стоїть, але заявок мало. Додаємо видимість у пошуку, рекламу і перевірку, що саме конвертує.',
@@ -213,6 +223,7 @@ export const copy: Record<Locale, Copy> = {
           items: ['SEO-оптимізація', 'Пошукова реклама', 'A/B тестування'],
         },
         {
+          id: 'presence',
           label: 'Для короткої присутності',
           name: 'Вітрина в мережі',
           for: 'Потрібна компактна компанія в мережі — не корпоратив, а візитка, Instagram і базова оптимізація.',
@@ -263,33 +274,6 @@ export const copy: Record<Locale, Copy> = {
       term: 'Термін',
       expand: 'Розгорнути',
       collapse: 'Згорнути',
-    },
-    cases: {
-      kicker: 'Кейси',
-      title: 'Система в роботі, не в презентації',
-      text: 'Чотири напрями, з яких уже збираємо контур під задачу бізнесу.',
-      items: [
-        {
-          category: 'Лендінг',
-          title: 'Локальна студія',
-          text: 'Посадкова під запис і форму, яку можна одразу взяти в роботу.',
-        },
-        {
-          category: 'Каса POS',
-          title: 'Роздріб',
-          text: 'Вітрина, оплата й облік — щоб продажі не губились між чатами.',
-        },
-        {
-          category: 'Meta Ads',
-          title: 'Заявки з реклами',
-          text: 'Креативи й посадкова в одному контурі, бюджет іде в заявку.',
-        },
-        {
-          category: 'Логотип',
-          title: 'Експертний бренд',
-          text: 'Знак і проста система використання на носіях і в мережі.',
-        },
-      ],
     },
     approach: {
       kicker: 'Підхід',
@@ -376,7 +360,10 @@ export const copy: Record<Locale, Copy> = {
       phoneLabel: 'Номер телефону *',
       telegramLabel: 'Нік у Telegram *',
       emailLabel: 'Email *',
-      consent: 'Погоджуюсь на обробку даних для відповіді по запиту.',
+      consent: 'Погоджуюсь на обробку даних для відповіді по запиту згідно з',
+      privacy: 'політикою конфіденційності',
+      offer: 'публічною офертою',
+      consentJoin: 'та',
       send: 'Надіслати',
       sending: 'Надсилаємо…',
       error: 'Заповніть обовʼязкові поля.',
@@ -384,6 +371,63 @@ export const copy: Record<Locale, Copy> = {
       fullSystem: 'Система під ключ',
       other: 'Інше',
       honey: 'Сайт',
+    },
+    legal: {
+      kicker: 'Документи',
+      title: 'Політика та оферта',
+      description:
+        'Як DemWay обробляє дані з брифу та на яких умовах надає послуги.',
+      updated: 'Оновлено 21 вересня 2026',
+      privacyTitle: 'Політика конфіденційності',
+      privacy: [
+        {
+          title: 'Хто обробляє дані',
+          text: 'Оператор — DemWay (digital-агенція, формат Україна · онлайн). Контакт: demway.agency@gmail.com, Telegram @DemWay_Team.',
+        },
+        {
+          title: 'Які дані збираємо',
+          text: 'З брифу: імʼя, компанія, обрана послуга чи пакет, опис задачі, канал відповіді та контакт (телефон, Telegram або email). На сайті зберігаємо обрану мову в браузері.',
+        },
+        {
+          title: 'Навіщо',
+          text: 'Щоб відповісти на запит, уточнити обсяг і строки, підготувати прорахунок і вести листування по проєкту. Підстава — ваша згода в формі та необхідність виконати запит до укладення договору.',
+        },
+        {
+          title: 'Кому передаємо',
+          text: 'Заявку можемо надіслати на пошту через FormSubmit і в робочий чат через Telegram. Іншим третім особам дані не продаємо і не передаємо для їхнього маркетингу.',
+        },
+        {
+          title: 'Скільки зберігаємо',
+          text: 'Поки ведемо листування і стільки, скільки потрібно для обліку послуг і вимог закону. Далі видаляємо або знеособлюємо за запитом на demway.agency@gmail.com.',
+        },
+        {
+          title: 'Ваші права',
+          text: 'Можна запитати доступ, виправлення, видалення, обмеження обробки або відкликати згоду. Це не впливає на вже надіслану відповідь, якщо вона вже пішла в роботу.',
+        },
+      ],
+      offerTitle: 'Публічна оферта',
+      offer: [
+        {
+          title: 'Предмет',
+          text: 'DemWay пропонує послуги з сайтів, реклами, SEO, CRM та айдентики. Надсилання брифу — запит на прорахунок, а не автоматичне замовлення. Договір укладається після узгодження обсягу, строків і вартості.',
+        },
+        {
+          title: 'Вартість',
+          text: 'Пакети на головній зі знижкою −15% — орієнтир на зазначених умовах. Каталог — склад послуг без публічної ціни: сума за індивідуальним прорахунком. Медіабюджет реклами, хостинг і домен у вартість пакетів не входять, якщо не погоджено окремо.',
+        },
+        {
+          title: 'Строки і результат',
+          text: 'Строки в каталозі орієнтовні. Фінальний план фіксуємо після консультації. Результат — погоджений обсяг робіт, не гарантія продажів чи позицій у пошуку.',
+        },
+        {
+          title: 'Оплата і зміни',
+          text: 'Порядок оплати — у рахунку або договорі. Зміни обсягу погоджуємо письмово (чат або email). Право на матеріали переходить після повної оплати відповідного етапу, якщо інше не зазначено.',
+        },
+        {
+          title: 'Право',
+          text: 'Стосунки регулює законодавство України. Спори — переговори, далі суди України за місцем реєстрації виконавця, якщо інше не вимагає закон.',
+        },
+      ],
     },
     footer: {
       aside: 'Від контакту до угоди',
@@ -410,10 +454,10 @@ export const copy: Record<Locale, Copy> = {
     nav: {
       about: 'About',
       services: 'Services',
-      cases: 'Work',
       approach: 'Approach',
       contact: 'Contact',
       brief: 'Brief',
+      packages: 'Bundles',
       openMenu: 'Open menu',
       closeMenu: 'Close menu',
       aria: 'Navigation',
@@ -462,6 +506,7 @@ export const copy: Record<Locale, Copy> = {
       note: 'Ad spend, hosting and domain are not included.',
       items: [
         {
+          id: 'start-leads',
           label: 'For a new business',
           name: 'Lead launch',
           for: 'No page ready for ads yet. You need a short landing, search and email so the first enquiries don’t get lost.',
@@ -471,6 +516,7 @@ export const copy: Record<Locale, Copy> = {
           items: ['Landing Start', 'Search ads', 'Email marketing'],
         },
         {
+          id: 'site-exists',
           label: 'Most chosen',
           name: 'Site already live',
           for: 'The site exists, leads are thin. We add search visibility, ads and a test of what actually converts.',
@@ -481,6 +527,7 @@ export const copy: Record<Locale, Copy> = {
           items: ['SEO', 'Search ads', 'A/B testing'],
         },
         {
+          id: 'presence',
           label: 'For a short presence',
           name: 'Presence online',
           for: 'A compact company on the web — not a corporate build, but a brochure site, Instagram and basic SEO.',
@@ -531,33 +578,6 @@ export const copy: Record<Locale, Copy> = {
       term: 'Timeline',
       expand: 'Show more',
       collapse: 'Show less',
-    },
-    cases: {
-      kicker: 'Work',
-      title: 'A system in use, not on a slide',
-      text: 'Four directions we already assemble around a business brief.',
-      items: [
-        {
-          category: 'Landing',
-          title: 'Local studio',
-          text: 'A booking page and form you can put to work right away.',
-        },
-        {
-          category: 'POS',
-          title: 'Retail',
-          text: 'Showcase, payments and stock — so sales are not lost in chats.',
-        },
-        {
-          category: 'Meta Ads',
-          title: 'Leads from ads',
-          text: 'Creatives and a landing page in one loop, budget going to inquiries.',
-        },
-        {
-          category: 'Logo',
-          title: 'Expert brand',
-          text: 'A mark and a simple system for use on assets and online.',
-        },
-      ],
     },
     approach: {
       kicker: 'Approach',
@@ -644,7 +664,10 @@ export const copy: Record<Locale, Copy> = {
       phoneLabel: 'Phone number *',
       telegramLabel: 'Telegram handle *',
       emailLabel: 'Email *',
-      consent: 'I agree to data processing so you can reply to this request.',
+      consent: 'I agree to data processing so you can reply to this request, as set out in the',
+      privacy: 'privacy policy',
+      offer: 'public offer',
+      consentJoin: 'and the',
       send: 'Send',
       sending: 'Sending…',
       error: 'Please fill in the required fields.',
@@ -652,6 +675,62 @@ export const copy: Record<Locale, Copy> = {
       fullSystem: 'Full system',
       other: 'Other',
       honey: 'Website',
+    },
+    legal: {
+      kicker: 'Legal',
+      title: 'Privacy and offer',
+      description: 'How DemWay handles brief data and the terms for our services.',
+      updated: 'Updated 21 September 2026',
+      privacyTitle: 'Privacy policy',
+      privacy: [
+        {
+          title: 'Who processes the data',
+          text: 'Controller: DemWay (digital agency, Ukraine · online). Contact: demway.agency@gmail.com, Telegram @DemWay_Team.',
+        },
+        {
+          title: 'What we collect',
+          text: 'From the brief: name, company, chosen service or bundle, task description, reply channel and contact (phone, Telegram or email). The site stores the language choice in your browser.',
+        },
+        {
+          title: 'Why',
+          text: 'To reply to the request, clarify scope and timeline, prepare a quote and continue project correspondence. Legal basis: consent in the form and steps needed to handle a pre-contract enquiry.',
+        },
+        {
+          title: 'Who we share with',
+          text: 'We may send the request by email via FormSubmit and to our work chat via Telegram. We do not sell data or pass it to others for their marketing.',
+        },
+        {
+          title: 'How long we keep it',
+          text: 'For as long as we correspond and as required for service records and the law. After that we delete or anonymise it on request to demway.agency@gmail.com.',
+        },
+        {
+          title: 'Your rights',
+          text: 'You can ask for access, correction, deletion, restriction, or withdraw consent. That does not undo a reply already sent if work has started.',
+        },
+      ],
+      offerTitle: 'Public offer',
+      offer: [
+        {
+          title: 'Subject',
+          text: 'DemWay offers websites, ads, SEO, CRM and identity work. Sending a brief is a request for a quote, not an automatic order. A contract is formed after we agree scope, timeline and price.',
+        },
+        {
+          title: 'Price',
+          text: 'Homepage bundles at −15% are a guide under the stated terms. The catalog lists scope without a public price: the sum is by individual quote. Ad spend, hosting and domain are not included unless agreed separately.',
+        },
+        {
+          title: 'Timeline and result',
+          text: 'Catalog timelines are estimates. The final plan is locked after a consultation. You get the agreed scope of work, not a guarantee of sales or search rankings.',
+        },
+        {
+          title: 'Payment and changes',
+          text: 'Payment terms appear on the invoice or contract. Scope changes are agreed in writing (chat or email). Rights in the materials pass after full payment of the relevant stage unless stated otherwise.',
+        },
+        {
+          title: 'Law',
+          text: 'Ukrainian law applies. Disputes: talks first, then Ukrainian courts at the contractor’s place of registration unless the law requires otherwise.',
+        },
+      ],
     },
     footer: {
       aside: 'From contact to deal',
@@ -678,10 +757,10 @@ export const copy: Record<Locale, Copy> = {
     nav: {
       about: 'O nas',
       services: 'Usługi',
-      cases: 'Realizacje',
       approach: 'Podejście',
       contact: 'Kontakt',
       brief: 'Brief',
+      packages: 'Pakiety',
       openMenu: 'Otwórz menu',
       closeMenu: 'Zamknij menu',
       aria: 'Nawigacja',
@@ -730,6 +809,7 @@ export const copy: Record<Locale, Copy> = {
       note: 'Budżet reklamowy, hosting i domena nie wchodzą w cenę.',
       items: [
         {
+          id: 'start-leads',
           label: 'Dla nowego biznesu',
           name: 'Start zgłoszeń',
           for: 'Nie ma jeszcze strony pod reklamę. Potrzebny krótki landing, wyszukiwarka i e-mail, żeby pierwsze zgłoszenia się nie gubiły.',
@@ -739,6 +819,7 @@ export const copy: Record<Locale, Copy> = {
           items: ['Landing Start', 'Reklama w wyszukiwarce', 'E-mail marketing'],
         },
         {
+          id: 'site-exists',
           label: 'Najczęściej wybierany',
           name: 'Strona już jest',
           for: 'Strona stoi, zgłoszeń mało. Dodajemy widoczność w wyszukiwarce, reklamę i test, co naprawdę konwertuje.',
@@ -749,6 +830,7 @@ export const copy: Record<Locale, Copy> = {
           items: ['SEO', 'Reklama w wyszukiwarce', 'Testy A/B'],
         },
         {
+          id: 'presence',
           label: 'Dla krótkiej obecności',
           name: 'Witryna w sieci',
           for: 'Potrzebna zwięzła firma w sieci — nie korporacja, lecz wizytówka, Instagram i podstawowe SEO.',
@@ -799,33 +881,6 @@ export const copy: Record<Locale, Copy> = {
       term: 'Termin',
       expand: 'Rozwiń',
       collapse: 'Zwiń',
-    },
-    cases: {
-      kicker: 'Realizacje',
-      title: 'System w pracy, nie na slajdzie',
-      text: 'Cztery kierunki, z których już składamy obieg pod zadanie biznesu.',
-      items: [
-        {
-          category: 'Landing',
-          title: 'Lokalne studio',
-          text: 'Strona pod zapis i formularz, który od razu można wziąć do pracy.',
-        },
-        {
-          category: 'POS',
-          title: 'Detal',
-          text: 'Witryna, płatność i ewidencja — żeby sprzedaż nie ginęła w czatach.',
-        },
-        {
-          category: 'Meta Ads',
-          title: 'Zgłoszenia z reklam',
-          text: 'Kreacje i landing w jednym obiegu, budżet idzie w zgłoszenie.',
-        },
-        {
-          category: 'Logo',
-          title: 'Marka ekspercka',
-          text: 'Znak i prosty system użycia na nośnikach i w sieci.',
-        },
-      ],
     },
     approach: {
       kicker: 'Podejście',
@@ -912,7 +967,10 @@ export const copy: Record<Locale, Copy> = {
       phoneLabel: 'Numer telefonu *',
       telegramLabel: 'Nick na Telegramie *',
       emailLabel: 'Email *',
-      consent: 'Zgadzam się na przetwarzanie danych w celu odpowiedzi na zapytanie.',
+      consent: 'Zgadzam się na przetwarzanie danych w celu odpowiedzi na zapytanie zgodnie z',
+      privacy: 'polityką prywatności',
+      offer: 'ofertą publiczną',
+      consentJoin: 'i',
       send: 'Wyślij',
       sending: 'Wysyłamy…',
       error: 'Uzupełnij wymagane pola.',
@@ -920,6 +978,62 @@ export const copy: Record<Locale, Copy> = {
       fullSystem: 'System pod klucz',
       other: 'Inne',
       honey: 'Strona',
+    },
+    legal: {
+      kicker: 'Dokumenty',
+      title: 'Polityka i oferta',
+      description: 'Jak DemWay przetwarza dane z briefu i na jakich zasadach świadczy usługi.',
+      updated: 'Zaktualizowano 21 września 2026',
+      privacyTitle: 'Polityka prywatności',
+      privacy: [
+        {
+          title: 'Kto przetwarza dane',
+          text: 'Administrator: DemWay (agencja digital, format Ukraina · online). Kontakt: demway.agency@gmail.com, Telegram @DemWay_Team.',
+        },
+        {
+          title: 'Jakie dane zbieramy',
+          text: 'Z briefu: imię, firma, wybrana usługa lub pakiet, opis zadania, kanał odpowiedzi i kontakt (telefon, Telegram lub e-mail). Na stronie zapisujemy wybrany język w przeglądarce.',
+        },
+        {
+          title: 'Po co',
+          text: 'Aby odpowiedzieć na zapytanie, ustalić zakres i terminy, przygotować wycenę i prowadzić korespondencję projektu. Podstawa — zgoda w formularzu oraz czynności przed umową.',
+        },
+        {
+          title: 'Komu przekazujemy',
+          text: 'Zgłoszenie możemy wysłać na pocztę przez FormSubmit i na czat roboczy przez Telegram. Innym podmiotom danych nie sprzedajemy i nie oddajemy do ich marketingu.',
+        },
+        {
+          title: 'Jak długo przechowujemy',
+          text: 'Dopóki trwa korespondencja i tak długo, jak wymagają rozliczenia usług i prawo. Potem usuwamy lub anonimizujemy na wniosek na demway.agency@gmail.com.',
+        },
+        {
+          title: 'Twoje prawa',
+          text: 'Możesz żądać dostępu, sprostowania, usunięcia, ograniczenia przetwarzania lub wycofać zgodę. Nie cofa to odpowiedzi, która już poszła w realizację.',
+        },
+      ],
+      offerTitle: 'Oferta publiczna',
+      offer: [
+        {
+          title: 'Przedmiot',
+          text: 'DemWay oferuje strony, reklamy, SEO, CRM i identyfikację. Wysłanie briefu to prośba o wycenę, nie automatyczne zamówienie. Umowa powstaje po uzgodnieniu zakresu, terminów i ceny.',
+        },
+        {
+          title: 'Cena',
+          text: 'Pakiety na stronie głównej ze zniżką −15% to orientacja na podanych warunkach. Katalog to zakres bez publicznej ceny: kwota według indywidualnej wyceny. Budżet reklamowy, hosting i domena nie wchodzą w pakiety, chyba że uzgodniono inaczej.',
+        },
+        {
+          title: 'Terminy i rezultat',
+          text: 'Terminy w katalogu są orientacyjne. Finalny plan ustalamy po konsultacji. Rezultat to uzgodniony zakres prac, nie gwarancja sprzedaży ani pozycji w wyszukiwarce.',
+        },
+        {
+          title: 'Płatność i zmiany',
+          text: 'Warunki płatności — na fakturze lub w umowie. Zmiany zakresu uzgadniamy na piśmie (czat lub e-mail). Prawa do materiałów przechodzą po pełnej płatności etapu, jeśli nie ustalono inaczej.',
+        },
+        {
+          title: 'Prawo',
+          text: 'Stosunki reguluje prawo Ukrainy. Spory — najpierw rozmowy, potem sądy Ukrainy według siedziby wykonawcy, o ile ustawa nie wymaga inaczej.',
+        },
+      ],
     },
     footer: {
       aside: 'Od kontaktu do umowy',

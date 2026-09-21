@@ -16,8 +16,8 @@ export function Footer() {
   const location = useLocation()
   const onServices = location.pathname.replace(/\/$/, '').endsWith('/poslugy')
   const contactTo = onServices
-    ? { pathname: '/poslugy', hash: '#contact' }
-    : { pathname: '/', hash: '#contact' }
+    ? { pathname: '/poslugy', search: '', hash: '#contact' }
+    : { pathname: '/', search: '', hash: '#contact' }
   const faqTo = onServices
     ? { pathname: '/poslugy', hash: '#faq' }
     : { pathname: '/', hash: '#faq' }
@@ -62,6 +62,9 @@ export function Footer() {
                 <Link to={{ pathname: '/', hash: '#why' }}>{t.nav.about}</Link>
               </li>
               <li>
+                <Link to={{ pathname: '/', hash: '#offers' }}>{t.nav.packages}</Link>
+              </li>
+              <li>
                 <Link to={{ pathname: '/', hash: '#approach' }}>{t.nav.approach}</Link>
               </li>
               <li>
@@ -74,6 +77,12 @@ export function Footer() {
                 >
                   {t.catalog.title}
                 </NavLink>
+              </li>
+              <li>
+                <Link to="/polityka">{t.legal.privacyTitle}</Link>
+              </li>
+              <li>
+                <Link to="/polityka#oferta">{t.legal.offerTitle}</Link>
               </li>
               <li>
                 <Link to={contactTo}>{t.nav.brief}</Link>

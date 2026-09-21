@@ -5,6 +5,8 @@ import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 import { HomePage } from './pages/HomePage'
 import { ServicesPage } from './pages/ServicesPage'
+import { LegalPage } from './pages/LegalPage'
+import { useLocale } from './i18n/locale'
 import './App.css'
 
 function isHeroLanding(hash: string) {
@@ -47,6 +49,7 @@ function ScrollTo() {
   useEffect(() => {
     const path = location.pathname.replace(/\/$/, '')
     const onCatalog = path.endsWith('/poslugy')
+    const onLegal = path.endsWith('/polityka')
     const hash = location.hash
     let timer = 0
     let later = 0
@@ -64,7 +67,8 @@ function ScrollTo() {
     afterBoot(() => {
       const instant = firstPaint.current
       firstPaint.current = false
-      const landOnHero = !onCatalog && (instant ? isHeroLanding(hash) : hash === '' || hash === '#top')
+      const landOnHero =
+        !onCatalog && !onLegal && (instant ? isHeroLanding(hash) : hash === '' || hash === '#top')
 
       if (landOnHero) {
         jumpHero()
@@ -76,7 +80,9 @@ function ScrollTo() {
       }
 
       const allowed =
-        Boolean(hash) && (!onCatalog || hash === '#contact' || hash === '#faq')
+        Boolean(hash) &&
+        (!onCatalog || hash === '#contact' || hash === '#faq') &&
+        (!onLegal || hash === '#privacy' || hash === '#oferta')
 
       if (!allowed) {
         window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
@@ -104,6 +110,27 @@ function ScrollTo() {
       window.cancelAnimationFrame(frame)
     }
   }, [location.pathname, location.hash, location.search])
+
+  return null
+}
+
+function DocumentTitle() {
+  const { t, locale } = useLocale()
+  const location = useLocation()
+
+  useEffect(() => {
+    const path = location.pathname.replace(/\/$/, '')
+    document.documentElement.lang = locale
+    if (path.endsWith('/poslugy')) document.title = `${t.catalog.title} - DemWay`
+    else if (path.endsWith('/polityka')) document.title = `${t.legal.title} - DemWay`
+    else document.title = t.meta.title
+    const meta = document.querySelector('meta[name="description"]')
+    if (!meta) return
+    meta.setAttribute(
+      'content',
+      path.endsWith('/polityka') ? t.legal.description : t.meta.description,
+    )
+  }, [locale, location.pathname, t])
 
   return null
 }
@@ -149,6 +176,7 @@ function App() {
   return (
     <>
       <PageBg />
+      <DocumentTitle />
       <Header />
       <div className="page">
         <ScrollTo />
@@ -156,6 +184,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/poslugy" element={<ServicesPage />} />
+            <Route path="/polityka" element={<LegalPage />} />
           </Routes>
         </main>
         <Footer />

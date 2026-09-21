@@ -1,7 +1,6 @@
 import {
   createContext,
   useContext,
-  useEffect,
   useMemo,
   useState,
   type ReactNode,
@@ -38,13 +37,6 @@ function persistLocale(next: Locale) {
 
 export function LocaleProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>(readLocale)
-
-  useEffect(() => {
-    document.documentElement.lang = locale
-    document.title = copy[locale].meta.title
-    const meta = document.querySelector('meta[name="description"]')
-    if (meta) meta.setAttribute('content', copy[locale].meta.description)
-  }, [locale])
 
   const value = useMemo(
     () => ({

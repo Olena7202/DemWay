@@ -7,7 +7,7 @@ export function OpeningOffers() {
   const offers = t.openingOffers
 
   return (
-    <section className="offers" id="offers" data-scene="cases">
+    <section className="offers" id="offers" data-scene="ink">
       <Reveal>
         <div className="section-head">
           <p className="eyebrow">{offers.kicker}</p>
@@ -46,7 +46,10 @@ export function OpeningOffers() {
                     <span className="offer-card__now">{pack.now}</span>
                   </div>
                   <div className="offer-card__cta">
-                    <Link className="btn btn--pink btn--slide" to={{ pathname: '/', hash: '#contact' }}>
+                    <Link
+                      className="btn btn--pink btn--slide"
+                      to={{ pathname: '/', search: `?paket=${pack.id}`, hash: '#contact' }}
+                    >
                       <span>
                         <span>{offers.discuss}</span>
                         <span>{offers.discuss}</span>

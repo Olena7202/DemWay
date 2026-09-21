@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import {
   clusterServices,
   groupFromAnchor,
@@ -31,8 +31,15 @@ export function Services() {
 
   useEffect(() => {
     const napryam = new URLSearchParams(location.search).get('napryam')
+    const paket = new URLSearchParams(location.search).get('paket')
     const hash = location.hash.replace('#', '')
     const fromGroup = groupFromAnchor(napryam) ?? groupFromAnchor(hash)
+    const fromPaket = services.find((service) => service.slug === paket)
+    if (fromPaket) {
+      setGroup(fromPaket.group)
+      setOpen(fromPaket.slug)
+      return
+    }
     if (fromGroup) {
       setGroup(fromGroup)
       setOpen(firstSlug(fromGroup))
@@ -149,7 +156,15 @@ export function Services() {
 
 function ServicePlans({ service }: { service: Service }) {
   const { t } = useLocale()
+  const location = useLocation()
   const hintWithPrice = service.group === 'Реклама'
+  const params = new URLSearchParams(location.search)
+  params.set('paket', service.slug)
+  const discussTo = {
+    pathname: '/poslugy',
+    search: `?${params.toString()}`,
+    hash: '#contact',
+  } as const
   return (
     <div className={`svc__plans svc__plans--${service.plans.length}`}>
       {service.plans.map((plan, planIndex) => (
@@ -173,12 +188,12 @@ function ServicePlans({ service }: { service: Service }) {
             {!hintWithPrice && plan.note ? (
               <p className="plan__note">{plan.note}</p>
             ) : null}
-            <a className="btn btn--pink btn--slide" href="#contact">
+            <Link className="btn btn--pink btn--slide" to={discussTo}>
               <span>
                 <span>{t.catalog.discuss}</span>
                 <span>{t.catalog.discuss}</span>
               </span>
-            </a>
+            </Link>
           </article>
       ))}
     </div>
