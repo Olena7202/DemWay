@@ -116,13 +116,10 @@ export function Services() {
                         onClick={() => pickService(service.slug)}
                       >
                         <span className="teaser-row__body">
-                        <span className="teaser-row__title">
-                          {localizeService(service, locale).title}
+                          <span className="teaser-row__title">
+                            {localizeService(service, locale).title}
+                          </span>
                         </span>
-                        </span>
-                        {service.plans[0].price ? (
-                          <span className="teaser-row__from">{service.plans[0].price}</span>
-                        ) : null}
                       </button>
                     </ScrollReveal>
                   ))}
@@ -140,6 +137,7 @@ export function Services() {
                 <h2>{localizeService(current, locale).title}</h2>
                 <p>{localizeService(current, locale).text}</p>
               </header>
+              <p className="svc-picked__quote">{t.catalog.quote}</p>
               <ServicePlans service={localizeService(current, locale)} />
             </div>
           ) : null}
@@ -160,7 +158,6 @@ function ServicePlans({ service }: { service: Service }) {
             className={`plan${planIndex === 0 ? ' plan--base' : ''}`}
           >
             {plan.name ? <p className="plan__name">{plan.name}</p> : null}
-            {plan.price ? <p className="plan__price">{plan.price}</p> : null}
             {hintWithPrice && plan.note ? (
               <p className="plan__hint">{plan.note}</p>
             ) : null}
@@ -176,8 +173,11 @@ function ServicePlans({ service }: { service: Service }) {
             {!hintWithPrice && plan.note ? (
               <p className="plan__note">{plan.note}</p>
             ) : null}
-            <a className="btn btn--pink" href="#contact">
-              {t.catalog.discuss}
+            <a className="btn btn--pink btn--slide" href="#contact">
+              <span>
+                <span>{t.catalog.discuss}</span>
+                <span>{t.catalog.discuss}</span>
+              </span>
             </a>
           </article>
       ))}

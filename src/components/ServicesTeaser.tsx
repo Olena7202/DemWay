@@ -27,8 +27,11 @@ export function ServicesTeaser() {
             <p>{t.servicesTeaser.text}</p>
           </div>
           <div className="hero__actions teaser-catalog">
-            <Link className="btn btn--ink" to="/poslugy">
-              {t.servicesTeaser.catalog}
+            <Link className="btn btn--pink btn--slide" to="/poslugy">
+              <span>
+                <span>{t.servicesTeaser.catalog}</span>
+                <span>{t.servicesTeaser.catalog}</span>
+              </span>
             </Link>
           </div>
         </div>

@@ -17,30 +17,49 @@ export function OpeningOffers() {
       </Reveal>
 
       <ul className="offers__grid">
-        {offers.items.map((pack, index) => (
-          <li key={pack.name}>
-            <Reveal delay={index * 110} from="scale">
-              <article className={`offer-card${index === 1 ? ' offer-card--hit' : ''}`}>
-                <p className="offer-card__badge">{offers.badge}</p>
-                <h3>{pack.name}</h3>
-                <p className="offer-card__for">{pack.for}</p>
-                <p className="offer-card__price">
-                  <span className="offer-card__was">{pack.was}</span>
-                  <span className="offer-card__now">{pack.now}</span>
-                </p>
-                <ul className="offer-card__items">
-                  {pack.items.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-                <Link className="btn btn--pink" to={{ pathname: '/', hash: '#contact' }}>
-                  {offers.discuss}
-                </Link>
-              </article>
-            </Reveal>
-          </li>
-        ))}
+        {offers.items.map((pack, index) => {
+          const featured = Boolean(pack.featured)
+          return (
+            <li key={pack.name}>
+              <Reveal delay={index * 110} from="scale">
+                <article className={`offer-card${featured ? ' offer-card--hit' : ''}`}>
+                  {featured ? (
+                    <span className="offer-card__glow" aria-hidden="true" />
+                  ) : null}
+                  <div className="offer-card__meta">
+                    <p className="offer-card__label">{pack.label}</p>
+                    <p className="offer-card__save">{offers.save}</p>
+                  </div>
+                  <h3>{pack.name}</h3>
+                  <p className="offer-card__for">{pack.for}</p>
+                  <p className="offer-card__includes">{offers.includes}</p>
+                  <ul className="offer-card__items">
+                    {pack.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                  <p className="offer-card__result">
+                    <strong>{offers.resultLabel}:</strong> {pack.result}
+                  </p>
+                  <div className="offer-card__price">
+                    <span className="offer-card__was">{pack.was}</span>
+                    <span className="offer-card__now">{pack.now}</span>
+                  </div>
+                  <div className="offer-card__cta">
+                    <Link className="btn btn--pink btn--slide" to={{ pathname: '/', hash: '#contact' }}>
+                      <span>
+                        <span>{offers.discuss}</span>
+                        <span>{offers.discuss}</span>
+                      </span>
+                    </Link>
+                  </div>
+                </article>
+              </Reveal>
+            </li>
+          )
+        })}
       </ul>
+
       <p className="offers__note">{offers.note}</p>
     </section>
   )

@@ -26,7 +26,11 @@ export function Footer() {
     <footer className="site-footer" data-scene="close">
       <Reveal from="soft">
         <div className="site-footer__head">
-          <Link to="/" className="brand" aria-label="DemWay digital agency">
+          <Link
+            to={{ pathname: '/', search: '', hash: '#top' }}
+            className="brand"
+            aria-label="DemWay digital agency"
+          >
             <Wordmark />
           </Link>
           <p className="site-footer__aside">{t.footer.aside}</p>

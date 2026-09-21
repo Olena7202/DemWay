@@ -7,13 +7,29 @@ import { HomePage } from './pages/HomePage'
 import { ServicesPage } from './pages/ServicesPage'
 import './App.css'
 
+function isHeroLanding(hash: string) {
+  return hash === '' || hash === '#top' || hash === '#why'
+}
+
+function jumpHero() {
+  window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+}
+
+function stripHeroHash() {
+  const hash = window.location.hash
+  if (hash === '#top' || hash === '#why') {
+    history.replaceState(null, '', `${window.location.pathname}${window.location.search}`)
+  }
+}
+
 function dismissBoot() {
   const html = document.documentElement
   const boot = document.getElementById('boot')
   html.classList.remove('is-booting')
   html.classList.add('is-booted')
-  if (!window.location.hash) {
-    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+  if (isHeroLanding(window.location.hash)) {
+    jumpHero()
+    stripHeroHash()
   }
   if (!boot) return
   boot.classList.add('is-away')
@@ -33,6 +49,7 @@ function ScrollTo() {
     const onCatalog = path.endsWith('/poslugy')
     const hash = location.hash
     let timer = 0
+    let later = 0
     let frame = 0
     let attempts = 0
 
@@ -44,10 +61,20 @@ function ScrollTo() {
       fn()
     }
 
-    const instant = firstPaint.current
-    firstPaint.current = false
-
     afterBoot(() => {
+      const instant = firstPaint.current
+      firstPaint.current = false
+      const landOnHero = !onCatalog && (instant ? isHeroLanding(hash) : hash === '' || hash === '#top')
+
+      if (landOnHero) {
+        jumpHero()
+        frame = window.requestAnimationFrame(jumpHero)
+        timer = window.setTimeout(jumpHero, 80)
+        later = window.setTimeout(jumpHero, 400)
+        if (instant || hash === '#top') stripHeroHash()
+        return
+      }
+
       const allowed =
         Boolean(hash) && (!onCatalog || hash === '#contact' || hash === '#faq')
 
@@ -73,6 +100,7 @@ function ScrollTo() {
 
     return () => {
       window.clearTimeout(timer)
+      window.clearTimeout(later)
       window.cancelAnimationFrame(frame)
     }
   }, [location.pathname, location.hash, location.search])

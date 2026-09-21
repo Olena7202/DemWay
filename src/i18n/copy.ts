@@ -35,10 +35,21 @@ export type Copy = {
     kicker: string
     title: string
     text: string
-    badge: string
+    includes: string
+    resultLabel: string
+    save: string
     discuss: string
     note: string
-    items: { name: string; for: string; was: string; now: string; items: [string, string, string] }[]
+    items: {
+      label: string
+      name: string
+      for: string
+      result: string
+      was: string
+      now: string
+      featured?: boolean
+      items: [string, string, string]
+    }[]
   }
   groups: Record<ServiceGroup, string>
   clusters: Record<string, string>
@@ -51,6 +62,7 @@ export type Copy = {
     tabsAria: string
     packagesAria: string
     picked: string
+    quote: string
     discuss: string
     term: string
     expand: string
@@ -173,29 +185,38 @@ export const copy: Record<Locale, Copy> = {
     },
     openingOffers: {
       kicker: 'Пакети',
-      title: 'Пропонуємо готові збірки під задачу',
-      text: 'Три послуги в кожному, зі знижкою 15%. Під запуск, під сайт який уже є, і під коротку вітрину компанії.',
-      badge: '−15%',
+      title: 'Оберіть формат запуску',
+      text: 'Не збирайте сайт, рекламу і SEO з окремих послуг. Три готові збірки зі знижкою 15% — під етап, на якому зараз ваш бізнес.',
+      includes: 'Що входить',
+      resultLabel: 'Результат',
+      save: '−15%',
       discuss: 'Хочу цей пакет',
       note: 'Медіабюджет реклами, хостинг і домен — не входять у вартість.',
       items: [
         {
-          name: 'Старт заявки',
-          for: 'Немає сторінки під рекламу.',
+          label: 'Для нового бізнесу',
+          name: 'Запуск заявок',
+          for: 'Немає сторінки під рекламу. Потрібна коротка посадка, пошук і лист, щоб перші звернення не губились.',
+          result: 'Готова точка входу в рекламу і ланцюжок, яким заявка доходить до пошти.',
           was: '16 000 грн',
           now: '13 500 грн',
           items: ['Лендінг Старт', 'Пошукова реклама', 'Email-маркетинг'],
         },
         {
+          label: 'Найчастіше обирають',
           name: 'Сайт уже є',
-          for: 'Сайт стоїть, заявок мало.',
+          for: 'Сторінка стоїть, але заявок мало. Додаємо видимість у пошуку, рекламу і перевірку, що саме конвертує.',
+          result: 'Існуючий сайт починає приводити звернення, а не просто «бути в інтернеті».',
           was: '15 500 грн',
           now: '12 900 грн',
+          featured: true,
           items: ['SEO-оптимізація', 'Пошукова реклама', 'A/B тестування'],
         },
         {
+          label: 'Для короткої присутності',
           name: 'Вітрина в мережі',
-          for: 'Коротка компанія в інтернеті, не корпоратив.',
+          for: 'Потрібна компактна компанія в мережі — не корпоратив, а візитка, Instagram і базова оптимізація.',
+          result: 'Бренд можна знайти, показати і запустити в рекламу з однієї узгодженої основи.',
           was: '22 000 грн',
           now: '18 500 грн',
           items: ['Сайт-візитка', 'Instagram Ads', 'SEO-оптимізація'],
@@ -233,10 +254,11 @@ export const copy: Record<Locale, Copy> = {
     catalog: {
       kicker: 'Послуги',
       title: 'Каталог пакетів',
-      text: 'Оберіть напрям і пакет — склад і ціна відкриються поруч. Суми орієнтовні, «від».',
+      text: 'Оберіть напрям і пакет — склад відкриється поруч.',
       tabsAria: 'Напрями послуг',
       packagesAria: 'Пакети',
       picked: 'обраний пакет',
+      quote: 'Вартість — за індивідуальним прорахунком',
       discuss: 'Обговорити пакет',
       term: 'Термін',
       expand: 'Розгорнути',
@@ -431,29 +453,38 @@ export const copy: Record<Locale, Copy> = {
     },
     openingOffers: {
       kicker: 'Bundles',
-      title: 'Ready packages we put together for you',
-      text: 'Three services in each, 15% off. Built for a first launch, for a site you already have, and for a short company presence.',
-      badge: '−15%',
+      title: 'Choose how we start',
+      text: 'Don’t piece together a site, ads and SEO from a dozen separate services. Three ready bundles at 15% off — matched to the stage your business is in.',
+      includes: 'What’s included',
+      resultLabel: 'Result',
+      save: '−15%',
       discuss: 'I want this bundle',
       note: 'Ad spend, hosting and domain are not included.',
       items: [
         {
-          name: 'Lead start',
-          for: 'No page ready for ads yet.',
+          label: 'For a new business',
+          name: 'Lead launch',
+          for: 'No page ready for ads yet. You need a short landing, search and email so the first enquiries don’t get lost.',
+          result: 'A live entry point for ads and a path that delivers the lead to your inbox.',
           was: '16 000 UAH',
           now: '13 500 UAH',
           items: ['Landing Start', 'Search ads', 'Email marketing'],
         },
         {
+          label: 'Most chosen',
           name: 'Site already live',
-          for: 'The site exists, leads are thin.',
+          for: 'The site exists, leads are thin. We add search visibility, ads and a test of what actually converts.',
+          result: 'The site you already have starts bringing enquiries, not just sitting online.',
           was: '15 500 UAH',
           now: '12 900 UAH',
+          featured: true,
           items: ['SEO', 'Search ads', 'A/B testing'],
         },
         {
+          label: 'For a short presence',
           name: 'Presence online',
-          for: 'A short company site, not a full corporate build.',
+          for: 'A compact company on the web — not a corporate build, but a brochure site, Instagram and basic SEO.',
+          result: 'The brand can be found, shown and advertised from one coherent base.',
           was: '22 000 UAH',
           now: '18 500 UAH',
           items: ['Brochure site', 'Instagram Ads', 'SEO'],
@@ -491,10 +522,11 @@ export const copy: Record<Locale, Copy> = {
     catalog: {
       kicker: 'Services',
       title: 'Package catalog',
-      text: 'Pick a direction and a package — scope and price open beside it. Prices are estimates, “from”.',
+      text: 'Pick a direction and a package — scope opens beside it.',
       tabsAria: 'Service directions',
       packagesAria: 'Packages',
       picked: 'selected package',
+      quote: 'Price — by individual quote',
       discuss: 'Discuss this package',
       term: 'Timeline',
       expand: 'Show more',
@@ -689,29 +721,38 @@ export const copy: Record<Locale, Copy> = {
     },
     openingOffers: {
       kicker: 'Pakiety',
-      title: 'Proponujemy gotowe zestawy pod zadanie',
-      text: 'Trzy usługi w każdym, ze zniżką 15%. Pod pierwszy start, pod stronę która już jest, i pod krótką witrynę firmy.',
-      badge: '−15%',
+      title: 'Wybierz format startu',
+      text: 'Nie składaj strony, reklam i SEO z osobnych usług. Trzy gotowe zestawy ze zniżką 15% — pod etap, na którym jest teraz Twój biznes.',
+      includes: 'Co wchodzi',
+      resultLabel: 'Rezultat',
+      save: '−15%',
       discuss: 'Chcę ten pakiet',
       note: 'Budżet reklamowy, hosting i domena nie wchodzą w cenę.',
       items: [
         {
+          label: 'Dla nowego biznesu',
           name: 'Start zgłoszeń',
-          for: 'Nie ma jeszcze strony pod reklamę.',
+          for: 'Nie ma jeszcze strony pod reklamę. Potrzebny krótki landing, wyszukiwarka i e-mail, żeby pierwsze zgłoszenia się nie gubiły.',
+          result: 'Gotowy punkt wejścia w reklamę i ścieżka, którą zgłoszenie trafia na pocztę.',
           was: '16 000 UAH',
           now: '13 500 UAH',
           items: ['Landing Start', 'Reklama w wyszukiwarce', 'E-mail marketing'],
         },
         {
+          label: 'Najczęściej wybierany',
           name: 'Strona już jest',
-          for: 'Strona stoi, zgłoszeń mało.',
+          for: 'Strona stoi, zgłoszeń mało. Dodajemy widoczność w wyszukiwarce, reklamę i test, co naprawdę konwertuje.',
+          result: 'Istniejąca strona zaczyna przynosić zgłoszenia, a nie tylko „być w internecie”.',
           was: '15 500 UAH',
           now: '12 900 UAH',
+          featured: true,
           items: ['SEO', 'Reklama w wyszukiwarce', 'Testy A/B'],
         },
         {
+          label: 'Dla krótkiej obecności',
           name: 'Witryna w sieci',
-          for: 'Krótka firma w internecie, nie korporacja.',
+          for: 'Potrzebna zwięzła firma w sieci — nie korporacja, lecz wizytówka, Instagram i podstawowe SEO.',
+          result: 'Markę można znaleźć, pokazać i odpalić w reklamie z jednej spójnej podstawy.',
           was: '22 000 UAH',
           now: '18 500 UAH',
           items: ['Strona wizytówka', 'Instagram Ads', 'SEO'],
@@ -749,10 +790,11 @@ export const copy: Record<Locale, Copy> = {
     catalog: {
       kicker: 'Usługi',
       title: 'Katalog pakietów',
-      text: 'Wybierz kierunek i pakiet — zakres i cena otworzą się obok. Kwoty orientacyjne, «od».',
+      text: 'Wybierz kierunek i pakiet — zakres otworzy się obok.',
       tabsAria: 'Kierunki usług',
       packagesAria: 'Pakiety',
       picked: 'wybrany pakiet',
+      quote: 'Cena — według indywidualnej wyceny',
       discuss: 'Omówić pakiet',
       term: 'Termin',
       expand: 'Rozwiń',

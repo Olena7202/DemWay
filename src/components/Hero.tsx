@@ -26,8 +26,11 @@ export function Hero() {
                   <span>{t.hero.discuss}</span>
                 </span>
               </a>
-              <a className="btn btn--ink" href="#services">
-                {t.hero.cases}
+              <a className="btn btn--ink btn--slide" href="#services">
+                <span>
+                  <span>{t.hero.cases}</span>
+                  <span>{t.hero.cases}</span>
+                </span>
               </a>
             </div>
           </Reveal>

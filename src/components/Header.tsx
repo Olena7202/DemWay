@@ -17,7 +17,7 @@ function NavLinks({ onSelect }: { onSelect: () => void }) {
         {t.nav.about}
       </Link>
       <NavLink
-        to="/poslugy"
+        to={{ pathname: '/poslugy', search: '', hash: '' }}
         className={({ isActive }) => (isActive ? 'is-current' : '')}
         onClick={onSelect}
       >
@@ -95,12 +95,12 @@ export function Header() {
       <header
         className={`site-header${scrolled && !open ? ' is-scrolled' : ''}${open ? ' is-open' : ''}`}
       >
-        <Link
-          to="/"
-          className="brand"
-          aria-label="DemWay digital agency"
-          onClick={close}
-        >
+      <Link
+        to={{ pathname: '/', search: '', hash: '#top' }}
+        className="brand"
+        aria-label="DemWay digital agency"
+        onClick={close}
+      >
           <Wordmark />
         </Link>
         <nav className="nav nav--bar" aria-label={t.nav.aria}>

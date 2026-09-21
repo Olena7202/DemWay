@@ -16,6 +16,11 @@
       rel="stylesheet"
     />
     <title>DemWay — digital agency</title>
+    <script>
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
+      var bootHash = location.hash
+      if (!bootHash || bootHash === '#top' || bootHash === '#why') window.scrollTo(0, 0)
+    </script>
     <style>
       html,
       body {
