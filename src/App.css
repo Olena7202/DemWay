@@ -255,13 +255,14 @@
 }
 
 .nav__cta {
-  padding: 0.48rem 0.95rem !important;
+  padding: 0.48rem 0.85rem !important;
   border: 1px solid color-mix(in srgb, var(--pink) 55%, transparent) !important;
   border-radius: 0 !important;
   background: transparent !important;
   color: var(--cream) !important;
   opacity: 1 !important;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
   box-shadow: 0 0 24px rgba(var(--pink-rgb), 0.08);
   transition:
     background-color 0.3s ease,
@@ -362,6 +363,7 @@
 .offers,
 .cases,
 .approach,
+.why-choose,
 .faq,
 .contact {
   scroll-margin-top: 88px;
@@ -373,6 +375,7 @@
 .offers,
 .cases,
 .approach,
+.why-choose,
 .faq,
 .contact,
 .site-footer {
@@ -1001,6 +1004,10 @@ h1 em {
 
 .why__kicker .eyebrow {
   margin-bottom: 0.85rem;
+  font-family: var(--font);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  line-height: inherit;
 }
 
 .why__copy {
@@ -1011,6 +1018,9 @@ h1 em {
 .why__grid {
   grid-column: 2;
   grid-row: 2;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .why__head {
@@ -1018,8 +1028,13 @@ h1 em {
   margin-bottom: 0;
 }
 
-.why__head h2 {
+.why__head h2,
+.why__head h3 {
   margin-top: 0;
+  font-size: var(--h2);
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+  margin-bottom: 0.85rem;
 }
 
 .services__intro {
@@ -1134,7 +1149,9 @@ h1 em {
   margin: 0 0 0.35rem;
   padding-bottom: 0.55rem;
   border-bottom: 1px solid var(--khaki-line);
+  font-family: var(--font);
   font-size: var(--text-sm);
+  font-weight: 500;
   line-height: 1.2;
   letter-spacing: var(--track);
   text-transform: uppercase;
@@ -1247,6 +1264,7 @@ h1 em {
 }
 
 .teaser-row__title {
+  margin: 0;
   font-family: var(--display);
   font-size: 1.05rem;
   font-weight: 700;
@@ -1280,6 +1298,16 @@ h1 em {
 
 .svc-catalog__split > .svc-picked {
   margin-top: calc(var(--text-sm) * 1.2 + 0.9rem);
+}
+
+.svc-catalog__group {
+  margin: 0 0 0.85rem;
+  font-family: var(--display);
+  font-size: var(--h3);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  color: var(--cream);
 }
 
 .svc-catalog__lead {
@@ -1393,7 +1421,8 @@ button.teaser-row {
   color: var(--pink);
 }
 
-.svc-picked .svc-detail__head h2 {
+.svc-picked .svc-detail__head h2,
+.svc-picked .svc-detail__title {
   margin: 0 0 0.55rem;
   font-family: var(--display);
   font-size: clamp(1.5rem, 2.5vw, 2.05rem);
@@ -1949,8 +1978,10 @@ button.teaser-row {
 }
 
 .case-card__title {
+  margin: 0;
   font-family: var(--display);
   font-size: var(--h3);
+  font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.2;
   color: var(--cream);
@@ -2247,12 +2278,16 @@ button.teaser-row {
 }
 
 .why__card h3,
+.why__card h4,
+.why__card .why__card-title,
 .why__card p {
   position: relative;
   z-index: 1;
 }
 
-.why__card h3 {
+.why__card h3,
+.why__card h4,
+.why__card .why__card-title {
   margin: 0 0 0.4rem;
   font-family: var(--display);
   font-size: clamp(1.25rem, 1.6vw, 1.5rem);
@@ -2457,7 +2492,8 @@ button.teaser-row {
   user-select: none;
 }
 
-.approach-slide h3 {
+.approach-slide h3,
+.approach-slide h4 {
   margin: 0 0 0.9rem;
   font-family: var(--display);
   font-size: clamp(1.85rem, 3.6vw, 2.7rem);
@@ -2644,7 +2680,8 @@ button.teaser-row {
   border-color: var(--pink);
 }
 
-.step-card h3 {
+.step-card h3,
+.step-card h4 {
   grid-column: 2;
   margin: 0 0 0.4rem;
   font-family: var(--sans);
@@ -2667,6 +2704,170 @@ button.teaser-row {
   gap: 2.2rem 3.4rem;
   align-items: start;
   max-width: none;
+}
+
+.why-choose {
+  position: relative;
+  isolation: isolate;
+  padding-top: calc(var(--pad-section) + 0.4rem);
+}
+
+.why-choose::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 8% 4% auto;
+  height: min(28rem, 70%);
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 70% 80% at 8% 40%,
+      rgba(var(--pink-rgb), 0.22),
+      transparent 62%
+    ),
+    radial-gradient(
+      ellipse 55% 70% at 92% 20%,
+      rgba(var(--pink-rgb), 0.12),
+      transparent 58%
+    );
+}
+
+.why-choose__head {
+  max-width: 34rem;
+  margin-bottom: 1.6rem;
+}
+
+.why-choose__rows {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.why-choose__rows > li {
+  min-width: 0;
+}
+
+.reason {
+  display: grid;
+  grid-template-columns: 4.4rem minmax(12rem, 0.85fr) minmax(0, 1.25fr);
+  gap: 0.35rem 1.8rem;
+  align-items: start;
+  padding: 1.45rem 1.55rem 1.5rem;
+  overflow: hidden;
+  border-radius: var(--card-radius);
+  border: 1px solid rgba(var(--pink-rgb), 0.28);
+  background:
+    radial-gradient(
+      ellipse 42% 120% at 0% 50%,
+      rgba(var(--pink-rgb), 0.22),
+      transparent 58%
+    ),
+    linear-gradient(180deg, #141410 0%, #0c0c0a 100%);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.reason__n {
+  grid-row: 1 / span 2;
+  font-family: var(--display);
+  font-size: clamp(2.15rem, 3.4vw, 3.1rem);
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  line-height: 0.9;
+  color: var(--pink);
+  text-shadow: 0 0 22px rgba(var(--pink-rgb), 0.45);
+}
+
+.reason__title {
+  margin: 0.15rem 0 0;
+  font-family: var(--display);
+  font-size: clamp(1.15rem, 1.7vw, 1.45rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  color: var(--cream);
+}
+
+.reason__text {
+  margin: 0.2rem 0 0;
+  max-width: 34rem;
+  color: rgba(243, 243, 241, 0.86);
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.reason:hover {
+  border-color: color-mix(in srgb, var(--pink) 70%, transparent);
+  box-shadow:
+    0 14px 40px rgba(0, 0, 0, 0.32),
+    0 0 28px rgba(var(--pink-rgb), 0.16);
+}
+
+.why-choose__rows .reveal {
+  height: 100%;
+}
+
+.why-choose__rows .reveal.is-visible {
+  animation: why-choose-in 0.9s cubic-bezier(0.16, 1.18, 0.28, 1) both;
+  animation-delay: var(--reveal-delay, 0ms);
+  transition: none;
+}
+
+.why-choose__rows .reveal.is-visible .reason__n {
+  animation: why-choose-num 0.75s cubic-bezier(0.16, 1.32, 0.28, 1) both;
+  animation-delay: calc(var(--reveal-delay, 0ms) + 140ms);
+}
+
+.why-choose__rows .reveal.is-visible .reason__title,
+.why-choose__rows .reveal.is-visible .reason__text {
+  animation: why-choose-copy 0.7s ease both;
+}
+
+.why-choose__rows .reveal.is-visible .reason__title {
+  animation-delay: calc(var(--reveal-delay, 0ms) + 180ms);
+}
+
+.why-choose__rows .reveal.is-visible .reason__text {
+  animation-delay: calc(var(--reveal-delay, 0ms) + 260ms);
+}
+
+@keyframes why-choose-in {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes why-choose-num {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.55);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@keyframes why-choose-copy {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .faq {
@@ -2786,6 +2987,13 @@ button.teaser-row {
   letter-spacing: -0.04em;
   line-height: 1.25;
   color: var(--cream);
+}
+
+.faq-item__q h3 {
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
 }
 
 .faq-item__mark {
@@ -3390,7 +3598,7 @@ button.teaser-row {
   color: var(--pink);
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1180px) {
   .page-bg,
   .page-bg[data-scene='why'],
   .page-bg[data-scene='blush'],
@@ -3477,7 +3685,14 @@ button.teaser-row {
 
   .nav--sheet .nav__cta {
     margin-top: 1.2rem;
+    width: 100%;
     text-align: center;
+  }
+
+  .contact input:not([type='checkbox']):not([type='hidden']),
+  .contact textarea,
+  .contact-select__btn {
+    font-size: 16px;
   }
 
   .hero,
@@ -3486,15 +3701,36 @@ button.teaser-row {
   .offers,
   .cases,
   .approach,
+  .why-choose,
   .faq,
   .contact,
   .legal {
     scroll-margin-top: 72px;
   }
 
+  .hero__actions {
+    width: 100%;
+  }
+
+  .hero__actions .btn {
+    min-height: 48px;
+  }
+
+  .reason {
+    grid-template-columns: 3.4rem minmax(0, 1fr);
+    gap: 0.25rem 1.2rem;
+    padding: 1.2rem 1.2rem 1.25rem;
+  }
+
+  .reason__title,
+  .reason__text {
+    grid-column: 2;
+  }
+
   .hero {
     z-index: 2;
     overflow: hidden;
+    min-height: 0;
     padding-top: calc(5.4rem + env(safe-area-inset-top));
     padding-bottom: 4.5rem;
   }
@@ -3638,12 +3874,13 @@ button.teaser-row {
   .faq,
   .contact,
   .services,
-  .offers {
+  .offers,
+  .why-choose {
     overflow-x: clip;
   }
 
   .offers__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 0.85rem;
   }
 
@@ -3668,7 +3905,15 @@ button.teaser-row {
     overflow-wrap: break-word;
   }
 
-  .approach--swipe .approach-slide h3 {
+  .section-head h1,
+  .section-head h2,
+  .hero__title,
+  .reason__title {
+    overflow-wrap: break-word;
+  }
+
+  .approach--swipe .approach-slide h3,
+  .approach--swipe .approach-slide h4 {
     font-size: clamp(1.55rem, 7.2vw, 2.15rem);
   }
 
@@ -3726,7 +3971,7 @@ button.teaser-row {
   .service-tabs {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.4rem;
   }
 
@@ -3777,6 +4022,7 @@ button.teaser-row {
   .offers,
   .cases,
   .approach--plain,
+  .why-choose,
   .faq,
   .contact,
   .legal {
@@ -3876,6 +4122,10 @@ button.teaser-row {
     min-height: 44px;
   }
 
+  .contact__chip {
+    min-height: 44px;
+  }
+
   .teaser-row__title {
     font-size: 0.98rem;
   }
@@ -3898,6 +4148,31 @@ button.teaser-row {
 
   .offers__grid {
     grid-template-columns: 1fr;
+  }
+
+  .service-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .reason {
+    grid-template-columns: 3.15rem minmax(0, 1fr);
+    gap: 0.2rem 1rem;
+    padding: 1.15rem 1.1rem 1.2rem;
+  }
+
+  .reason__n {
+    grid-row: 1 / span 2;
+    font-size: 1.55rem;
+    padding-top: 0.12rem;
+  }
+
+  .reason__title,
+  .reason__text {
+    grid-column: 2;
+  }
+
+  .reason__text {
+    margin-top: 0.35rem;
   }
 
   .offer-card--hit {
@@ -3952,7 +4227,9 @@ button.teaser-row {
     padding: 1rem 1.05rem;
   }
 
-  .why__card h3 {
+  .why__card h3,
+  .why__card h4,
+  .why__card .why__card-title {
     font-size: 1.18rem;
   }
 
@@ -4089,6 +4366,10 @@ button.teaser-row {
   .case-card,
   .service-tile,
   .why__card,
+  .reason,
+  .reason__n,
+  .reason__title,
+  .reason__text,
   .steps li,
   .step-card,
   .btn,

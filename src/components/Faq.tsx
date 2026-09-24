@@ -19,7 +19,9 @@ export function Faq() {
             <details key={item.q} className="faq-item" name="faq">
               <summary>
                 <span className="faq-item__n">{String(index + 1).padStart(2, '0')}</span>
-                <span className="faq-item__q">{item.q}</span>
+                <span className="faq-item__q">
+                  <h3>{item.q}</h3>
+                </span>
                 <span className="faq-item__mark" aria-hidden="true" />
               </summary>
               <div className="faq-item__body">

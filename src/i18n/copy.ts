@@ -1,6 +1,6 @@
 import type { ServiceGroup } from '../data/services'
 
-export type Locale = 'uk' | 'en' | 'pl'
+export type Locale = 'uk' | 'en'
 
 export type Copy = {
   meta: { title: string; description: string }
@@ -16,12 +16,18 @@ export type Copy = {
     language: string
     packages: string
   }
-  hero: { lede: string; discuss: string; cases: string }
+  hero: { titleName: string; titleAgency: string; lede: string; discuss: string; cases: string }
   why: {
     kicker: string
     title: string
+    lead: string
     text: string
     points: { title: string; text: string }[]
+  }
+  whyChoose: {
+    kicker: string
+    title: string
+    points: { title: string; text: string; heading: 'h3' | 'h4' }[]
   }
   servicesTeaser: {
     kicker: string
@@ -72,7 +78,7 @@ export type Copy = {
   approach: {
     kicker: string
     title: string
-    steps: { title: string; text: string }[]
+    steps: { title: string; text: string; heading?: 'h3' | 'h4' }[]
   }
   faq: {
     kicker: string
@@ -143,16 +149,16 @@ export type Copy = {
 export const copy: Record<Locale, Copy> = {
   uk: {
     meta: {
-      title: 'DemWay - digital agency',
+      title: 'Діджитал агенція - розробка сайту, маркетинг, SEO та реклама|DemWay',
       description:
-        'DemWay - digital агенція: лендінг, CRM, SEO, Google Ads, Meta Ads, аналіз ринку, банери та логотип.',
+        'Діджитал агентство DemWay поєднує усе необхідне для розвитку вашого бізнесу. Розробка сайту,SEO,контекстна реклама, Google Ads та email - маркетинг в одному місці. Замовляйте digital-послуги під ключ та зростайте онлайн з нами!',
     },
     nav: {
       about: 'Про нас',
       services: 'Послуги',
       approach: 'Підхід',
       contact: 'Контакти',
-      brief: 'Бриф',
+      brief: 'Зв’язок',
       packages: 'Пакети',
       openMenu: 'Відкрити меню',
       closeMenu: 'Закрити меню',
@@ -160,21 +166,24 @@ export const copy: Record<Locale, Copy> = {
       language: 'Мова',
     },
     hero: {
+      titleName: 'DemWay-',
+      titleAgency: 'digital-агенція повного циклу.',
       lede: 'Кожне рішення будуємо навколо вашого бізнесу: сайти й лендінги, CRM, пошук, реклама та айдентика — від першого контакту до покупки.',
       discuss: 'Обговорити задачу',
       cases: 'Дивитись послуги',
     },
     why: {
-      kicker: 'Про нас',
-      title: 'Перетворюємо ідеї на бізнес, який рухається вперед',
+      kicker: 'DemWay',
+      title: 'Про нас',
+      lead: 'Digital-маркетинг як система для розвитку бізнесу',
       text: 'Ми створюємо сайти та лендінги, впроваджуємо CRM-рішення, працюємо з SEO та рекламою, формуємо айдентику бренду. Кожне рішення будуємо навколо вашого бізнесу, його цілей і шляху клієнта - від першого контакту до покупки.',
       points: [
         {
-          title: 'Експертиза',
+          title: 'Для кого ми працюємо',
           text: 'Розуміємо бізнес комплексно та поєднуємо розробку, маркетинг і технології в одну систему',
         },
         {
-          title: 'Чесність',
+          title: 'Від ідеї до результату з чіткою стратегією',
           text: 'Дедлайни й зона відповідальності прозорі. Не обіцяємо неможливе і не зникаємо після запуску.',
         },
         {
@@ -183,9 +192,30 @@ export const copy: Record<Locale, Copy> = {
         },
       ],
     },
+    whyChoose: {
+      kicker: 'Чому ми',
+      title: 'Чому обирають саме нас',
+      points: [
+        {
+          title: 'Рішення під конкретний бізнес',
+          heading: 'h3',
+          text: 'Не шаблон «для всіх». Сайт, SEO і рекламу збираємо під нішу, продукт і бюджет.',
+        },
+        {
+          title: 'Прозорий процес роботи',
+          heading: 'h4',
+          text: 'Дедлайни й зона відповідальності зрозумілі. Не обіцяємо неможливе і не зникаємо після запуску.',
+        },
+        {
+          title: 'Орієнтація на результат',
+          heading: 'h4',
+          text: 'Кожен інструмент працює на заявки, продажі й розвиток, а не на «просто бути в інтернеті».',
+        },
+      ],
+    },
     servicesTeaser: {
       kicker: 'Послуги',
-      title: 'Напрями, з яких збираємо систему',
+      title: 'Послуги діджитал агентства',
       text: 'Натисніть квадрат напряму — відкриється вкладка каталогу з іншими пакетами цього блоку.',
       catalog: 'Увесь каталог пакетів',
       openTab: 'Відкрити вкладку «{name}» і подивитись пакети',
@@ -277,7 +307,7 @@ export const copy: Record<Locale, Copy> = {
     },
     approach: {
       kicker: 'Підхід',
-      title: 'Від першої розмови до системного результату',
+      title: 'Наш підхід до роботи',
       steps: [
         {
           title: 'Знайомство',
@@ -307,8 +337,8 @@ export const copy: Record<Locale, Copy> = {
     },
     faq: {
       kicker: 'FAQ',
-      title: 'Питання, які ставлять перед стартом',
-      text: 'Коротко про запуск, строки й комунікацію. Якщо вашого питання немає — напишіть у бриф, відповімо в той самий канал.',
+      title: 'Питання, які часто задають',
+      text: 'Коротко про запуск, строки й комунікацію. Якщо вашого питання немає — напишіть у форму, відповімо в той самий канал.',
       items: [
         {
           q: 'Як почати працювати з DemWay?',
@@ -327,11 +357,15 @@ export const copy: Record<Locale, Copy> = {
           a: 'Спочатку обсяг і строки, потім цифри. Пакети в каталозі — орієнтир. Фінальна сума залежить від інтеграцій, контенту й того, чи беремо одну послугу, чи систему. Після узгодження без прихованих доплат.',
         },
         {
-          q: 'Чи можна замовити одну послугу, а не все під ключ?',
+          q: 'Чи можна замовити одну послугу, а не повний пакет?',
           a: 'Так. Можна стартувати з лендінгу, SEO, реклами, CRM або айдентики. Якщо далі знадобиться повний контур — зберемо його навколо вже зробленого, без перезапуску з нуля.',
         },
         {
-          q: 'Що потрібно від мене, щоб стартувати?',
+          q: 'Є ідея, але немає чіткого розуміння,яким має бути мій бренд. Що робити?',
+          a: 'Короткий опис бізнесу, доступ до поточних каналів, якщо вони вже є, і людина з вашого боку для швидких рішень. Тексти й фото можемо зібрати разом. Ідеальне ТЗ не чекаємо.',
+        },
+        {
+          q: 'Які результати очікувати від співпраці?',
           a: 'Короткий опис бізнесу, доступ до поточних каналів, якщо вони вже є, і людина з вашого боку для швидких рішень. Тексти й фото можемо зібрати разом. Ідеальне ТЗ не чекаємо.',
         },
       ],
@@ -376,7 +410,7 @@ export const copy: Record<Locale, Copy> = {
       kicker: 'Документи',
       title: 'Політика та оферта',
       description:
-        'Як DemWay обробляє дані з брифу та на яких умовах надає послуги.',
+        'Як DemWay обробляє дані з форми та на яких умовах надає послуги.',
       updated: 'Оновлено 21 вересня 2026',
       privacyTitle: 'Політика конфіденційності',
       privacy: [
@@ -386,7 +420,7 @@ export const copy: Record<Locale, Copy> = {
         },
         {
           title: 'Які дані збираємо',
-          text: 'З брифу: імʼя, компанія, обрана послуга чи пакет, опис задачі, канал відповіді та контакт (телефон, Telegram або email). На сайті зберігаємо обрану мову в браузері.',
+          text: 'З форми: імʼя, компанія, обрана послуга чи пакет, опис задачі, канал відповіді та контакт (телефон, Telegram або email). На сайті зберігаємо обрану мову в браузері.',
         },
         {
           title: 'Навіщо',
@@ -409,7 +443,7 @@ export const copy: Record<Locale, Copy> = {
       offer: [
         {
           title: 'Предмет',
-          text: 'DemWay пропонує послуги з сайтів, реклами, SEO, CRM та айдентики. Надсилання брифу — запит на прорахунок, а не автоматичне замовлення. Договір укладається після узгодження обсягу, строків і вартості.',
+          text: 'DemWay пропонує послуги з сайтів, реклами, SEO, CRM та айдентики. Надсилання форми — запит на прорахунок, а не автоматичне замовлення. Договір укладається після узгодження обсягу, строків і вартості.',
         },
         {
           title: 'Вартість',
@@ -456,7 +490,7 @@ export const copy: Record<Locale, Copy> = {
       services: 'Services',
       approach: 'Approach',
       contact: 'Contact',
-      brief: 'Brief',
+      brief: 'Connect',
       packages: 'Bundles',
       openMenu: 'Open menu',
       closeMenu: 'Close menu',
@@ -464,26 +498,50 @@ export const copy: Record<Locale, Copy> = {
       language: 'Language',
     },
     hero: {
+      titleName: 'DemWay-',
+      titleAgency: 'full-cycle digital agency.',
       lede: 'Every solution is built around your business: websites and landing pages, CRM, search, ads and identity — from first contact to purchase.',
       discuss: 'Discuss a project',
       cases: 'See services',
     },
     why: {
-      kicker: 'About',
-      title: 'We turn ideas into a business that keeps moving',
+      kicker: 'DemWay',
+      title: 'About us',
+      lead: 'Digital marketing as a system for business growth',
       text: 'We build websites and landing pages, implement CRM, work with SEO and ads, and shape brand identity. Each decision is built around your business, its goals and the customer path — from first contact to purchase.',
       points: [
         {
-          title: 'Expertise',
+          title: 'Who we work with',
           text: 'We see the business as a whole and join development, marketing and technology into one system.',
         },
         {
-          title: 'Honesty',
+          title: 'From idea to result with a clear strategy',
           text: 'Deadlines and ownership stay clear. We do not promise the impossible or disappear after launch.',
         },
         {
           title: 'Results',
           text: 'Every tool works toward one goal — more clients, more sales and a business that grows.',
+        },
+      ],
+    },
+    whyChoose: {
+      kicker: 'Why us',
+      title: 'Why choose DemWay',
+      points: [
+        {
+          title: 'Built for your business',
+          heading: 'h3',
+          text: 'Not a template pack. Site, SEO and ads match your niche, product and budget.',
+        },
+        {
+          title: 'A transparent process',
+          heading: 'h4',
+          text: 'Deadlines and ownership stay clear. We do not promise the impossible or disappear after launch.',
+        },
+        {
+          title: 'Focused on results',
+          heading: 'h4',
+          text: 'Every tool works toward leads, sales and growth — not just being online.',
         },
       ],
     },
@@ -612,11 +670,11 @@ export const copy: Record<Locale, Copy> = {
     faq: {
       kicker: 'FAQ',
       title: 'Questions people ask before we start',
-      text: 'A short take on kickoff, timelines and communication. If yours is missing — write in the brief and we reply in the same channel.',
+      text: 'A short take on kickoff, timelines and communication. If yours is missing — write in the form and we reply in the same channel.',
       items: [
         {
           q: 'How do we start working with DemWay?',
-          a: 'Send the brief below or write on Telegram: who you are, what you already have, and what should exist after launch. We reply in the channel you pick, clarify scope and timeline, then send an estimate. No pitch deck, no long form.',
+          a: 'Write in the form below or on Telegram: who you are, what you already have, and what should exist after launch. We reply in the channel you pick, clarify scope and timeline, then send an estimate. No pitch deck, no long form.',
         },
         {
           q: 'How long does a project take?',
@@ -636,13 +694,13 @@ export const copy: Record<Locale, Copy> = {
         },
         {
           q: 'What do you need from me to start?',
-          a: 'A short description of the business, access to current channels if they exist, and someone on your side for fast decisions. Copy and photos we can gather together. We do not wait for a perfect brief.',
+          a: 'A short description of the business, access to current channels if they exist, and someone on your side for fast decisions. Copy and photos we can gather together. We do not wait for a perfect spec.',
         },
       ],
     },
     contact: {
       kicker: 'Contact',
-      title: 'Send the brief — we will estimate the work',
+      title: 'Write the task — we will estimate the work',
       text: 'No two-screen questionnaire. Short: who you are, what to launch, how to reply.',
       notes: [
         'We reply in the same channel you choose.',
@@ -655,7 +713,7 @@ export const copy: Record<Locale, Copy> = {
       company: 'Company',
       companyPh: 'Brand name',
       service: 'What we launch *',
-      task: 'The brief *',
+      task: 'The task *',
       taskPh: 'What exists now and what should appear after launch',
       channel: 'How to reply *',
       phone: 'Phone',
@@ -679,7 +737,7 @@ export const copy: Record<Locale, Copy> = {
     legal: {
       kicker: 'Legal',
       title: 'Privacy and offer',
-      description: 'How DemWay handles brief data and the terms for our services.',
+      description: 'How DemWay handles form data and the terms for our services.',
       updated: 'Updated 21 September 2026',
       privacyTitle: 'Privacy policy',
       privacy: [
@@ -689,7 +747,7 @@ export const copy: Record<Locale, Copy> = {
         },
         {
           title: 'What we collect',
-          text: 'From the brief: name, company, chosen service or bundle, task description, reply channel and contact (phone, Telegram or email). The site stores the language choice in your browser.',
+          text: 'From the form: name, company, chosen service or bundle, task description, reply channel and contact (phone, Telegram or email). The site stores the language choice in your browser.',
         },
         {
           title: 'Why',
@@ -712,7 +770,7 @@ export const copy: Record<Locale, Copy> = {
       offer: [
         {
           title: 'Subject',
-          text: 'DemWay offers websites, ads, SEO, CRM and identity work. Sending a brief is a request for a quote, not an automatic order. A contract is formed after we agree scope, timeline and price.',
+          text: 'DemWay offers websites, ads, SEO, CRM and identity work. Sending the form is a quote enquiry, not an automatic order. A contract is formed after we agree scope, timeline and price.',
         },
         {
           title: 'Price',
@@ -746,309 +804,6 @@ export const copy: Record<Locale, Copy> = {
       hours: 'Hours',
       hoursValue: 'Mon–Fri, 10:00–18:00',
       rights: 'All rights reserved',
-    },
-  },
-  pl: {
-    meta: {
-      title: 'DemWay - digital agency',
-      description:
-        'DemWay to agencja digital: landingi, CRM, SEO, Google Ads, Meta Ads, analiza rynku, banery i logo.',
-    },
-    nav: {
-      about: 'O nas',
-      services: 'Usługi',
-      approach: 'Podejście',
-      contact: 'Kontakt',
-      brief: 'Brief',
-      packages: 'Pakiety',
-      openMenu: 'Otwórz menu',
-      closeMenu: 'Zamknij menu',
-      aria: 'Nawigacja',
-      language: 'Język',
-    },
-    hero: {
-      lede: 'Każdą decyzję budujemy wokół Twojego biznesu: strony i landingi, CRM, wyszukiwanie, reklama i identyfikacja — od pierwszego kontaktu do zakupu.',
-      discuss: 'Omówić zadanie',
-      cases: 'Zobacz usługi',
-    },
-    why: {
-      kicker: 'O nas',
-      title: 'Zamieniamy pomysły w biznes, który idzie do przodu',
-      text: 'Tworzymy strony i landingi, wdrażamy CRM, pracujemy z SEO i reklamą, budujemy identyfikację marki. Każdą decyzję opieramy na Twoim biznesie, celach i ścieżce klienta — od pierwszego kontaktu do zakupu.',
-      points: [
-        {
-          title: 'Ekspertyza',
-          text: 'Widzimy biznes całościowo i łączymy development, marketing i technologie w jeden system.',
-        },
-        {
-          title: 'Uczciwość',
-          text: 'Terminy i zakres odpowiedzialności są jasne. Nie obiecujemy niemożliwego i nie znikamy po starcie.',
-        },
-        {
-          title: 'Rezultat',
-          text: 'Każde narzędzie pracuje na jeden cel — więcej klientów, sprzedaży i rozwój biznesu.',
-        },
-      ],
-    },
-    servicesTeaser: {
-      kicker: 'Usługi',
-      title: 'Kierunki, z których składamy system',
-      text: 'Kliknij kafelek kierunku — otworzy się zakładka katalogu z pozostałymi pakietami tego bloku.',
-      catalog: 'Cały katalog pakietów',
-      openTab: 'Otwórz zakładkę «{name}» i zobacz pakiety',
-      go: 'Otwórz zakładkę z pakietami',
-    },
-    openingOffers: {
-      kicker: 'Pakiety',
-      title: 'Wybierz format startu',
-      text: 'Nie składaj strony, reklam i SEO z osobnych usług. Trzy gotowe zestawy ze zniżką 15% — pod etap, na którym jest teraz Twój biznes.',
-      includes: 'Co wchodzi',
-      resultLabel: 'Rezultat',
-      save: '−15%',
-      discuss: 'Chcę ten pakiet',
-      note: 'Budżet reklamowy, hosting i domena nie wchodzą w cenę.',
-      items: [
-        {
-          id: 'start-leads',
-          label: 'Dla nowego biznesu',
-          name: 'Start zgłoszeń',
-          for: 'Nie ma jeszcze strony pod reklamę. Potrzebny krótki landing, wyszukiwarka i e-mail, żeby pierwsze zgłoszenia się nie gubiły.',
-          result: 'Gotowy punkt wejścia w reklamę i ścieżka, którą zgłoszenie trafia na pocztę.',
-          was: '16 000 UAH',
-          now: '13 500 UAH',
-          items: ['Landing Start', 'Reklama w wyszukiwarce', 'E-mail marketing'],
-        },
-        {
-          id: 'site-exists',
-          label: 'Najczęściej wybierany',
-          name: 'Strona już jest',
-          for: 'Strona stoi, zgłoszeń mało. Dodajemy widoczność w wyszukiwarce, reklamę i test, co naprawdę konwertuje.',
-          result: 'Istniejąca strona zaczyna przynosić zgłoszenia, a nie tylko „być w internecie”.',
-          was: '15 500 UAH',
-          now: '12 900 UAH',
-          featured: true,
-          items: ['SEO', 'Reklama w wyszukiwarce', 'Testy A/B'],
-        },
-        {
-          id: 'presence',
-          label: 'Dla krótkiej obecności',
-          name: 'Witryna w sieci',
-          for: 'Potrzebna zwięzła firma w sieci — nie korporacja, lecz wizytówka, Instagram i podstawowe SEO.',
-          result: 'Markę można znaleźć, pokazać i odpalić w reklamie z jednej spójnej podstawy.',
-          was: '22 000 UAH',
-          now: '18 500 UAH',
-          items: ['Strona wizytówka', 'Instagram Ads', 'SEO'],
-        },
-      ],
-    },
-    groups: {
-      Сайти: 'Strony',
-      Редизайн: 'Redesign',
-      SEO: 'SEO',
-      Реклама: 'Reklama',
-      Системи: 'Systemy',
-      Айдентика: 'Identyfikacja',
-    },
-    clusters: {
-      'Новий сайт': 'Nowa strona',
-      Оновлення: 'Odświeżenie',
-      'Лендінг і сайт': 'Landing i strona',
-      'SEO-оптимізація': 'Optymalizacja SEO',
-      'Google Ads': 'Google Ads',
-      'Meta Ads': 'Meta Ads',
-      'Email і тести': 'E-mail i testy',
-      Продажі: 'Sprzedaż',
-      Бренд: 'Marka',
-    },
-    groupLeads: {},
-    teaserBlurbs: {
-      Сайти: 'Landing, wizytówka albo katalog — strona pod zgłoszenia i reklamy.',
-      Редизайн: 'Odświeżamy landing, wizytówkę, stronę korporacyjną albo katalog.',
-      SEO: 'Słowa kluczowe, metatagi i URL — podstawowe SEO on-site.',
-      Реклама: 'Wyszukiwanie, display i produkty w Google, Instagram i Facebook Ads, e-mail i testy A/B.',
-      Системи: 'CRM, żeby sprzedaż nie ginęła między czatami.',
-      Айдентика: 'Logo i nośniki, które trzymają markę razem.',
-    },
-    catalog: {
-      kicker: 'Usługi',
-      title: 'Katalog pakietów',
-      text: 'Wybierz kierunek i pakiet — zakres otworzy się obok.',
-      tabsAria: 'Kierunki usług',
-      packagesAria: 'Pakiety',
-      picked: 'wybrany pakiet',
-      quote: 'Cena — według indywidualnej wyceny',
-      discuss: 'Omówić pakiet',
-      term: 'Termin',
-      expand: 'Rozwiń',
-      collapse: 'Zwiń',
-    },
-    approach: {
-      kicker: 'Podejście',
-      title: 'Od pierwszej rozmowy do systemowego rezultatu',
-      steps: [
-        {
-          title: 'Poznanie',
-          text: 'Omawiamy biznes, produkt, cele i oczekiwania. Ustalamy, co ma się zmienić po starcie.',
-        },
-        {
-          title: 'Analiza',
-          text: 'Patrzymy na niszę, konkurencję, popyt i obecne kanały. Bez tego nie składamy architektury na ślepo.',
-        },
-        {
-          title: 'Strategia',
-          text: 'Wybieramy priorytety: landing, CRM, SEO albo reklama. Plan i terminy — przed pierwszą makietą.',
-        },
-        {
-          title: 'Realizacja',
-          text: 'Projekt, budowa, integracje, kreacje. Oddajemy działający produkt, nie koncept na slajdzie.',
-        },
-        {
-          title: 'Start',
-          text: 'Publikujemy, podłączamy formularze, kasę, reklamy. System zaczyna zbierać zgłoszenia.',
-        },
-        {
-          title: 'Analiza i rozwój',
-          text: 'Mierzymy zgłoszenia, widoczność, transakcje. Testujemy i dopracowujemy, żeby wzrost nie zatrzymał się po starcie.',
-        },
-      ],
-    },
-    faq: {
-      kicker: 'FAQ',
-      title: 'Pytania, które padają przed startem',
-      text: 'Krótko o starcie, terminach i komunikacji. Jeśli nie ma Twojego pytania — napisz w briefie, odpowiemy w tym samym kanale.',
-      items: [
-        {
-          q: 'Jak zacząć współpracę z DemWay?',
-          a: 'Napisz zadanie w formularzu poniżej albo na Telegramie: kim jesteś, co już jest i co ma powstać po starcie. Odpowiadamy w wybranym kanale, doprecyzowujemy zakres i terminy — potem wycena. Bez szablonowej prezentacji i długiej ankiety.',
-        },
-        {
-          q: 'Jaki jest termin realizacji projektu?',
-          a: 'Zależy od usługi i zakresu pracy. Po pierwszej konsultacji układamy jasny plan, etapy i uzgadniamy terminy. Jeśli chodzi o kompleksowe wsparcie marketingowe, to systematyczna, długoterminowa praca z regularną analizą i korektą strategii.',
-        },
-        {
-          q: 'Jak wygląda komunikacja?',
-          a: 'Pracujemy we wspólnym czacie projektowym: akceptujemy materiały, omawiamy bieżące zadania i szybko rozwiązujemy sprawy operacyjne. Zawsze wiesz, co jest w toku i na jakim etapie jest projekt.',
-        },
-        {
-          q: 'Jak powstaje budżet?',
-          a: 'Najpierw zakres i terminy, potem liczby. Pakiety w katalogu to orientacja. Kwota końcowa zależy od integracji, treści i tego, czy bierzemy jedną usługę, czy system. Po uzgodnieniu bez ukrytych dopłat.',
-        },
-        {
-          q: 'Czy można zamówić jedną usługę, a nie wszystko pod klucz?',
-          a: 'Tak. Można zacząć od landingu, SEO, reklamy, CRM albo identyfikacji. Jeśli później będzie potrzebny pełny obieg — złożymy go wokół tego, co już jest, bez startu od zera.',
-        },
-        {
-          q: 'Czego potrzebujesz ode mnie, żeby zacząć?',
-          a: 'Krótki opis biznesu, dostęp do obecnych kanałów, jeśli już są, i osoba po Twojej stronie do szybkich decyzji. Teksty i zdjęcia możemy zebrać razem. Idealnego briefu nie czekamy.',
-        },
-      ],
-    },
-    contact: {
-      kicker: 'Kontakt',
-      title: 'Napisz zadanie — przygotujemy wycenę',
-      text: 'Bez ankiety na dwa ekrany. Krótko: kim jesteś, co uruchomić, jak wygodnie odpowiedzieć.',
-      notes: [
-        'Odpowiadamy w tym samym kanale, który wybierzesz.',
-        'Najpierw zakres i terminy, potem liczby — bez szablonowej prezentacji.',
-      ],
-      received: 'Otrzymaliśmy już Twoje zgłoszenie.',
-      reply: 'Wkrótce się odezwiemy, żeby zacząć Twoją digital-historię',
-      name: 'Imię *',
-      namePh: 'Olena',
-      company: 'Firma',
-      companyPh: 'Nazwa marki',
-      service: 'Co uruchamiamy *',
-      task: 'Zadanie *',
-      taskPh: 'Co już jest i co ma pojawić się po starcie',
-      channel: 'Jak odpowiedzieć *',
-      phone: 'Telefon',
-      telegram: 'Telegram',
-      email: 'Email',
-      phoneLabel: 'Numer telefonu *',
-      telegramLabel: 'Nick na Telegramie *',
-      emailLabel: 'Email *',
-      consent: 'Zgadzam się na przetwarzanie danych w celu odpowiedzi na zapytanie zgodnie z',
-      privacy: 'polityką prywatności',
-      offer: 'ofertą publiczną',
-      consentJoin: 'i',
-      send: 'Wyślij',
-      sending: 'Wysyłamy…',
-      error: 'Uzupełnij wymagane pola.',
-      sendFail: 'Nie udało się wysłać. Spróbuj ponownie.',
-      fullSystem: 'System pod klucz',
-      other: 'Inne',
-      honey: 'Strona',
-    },
-    legal: {
-      kicker: 'Dokumenty',
-      title: 'Polityka i oferta',
-      description: 'Jak DemWay przetwarza dane z briefu i na jakich zasadach świadczy usługi.',
-      updated: 'Zaktualizowano 21 września 2026',
-      privacyTitle: 'Polityka prywatności',
-      privacy: [
-        {
-          title: 'Kto przetwarza dane',
-          text: 'Administrator: DemWay (agencja digital, format Ukraina · online). Kontakt: demway.agency@gmail.com, Telegram @DemWay_Team.',
-        },
-        {
-          title: 'Jakie dane zbieramy',
-          text: 'Z briefu: imię, firma, wybrana usługa lub pakiet, opis zadania, kanał odpowiedzi i kontakt (telefon, Telegram lub e-mail). Na stronie zapisujemy wybrany język w przeglądarce.',
-        },
-        {
-          title: 'Po co',
-          text: 'Aby odpowiedzieć na zapytanie, ustalić zakres i terminy, przygotować wycenę i prowadzić korespondencję projektu. Podstawa — zgoda w formularzu oraz czynności przed umową.',
-        },
-        {
-          title: 'Komu przekazujemy',
-          text: 'Zgłoszenie możemy wysłać na pocztę przez FormSubmit i na czat roboczy przez Telegram. Innym podmiotom danych nie sprzedajemy i nie oddajemy do ich marketingu.',
-        },
-        {
-          title: 'Jak długo przechowujemy',
-          text: 'Dopóki trwa korespondencja i tak długo, jak wymagają rozliczenia usług i prawo. Potem usuwamy lub anonimizujemy na wniosek na demway.agency@gmail.com.',
-        },
-        {
-          title: 'Twoje prawa',
-          text: 'Możesz żądać dostępu, sprostowania, usunięcia, ograniczenia przetwarzania lub wycofać zgodę. Nie cofa to odpowiedzi, która już poszła w realizację.',
-        },
-      ],
-      offerTitle: 'Oferta publiczna',
-      offer: [
-        {
-          title: 'Przedmiot',
-          text: 'DemWay oferuje strony, reklamy, SEO, CRM i identyfikację. Wysłanie briefu to prośba o wycenę, nie automatyczne zamówienie. Umowa powstaje po uzgodnieniu zakresu, terminów i ceny.',
-        },
-        {
-          title: 'Cena',
-          text: 'Pakiety na stronie głównej ze zniżką −15% to orientacja na podanych warunkach. Katalog to zakres bez publicznej ceny: kwota według indywidualnej wyceny. Budżet reklamowy, hosting i domena nie wchodzą w pakiety, chyba że uzgodniono inaczej.',
-        },
-        {
-          title: 'Terminy i rezultat',
-          text: 'Terminy w katalogu są orientacyjne. Finalny plan ustalamy po konsultacji. Rezultat to uzgodniony zakres prac, nie gwarancja sprzedaży ani pozycji w wyszukiwarce.',
-        },
-        {
-          title: 'Płatność i zmiany',
-          text: 'Warunki płatności — na fakturze lub w umowie. Zmiany zakresu uzgadniamy na piśmie (czat lub e-mail). Prawa do materiałów przechodzą po pełnej płatności etapu, jeśli nie ustalono inaczej.',
-        },
-        {
-          title: 'Prawo',
-          text: 'Stosunki reguluje prawo Ukrainy. Spory — najpierw rozmowy, potem sądy Ukrainy według siedziby wykonawcy, o ile ustawa nie wymaga inaczej.',
-        },
-      ],
-    },
-    footer: {
-      aside: 'Od kontaktu do umowy',
-      services: 'Usługi',
-      company: 'Firma',
-      contacts: 'Kontakt',
-      catalog: 'Cały katalog',
-      mail: 'E-mail',
-      channel: 'Kanał',
-      channelValue: 'Telegram, telefon, e-mail',
-      format: 'Format',
-      formatValue: 'Ukraina · online',
-      hours: 'Godziny',
-      hoursValue: 'Pn–Pt, 10:00–18:00',
-      rights: 'Wszelkie prawa zastrzeżone',
     },
   },
 }

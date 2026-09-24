@@ -49,7 +49,7 @@ function ScrollTo() {
   useEffect(() => {
     const path = location.pathname.replace(/\/$/, '')
     const onCatalog = path.endsWith('/poslugy')
-    const onLegal = path.endsWith('/polityka')
+    const onLegal = path.endsWith('/privacy')
     const hash = location.hash
     let timer = 0
     let later = 0
@@ -82,7 +82,7 @@ function ScrollTo() {
       const allowed =
         Boolean(hash) &&
         (!onCatalog || hash === '#contact' || hash === '#faq') &&
-        (!onLegal || hash === '#privacy' || hash === '#oferta')
+        (!onLegal || hash === '#privacy' || hash === '#offer')
 
       if (!allowed) {
         window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
@@ -122,13 +122,13 @@ function DocumentTitle() {
     const path = location.pathname.replace(/\/$/, '')
     document.documentElement.lang = locale
     if (path.endsWith('/poslugy')) document.title = `${t.catalog.title} - DemWay`
-    else if (path.endsWith('/polityka')) document.title = `${t.legal.title} - DemWay`
+    else if (path.endsWith('/privacy')) document.title = `${t.legal.title} - DemWay`
     else document.title = t.meta.title
     const meta = document.querySelector('meta[name="description"]')
     if (!meta) return
     meta.setAttribute(
       'content',
-      path.endsWith('/polityka') ? t.legal.description : t.meta.description,
+      path.endsWith('/privacy') ? t.legal.description : t.meta.description,
     )
   }, [locale, location.pathname, t])
 
@@ -184,7 +184,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/poslugy" element={<ServicesPage />} />
-            <Route path="/polityka" element={<LegalPage />} />
+            <Route path="/privacy" element={<LegalPage />} />
           </Routes>
         </main>
         <Footer />

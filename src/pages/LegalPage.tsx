@@ -22,7 +22,7 @@ export function LegalPage() {
         ))}
       </section>
 
-      <section className="legal__block" id="oferta">
+      <section className="legal__block" id="offer">
         <h2>{legal.offerTitle}</h2>
         {legal.offer.map((item) => (
           <div key={item.title}>

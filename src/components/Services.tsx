@@ -68,7 +68,7 @@ export function Services() {
 
   function pickService(slug: string) {
     setOpen(slug)
-    if (!window.matchMedia('(max-width: 960px)').matches) return
+    if (!window.matchMedia('(max-width: 1180px)').matches) return
     window.requestAnimationFrame(() => {
       document.getElementById('svc-detail')?.scrollIntoView({
         behavior: 'smooth',
@@ -93,6 +93,9 @@ export function Services() {
       </div>
 
       <div className="svc-catalog">
+        {t.groups[group] ? (
+          <h3 className="svc-catalog__group">{t.groups[group]}</h3>
+        ) : null}
         {t.groupLeads[group] ? (
           <p className="svc-catalog__lead">{t.groupLeads[group]}</p>
         ) : null}
@@ -106,9 +109,9 @@ export function Services() {
             {clusters.map((cluster, clusterIndex) => (
               <div key={cluster.label} className="teaser-cluster">
                 <ScrollReveal delay={clusterIndex * 70}>
-                  <p className="teaser-cluster__label">
+                  <h3 className="teaser-cluster__label">
                     {t.clusters[cluster.label] ?? cluster.label}
-                  </p>
+                  </h3>
                 </ScrollReveal>
                 <div className="teaser-list">
                   {cluster.items.map((service, index) => (
@@ -123,9 +126,9 @@ export function Services() {
                         onClick={() => pickService(service.slug)}
                       >
                         <span className="teaser-row__body">
-                          <span className="teaser-row__title">
+                          <h4 className="teaser-row__title">
                             {localizeService(service, locale).title}
-                          </span>
+                          </h4>
                         </span>
                       </button>
                     </ScrollReveal>
@@ -141,7 +144,7 @@ export function Services() {
                 <p className="svc-detail__code">
                   {t.groups[group]} · {t.catalog.picked}
                 </p>
-                <h2>{localizeService(current, locale).title}</h2>
+                <p className="svc-detail__title">{localizeService(current, locale).title}</p>
                 <p>{localizeService(current, locale).text}</p>
               </header>
               <p className="svc-picked__quote">{t.catalog.quote}</p>

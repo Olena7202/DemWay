@@ -11,8 +11,8 @@ export function Hero() {
         <div className="hero__copy">
           <Reveal>
             <h1 className="hero__title">
-              <span className="hero__title-name">DemWay -</span>
-              <span className="hero__title-agency">digital agency</span>
+              <span className="hero__title-name">{t.hero.titleName}</span>
+              <span className="hero__title-agency">{t.hero.titleAgency}</span>
             </h1>
           </Reveal>
           <Reveal delay={90} from="soft">

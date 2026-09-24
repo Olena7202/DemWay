@@ -44,7 +44,6 @@ function LangSwitch() {
   const langs = [
     { id: 'uk' as const, label: 'UA' },
     { id: 'en' as const, label: 'EN' },
-    { id: 'pl' as const, label: 'PL' },
   ]
 
   return (

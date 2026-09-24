@@ -52,6 +52,7 @@ export function ServicesTeaser() {
                     <span className="case-card__mark">{marks[name]}</span>
                   </span>
                   <span className="case-card__copy">
+                    <h3 className="case-card__title">{t.groups[name]}</h3>
                     <span className="case-card__text">{t.teaserBlurbs[name]}</span>
                     <span className="case-card__go">
                       {t.servicesTeaser.go}

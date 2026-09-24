@@ -79,10 +79,10 @@ export function Footer() {
                 </NavLink>
               </li>
               <li>
-                <Link to="/polityka">{t.legal.privacyTitle}</Link>
+                <Link to="/privacy">{t.legal.privacyTitle}</Link>
               </li>
               <li>
-                <Link to="/polityka#oferta">{t.legal.offerTitle}</Link>
+                <Link to="/privacy#offer">{t.legal.offerTitle}</Link>
               </li>
               <li>
                 <Link to={contactTo}>{t.nav.brief}</Link>

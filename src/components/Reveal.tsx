@@ -5,6 +5,7 @@ type RevealProps = {
   className?: string
   delay?: number
   from?: 'up' | 'left' | 'right' | 'soft' | 'scale' | 'slide' | 'orb'
+  once?: boolean
 }
 
 export function Reveal({
@@ -12,6 +13,7 @@ export function Reveal({
   className = '',
   delay = 0,
   from = 'up',
+  once = false,
 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null)
 
@@ -28,9 +30,10 @@ export function Reveal({
       ([entry]) => {
         if (entry.isIntersecting) {
           el.classList.add('is-visible')
+          if (once) io.unobserve(el)
           return
         }
-        el.classList.remove('is-visible')
+        if (!once) el.classList.remove('is-visible')
       },
       { threshold: 0.14, rootMargin: '0px 0px -10% 0px' },
     )

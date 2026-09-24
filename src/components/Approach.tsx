@@ -7,6 +7,7 @@ export function Approach() {
     n: String(index + 1),
     title: step.title,
     text: step.text,
+    heading: step.heading ?? 'h3',
   }))
   const trackRef = useRef<HTMLDivElement>(null)
   const stageRef = useRef<HTMLDivElement>(null)
@@ -19,12 +20,12 @@ export function Approach() {
       window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   )
   const [phone, setPhone] = useState(
-    () => typeof window !== 'undefined' && window.matchMedia('(max-width: 960px)').matches,
+    () => typeof window !== 'undefined' && window.matchMedia('(max-width: 1180px)').matches,
   )
 
   useEffect(() => {
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const narrow = window.matchMedia('(max-width: 960px)')
+    const narrow = window.matchMedia('(max-width: 1180px)')
     const sync = () => {
       setReduced(motion.matches)
       setPhone(narrow.matches)
@@ -161,7 +162,7 @@ export function Approach() {
             <li key={step.n}>
               <article className="step-card">
                 <span>{step.n}</span>
-                <h3>{step.title}</h3>
+                {step.heading === 'h4' ? <h4>{step.title}</h4> : <h3>{step.title}</h3>}
                 <p>{step.text}</p>
               </article>
             </li>
@@ -199,7 +200,11 @@ export function Approach() {
                       <span className="approach-slide__ghost" aria-hidden="true">
                         {step.n}
                       </span>
-                      <h3>{step.title}</h3>
+                      {step.heading === 'h4' ? (
+                        <h4>{step.title}</h4>
+                      ) : (
+                        <h3>{step.title}</h3>
+                      )}
                       <p>{step.text}</p>
                     </article>
                   </li>

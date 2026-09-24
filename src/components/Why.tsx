@@ -7,11 +7,11 @@ export function Why() {
   return (
     <section className="why" id="why" data-scene="why">
       <Reveal className="why__kicker">
-        <p className="eyebrow">{t.why.kicker}</p>
+        <h2 className="eyebrow">{t.why.title}</h2>
       </Reveal>
       <Reveal className="why__copy">
         <div className="section-head why__head">
-          <h2>{t.why.title}</h2>
+          <h3>{t.why.lead}</h3>
           <p>{t.why.text}</p>
         </div>
       </Reveal>
@@ -25,7 +25,7 @@ export function Why() {
                   aria-hidden="true"
                   style={{ backgroundImage: `url(${moon})` }}
                 />
-                <h3>{point.title}</h3>
+                <h4 className="why__card-title">{point.title}</h4>
                 <p>{point.text}</p>
               </article>
             </Reveal>

@@ -427,10 +427,10 @@ export function Contact() {
               <input name="consent" type="checkbox" required />
               <span>
                 {t.contact.consent}{' '}
-                <Link to="/polityka">{t.contact.privacy}</Link>
+                <Link to="/privacy">{t.contact.privacy}</Link>
                 {' '}
                 {t.contact.consentJoin}{' '}
-                <Link to="/polityka#oferta">{t.contact.offer}</Link>.
+                <Link to="/privacy#offer">{t.contact.offer}</Link>.
               </span>
             </label>
             {error ? (

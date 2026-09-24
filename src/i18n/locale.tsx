@@ -20,7 +20,7 @@ const LocaleContext = createContext<LocaleContextValue | null>(null)
 function readLocale(): Locale {
   try {
     const stored = localStorage.getItem(storageKey)
-    if (stored === 'en' || stored === 'uk' || stored === 'pl') return stored
+    if (stored === 'en' || stored === 'uk') return stored
   } catch {
     /* ignore */
   }

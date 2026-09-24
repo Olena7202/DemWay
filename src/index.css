@@ -67,7 +67,7 @@ html.is-booted {
   scroll-behavior: smooth;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1180px) {
   :root {
     --pad-x: 1.5rem;
     --pad-section: 3.4rem;
