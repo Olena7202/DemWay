@@ -79,10 +79,10 @@ html.is-booted {
 
 @media (max-width: 720px) {
   :root {
-    --pad-x: 1.15rem;
-    --pad-section: 2.6rem;
-    --h2: clamp(1.55rem, 8vw, 2.05rem);
-    --h3: 1.12rem;
+    --pad-x: 1.2rem;
+    --pad-section: 3.6rem;
+    --h2: clamp(1.5rem, 7.6vw, 1.95rem);
+    --h3: 1.08rem;
     --pink: #72825e;
     --pink-rgb: 114, 130, 94;
   }
@@ -90,8 +90,8 @@ html.is-booted {
 
 @media (max-width: 480px) {
   :root {
-    --pad-x: 1rem;
-    --pad-section: 2.2rem;
+    --pad-x: 1.1rem;
+    --pad-section: 3.1rem;
     --text: 0.95rem;
   }
 }

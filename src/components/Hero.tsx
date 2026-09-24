@@ -18,22 +18,6 @@ export function Hero() {
           <Reveal delay={90} from="soft">
             <p className="lede">{t.hero.lede}</p>
           </Reveal>
-          <Reveal delay={160} from="soft">
-            <div className="hero__actions">
-              <a className="btn btn--pink btn--slide" href="#contact">
-                <span>
-                  <span>{t.hero.discuss}</span>
-                  <span>{t.hero.discuss}</span>
-                </span>
-              </a>
-              <a className="btn btn--ink btn--slide" href="#services">
-                <span>
-                  <span>{t.hero.cases}</span>
-                  <span>{t.hero.cases}</span>
-                </span>
-              </a>
-            </div>
-          </Reveal>
         </div>
         <figure
           className="hero__mark"
@@ -52,6 +36,22 @@ export function Hero() {
             />
           </div>
         </figure>
+        <Reveal delay={160} from="soft" className="hero__cta">
+          <div className="hero__actions">
+            <a className="btn btn--pink btn--slide" href="#contact">
+              <span>
+                <span>{t.hero.discuss}</span>
+                <span>{t.hero.discuss}</span>
+              </span>
+            </a>
+            <a className="btn btn--ink btn--slide" href="#services">
+              <span>
+                <span>{t.hero.cases}</span>
+                <span>{t.hero.cases}</span>
+              </span>
+            </a>
+          </div>
+        </Reveal>
       </div>
     </section>
   )

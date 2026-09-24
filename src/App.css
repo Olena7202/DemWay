@@ -431,15 +431,26 @@
   width: 100%;
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(220px, 0.9fr);
+  grid-template-areas:
+    'copy mark'
+    'actions mark';
   gap: 2rem 3rem;
   align-items: center;
 }
 
 .hero__copy {
+  grid-area: copy;
   max-width: 40rem;
 }
 
+.hero__cta {
+  grid-area: actions;
+  max-width: 40rem;
+  align-self: start;
+}
+
 .hero__mark {
+  grid-area: mark;
   position: relative;
   margin: 0;
   justify-self: end;
@@ -780,7 +791,7 @@ h1 em {
   display: flex;
   flex-wrap: wrap;
   gap: 0.9rem;
-  margin-top: calc(var(--gap-block) + 0.35rem);
+  margin-top: 0;
 }
 
 .hero__actions .btn,
@@ -1037,12 +1048,25 @@ h1 em {
   margin-bottom: 0.85rem;
 }
 
-.services__intro {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 1.4rem 2.4rem;
-  margin-bottom: var(--gap-block);
+.services:not(.services--page) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'head cta'
+    'cards cards';
+  column-gap: 2.4rem;
+  row-gap: var(--gap-block);
+  align-items: end;
+}
+
+.services__head-block {
+  grid-area: head;
+  min-width: 0;
+}
+
+.services .teaser-catalog {
+  grid-area: cta;
+  margin: 0;
 }
 
 .services__head {
@@ -1050,9 +1074,9 @@ h1 em {
   margin-bottom: 0;
 }
 
-.services__intro .teaser-catalog {
-  margin: 0;
-  flex: 0 0 auto;
+.services__cards {
+  grid-area: cards;
+  margin-bottom: 0;
 }
 
 .services__top {
@@ -1639,10 +1663,6 @@ button.teaser-row {
   height: 1px;
   border-radius: 0;
   background: var(--pink);
-}
-
-.services__cards {
-  margin-bottom: var(--gap-block);
 }
 
 .offers .section-head {
@@ -2552,6 +2572,19 @@ button.teaser-row {
   padding-bottom: 2.2rem;
 }
 
+.approach--swipe .approach-nav {
+  justify-items: center;
+}
+
+.approach--swipe .approach-dots {
+  justify-content: center;
+}
+
+.approach--swipe .approach-progress {
+  width: min(11rem, 62%);
+  justify-self: center;
+}
+
 .approach--swipe .approach-track {
   min-height: 22rem;
 }
@@ -2722,12 +2755,12 @@ button.teaser-row {
   background:
     radial-gradient(
       ellipse 70% 80% at 8% 40%,
-      rgba(var(--pink-rgb), 0.22),
+      rgba(var(--pink-rgb), 0.1),
       transparent 62%
     ),
     radial-gradient(
       ellipse 55% 70% at 92% 20%,
-      rgba(var(--pink-rgb), 0.12),
+      rgba(var(--pink-rgb), 0.05),
       transparent 58%
     );
 }
@@ -2757,14 +2790,14 @@ button.teaser-row {
   padding: 1.45rem 1.55rem 1.5rem;
   overflow: hidden;
   border-radius: var(--card-radius);
-  border: 1px solid rgba(var(--pink-rgb), 0.28);
+  border: 1px solid rgba(var(--pink-rgb), 0.14);
   background:
     radial-gradient(
       ellipse 42% 120% at 0% 50%,
-      rgba(var(--pink-rgb), 0.22),
+      rgba(var(--pink-rgb), 0.08),
       transparent 58%
     ),
-    linear-gradient(180deg, #141410 0%, #0c0c0a 100%);
+    linear-gradient(180deg, #101010 0%, #0b0b0b 100%);
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
   transition:
     border-color 0.3s ease,
@@ -2779,7 +2812,7 @@ button.teaser-row {
   letter-spacing: -0.06em;
   line-height: 0.9;
   color: var(--pink);
-  text-shadow: 0 0 22px rgba(var(--pink-rgb), 0.45);
+  text-shadow: 0 0 16px rgba(var(--pink-rgb), 0.22);
 }
 
 .reason__title {
@@ -2801,10 +2834,10 @@ button.teaser-row {
 }
 
 .reason:hover {
-  border-color: color-mix(in srgb, var(--pink) 70%, transparent);
+  border-color: color-mix(in srgb, var(--pink) 42%, transparent);
   box-shadow:
     0 14px 40px rgba(0, 0, 0, 0.32),
-    0 0 28px rgba(var(--pink-rgb), 0.16);
+    0 0 18px rgba(var(--pink-rgb), 0.08);
 }
 
 .why-choose__rows .reveal {
@@ -3767,10 +3800,18 @@ button.teaser-row {
 
   .hero__grid {
     grid-template-columns: 1fr;
-    gap: 1.6rem;
+    grid-template-areas:
+      'copy'
+      'mark'
+      'actions';
+    gap: 2.4rem;
   }
 
   .hero__copy {
+    max-width: none;
+  }
+
+  .hero__cta {
     max-width: none;
   }
 
@@ -3855,7 +3896,7 @@ button.teaser-row {
   .why__grid .reveal.is-visible .why__card--1,
   .why__grid .reveal.is-visible .why__card--2,
   .why__grid .reveal.is-visible .why__card--3 {
-    animation-name: why-card-float-phone;
+    animation: none;
   }
 
   @keyframes why-card-float-phone {
@@ -3874,27 +3915,29 @@ button.teaser-row {
   .faq,
   .contact,
   .services,
-  .offers,
   .why-choose {
     overflow-x: clip;
   }
 
   .offers {
-    overflow-x: clip;
+    overflow: visible;
   }
 
   .offers__grid {
     display: flex;
     align-items: stretch;
-    gap: 0.85rem;
+    gap: 0.75rem;
     overflow-x: auto;
+    overflow-y: hidden;
     overscroll-behavior-x: contain;
+    overscroll-behavior-y: auto;
     scroll-snap-type: x mandatory;
     scroll-padding-inline: 0;
+    scroll-snap-stop: always;
     -webkit-overflow-scrolling: touch;
-    touch-action: pan-x;
+    touch-action: pan-y pinch-zoom;
     scrollbar-width: none;
-    padding: 0.15rem 0 0.55rem;
+    padding: 0.1rem 0 0.4rem;
     grid-template-columns: none;
   }
 
@@ -3903,22 +3946,32 @@ button.teaser-row {
   }
 
   .offers__grid > li {
-    flex: 0 0 min(78vw, 22rem);
-    width: min(78vw, 22rem);
+    flex: 0 0 min(82vw, 21rem);
+    width: min(82vw, 21rem);
     scroll-snap-align: start;
+    scroll-snap-stop: always;
     height: auto;
+  }
+
+  .offers__grid .offer-card {
+    touch-action: pan-y pinch-zoom;
+    transform: none;
+    height: auto;
+    min-height: 0;
   }
 
   .offer-card__meta {
     align-items: flex-start;
   }
 
-  .offer-card:hover {
+  .offer-card:hover,
+  .offer-card--hit:hover {
     transform: none;
+    box-shadow: none;
   }
 
   .offer-card {
-    padding: 1.15rem 1.1rem 1.2rem;
+    padding: 1.05rem 1rem 1.1rem;
   }
 
   .faq-item summary {
@@ -4020,9 +4073,18 @@ button.teaser-row {
     padding-top: calc(5.4rem + env(safe-area-inset-top));
   }
 
-  .services__intro {
-    flex-direction: column;
-    align-items: flex-start;
+  .services:not(.services--page) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'head'
+      'cards'
+      'cta';
+    align-items: start;
+    row-gap: 1.5rem;
+  }
+
+  .services .teaser-catalog {
+    width: 100%;
   }
 
   .approach-rail li {
@@ -4083,52 +4145,64 @@ button.teaser-row {
   }
 
   .contact__form {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 720px) {
+  .page-bg__grain,
+  .page-bg__grid {
+    display: none;
+  }
+
   .hero {
-    padding-top: calc(6.6rem + env(safe-area-inset-top));
-    padding-bottom: 5.2rem;
+    padding-top: calc(9rem + env(safe-area-inset-top));
+    padding-bottom: 4.8rem;
     align-items: start;
     min-height: 100svh;
     min-height: 100dvh;
   }
 
   .hero__title {
-    font-size: clamp(1.85rem, 10.5vw, 2.45rem);
+    font-size: clamp(1.7rem, 9.4vw, 2.2rem);
   }
 
   .hero__title-agency {
     letter-spacing: 0.08em;
-    margin-top: 0.32em;
+    margin-top: 0.4em;
   }
 
   .hero .lede {
-    margin-top: 1.55rem;
-    line-height: 1.7;
+    margin-top: 2.25rem;
+    line-height: 1.65;
+    font-size: 0.92rem;
   }
 
   .hero__actions {
     width: 100%;
     flex-direction: column;
-    gap: 0.95rem;
-    margin-top: 1.7rem;
+    gap: 1.15rem;
+    margin-top: 0;
   }
 
   .hero__grid {
-    gap: 3.4rem;
+    gap: 4.4rem;
   }
 
   .hero__mark {
     width: min(64vw, 15.5rem);
     justify-self: center;
-    margin-top: 0.5rem;
+    margin-top: 0;
+  }
+
+  .hero__copy,
+  .hero__cta {
+    max-width: none;
+    width: 100%;
   }
 
   .why {
-    padding-top: 3.8rem;
+    padding-top: 4.8rem;
   }
 
   .why__kicker .eyebrow {
@@ -4136,16 +4210,121 @@ button.teaser-row {
   }
 
   .why__head {
-    margin-bottom: 2rem;
+    margin-bottom: 1.9rem;
   }
 
   .why__head h3 {
     margin-bottom: 1.1rem;
-    line-height: 1.3;
+    line-height: 1.32;
+  }
+
+  .why__head p {
+    line-height: 1.7;
   }
 
   .why__grid {
-    gap: 1.35rem;
+    gap: 1.2rem;
+  }
+
+  .why__card h3,
+  .why__card h4,
+  .why__card .why__card-title {
+    margin-bottom: 0.55rem;
+    padding-right: 0.2rem;
+  }
+
+  .why__card {
+    justify-content: flex-start;
+    min-height: 0;
+    padding: 1.25rem 4.6rem 1.3rem 1.15rem;
+  }
+
+  .why__card--2 {
+    padding-right: 4.6rem;
+  }
+
+  .why__card--1 .why__planet,
+  .why__card--2 .why__planet,
+  .why__card--3 .why__planet {
+    top: 50%;
+    bottom: auto;
+    right: -1.55rem;
+    width: 5.1rem;
+    height: 5.1rem;
+    transform: translateY(-50%) rotate(-18deg);
+  }
+
+  .why__grid .reveal.is-visible .why__card--1,
+  .why__grid .reveal.is-visible .why__card--2,
+  .why__grid .reveal.is-visible .why__card--3 {
+    animation: none;
+  }
+
+  .section-head {
+    max-width: none;
+    margin-bottom: 1.45rem;
+  }
+
+  .section-head h2 {
+    margin-bottom: 0;
+  }
+
+  .services:not(.services--page) {
+    row-gap: 1.7rem;
+  }
+
+  .offers .section-head {
+    margin-bottom: 1.35rem;
+  }
+
+  .offers__note {
+    margin-top: 1.4rem;
+  }
+
+  .why-choose {
+    padding-top: calc(var(--pad-section) + 0.35rem);
+  }
+
+  .why-choose__head {
+    max-width: none;
+    margin-bottom: 1.5rem;
+  }
+
+  .why-choose__head h2 {
+    max-width: none;
+  }
+
+  .why-choose__rows {
+    gap: 1rem;
+  }
+
+  .faq {
+    padding-top: calc(var(--pad-section) + 0.5rem);
+  }
+
+  .faq__intro {
+    max-width: none;
+    margin-bottom: 1.3rem;
+  }
+
+  .contact__intro {
+    max-width: none;
+  }
+
+  .faq__intro h2 {
+    margin-bottom: 0;
+  }
+
+  .faq__list {
+    gap: 0.85rem;
+  }
+
+  .contact {
+    gap: 1.7rem;
+  }
+
+  .contact__intro h2 {
+    margin: 0 0 0.9rem;
   }
 
   .hero__actions .btn,
@@ -4166,7 +4345,7 @@ button.teaser-row {
   .hero .hero__actions .btn,
   .hero .hero__actions .btn--slide > span,
   .hero .hero__actions .btn--slide > span > span {
-    min-height: 60px;
+    min-height: 48px;
   }
 
   .faq-item summary {
@@ -4206,11 +4385,57 @@ button.teaser-row {
 
   .case-grid {
     grid-template-columns: 1fr;
+    gap: 1.15rem;
+  }
+
+  .case-card {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(4.35rem, auto) auto;
+    align-items: stretch;
+    gap: 0.4rem;
+    padding: 0.95rem 1.05rem 1.05rem;
+  }
+
+  .case-card__visual {
+    min-height: 4.2rem;
+    padding: 0.2rem 0 0.05rem;
+  }
+
+  .case-card__mark {
+    font-size: clamp(2.15rem, 13.5vw, 3.05rem);
+  }
+
+  .case-card__copy {
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(243, 243, 241, 0.08);
+    gap: 0.32rem;
+  }
+
+  .case-card__title {
+    font-size: 1.05rem;
+  }
+
+  .case-card__text {
+    font-size: 0.88rem;
   }
 
   .offers__grid > li {
-    flex: 0 0 min(85vw, 20.5rem);
-    width: min(85vw, 20.5rem);
+    flex: 0 0 min(86vw, 19.5rem);
+    width: min(86vw, 19.5rem);
+  }
+
+  .offer-card__for {
+    margin-bottom: 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .offer-card__result {
+    font-size: 0.76rem;
+  }
+
+  .offer-card h3 {
+    font-size: 1.22rem;
+    margin-bottom: 0.5rem;
   }
 
   .service-tabs {
@@ -4219,8 +4444,8 @@ button.teaser-row {
 
   .reason {
     grid-template-columns: 3.15rem minmax(0, 1fr);
-    gap: 0.2rem 1rem;
-    padding: 1.15rem 1.1rem 1.2rem;
+    gap: 0.4rem 1rem;
+    padding: 1.2rem 1.15rem 1.3rem;
   }
 
   .reason__n {
@@ -4235,19 +4460,12 @@ button.teaser-row {
   }
 
   .reason__text {
-    margin-top: 0.35rem;
+    margin-top: 0.45rem;
+    max-width: none;
   }
 
   .offer-card--hit {
     box-shadow: none;
-  }
-
-  .case-card {
-    padding: 1.05rem 1.05rem 1.1rem;
-  }
-
-  .case-card__mark {
-    font-size: clamp(2.4rem, 16vw, 3.6rem);
   }
 
   .service-tile {
@@ -4284,10 +4502,68 @@ button.teaser-row {
 
   .site-footer__cols {
     grid-template-columns: 1fr;
+    gap: 1.15rem;
+  }
+
+  .site-footer {
+    padding-top: 1.7rem;
+    padding-bottom: max(1.7rem, env(safe-area-inset-bottom));
+  }
+
+  .site-footer .reveal {
+    gap: 1.35rem;
+  }
+
+  .site-footer .wordmark {
+    font-size: 1.12rem;
+  }
+
+  .site-footer__label {
+    margin-bottom: 0.7rem;
+    padding-bottom: 0.45rem;
+    font-size: 0.6rem;
+  }
+
+  .site-footer__col ul {
+    gap: 0.45rem;
+  }
+
+  .site-footer__col a,
+  .site-footer__col p {
+    font-size: 0.82rem;
+    line-height: 1.35;
+  }
+
+  .site-footer__col--contact li > span {
+    font-size: 0.58rem;
+  }
+
+  .site-footer__bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding-top: 1rem;
+    letter-spacing: 0.06em;
+    font-size: 0.6rem;
+  }
+
+  .site-footer__socials {
+    margin-left: 0;
+    gap: 0.4rem;
+  }
+
+  .site-footer__social {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .site-footer__social svg {
+    width: 1.05rem;
+    height: 1.05rem;
   }
 
   .why__card {
-    padding: 1.25rem 1.2rem 1.35rem;
+    padding: 1.05rem 1.05rem 1.1rem;
   }
 
   .why__card h3,
@@ -4304,45 +4580,9 @@ button.teaser-row {
     width: 100%;
   }
 
-  .why__card--1 .why__planet,
-  .why__card--3 .why__planet {
-    width: 4.8rem;
-    height: 4.8rem;
-  }
-
-  .why__card--1 .why__planet {
-    right: -1.2rem;
-    top: -1.4rem;
-  }
-
-  .why__card--2 {
-    padding-right: 3rem;
-  }
-
-  .why__card--2 .why__planet {
-    width: 5.1rem;
-    height: 5.1rem;
-    right: -2.1rem;
-  }
-
-  .why__card--3 .why__planet {
-    right: -1.4rem;
-    bottom: -1.6rem;
-  }
-
   .site-header .brand,
   .site-header .wordmark {
     min-width: 0;
-  }
-
-  .site-footer__bar {
-    flex-direction: column;
-    align-items: flex-start;
-    letter-spacing: 0.06em;
-  }
-
-  .site-footer__socials {
-    margin-left: 0;
   }
 
   .contact__receipt {
@@ -4400,10 +4640,20 @@ button.teaser-row {
   .btn:hover,
   .plan:hover,
   .case-card:hover,
+  .offer-card:hover,
+  .offer-card--hit:hover,
   .service-tile:hover,
+  .why__card:hover,
   .teaser-row:hover,
   .teaser-row.is-on {
     transform: none;
+    box-shadow: none;
+    filter: none;
+  }
+
+  .offer-card,
+  .case-card {
+    transition: border-color 0.3s ease;
   }
 }
 

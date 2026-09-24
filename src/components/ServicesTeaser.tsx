@@ -19,19 +19,9 @@ export function ServicesTeaser() {
   const { t } = useLocale()
   return (
     <section className="services" id="services" data-scene="blush">
-      <Reveal>
-        <div className="services__intro">
-          <div className="section-head services__head">
-            <h2>{t.servicesTeaser.title}</h2>
-          </div>
-          <div className="hero__actions teaser-catalog">
-            <Link className="btn btn--pink btn--slide" to="/poslugy">
-              <span>
-                <span>{t.servicesTeaser.catalog}</span>
-                <span>{t.servicesTeaser.catalog}</span>
-              </span>
-            </Link>
-          </div>
+      <Reveal className="services__head-block">
+        <div className="section-head services__head">
+          <h2>{t.servicesTeaser.title}</h2>
         </div>
       </Reveal>
 
@@ -40,7 +30,7 @@ export function ServicesTeaser() {
           const label = t.groups[name]
           return (
             <li key={name}>
-              <Reveal delay={index * 90} from="scale">
+              <Reveal delay={index * 70} from="up" once>
                 <Link
                   className="case-card"
                   to={`/poslugy?napryam=${serviceGroupAnchors[name]}`}
@@ -59,6 +49,17 @@ export function ServicesTeaser() {
           )
         })}
       </ul>
+
+      <Reveal className="teaser-catalog" delay={80}>
+        <div className="hero__actions">
+          <Link className="btn btn--pink btn--slide" to="/poslugy">
+            <span>
+              <span>{t.servicesTeaser.catalog}</span>
+              <span>{t.servicesTeaser.catalog}</span>
+            </span>
+          </Link>
+        </div>
+      </Reveal>
     </section>
   )
 }

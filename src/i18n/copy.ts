@@ -181,15 +181,15 @@ export const copy: Record<Locale, Copy> = {
       points: [
         {
           title: 'Для кого ми працюємо',
-          text: 'Розуміємо бізнес комплексно та поєднуємо розробку, маркетинг і технології в одну систему',
+          text: 'Для малого й середнього бізнесу, якому потрібні сайт, реклама й SEO як одна система — не розрізнені послуги «на потім».',
         },
         {
           title: 'Від ідеї до результату з чіткою стратегією',
-          text: 'Дедлайни й зона відповідальності прозорі. Не обіцяємо неможливе і не зникаємо після запуску.',
+          text: 'Спочатку ціль і етапи, потім дизайн і запуск. Ви бачите план, строки й що буде на виході — без хаотичних правок по дорозі.',
         },
         {
           title: 'Результат',
-          text: 'Кожен інструмент працює на спільну ціль - більше клієнтів, продажів і розвиток бізнесу.',
+          text: 'Заявки, продажі й ріст, а не «просто сайт». Кожен інструмент працює на конкретну бізнес-ціль, яку фіксуємо на старті.',
         },
       ],
     },
@@ -514,15 +514,15 @@ export const copy: Record<Locale, Copy> = {
       points: [
         {
           title: 'Who we work with',
-          text: 'We see the business as a whole and join development, marketing and technology into one system.',
+          text: 'Owners and teams that need a site, ads and SEO as one system — not separate services “for later”.',
         },
         {
           title: 'From idea to result with a clear strategy',
-          text: 'Deadlines and ownership stay clear. We do not promise the impossible or disappear after launch.',
+          text: 'Goal and stages first, then design and launch. You see the plan, timeline and outcome — no random edits along the way.',
         },
         {
           title: 'Results',
-          text: 'Every tool works toward one goal — more clients, more sales and a business that grows.',
+          text: 'Leads, sales and growth, not “just a website”. Every tool serves the business goal we lock in at kickoff.',
         },
       ],
     },
