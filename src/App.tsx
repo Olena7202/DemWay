@@ -26,6 +26,7 @@ function stripHeroHash() {
 
 function dismissBoot() {
   const html = document.documentElement
+  if (html.classList.contains('is-booted')) return
   const boot = document.getElementById('boot')
   html.classList.remove('is-booting')
   html.classList.add('is-booted')
@@ -121,9 +122,12 @@ function DocumentTitle() {
   useEffect(() => {
     const path = location.pathname.replace(/\/$/, '')
     document.documentElement.lang = locale
-    if (path.endsWith('/poslugy')) document.title = `${t.catalog.title} - DemWay`
-    else if (path.endsWith('/privacy')) document.title = `${t.legal.title} - DemWay`
-    else document.title = t.meta.title
+    if (path.endsWith('/poslugy')) document.title = `${t.catalog.title} · ${t.meta.tab}`
+    else if (path.endsWith('/privacy')) document.title = `${t.legal.title} · ${t.meta.tab}`
+    else document.title = t.meta.tab
+    const seoTitle = path.endsWith('/privacy') ? `${t.legal.title} | DemWay` : t.meta.title
+    const og = document.querySelector('meta[property="og:title"]')
+    if (og) og.setAttribute('content', seoTitle)
     const meta = document.querySelector('meta[name="description"]')
     if (!meta) return
     meta.setAttribute(
@@ -137,17 +141,17 @@ function DocumentTitle() {
 
 function App() {
   useEffect(() => {
+    if (document.documentElement.classList.contains('is-booted')) return
+
     const boot = document.getElementById('boot')
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const minMs = reduce ? 240 : 2200
+    const minMs = reduce ? 240 : 1800
     const started = performance.now()
-    let cancelled = false
     let later = 0
 
     const finish = () => {
-      if (cancelled) return
-      cancelled = true
       const wait = Math.max(0, minMs - (performance.now() - started))
+      window.clearTimeout(later)
       later = window.setTimeout(dismissBoot, wait)
     }
 
@@ -163,14 +167,16 @@ function App() {
       ),
     )
 
-    Promise.all([document.fonts.ready, imageReady]).then(finish)
-    const failsafe = window.setTimeout(finish, 4200)
+    const fonts = document.fonts?.ready ?? Promise.resolve()
+    void Promise.race([
+      Promise.all([fonts, imageReady]),
+      new Promise<void>((resolve) => {
+        window.setTimeout(resolve, 1400)
+      }),
+    ]).then(finish)
 
-    return () => {
-      cancelled = true
-      window.clearTimeout(failsafe)
-      window.clearTimeout(later)
-    }
+    const failsafe = window.setTimeout(finish, 2600)
+    return () => window.clearTimeout(failsafe)
   }, [])
 
   return (

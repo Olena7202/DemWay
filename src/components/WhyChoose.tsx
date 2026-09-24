@@ -9,7 +9,6 @@ export function WhyChoose() {
     <section className="why-choose" id="why-choose" data-scene="ink">
       <Reveal once>
         <div className="why-choose__head">
-          <p className="eyebrow">{block.kicker}</p>
           <h2>{block.title}</h2>
         </div>
       </Reveal>

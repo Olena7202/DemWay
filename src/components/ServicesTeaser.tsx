@@ -22,9 +22,7 @@ export function ServicesTeaser() {
       <Reveal>
         <div className="services__intro">
           <div className="section-head services__head">
-            <p className="eyebrow">{t.servicesTeaser.kicker}</p>
             <h2>{t.servicesTeaser.title}</h2>
-            <p>{t.servicesTeaser.text}</p>
           </div>
           <div className="hero__actions teaser-catalog">
             <Link className="btn btn--pink btn--slide" to="/poslugy">
@@ -54,10 +52,6 @@ export function ServicesTeaser() {
                   <span className="case-card__copy">
                     <h3 className="case-card__title">{t.groups[name]}</h3>
                     <span className="case-card__text">{t.teaserBlurbs[name]}</span>
-                    <span className="case-card__go">
-                      {t.servicesTeaser.go}
-                      <span aria-hidden="true"> →</span>
-                    </span>
                   </span>
                 </Link>
               </Reveal>

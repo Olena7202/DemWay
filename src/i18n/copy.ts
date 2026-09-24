@@ -3,7 +3,7 @@ import type { ServiceGroup } from '../data/services'
 export type Locale = 'uk' | 'en'
 
 export type Copy = {
-  meta: { title: string; description: string }
+  meta: { title: string; tab: string; description: string }
   nav: {
     about: string
     services: string
@@ -150,6 +150,7 @@ export const copy: Record<Locale, Copy> = {
   uk: {
     meta: {
       title: 'Діджитал агенція - розробка сайту, маркетинг, SEO та реклама|DemWay',
+      tab: 'DemWay agency',
       description:
         'Діджитал агентство DemWay поєднує усе необхідне для розвитку вашого бізнесу. Розробка сайту,SEO,контекстна реклама, Google Ads та email - маркетинг в одному місці. Замовляйте digital-послуги під ключ та зростайте онлайн з нами!',
     },
@@ -366,7 +367,7 @@ export const copy: Record<Locale, Copy> = {
         },
         {
           q: 'Які результати очікувати від співпраці?',
-          a: 'Короткий опис бізнесу, доступ до поточних каналів, якщо вони вже є, і людина з вашого боку для швидких рішень. Тексти й фото можемо зібрати разом. Ідеальне ТЗ не чекаємо.',
+          a: 'Працююча точка входу для клієнтів, зрозумілий канал заявок і план, що робити далі. Цифри залежать від ніші й бюджету — фіксуємо після старту, без обіцянок «гарантованих продажів».',
         },
       ],
     },
@@ -482,6 +483,7 @@ export const copy: Record<Locale, Copy> = {
   en: {
     meta: {
       title: 'DemWay - digital agency',
+      tab: 'DemWay agency',
       description:
         'DemWay is a digital agency: landing pages, CRM, SEO, Google Ads, Meta Ads, market analysis, banners and logo.',
     },

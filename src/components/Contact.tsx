@@ -296,19 +296,8 @@ export function Contact() {
     <section className="contact" id="contact" data-scene="close">
       <Reveal from="left">
         <div className="contact__intro">
-          <p className="eyebrow">{t.contact.kicker}</p>
           <h2>{t.contact.title}</h2>
           <p>{t.contact.text}</p>
-          <ul className="contact__notes">
-            <li>
-              <span>1</span>
-              {t.contact.notes[0]}
-            </li>
-            <li>
-              <span>2</span>
-              {t.contact.notes[1]}
-            </li>
-          </ul>
         </div>
       </Reveal>
 

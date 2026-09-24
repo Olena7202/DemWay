@@ -3879,9 +3879,34 @@ button.teaser-row {
     overflow-x: clip;
   }
 
+  .offers {
+    overflow-x: clip;
+  }
+
   .offers__grid {
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    align-items: stretch;
     gap: 0.85rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 0;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+    scrollbar-width: none;
+    padding: 0.15rem 0 0.55rem;
+    grid-template-columns: none;
+  }
+
+  .offers__grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .offers__grid > li {
+    flex: 0 0 min(78vw, 22rem);
+    width: min(78vw, 22rem);
+    scroll-snap-align: start;
+    height: auto;
   }
 
   .offer-card__meta {
@@ -4064,9 +4089,11 @@ button.teaser-row {
 
 @media (max-width: 720px) {
   .hero {
-    padding-top: calc(4.9rem + env(safe-area-inset-top));
-    padding-bottom: 3.4rem;
+    padding-top: calc(6.6rem + env(safe-area-inset-top));
+    padding-bottom: 5.2rem;
     align-items: start;
+    min-height: 100svh;
+    min-height: 100dvh;
   }
 
   .hero__title {
@@ -4075,15 +4102,50 @@ button.teaser-row {
 
   .hero__title-agency {
     letter-spacing: 0.08em;
+    margin-top: 0.32em;
+  }
+
+  .hero .lede {
+    margin-top: 1.55rem;
+    line-height: 1.7;
+  }
+
+  .hero__actions {
+    width: 100%;
+    flex-direction: column;
+    gap: 0.95rem;
+    margin-top: 1.7rem;
+  }
+
+  .hero__grid {
+    gap: 3.4rem;
   }
 
   .hero__mark {
     width: min(64vw, 15.5rem);
     justify-self: center;
+    margin-top: 0.5rem;
   }
 
-  .hero__actions {
-    width: 100%;
+  .why {
+    padding-top: 3.8rem;
+  }
+
+  .why__kicker .eyebrow {
+    margin-bottom: 1.15rem;
+  }
+
+  .why__head {
+    margin-bottom: 2rem;
+  }
+
+  .why__head h3 {
+    margin-bottom: 1.1rem;
+    line-height: 1.3;
+  }
+
+  .why__grid {
+    gap: 1.35rem;
   }
 
   .hero__actions .btn,
@@ -4146,8 +4208,9 @@ button.teaser-row {
     grid-template-columns: 1fr;
   }
 
-  .offers__grid {
-    grid-template-columns: 1fr;
+  .offers__grid > li {
+    flex: 0 0 min(85vw, 20.5rem);
+    width: min(85vw, 20.5rem);
   }
 
   .service-tabs {
@@ -4224,7 +4287,7 @@ button.teaser-row {
   }
 
   .why__card {
-    padding: 1rem 1.05rem;
+    padding: 1.25rem 1.2rem 1.35rem;
   }
 
   .why__card h3,
@@ -4265,10 +4328,6 @@ button.teaser-row {
   .why__card--3 .why__planet {
     right: -1.4rem;
     bottom: -1.6rem;
-  }
-
-  .hero {
-    min-height: 0;
   }
 
   .site-header .brand,

@@ -15,11 +15,26 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <title>Діджитал агенція - розробка сайту, маркетинг, SEO та реклама|DemWay</title>
+    <title>DemWay agency</title>
+    <meta
+      property="og:title"
+      content="Діджитал агенція - розробка сайту, маркетинг, SEO та реклама|DemWay"
+    />
     <script>
       if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
       var bootHash = location.hash
       if (!bootHash || bootHash === '#top' || bootHash === '#why') window.scrollTo(0, 0)
+      window.setTimeout(function () {
+        var html = document.documentElement
+        var boot = document.getElementById('boot')
+        if (!boot || html.classList.contains('is-booted')) return
+        html.classList.remove('is-booting')
+        html.classList.add('is-booted')
+        boot.classList.add('is-away')
+        window.setTimeout(function () {
+          boot.remove()
+        }, 800)
+      }, 3200)
     </script>
     <style>
       html,

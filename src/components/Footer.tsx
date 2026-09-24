@@ -33,7 +33,6 @@ export function Footer() {
           >
             <Wordmark />
           </Link>
-          <p className="site-footer__aside">{t.footer.aside}</p>
         </div>
 
         <div className="site-footer__cols">
