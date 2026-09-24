@@ -2586,7 +2586,7 @@ button.teaser-row {
 }
 
 .approach--swipe .approach-track {
-  min-height: 22rem;
+  min-height: 24rem;
 }
 
 .approach--swipe .approach-stage {
@@ -2596,6 +2596,7 @@ button.teaser-row {
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  min-height: 22rem;
 }
 
 .approach--swipe .approach-stage::-webkit-scrollbar {
@@ -2606,16 +2607,28 @@ button.teaser-row {
   transform: none;
   will-change: auto;
   padding-right: var(--pad-x);
+  height: 22rem;
 }
 
 .approach--swipe .approach-rail li {
   scroll-snap-align: start;
   scroll-snap-stop: always;
+  height: 22rem;
 }
 
 .approach--swipe .approach-slide {
   opacity: 1;
   transform: none;
+  height: 22rem;
+  overflow: hidden;
+}
+
+.approach--swipe .approach-slide__ghost {
+  right: 6%;
+  top: 50%;
+  font-size: clamp(6.4rem, 40vw, 8.8rem);
+  color: var(--pink);
+  opacity: 0.1;
 }
 
 .approach--plain {
@@ -3930,12 +3943,11 @@ button.teaser-row {
     overflow-x: auto;
     overflow-y: hidden;
     overscroll-behavior-x: contain;
-    overscroll-behavior-y: auto;
     scroll-snap-type: x mandatory;
     scroll-padding-inline: 0;
     scroll-snap-stop: always;
     -webkit-overflow-scrolling: touch;
-    touch-action: pan-y pinch-zoom;
+    touch-action: pan-x;
     scrollbar-width: none;
     padding: 0.1rem 0 0.4rem;
     grid-template-columns: none;
@@ -3946,18 +3958,22 @@ button.teaser-row {
   }
 
   .offers__grid > li {
+    display: flex;
     flex: 0 0 min(82vw, 21rem);
     width: min(82vw, 21rem);
     scroll-snap-align: start;
     scroll-snap-stop: always;
     height: auto;
+    align-self: stretch;
   }
 
   .offers__grid .offer-card {
-    touch-action: pan-y pinch-zoom;
-    transform: none;
+    flex: 1 1 auto;
+    width: 100%;
     height: auto;
-    min-height: 0;
+    min-height: 100%;
+    touch-action: pan-x;
+    transform: none;
   }
 
   .offer-card__meta {

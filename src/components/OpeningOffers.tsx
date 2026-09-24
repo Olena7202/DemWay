@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { Reveal } from './Reveal'
 import { useLocale } from '../i18n/locale'
@@ -6,89 +5,6 @@ import { useLocale } from '../i18n/locale'
 export function OpeningOffers() {
   const { t } = useLocale()
   const offers = t.openingOffers
-  const trackRef = useRef<HTMLUListElement>(null)
-
-  useEffect(() => {
-    const el = trackRef.current
-    if (!el) return
-    const narrow = window.matchMedia('(max-width: 1180px)')
-
-    let startX = 0
-    let startY = 0
-    let startLeft = 0
-    let axis: 'x' | 'y' | null = null
-    let dragging = false
-
-    const snap = () => {
-      const items = [...el.children] as HTMLElement[]
-      if (!items.length) return
-      const left = el.scrollLeft
-      let best = items[0]
-      let dist = Number.POSITIVE_INFINITY
-      for (const item of items) {
-        const next = Math.abs(item.offsetLeft - left)
-        if (next < dist) {
-          dist = next
-          best = item
-        }
-      }
-      el.scrollTo({ left: best.offsetLeft, behavior: 'smooth' })
-    }
-
-    const onDown = (event: PointerEvent) => {
-      if (!narrow.matches) return
-      if ((event.target as HTMLElement).closest('a, button')) return
-      dragging = true
-      axis = null
-      startX = event.clientX
-      startY = event.clientY
-      startLeft = el.scrollLeft
-    }
-
-    const onMove = (event: PointerEvent) => {
-      if (!dragging || !narrow.matches) return
-      const dx = event.clientX - startX
-      const dy = event.clientY - startY
-      if (!axis) {
-        if (Math.abs(dx) < 12 && Math.abs(dy) < 12) return
-        axis = Math.abs(dx) > Math.abs(dy) * 1.2 ? 'x' : 'y'
-        if (axis === 'x') {
-          try {
-            el.setPointerCapture(event.pointerId)
-          } catch {
-            /* ignore */
-          }
-        } else {
-          dragging = false
-        }
-      }
-      if (axis !== 'x') return
-      event.preventDefault()
-      el.scrollLeft = startLeft - dx
-    }
-
-    const onUp = () => {
-      if (!dragging && axis !== 'x') {
-        axis = null
-        return
-      }
-      const shouldSnap = axis === 'x'
-      dragging = false
-      axis = null
-      if (shouldSnap) snap()
-    }
-
-    el.addEventListener('pointerdown', onDown)
-    el.addEventListener('pointermove', onMove, { passive: false })
-    el.addEventListener('pointerup', onUp)
-    el.addEventListener('pointercancel', onUp)
-    return () => {
-      el.removeEventListener('pointerdown', onDown)
-      el.removeEventListener('pointermove', onMove)
-      el.removeEventListener('pointerup', onUp)
-      el.removeEventListener('pointercancel', onUp)
-    }
-  }, [])
 
   return (
     <section className="offers" id="offers" data-scene="ink">
@@ -98,7 +14,7 @@ export function OpeningOffers() {
         </div>
       </Reveal>
 
-      <ul className="offers__grid" ref={trackRef}>
+      <ul className="offers__grid">
         {offers.items.map((pack) => {
           const featured = Boolean(pack.featured)
           return (
