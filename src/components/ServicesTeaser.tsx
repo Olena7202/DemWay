@@ -50,7 +50,7 @@ export function ServicesTeaser() {
         })}
       </ul>
 
-      <Reveal className="teaser-catalog" delay={80}>
+      <div className="teaser-catalog">
         <div className="hero__actions">
           <Link className="btn btn--pink btn--slide" to="/poslugy">
             <span>
@@ -59,7 +59,7 @@ export function ServicesTeaser() {
             </span>
           </Link>
         </div>
-      </Reveal>
+      </div>
     </section>
   )
 }
