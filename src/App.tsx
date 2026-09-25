@@ -6,6 +6,7 @@ import { Footer } from './components/Footer'
 import { HomePage } from './pages/HomePage'
 import { ServicesPage } from './pages/ServicesPage'
 import { LegalPage } from './pages/LegalPage'
+import { NotFoundPage } from './pages/NotFoundPage'
 import { useLocale } from './i18n/locale'
 import './App.css'
 
@@ -51,6 +52,7 @@ function ScrollTo() {
     const path = location.pathname.replace(/\/$/, '')
     const onCatalog = path.endsWith('/poslugy')
     const onLegal = path.endsWith('/privacy')
+    const onHome = path === ''
     const hash = location.hash
     let timer = 0
     let later = 0
@@ -69,7 +71,7 @@ function ScrollTo() {
       const instant = firstPaint.current
       firstPaint.current = false
       const landOnHero =
-        !onCatalog && !onLegal && (instant ? isHeroLanding(hash) : hash === '' || hash === '#top')
+        onHome && (instant ? isHeroLanding(hash) : hash === '' || hash === '#top')
 
       if (landOnHero) {
         jumpHero()
@@ -77,6 +79,11 @@ function ScrollTo() {
         timer = window.setTimeout(jumpHero, 80)
         later = window.setTimeout(jumpHero, 400)
         if (instant || hash === '#top') stripHeroHash()
+        return
+      }
+
+      if (!onHome && !onCatalog && !onLegal) {
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
         return
       }
 
@@ -124,6 +131,7 @@ function DocumentTitle() {
     document.documentElement.lang = locale
     if (path.endsWith('/poslugy')) document.title = `${t.catalog.title} · ${t.meta.tab}`
     else if (path.endsWith('/privacy')) document.title = `${t.legal.title} · ${t.meta.tab}`
+    else if (path !== '') document.title = `404 · ${t.meta.tab}`
     else document.title = t.meta.tab
     const seoTitle = path.endsWith('/privacy') ? `${t.legal.title} | DemWay` : t.meta.title
     const og = document.querySelector('meta[property="og:title"]')
@@ -191,6 +199,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/poslugy" element={<ServicesPage />} />
             <Route path="/privacy" element={<LegalPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
         <Footer />

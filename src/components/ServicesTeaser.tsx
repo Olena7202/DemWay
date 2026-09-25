@@ -21,6 +21,7 @@ export function ServicesTeaser() {
     <section className="services" id="services" data-scene="blush">
       <Reveal className="services__head-block">
         <div className="section-head services__head">
+          <p className="eyebrow">{t.servicesTeaser.kicker}</p>
           <h2>{t.servicesTeaser.title}</h2>
         </div>
       </Reveal>

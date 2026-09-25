@@ -129,6 +129,13 @@ export type Copy = {
     offerTitle: string
     offer: { title: string; text: string }[]
   }
+  notFound: {
+    kicker: string
+    title: string
+    text: string
+    home: string
+    catalog: string
+  }
   footer: {
     aside: string
     services: string
@@ -159,7 +166,7 @@ export const copy: Record<Locale, Copy> = {
       services: 'Послуги',
       approach: 'Підхід',
       contact: 'Контакти',
-      brief: 'Зв’язок',
+      brief: 'Обговорити проєкт',
       packages: 'Пакети',
       openMenu: 'Відкрити меню',
       closeMenu: 'Закрити меню',
@@ -195,7 +202,7 @@ export const copy: Record<Locale, Copy> = {
     },
     whyChoose: {
       kicker: 'Чому ми',
-      title: 'Чому обирають саме нас',
+      title: 'Чому обирають наше діджитал агентство',
       points: [
         {
           title: 'Рішення під конкретний бізнес',
@@ -464,6 +471,13 @@ export const copy: Record<Locale, Copy> = {
         },
       ],
     },
+    notFound: {
+      kicker: 'Помилка',
+      title: 'Такої сторінки немає',
+      text: 'Посилання застаріле або адресу введено з помилкою. Поверніться на головну або відкрийте каталог пакетів.',
+      home: 'На головну',
+      catalog: 'Каталог пакетів',
+    },
     footer: {
       aside: 'Від контакту до угоди',
       services: 'Послуги',
@@ -492,7 +506,7 @@ export const copy: Record<Locale, Copy> = {
       services: 'Services',
       approach: 'Approach',
       contact: 'Contact',
-      brief: 'Connect',
+      brief: 'Discuss a project',
       packages: 'Bundles',
       openMenu: 'Open menu',
       closeMenu: 'Close menu',
@@ -791,6 +805,13 @@ export const copy: Record<Locale, Copy> = {
           text: 'Ukrainian law applies. Disputes: talks first, then Ukrainian courts at the contractor’s place of registration unless the law requires otherwise.',
         },
       ],
+    },
+    notFound: {
+      kicker: 'Error',
+      title: 'This page is missing',
+      text: 'The link is outdated or the address has a typo. Go home or open the package catalog.',
+      home: 'Go home',
+      catalog: 'Package catalog',
     },
     footer: {
       aside: 'From contact to deal',

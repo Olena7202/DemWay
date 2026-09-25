@@ -20,7 +20,7 @@
   --gap-block: 1.6rem;
   --text: 1rem;
   --text-sm: 0.72rem;
-  --h2: clamp(1.85rem, 3.5vw, 2.6rem);
+  --h2: clamp(1.48rem, 2.3vw, 1.92rem);
   --h3: 1.28rem;
   --track: 0.16em;
 }
@@ -71,7 +71,7 @@ html.is-booted {
   :root {
     --pad-x: 1.5rem;
     --pad-section: 3.4rem;
-    --h2: clamp(1.75rem, 5vw, 2.35rem);
+    --h2: clamp(1.38rem, 3.8vw, 1.72rem);
     --pink: #72825e;
     --pink-rgb: 114, 130, 94;
   }
@@ -81,7 +81,7 @@ html.is-booted {
   :root {
     --pad-x: 1.2rem;
     --pad-section: 3.6rem;
-    --h2: clamp(1.5rem, 7.6vw, 1.95rem);
+    --h2: clamp(1.28rem, 5.6vw, 1.52rem);
     --h3: 1.08rem;
     --pink: #72825e;
     --pink-rgb: 114, 130, 94;

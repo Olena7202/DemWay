@@ -296,6 +296,7 @@ export function Contact() {
     <section className="contact" id="contact" data-scene="close">
       <Reveal from="left">
         <div className="contact__intro">
+          <p className="eyebrow">{t.contact.kicker}</p>
           <h2>{t.contact.title}</h2>
           <p>{t.contact.text}</p>
         </div>

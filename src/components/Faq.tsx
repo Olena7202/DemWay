@@ -7,6 +7,7 @@ export function Faq() {
     <section className="faq" id="faq" data-scene="close">
       <Reveal from="left">
         <div className="faq__intro">
+          <p className="eyebrow">{t.faq.kicker}</p>
           <h2>{t.faq.title}</h2>
         </div>
       </Reveal>

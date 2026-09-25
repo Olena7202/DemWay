@@ -255,13 +255,15 @@
 }
 
 .nav__cta {
-  padding: 0.48rem 0.85rem !important;
+  position: relative;
+  overflow: hidden;
+  padding: 0 !important;
   border: 1px solid color-mix(in srgb, var(--pink) 55%, transparent) !important;
-  border-radius: 0 !important;
+  border-radius: var(--radius) !important;
   background: transparent !important;
   color: var(--cream) !important;
   opacity: 1 !important;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   white-space: nowrap;
   box-shadow: 0 0 24px rgba(var(--pink-rgb), 0.08);
   transition:
@@ -271,15 +273,45 @@
     box-shadow 0.3s ease !important;
 }
 
+.nav__cta > span {
+  position: relative;
+  z-index: 2;
+  min-height: 2.2rem;
+  padding: 0 0.9rem;
+}
+
+.nav__cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 20%,
+    rgba(243, 243, 241, 0.18) 48%,
+    transparent 72%
+  );
+  transform: translateX(-130%);
+  transition: transform 0.55s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.nav__cta:hover::before {
+  transform: translateX(130%);
+}
+
 .nav__cta::after {
   display: none;
 }
 
 .nav__cta:hover {
-  background: var(--pink) !important;
+  background: #000 !important;
   border-color: var(--pink) !important;
-  color: #000 !important;
-  box-shadow: 0 0 28px rgba(var(--pink-rgb), 0.28);
+  color: var(--cream) !important;
+  box-shadow:
+    0 0 0 1px var(--pink),
+    0 0 0 7px color-mix(in srgb, var(--pink) 20%, transparent),
+    0 0 28px rgba(var(--pink-rgb), 0.4);
 }
 
 .header-end {
@@ -980,6 +1012,12 @@ h1 em {
   margin-bottom: var(--gap-block);
 }
 
+.section-head .eyebrow,
+.faq__intro .eyebrow,
+.contact__intro .eyebrow {
+  margin-bottom: 0.55rem;
+}
+
 .section-head h2 {
   font-size: var(--h2);
   line-height: 1.12;
@@ -987,7 +1025,7 @@ h1 em {
   margin-bottom: 0.85rem;
 }
 
-.section-head p {
+.section-head p:not(.eyebrow) {
   color: var(--cream-dim);
   font-size: var(--text);
   line-height: 1.55;
@@ -2437,9 +2475,9 @@ button.teaser-row {
   grid-column: 1 / -1;
   margin: 0;
   max-width: 44rem;
-  font-size: clamp(1.85rem, 4.1vw, 2.9rem);
-  line-height: 1.12;
-  letter-spacing: -0.045em;
+  font-size: var(--h2);
+  line-height: 1.16;
+  letter-spacing: -0.035em;
 }
 
 .approach-pin__head .eyebrow {
@@ -2527,9 +2565,9 @@ button.teaser-row {
 .approach-slide h4 {
   margin: 0 0 0.9rem;
   font-family: var(--display);
-  font-size: clamp(1.85rem, 3.6vw, 2.7rem);
-  letter-spacing: -0.045em;
-  line-height: 1.05;
+  font-size: clamp(1.4rem, 2.4vw, 1.78rem);
+  letter-spacing: -0.035em;
+  line-height: 1.12;
 }
 
 .approach-slide p {
@@ -2802,8 +2840,16 @@ button.teaser-row {
   padding-bottom: 0.15rem;
 }
 
+.why-choose__head .eyebrow {
+  margin-bottom: 0.55rem;
+}
+
 .why-choose__head h2 {
   margin: 0;
+  font-size: var(--h2);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.04em;
 }
 
 .why-choose__rows {
@@ -2853,11 +2899,11 @@ button.teaser-row {
 
 .reason__title {
   margin: 0.15rem 0 0;
-  font-family: var(--display);
-  font-size: clamp(1.15rem, 1.7vw, 1.45rem);
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 1.15;
+  font-family: var(--sans);
+  font-size: clamp(1.05rem, 1.25vw, 1.2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.28;
   color: var(--cream);
 }
 
@@ -2958,6 +3004,9 @@ button.teaser-row {
 
 .faq__intro h2 {
   margin: 0 0 0.85rem;
+  font-size: var(--h2);
+  line-height: 1.16;
+  letter-spacing: -0.035em;
 }
 
 .faq__intro p:last-child {
@@ -3116,6 +3165,9 @@ button.teaser-row {
 
 .contact__intro h2 {
   margin: 0.3rem 0 0.75rem;
+  font-size: var(--h2);
+  line-height: 1.16;
+  letter-spacing: -0.035em;
 }
 
 .contact__intro > p {
@@ -3758,6 +3810,10 @@ button.teaser-row {
     text-align: center;
   }
 
+  .nav--sheet .nav__cta > span {
+    width: 100%;
+  }
+
   .contact input:not([type='checkbox']):not([type='hidden']),
   .contact textarea,
   .contact-select__btn {
@@ -4045,7 +4101,7 @@ button.teaser-row {
 
   .approach--swipe .approach-slide h3,
   .approach--swipe .approach-slide h4 {
-    font-size: clamp(1.55rem, 7.2vw, 2.15rem);
+    font-size: clamp(1.28rem, 5.2vw, 1.58rem);
   }
 
   .approach--swipe .approach-slide p {
@@ -4748,7 +4804,8 @@ button.teaser-row {
   .step-card,
   .btn,
   .btn--slide > span > span,
-  .hero__actions .btn::before {
+  .hero__actions .btn::before,
+  .nav__cta::before {
     animation: none;
     transition: none;
   }
@@ -4870,7 +4927,42 @@ button.teaser-row {
   line-height: 1.65;
 }
 
+.lost .eyebrow {
+  color: var(--pink);
+}
+
+.lost__code {
+  margin: 0.15rem 0 0.35rem;
+  color: var(--pink);
+  font-family: var(--logo);
+  font-size: clamp(4.2rem, 12vw, 8.4rem);
+  font-weight: 800;
+  letter-spacing: -0.08em;
+  line-height: 0.82;
+}
+
+.lost h1 {
+  margin: 0;
+  color: var(--cream);
+  font-size: clamp(1.48rem, 3vw, 2.05rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.12;
+}
+
+.lost .lede {
+  max-width: 34rem;
+}
+
 @media (max-width: 720px) {
+  .lost__code {
+    font-size: clamp(3.4rem, 22vw, 5.2rem);
+  }
+
+  .lost h1 {
+    font-size: clamp(1.32rem, 6.2vw, 1.7rem);
+  }
+
   .legal {
     width: 100%;
     margin: calc(5.2rem + env(safe-area-inset-top)) auto 3.2rem;

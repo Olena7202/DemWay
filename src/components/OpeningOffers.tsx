@@ -10,6 +10,7 @@ export function OpeningOffers() {
     <section className="offers" id="offers" data-scene="ink">
       <Reveal once>
         <div className="section-head">
+          <p className="eyebrow">{offers.kicker}</p>
           <h2>{offers.title}</h2>
         </div>
       </Reveal>

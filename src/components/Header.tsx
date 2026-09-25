@@ -32,8 +32,11 @@ function NavLinks({ onSelect }: { onSelect: () => void }) {
       <Link to={contactTo} onClick={onSelect}>
         {t.nav.contact}
       </Link>
-      <Link className="nav__cta" to={contactTo} onClick={onSelect}>
-        {t.nav.brief}
+      <Link className="nav__cta btn btn--slide" to={contactTo} onClick={onSelect}>
+        <span>
+          <span>{t.nav.brief}</span>
+          <span>{t.nav.brief}</span>
+        </span>
       </Link>
     </>
   )
