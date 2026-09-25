@@ -1665,8 +1665,19 @@ button.teaser-row {
   background: var(--pink);
 }
 
+.offers {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.offers .section-head,
+.offers .section-head h2 {
+  margin-bottom: 0;
+}
+
 .offers .section-head {
-  margin-bottom: 1.6rem;
+  padding-bottom: 0.15rem;
 }
 
 .offers__grid {
@@ -1871,7 +1882,7 @@ button.teaser-row {
 }
 
 .offers__note {
-  margin: 1.1rem 0 0;
+  margin: 0;
   max-width: 36rem;
   color: var(--cream-dim);
   font-size: 0.8rem;
@@ -2566,6 +2577,10 @@ button.teaser-row {
   background: var(--pink);
 }
 
+.approach--swipe {
+  padding-bottom: var(--pad-section);
+}
+
 .approach--swipe .approach-pin__sticky {
   min-height: 0;
   overflow: visible;
@@ -2755,7 +2770,10 @@ button.teaser-row {
 .why-choose {
   position: relative;
   isolation: isolate;
-  padding-top: calc(var(--pad-section) + 0.4rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  padding-top: var(--pad-section);
 }
 
 .why-choose::before {
@@ -2780,7 +2798,12 @@ button.teaser-row {
 
 .why-choose__head {
   max-width: 34rem;
-  margin-bottom: 1.6rem;
+  margin-bottom: 0;
+  padding-bottom: 0.15rem;
+}
+
+.why-choose__head h2 {
+  margin: 0;
 }
 
 .why-choose__rows {
@@ -2921,7 +2944,7 @@ button.teaser-row {
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
   gap: 2.2rem 3.4rem;
   align-items: start;
-  padding-top: calc(var(--pad-section) + 2.4rem);
+  padding-top: var(--pad-section);
 }
 
 .faq > * {
@@ -3863,10 +3886,24 @@ button.teaser-row {
     align-items: start;
   }
 
+  .why {
+    grid-template-rows: none;
+    row-gap: 1.55rem;
+  }
+
+  .why__kicker .eyebrow {
+    margin-bottom: 0;
+  }
+
   .contact__form,
   .contact__receipt,
   .faq__list {
     padding-top: 0;
+  }
+
+  .faq,
+  .contact {
+    gap: 1.55rem;
   }
 
   .why__kicker,
@@ -3877,7 +3914,7 @@ button.teaser-row {
   }
 
   .why__head {
-    margin-bottom: 1.4rem;
+    margin-bottom: 0;
     max-width: none;
   }
 
@@ -4096,7 +4133,7 @@ button.teaser-row {
       'cards'
       'cta';
     align-items: start;
-    row-gap: 1.5rem;
+    row-gap: 1.55rem;
   }
 
   .services .teaser-catalog {
@@ -4166,6 +4203,12 @@ button.teaser-row {
 }
 
 @media (max-width: 720px) {
+  .approach,
+  .nav__approach,
+  .site-footer li:has(.nav__approach) {
+    display: none;
+  }
+
   .page-bg__grain,
   .page-bg__grid {
     display: none;
@@ -4222,11 +4265,11 @@ button.teaser-row {
   }
 
   .why__kicker .eyebrow {
-    margin-bottom: 1.15rem;
+    margin-bottom: 0;
   }
 
   .why__head {
-    margin-bottom: 1.9rem;
+    margin-bottom: 0;
   }
 
   .why__head h3 {
@@ -4281,29 +4324,35 @@ button.teaser-row {
     margin-bottom: 1.45rem;
   }
 
+  .services:not(.services--page) .section-head,
+  .offers .section-head,
+  .why-choose__head {
+    margin-bottom: 0;
+  }
+
   .section-head h2 {
     margin-bottom: 0;
   }
 
   .services:not(.services--page) {
-    row-gap: 1.7rem;
+    row-gap: 1.55rem;
   }
 
   .offers .section-head {
-    margin-bottom: 1.35rem;
+    margin-bottom: 0;
   }
 
   .offers__note {
-    margin-top: 1.4rem;
+    margin-top: 0;
   }
 
   .why-choose {
-    padding-top: calc(var(--pad-section) + 0.35rem);
+    padding-top: var(--pad-section);
   }
 
   .why-choose__head {
     max-width: none;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0;
   }
 
   .why-choose__head h2 {
@@ -4315,7 +4364,7 @@ button.teaser-row {
   }
 
   .faq {
-    padding-top: calc(var(--pad-section) + 0.5rem);
+    padding-top: var(--pad-section);
   }
 
   .faq__intro {
@@ -4336,7 +4385,7 @@ button.teaser-row {
   }
 
   .contact {
-    gap: 1.7rem;
+    gap: 1.55rem;
   }
 
   .contact__intro h2 {

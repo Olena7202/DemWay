@@ -64,7 +64,7 @@ export function Footer() {
                 <Link to={{ pathname: '/', hash: '#offers' }}>{t.nav.packages}</Link>
               </li>
               <li>
-                <Link to={{ pathname: '/', hash: '#approach' }}>{t.nav.approach}</Link>
+                <Link className="nav__approach" to={{ pathname: '/', hash: '#approach' }}>{t.nav.approach}</Link>
               </li>
               <li>
                 <Link to={faqTo}>FAQ</Link>

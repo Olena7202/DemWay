@@ -26,7 +26,7 @@ function NavLinks({ onSelect }: { onSelect: () => void }) {
       <Link to={{ pathname: '/', hash: '#offers' }} onClick={onSelect}>
         {t.nav.packages}
       </Link>
-      <Link to={{ pathname: '/', hash: '#approach' }} onClick={onSelect}>
+      <Link className="nav__approach" to={{ pathname: '/', hash: '#approach' }} onClick={onSelect}>
         {t.nav.approach}
       </Link>
       <Link to={contactTo} onClick={onSelect}>
