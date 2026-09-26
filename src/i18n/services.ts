@@ -7,7 +7,7 @@ type ServiceCopy = { title?: string; text?: string; plans?: PlanCopy[] }
 const en: Record<string, ServiceCopy> = {
   lending: {
     title: 'Landing page',
-    text: 'A landing page to advertise one product or service — a clear path and high conversion.',
+    text: 'We build landing pages for a specific offer, product or ad campaign. The page structure is built around one action so the visitor quickly sees the value and takes the next step.',
     plans: [
       {
         name: 'Start',
@@ -39,7 +39,7 @@ const en: Record<string, ServiceCopy> = {
   },
   vizytka: {
     title: 'Brochure site',
-    text: 'A multi-page site for a company or specialist: services, portfolio, reviews, blog and contacts.',
+    text: 'A compact brochure site that presents a company, services or specialist online. We shape the structure around what a potential client needs to know.',
     plans: [
       {
         name: 'Start',
@@ -59,7 +59,7 @@ const en: Record<string, ServiceCopy> = {
   },
   korporatyvnyy: {
     title: 'Corporate website',
-    text: 'A company system site: practices, cases, team, careers, blog and marketing integrations.',
+    text: 'Corporate sites for companies that need a full digital presentation of the business. We plan page structure, navigation and content so the site builds trust and supports growth.',
     plans: [
       {
         name: 'Start',
@@ -88,7 +88,7 @@ const en: Record<string, ServiceCopy> = {
   },
   katalog: {
     title: 'Catalog site',
-    text: 'A product showcase with inquiries — no cart, not a webshop. For B2B, manufacturers and suppliers.',
+    text: 'For a clear presentation of a wide range of products or services. We organize categories, filters and navigation so the user finds the right offer quickly. No cart and no payment — not an online store. For B2B, manufacturers and suppliers.',
     plans: [
       {
         name: 'No checkout',
@@ -140,7 +140,7 @@ const en: Record<string, ServiceCopy> = {
   },
   'redyzayn-lending': {
     title: 'Landing redesign',
-    text: 'We refresh the landing: structure, visuals and form — without building the site from scratch.',
+    text: 'We rebuild the landing around the current offer, audience and target action. The page becomes clearer and more persuasive for a potential client.',
     plans: [
       {
         name: 'Start',
@@ -162,7 +162,7 @@ const en: Record<string, ServiceCopy> = {
   },
   'redyzayn-vizytka': {
     title: 'Brochure site redesign',
-    text: 'We refresh a short company site: who you are, what you do, how to reach you — without a rebuild from scratch.',
+    text: 'We refresh a brochure site when the information is outdated or the features fall short. We work on visual presentation, structure and ease of use.',
     plans: [
       {
         name: 'Start',
@@ -184,7 +184,7 @@ const en: Record<string, ServiceCopy> = {
   },
   'redyzayn-korporatyvnyy': {
     title: 'Corporate redesign',
-    text: 'We refresh look and ease of a multi-page site while keeping the content you need.',
+    text: 'We refresh the look and ease of a multi-page site while keeping the content you need. We tune structure, how information is presented and the user experience.',
     plans: [
       {
         name: 'Start',
@@ -211,7 +211,7 @@ const en: Record<string, ServiceCopy> = {
   },
   'redyzayn-katalog': {
     title: 'Catalog site redesign',
-    text: 'We refresh a product or service catalog: categories, cards, search and inquiry — keeping your content.',
+    text: 'We improve structure and navigation of catalog sites so people find the products or services they need more easily.',
     plans: [
       {
         name: 'Start',
@@ -233,8 +233,8 @@ const en: Record<string, ServiceCopy> = {
     ],
   },
   pereyizd: {
-    title: 'Move off a website builder',
-    text: 'We take the site off Tilda, Wix or another builder onto a custom build you can grow.',
+    title: 'Move off a website builder onto a custom build',
+    text: 'We move a site off a builder (Tilda, Wix) onto a custom build when the platform’s standard options are no longer enough.',
     plans: [
       {
         name: 'Start',
@@ -255,8 +255,8 @@ const en: Record<string, ServiceCopy> = {
     ],
   },
   'mobilna-adaptatsiya': {
-    title: 'Mobile adaptation',
-    text: 'We bring the existing site to a usable look on phones: layout, buttons, speed.',
+    title: 'Mobile version adaptation',
+    text: 'We optimize how the site looks on phones and tablets. We work with structure, navigation and page elements so people can use the site comfortably on any device.',
     plans: [
       {
         name: 'Start',
@@ -277,7 +277,7 @@ const en: Record<string, ServiceCopy> = {
   },
   'seo-optymizatsiya': {
     title: 'On-site SEO optimization',
-    text: 'Core on-site SEO: keywords, meta and page URLs.',
+    text: 'We run a full on-site SEO pass: structure, content, metadata, technical settings and search semantics. The aim is a site that search engines understand and potential clients find useful.',
     plans: [
       {
         name: 'Scope',
@@ -308,7 +308,7 @@ const en: Record<string, ServiceCopy> = {
   },
   'poshukova-reklama': {
     title: 'Search ads',
-    text: 'For customers already looking for your product or service.',
+    text: 'We show ads at the moment people already search for the product, service or solution they need. Search ads bring an audience with a specific query, which raises the chance of a purchase.',
     plans: [
       {
         name: 'Launch',
@@ -325,7 +325,7 @@ const en: Record<string, ServiceCopy> = {
   },
   'mediyna-reklama': {
     title: 'Display ads',
-    text: 'For reach, recognition and bringing potential clients back.',
+    text: 'We raise brand recognition with visual ads and build interest in the offer across Google’s partner network. Audiences and formats are picked to match the campaign goals.',
     plans: [
       {
         name: 'Launch',
@@ -342,7 +342,7 @@ const en: Record<string, ServiceCopy> = {
   },
   'tovarna-reklama': {
     title: 'Shopping ads',
-    text: 'For online stores: products with photo, price and a link to the site.',
+    text: 'We show the product, photo, price and name right in search so the client can judge the offer quickly and move to a purchase.',
     plans: [
       {
         name: 'Launch',

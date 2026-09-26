@@ -23,6 +23,7 @@ export function ServicesTeaser() {
         <div className="section-head services__head">
           <p className="eyebrow">{t.servicesTeaser.kicker}</p>
           <h2>{t.servicesTeaser.title}</h2>
+          <p>{t.servicesTeaser.text}</p>
         </div>
       </Reveal>
 

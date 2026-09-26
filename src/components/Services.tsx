@@ -93,8 +93,10 @@ export function Services() {
       </div>
 
       <div className="svc-catalog">
-        {t.groups[group] ? (
-          <h3 className="svc-catalog__group">{t.groups[group]}</h3>
+        {(t.groupHeadings[group] || t.groups[group]) ? (
+          <h3 className="svc-catalog__group">
+            {t.groupHeadings[group] ?? t.groups[group]}
+          </h3>
         ) : null}
         {t.groupLeads[group] ? (
           <p className="svc-catalog__lead">{t.groupLeads[group]}</p>
@@ -112,6 +114,9 @@ export function Services() {
                   <h3 className="teaser-cluster__label">
                     {t.clusters[cluster.label] ?? cluster.label}
                   </h3>
+                  {t.clusterLeads[cluster.label] ? (
+                    <p className="teaser-cluster__lead">{t.clusterLeads[cluster.label]}</p>
+                  ) : null}
                 </ScrollReveal>
                 <div className="teaser-list">
                   {cluster.items.map((service, index) => (
@@ -165,6 +170,7 @@ function ServicePlans({ service }: { service: Service }) {
     search: `?${params.toString()}`,
     hash: '#contact',
   } as const
+  const namedPlans = service.plans.length > 1
   return (
     <div className={`svc__plans svc__plans--${service.plans.length}`}>
       {service.plans.map((plan, planIndex) => (
@@ -172,10 +178,12 @@ function ServicePlans({ service }: { service: Service }) {
             key={plan.name}
             className={`plan${planIndex === 0 ? ' plan--base' : ''}`}
           >
-            {plan.name || plan.term ? (
+            {(namedPlans && plan.name) || plan.term ? (
               <p className="plan__meta">
-                {plan.name ? <span className="plan__name">{plan.name}</span> : null}
-                {plan.name && plan.term ? (
+                {namedPlans && plan.name ? (
+                  <span className="plan__name">{plan.name}</span>
+                ) : null}
+                {namedPlans && plan.name && plan.term ? (
                   <span className="plan__sep" aria-hidden="true">
                     ·
                   </span>

@@ -1025,7 +1025,7 @@ h1 em {
   margin-bottom: 0.85rem;
 }
 
-.section-head p:not(.eyebrow) {
+.section-head p:not(.eyebrow):not(.svc-detail__title) {
   color: var(--cream-dim);
   font-size: var(--text);
   line-height: 1.55;
@@ -1098,7 +1098,7 @@ h1 em {
     'cards cards';
   column-gap: 2.4rem;
   row-gap: var(--gap-block);
-  align-items: end;
+  align-items: start;
 }
 
 .services__head-block {
@@ -1112,8 +1112,21 @@ h1 em {
 }
 
 .services__head {
-  max-width: 34rem;
+  max-width: 44rem;
   margin-bottom: 0;
+}
+
+.services__head h3 {
+  margin: 1.15rem 0 0.55rem;
+  font-family: var(--display);
+  font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.18;
+}
+
+.services__head p {
+  margin: 0.7rem 0 0;
 }
 
 .services__cards {
@@ -1229,6 +1242,14 @@ h1 em {
   color: color-mix(in srgb, var(--pink) 55%, var(--cream-dim));
 }
 
+.teaser-cluster__lead {
+  margin: 0.55rem 0 0.75rem;
+  max-width: 28rem;
+  color: var(--cream-dim);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
 .teaser-list {
   list-style: none;
   margin: 0;
@@ -1339,6 +1360,7 @@ h1 em {
 }
 
 .teaser-row__text {
+  display: block;
   color: var(--cream-dim);
   font-size: 0.84rem;
   line-height: 1.45;
@@ -1377,8 +1399,8 @@ h1 em {
 }
 
 .svc-catalog__lead {
-  margin: 0;
-  max-width: 34rem;
+  margin: 0 0 1.25rem;
+  max-width: 42rem;
   color: var(--cream-dim);
   font-size: 0.94rem;
   line-height: 1.5;
@@ -1490,16 +1512,23 @@ button.teaser-row {
 .svc-picked .svc-detail__head h2,
 .svc-picked .svc-detail__title {
   margin: 0 0 0.55rem;
-  font-family: var(--display);
-  font-size: clamp(1.5rem, 2.5vw, 2.05rem);
-  letter-spacing: -0.04em;
-  line-height: 1.12;
+  font-family: var(--font);
+  font-size: var(--text);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.55;
+  color: var(--pink);
 }
 
-.svc-detail__head p {
+.svc-detail__head p:not(.svc-detail__title) {
   margin: 0;
   color: var(--cream-dim);
   line-height: 1.55;
+}
+
+.svc-picked .svc-detail__head p.svc-detail__title {
+  color: var(--pink);
+  font-size: var(--text);
 }
 
 .svc-picked__quote {

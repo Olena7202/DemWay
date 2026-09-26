@@ -58,7 +58,9 @@ export type Copy = {
     }[]
   }
   groups: Record<ServiceGroup, string>
+  groupHeadings: Partial<Record<ServiceGroup, string>>
   clusters: Record<string, string>
+  clusterLeads: Partial<Record<string, string>>
   groupLeads: Partial<Record<ServiceGroup, string>>
   teaserBlurbs: Record<ServiceGroup, string>
   catalog: {
@@ -173,9 +175,9 @@ export const copy: Record<Locale, Copy> = {
       language: 'Мова',
     },
     hero: {
-      titleName: 'DemWay-',
+      titleName: 'DemWay -',
       titleAgency: 'digital-агенція повного циклу',
-      lede: 'Кожне рішення будуємо навколо вашого бізнесу: сайти й лендінги, CRM, пошук, реклама та айдентика — від першого контакту до покупки.',
+      lede: 'Перетворюємо бізнес на бренд, який знаходять, обирають і запам’ятовують. Створюємо сайт, залучаємо клієнтів та розвиваємо бізнес з нуля.',
       discuss: 'Обговорити задачу',
       cases: 'Дивитись послуги',
     },
@@ -186,7 +188,7 @@ export const copy: Record<Locale, Copy> = {
       points: [
         {
           title: 'Digital-маркетинг як система для розвитку бізнесу',
-          text: 'Digital-маркетинг — це не окремі рекламні інструменти, а система, у якій кожен канал працює на спільну ціль. Ми допомагаємо вибудувати послідовний шлях від першого контакту з брендом до залучення та утримання клієнта.',
+          text: 'Digital-маркетинг - це не окремі рекламні інструменти, а система, у якій кожен канал працює на спільну ціль. Ми допомагаємо вибудувати послідовний шлях від першого контакту з брендом до залучення та утримання клієнта.',
         },
         {
           title: 'Для кого ми працюємо',
@@ -222,7 +224,7 @@ export const copy: Record<Locale, Copy> = {
     servicesTeaser: {
       kicker: 'Послуги',
       title: 'Послуги діджитал агентства',
-      text: 'Натисніть квадрат напряму — відкриється вкладка каталогу з іншими пакетами цього блоку.',
+      text: 'Ми зібрали ключові маркетингові послуги в одному місці, щоб бізнесу не доводилося збирати діджитал по частинках. Від створення сайту та SEO-оптимізації до реклами та ремаркетингу - будуємо систему, де кожен інструмент працює на спільну ціль.',
       catalog: 'Увесь каталог пакетів',
       openTab: 'Відкрити вкладку «{name}» і подивитись пакети',
       go: 'Відкрити вкладку з пакетами',
@@ -230,7 +232,7 @@ export const copy: Record<Locale, Copy> = {
     openingOffers: {
       kicker: 'Пакети',
       title: 'Оберіть формат запуску',
-      text: 'Не збирайте сайт, рекламу і SEO з окремих послуг. Три готові збірки зі знижкою 15% — під етап, на якому зараз ваш бізнес.',
+      text: 'Не збирайте сайт, рекламу і SEO з окремих послуг. Три готові збірки зі знижкою 15% - під етап, на якому зараз ваш бізнес.',
       includes: 'Що входить',
       resultLabel: 'Результат',
       save: '−15%',
@@ -278,18 +280,38 @@ export const copy: Record<Locale, Copy> = {
       Системи: 'Системи',
       Айдентика: 'Айдентика',
     },
+    groupHeadings: {
+      Сайти: 'Розробка сайтів',
+      Редизайн: 'Редизайн',
+      SEO: 'SEO',
+      Реклама: 'Реклама',
+    },
     clusters: {
       'Новий сайт': 'Новий сайт',
       Оновлення: 'Оновлення',
-      'Лендінг і сайт': 'Лендінг і сайт',
-      'SEO-оптимізація': 'SEO-оптимізація',
+      'Редизайн сайтів': 'Редизайн сайтів',
+      'SEO-просування': 'SEO-просування',
       'Google Ads': 'Google Ads',
       'Meta Ads': 'Meta Ads',
       'Email і тести': 'Email і тести',
       Продажі: 'Продажі',
       Бренд: 'Бренд',
     },
-    groupLeads: {},
+    clusterLeads: {
+      'SEO-просування':
+        'Залучаємо цільових клієнтів із пошуку, підвищуємо видимість сайту та отримуємо стабільний органічний трафік без постійної оплати за кожен клік.',
+      'Google Ads':
+        'Налаштовуємо Google Ads для залучення цільової аудиторії та контролю рекламних витрат. Визначаємо потрібні кампанії, аудиторії та цілі, а після запуску аналізуємо дані й оптимізуємо рекламу.',
+    },
+    groupLeads: {
+      Сайти:
+        'Створюємо сайти, які не просто презентують бізнес, а допомагають досягати комерційних цілей. Розробляємо нові проєкти, оновлюємо наявні та адаптуємо їх під потреби користувачів і бізнесу.',
+      Редизайн:
+        'Оновлюємо сайт, коли його вигляд, структура або логіка вже не відповідають бренду та очікуванням аудиторії. Редизайн допомагає зробити сайт сучаснішим, зрозумілішим і зручнішим без втрати його основної цінності для бізнесу.',
+      SEO: 'SEO — ключовий елемент успішної стратегії просування. Бути в правильному місці в правильний час — це не магія, а якісна SEO-оптимізація сайту. Аналізуємо сайт, пошуковий попит і конкурентне середовище, щоб визначити точки росту.',
+      Реклама:
+        'Запускаємо рекламу там, де потенційні клієнти вже шукають рішення або взаємодіють із брендами. Підбираємо рекламні канали відповідно до цілей, аудиторії та доступного бюджету.',
+    },
     teaserBlurbs: {
       Сайти: 'Лендінг, візитка чи каталог — сайт під заявку й запуск реклами.',
       Редизайн: 'Оновлюємо лендінг, візитку, корпоративний сайт чи каталог.',
@@ -566,8 +588,8 @@ export const copy: Record<Locale, Copy> = {
     },
     servicesTeaser: {
       kicker: 'Services',
-      title: 'Directions we assemble into a system',
-      text: 'Tap a direction card to open the catalog tab with the other packages in that block.',
+      title: 'Digital agency services',
+      text: 'We gathered the core marketing services in one place so a business does not have to assemble digital piece by piece. From site creation and SEO to ads and remarketing — we build a system where every tool works toward one goal.',
       catalog: 'Full package catalog',
       openTab: 'Open the “{name}” tab and see packages',
       go: 'Open the packages tab',
@@ -623,18 +645,38 @@ export const copy: Record<Locale, Copy> = {
       Системи: 'Systems',
       Айдентика: 'Identity',
     },
+    groupHeadings: {
+      Сайти: 'Website development',
+      Редизайн: 'Redesign',
+      SEO: 'SEO',
+      Реклама: 'Ads',
+    },
     clusters: {
       'Новий сайт': 'New site',
       Оновлення: 'Refresh',
-      'Лендінг і сайт': 'Landing & site',
-      'SEO-оптимізація': 'SEO optimization',
+      'Редизайн сайтів': 'Website redesign',
+      'SEO-просування': 'SEO promotion',
       'Google Ads': 'Google Ads',
       'Meta Ads': 'Meta Ads',
       'Email і тести': 'Email & tests',
       Продажі: 'Sales',
       Бренд: 'Brand',
     },
-    groupLeads: {},
+    clusterLeads: {
+      'SEO-просування':
+        'We attract target clients from search, raise site visibility and get steady organic traffic without paying for every click.',
+      'Google Ads':
+        'We set up Google Ads to reach the right audience and keep spend under control. We pick campaigns, audiences and goals, then review the data after launch and optimize.',
+    },
+    groupLeads: {
+      Сайти:
+        'We create sites that do more than present the business: they help hit commercial goals. We build new projects, refresh existing ones and adapt them to user and business needs.',
+      Редизайн:
+        'We refresh a site when its look, structure or logic no longer match the brand and audience expectations. Redesign makes the site more modern, clearer and easier to use without losing its core value for the business.',
+      SEO: 'SEO is a key part of a working promotion strategy. Being in the right place at the right time is not magic — it is solid on-site SEO. We review the site, search demand and the competitive field to find growth points.',
+      Реклама:
+        'We run ads where potential clients already look for a solution or engage with brands. We pick channels to match goals, audience and budget.',
+    },
     teaserBlurbs: {
       Сайти: 'Landing, brochure or catalog — a site built for leads and ads.',
       Редизайн: 'Refresh a landing, brochure, corporate site or catalog.',

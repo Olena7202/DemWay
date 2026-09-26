@@ -16,4 +16,8 @@ function spaFallback(): Plugin {
 export default defineConfig(({ command }) => ({
   plugins: [react(), spaFallback()],
   base: command === 'build' ? '/DemWay/' : '/',
+  server: {
+    host: '127.0.0.1',
+    port: 5173,
+  },
 }))
