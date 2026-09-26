@@ -21,6 +21,8 @@ export type Copy = {
     kicker: string
     title: string
     text: string
+    lead: string
+    leadText: string
     points: { title: string; text: string }[]
   }
   whyChoose: {
@@ -184,12 +186,11 @@ export const copy: Record<Locale, Copy> = {
     why: {
       kicker: 'DemWay',
       title: 'Про нас',
-      text: 'DemWay — діджитал агентство, яке допомагає бізнесу вибудувати зрозумілу digital-систему без необхідності самостійно розбиратися в маркетингу. Ми поєднуємо стратегію, креатив і технології, щоб маркетингові рішення відповідали цілям бізнесу, його можливостям та бюджету.',
+      text: 'DemWay - діджитал агентство, яке допомагає бізнесу вибудувати зрозумілу digital-систему без необхідності самостійно розбиратися в маркетингу. Ми поєднуємо стратегію, креатив і технології, щоб маркетингові рішення відповідали цілям бізнесу, його можливостям та бюджету.',
+      lead: 'Digital-маркетинг як система для розвитку бізнесу',
+      leadText:
+        'Digital-маркетинг — це не окремі рекламні інструменти, а система, у якій кожен канал працює на спільну ціль. Ми допомагаємо вибудувати послідовний шлях від першого контакту з брендом до залучення та утримання клієнта.',
       points: [
-        {
-          title: 'Digital-маркетинг як система для розвитку бізнесу',
-          text: 'Digital-маркетинг - це не окремі рекламні інструменти, а система, у якій кожен канал працює на спільну ціль. Ми допомагаємо вибудувати послідовний шлях від першого контакту з брендом до залучення та утримання клієнта.',
-        },
         {
           title: 'Для кого ми працюємо',
           text: 'Працюємо з бізнесами, які хочуть розвиватись онлайн, але не мають власного маркетолога або чіткого digital-плану. Допомагаємо як новим проєктам, так і компаніям, які прагнуть оновити сайт, покращити просування чи систематизувати маркетинг.',
@@ -285,6 +286,7 @@ export const copy: Record<Locale, Copy> = {
       Редизайн: 'Редизайн',
       SEO: 'SEO',
       Реклама: 'Реклама',
+      Системи: 'Системи',
     },
     clusters: {
       'Новий сайт': 'Новий сайт',
@@ -293,8 +295,9 @@ export const copy: Record<Locale, Copy> = {
       'SEO-просування': 'SEO-просування',
       'Google Ads': 'Google Ads',
       'Meta Ads': 'Meta Ads',
-      'Email і тести': 'Email і тести',
-      Продажі: 'Продажі',
+      'Email-маркетинг': 'Email-маркетинг',
+      Системи: 'Системи',
+      'CRM та автоматизація': 'CRM та автоматизація',
       Бренд: 'Бренд',
     },
     clusterLeads: {
@@ -302,6 +305,14 @@ export const copy: Record<Locale, Copy> = {
         'Залучаємо цільових клієнтів із пошуку, підвищуємо видимість сайту та отримуємо стабільний органічний трафік без постійної оплати за кожен клік.',
       'Google Ads':
         'Налаштовуємо Google Ads для залучення цільової аудиторії та контролю рекламних витрат. Визначаємо потрібні кампанії, аудиторії та цілі, а після запуску аналізуємо дані й оптимізуємо рекламу.',
+      'Meta Ads':
+        'Запускаємо таргетовану рекламу в Meta для підвищення впізнаваності бренду, залучення нової аудиторії, повернення потенційних клієнтів і просування конкретних пропозицій.',
+      'Email-маркетинг':
+        'Створюємо комунікацію, яка нагадує про бренд, повертає аудиторію та підтримує повторні покупки. Не втрачаємо контакт із клієнтами після першої взаємодії.',
+      Системи:
+        'Будуємо digital-системи, які спрощують роботу з клієнтами, продажами та маркетингом. Поєднуємо інструменти так, щоб дані не залишалися окремо в різних сервісах.',
+      'CRM та автоматизація':
+        'Структуруємо процес роботи з потенційними клієнтами, щоб жодна заявка не губилася, а команда розуміла, на якому етапі перебуває кожен контакт.',
     },
     groupLeads: {
       Сайти:
@@ -311,6 +322,8 @@ export const copy: Record<Locale, Copy> = {
       SEO: 'SEO — ключовий елемент успішної стратегії просування. Бути в правильному місці в правильний час — це не магія, а якісна SEO-оптимізація сайту. Аналізуємо сайт, пошуковий попит і конкурентне середовище, щоб визначити точки росту.',
       Реклама:
         'Запускаємо рекламу там, де потенційні клієнти вже шукають рішення або взаємодіють із брендами. Підбираємо рекламні канали відповідно до цілей, аудиторії та доступного бюджету.',
+      Системи:
+        'Будуємо digital-системи, які спрощують роботу з клієнтами, продажами та маркетингом. Поєднуємо інструменти так, щоб дані не залишалися окремо в різних сервісах.',
     },
     teaserBlurbs: {
       Сайти: 'Лендінг, візитка чи каталог — сайт під заявку й запуск реклами.',
@@ -550,11 +563,10 @@ export const copy: Record<Locale, Copy> = {
       kicker: 'DemWay',
       title: 'About us',
       text: 'DemWay is a digital agency that helps businesses build a clear digital system without having to figure out marketing on their own. We combine strategy, creative and technology so marketing decisions match the business goals, capacity and budget.',
+      lead: 'Digital marketing as a system for business growth',
+      leadText:
+        'Digital marketing is not a set of separate ad tools, but a system where every channel works toward one goal. We help build a consistent path from the first contact with the brand to attracting and retaining the client.',
       points: [
-        {
-          title: 'Digital marketing as a system for business growth',
-          text: 'Digital marketing is not a set of separate ad tools, but a system where every channel works toward one goal. We help build a consistent path from the first contact with the brand to attracting and retaining the client.',
-        },
         {
           title: 'Who we work with',
           text: 'We work with businesses that want to grow online but do not have an in-house marketer or a clear digital plan. We help both new projects and companies that want to refresh a site, improve promotion or systematize marketing.',
@@ -650,6 +662,7 @@ export const copy: Record<Locale, Copy> = {
       Редизайн: 'Redesign',
       SEO: 'SEO',
       Реклама: 'Ads',
+      Системи: 'Systems',
     },
     clusters: {
       'Новий сайт': 'New site',
@@ -658,15 +671,24 @@ export const copy: Record<Locale, Copy> = {
       'SEO-просування': 'SEO promotion',
       'Google Ads': 'Google Ads',
       'Meta Ads': 'Meta Ads',
-      'Email і тести': 'Email & tests',
-      Продажі: 'Sales',
+      'Email-маркетинг': 'Email marketing',
+      Системи: 'Systems',
+      'CRM та автоматизація': 'CRM and automation',
       Бренд: 'Brand',
     },
     clusterLeads: {
       'SEO-просування':
         'We attract target clients from search, raise site visibility and get steady organic traffic without paying for every click.',
       'Google Ads':
-        'We set up Google Ads to reach the right audience and keep spend under control. We pick campaigns, audiences and goals, then review the data after launch and optimize.',
+        'We set up Google Ads to attract a target audience and keep ad spend under control. We define the campaigns, audiences and goals you need, then after launch we analyse the data and optimise the ads.',
+      'Meta Ads':
+        'We run targeted ads in Meta to raise brand recognition, attract a new audience, bring potential clients back and promote specific offers.',
+      'Email-маркетинг':
+        'We build communication that reminds people of the brand, brings the audience back and supports repeat purchases. We do not lose contact with clients after the first interaction.',
+      Системи:
+        'We build digital systems that make work with clients, sales and marketing simpler. We connect tools so data does not sit apart in different services.',
+      'CRM та автоматизація':
+        'We structure how you work with potential clients so no lead is lost and the team can see which stage each contact is at.',
     },
     groupLeads: {
       Сайти:
@@ -676,6 +698,8 @@ export const copy: Record<Locale, Copy> = {
       SEO: 'SEO is a key part of a working promotion strategy. Being in the right place at the right time is not magic — it is solid on-site SEO. We review the site, search demand and the competitive field to find growth points.',
       Реклама:
         'We run ads where potential clients already look for a solution or engage with brands. We pick channels to match goals, audience and budget.',
+      Системи:
+        'We build digital systems that make work with clients, sales and marketing simpler. We connect tools so data does not sit apart in different services.',
     },
     teaserBlurbs: {
       Сайти: 'Landing, brochure or catalog — a site built for leads and ads.',

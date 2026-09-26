@@ -412,7 +412,7 @@ const en: Record<string, ServiceCopy> = {
   },
   'instagram-ads': {
     title: 'Instagram Ads',
-    text: 'Attracting attention, a new audience and potential clients.',
+    text: 'We help catch attention in Instagram through visual ad formats. We create attractive creatives, set targeting and goals to match the business brief.',
     plans: [
       {
         name: 'Start',
@@ -429,7 +429,7 @@ const en: Record<string, ServiceCopy> = {
   },
   'facebook-ads': {
     title: 'Facebook Ads',
-    text: 'Targeted ads for acquisition, engagement and sales.',
+    text: 'We set up Facebook ads to reach a relevant audience. We find potential clients by interests, behaviour and profile and bring them efficiently to a lead or purchase.',
     plans: [
       {
         name: 'Start',
@@ -446,7 +446,7 @@ const en: Record<string, ServiceCopy> = {
   },
   email: {
     title: 'Automation and client communication',
-    text: 'Email setup: list, sequences, templates. So the lead does not stop after the first contact.',
+    text: 'We set up and automatically send the right emails at the right moment — from a welcome and reminders to personal offers, helping keep contact and bring clients back.',
     plans: [
       {
         name: 'Start',
@@ -500,7 +500,7 @@ const en: Record<string, ServiceCopy> = {
   },
   crm: {
     title: 'CRM',
-    text: 'Pipeline, deal stages and client history. So the team sees where the lead is and what is next.',
+    text: 'We help implement CRM for systematic work with leads and clients. We set processes to the specifics of the business, to simplify control of leads and sales.',
     plans: [
       {
         name: 'Start',
@@ -532,7 +532,7 @@ const en: Record<string, ServiceCopy> = {
   },
   'crm-business': {
     title: 'CRM Business',
-    text: 'CRM with a dashboard, site integration, leads into the system, email and Telegram.',
+    text: 'An extended CRM package: from the structure of the client base to sales stages and automation of repeated tasks.',
     plans: [
       {
         name: 'Business',

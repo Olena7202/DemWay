@@ -12,6 +12,8 @@ export function Why() {
       <Reveal className="why__copy">
         <div className="section-head why__head">
           <p className="why__intro">{t.why.text}</p>
+          <h3>{t.why.lead}</h3>
+          <p>{t.why.leadText}</p>
         </div>
       </Reveal>
       <ul className="why__grid">

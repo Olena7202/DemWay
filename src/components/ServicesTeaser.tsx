@@ -29,7 +29,8 @@ export function ServicesTeaser() {
 
       <ul className="case-grid services__cards">
         {serviceGroups.map((name, index) => {
-          const label = t.groups[name]
+          const label = t.groupHeadings[name] ?? t.groups[name]
+          const text = t.groupLeads[name] ?? t.teaserBlurbs[name]
           return (
             <li key={name}>
               <Reveal delay={index * 70} from="up" once>
@@ -42,8 +43,7 @@ export function ServicesTeaser() {
                     <span className="case-card__mark">{marks[name]}</span>
                   </span>
                   <span className="case-card__copy">
-                    <h3 className="case-card__title">{t.groups[name]}</h3>
-                    <span className="case-card__text">{t.teaserBlurbs[name]}</span>
+                    <span className="case-card__text">{text}</span>
                   </span>
                 </Link>
               </Reveal>

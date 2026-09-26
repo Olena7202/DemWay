@@ -29,8 +29,11 @@ function NavLinks({ onSelect }: { onSelect: () => void }) {
       <Link className="nav__approach" to={{ pathname: '/', hash: '#approach' }} onClick={onSelect}>
         {t.nav.approach}
       </Link>
-      <Link to={contactTo} onClick={onSelect}>
-        {t.nav.contact}
+      <Link className="nav__cta btn btn--slide" to={contactTo} onClick={onSelect}>
+        <span>
+          <span>{t.nav.contact}</span>
+          <span>{t.nav.contact}</span>
+        </span>
       </Link>
     </>
   )

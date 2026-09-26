@@ -28,6 +28,13 @@ export function Services() {
   const current =
     services.find((service) => service.slug === open && service.group === group) ??
     clusters[0]?.items[0]
+  const activeCluster =
+    clusters.find((cluster) => cluster.items.some((service) => service.slug === current?.slug)) ??
+    clusters[0]
+  const activeClusterLead = activeCluster
+    ? t.clusterLeads[activeCluster.label]
+    : undefined
+  const openClusterLabels = clusters.length > 1 || clusters.some((cluster) => !t.clusterLeads[cluster.label])
 
   useEffect(() => {
     const napryam = new URLSearchParams(location.search).get('napryam')
@@ -81,11 +88,7 @@ export function Services() {
     <section className="services services--page" id="services" data-scene="blush">
       <div className="services__top">
         <Reveal>
-          <div className="section-head">
-            <p className="eyebrow">{t.catalog.kicker}</p>
-            <h1 className="services__h1">{t.catalog.title}</h1>
-            <p>{t.catalog.text}</p>
-          </div>
+          <h1 className="services__h1">{t.nav.services}</h1>
         </Reveal>
         <Reveal delay={60} from="soft">
           <ServiceTabs group={group} onChange={pickGroup} />
@@ -93,31 +96,32 @@ export function Services() {
       </div>
 
       <div className="svc-catalog">
-        {(t.groupHeadings[group] || t.groups[group]) ? (
-          <h3 className="svc-catalog__group">
-            {t.groupHeadings[group] ?? t.groups[group]}
-          </h3>
+        {activeClusterLead && activeCluster ? (
+          <div className="svc-catalog__intro">
+            <h3 className="svc-catalog__group">
+              {t.clusters[activeCluster.label] ?? activeCluster.label}
+            </h3>
+            <p className="svc-catalog__lead">{activeClusterLead}</p>
+          </div>
         ) : null}
-        {t.groupLeads[group] ? (
-          <p className="svc-catalog__lead">{t.groupLeads[group]}</p>
-        ) : null}
-        <div className="svc-catalog__split">
+        <div
+          className={`svc-catalog__split${openClusterLabels ? '' : ' svc-catalog__split--flush'}`}
+        >
           <div
             key={group}
-            className={`teaser-board${clusters.length === 1 ? ' teaser-board--one' : ''}`}
+            className="teaser-board teaser-board--one"
             role="navigation"
             aria-label={`${t.catalog.packagesAria}: ${t.groups[group]}`}
           >
             {clusters.map((cluster, clusterIndex) => (
               <div key={cluster.label} className="teaser-cluster">
-                <ScrollReveal delay={clusterIndex * 70}>
-                  <h3 className="teaser-cluster__label">
-                    {t.clusters[cluster.label] ?? cluster.label}
-                  </h3>
-                  {t.clusterLeads[cluster.label] ? (
-                    <p className="teaser-cluster__lead">{t.clusterLeads[cluster.label]}</p>
-                  ) : null}
-                </ScrollReveal>
+                {clusters.length === 1 && t.clusterLeads[cluster.label] ? null : (
+                  <ScrollReveal delay={clusterIndex * 70}>
+                    <h3 className="teaser-cluster__label">
+                      {t.clusters[cluster.label] ?? cluster.label}
+                    </h3>
+                  </ScrollReveal>
+                )}
                 <div className="teaser-list">
                   {cluster.items.map((service, index) => (
                     <ScrollReveal
