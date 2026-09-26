@@ -6,13 +6,13 @@ export function Why() {
   const { t } = useLocale()
   return (
     <section className="why" id="why" data-scene="why">
-      <Reveal className="why__kicker">
-        <h2>{t.why.title}</h2>
-      </Reveal>
-      <Reveal className="why__lede-wrap">
-        <p className="why__lede">{t.why.text}</p>
-      </Reveal>
       <div className="why__split">
+        <Reveal className="why__kicker">
+          <h2>{t.why.title}</h2>
+        </Reveal>
+        <Reveal className="why__lede-wrap">
+          <p className="why__lede">{t.why.text}</p>
+        </Reveal>
         <Reveal className="why__copy">
           <div className="why__head">
             <h3>{t.why.lead}</h3>
