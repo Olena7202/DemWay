@@ -296,9 +296,9 @@ export function Contact() {
     <section className="contact" id="contact" data-scene="close">
       <Reveal from="left">
         <div className="contact__intro">
-          <p className="eyebrow">{t.contact.kicker}</p>
           <h2>{t.contact.title}</h2>
-          <p>{t.contact.text}</p>
+          <h3>{t.contact.lead}</h3>
+          <h4>{t.contact.text}</h4>
         </div>
       </Reveal>
 
@@ -431,7 +431,7 @@ export function Contact() {
             <button className="btn btn--pink btn--slide" type="submit" disabled={sending}>
               <span>
                 <span>{sending ? t.contact.sending : t.contact.send}</span>
-                <span>{sending ? t.contact.sending : t.contact.send}</span>
+                <span aria-hidden="true">{sending ? t.contact.sending : t.contact.send}</span>
               </span>
             </button>
           </form>

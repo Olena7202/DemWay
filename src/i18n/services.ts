@@ -570,7 +570,7 @@ const en: Record<string, ServiceCopy> = {
   },
   logotyp: {
     title: 'Logo design',
-    text: 'A mark and usage rules: color, type, applications. So the brand reads at first glance.',
+    text: 'A logo is the first impression and the base of your brand recognition. We will create a logo that reflects the brand character and can be used across digital and print formats.',
     plans: [
       {
         name: 'Start',
@@ -590,7 +590,7 @@ const en: Record<string, ServiceCopy> = {
   },
   polihrafiya: {
     title: 'Print design',
-    text: 'Asset design: cards, letterheads, brochures. One language with the logo and the site.',
+    text: 'We design business cards, flyers, booklets and other materials in one brand style.',
     plans: [
       {
         name: 'Start',

@@ -43,6 +43,7 @@ export function ServicesTeaser() {
                     <span className="case-card__mark">{marks[name]}</span>
                   </span>
                   <span className="case-card__copy">
+                    <span className="case-card__title">{label}</span>
                     <span className="case-card__text">{text}</span>
                   </span>
                 </Link>
@@ -57,7 +58,7 @@ export function ServicesTeaser() {
           <Link className="btn btn--pink btn--slide" to="/poslugy">
             <span>
               <span>{t.servicesTeaser.catalog}</span>
-              <span>{t.servicesTeaser.catalog}</span>
+              <span aria-hidden="true">{t.servicesTeaser.catalog}</span>
             </span>
           </Link>
         </div>

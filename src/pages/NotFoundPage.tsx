@@ -20,13 +20,13 @@ export function NotFoundPage() {
             <Link className="btn btn--pink btn--slide" to="/">
               <span>
                 <span>{page.home}</span>
-                <span>{page.home}</span>
+                <span aria-hidden="true">{page.home}</span>
               </span>
             </Link>
             <Link className="btn btn--ink btn--slide" to="/poslugy">
               <span>
                 <span>{page.catalog}</span>
-                <span>{page.catalog}</span>
+                <span aria-hidden="true">{page.catalog}</span>
               </span>
             </Link>
           </div>

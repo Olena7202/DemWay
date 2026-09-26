@@ -41,13 +41,13 @@ export function Hero() {
             <a className="btn btn--pink btn--slide" href="#contact">
               <span>
                 <span>{t.hero.discuss}</span>
-                <span>{t.hero.discuss}</span>
+                <span aria-hidden="true">{t.hero.discuss}</span>
               </span>
             </a>
             <a className="btn btn--ink btn--slide" href="#services">
               <span>
                 <span>{t.hero.cases}</span>
-                <span>{t.hero.cases}</span>
+                <span aria-hidden="true">{t.hero.cases}</span>
               </span>
             </a>
           </div>

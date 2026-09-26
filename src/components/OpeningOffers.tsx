@@ -50,7 +50,7 @@ export function OpeningOffers() {
                   >
                     <span>
                       <span>{offers.discuss}</span>
-                      <span>{offers.discuss}</span>
+                      <span aria-hidden="true">{offers.discuss}</span>
                     </span>
                   </Link>
                 </div>

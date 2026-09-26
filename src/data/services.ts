@@ -84,7 +84,10 @@ export const serviceClusters: Record<
     { label: 'Системи', slugs: ['crm'] },
     { label: 'CRM та автоматизація', slugs: ['crm-business'] },
   ],
-  Айдентика: [{ label: 'Бренд', slugs: ['logotyp', 'polihrafiya'] }],
+  Айдентика: [
+    { label: 'Айдентика', slugs: ['logotyp'] },
+    { label: 'Бренд', slugs: ['polihrafiya'] },
+  ],
 }
 
 export function clusterServices(group: ServiceGroup) {
@@ -713,7 +716,7 @@ export const services: Service[] = [
     slug: 'logotyp',
     title: 'Розробка логотипу',
     group: 'Айдентика',
-    text: 'Знак і правила використання: колір, шрифт, носії. Щоб бренд зчитувався з першого погляду.',
+    text: 'Логотип — це перше враження та основа впізнаваності вашого бренду. Ми створимо логотип, який відображає характер бренду та може використовуватися в різних digital і друкованих форматах.',
     plans: [
       {
         name: 'Старт',
@@ -737,7 +740,7 @@ export const services: Service[] = [
     slug: 'polihrafiya',
     title: 'Поліграфія',
     group: 'Айдентика',
-    text: 'Дизайн носіїв: візитки, бланки, брошури. Одна мова з логотипом і сайтом.',
+    text: 'Розробляємо дизайн візиток, флаєрів, буклетів та інших матеріалів у єдиному стилі бренду.',
     plans: [
       {
         name: 'Старт',

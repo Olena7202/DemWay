@@ -35,6 +35,9 @@ export function Services() {
     ? t.clusterLeads[activeCluster.label]
     : undefined
   const openClusterLabels = clusters.length > 1 || clusters.some((cluster) => !t.clusterLeads[cluster.label])
+  const firstClusterUnlabeled = Boolean(
+    activeClusterLead && clusters[0]?.label === activeCluster?.label,
+  )
 
   useEffect(() => {
     const napryam = new URLSearchParams(location.search).get('napryam')
@@ -105,7 +108,7 @@ export function Services() {
           </div>
         ) : null}
         <div
-          className={`svc-catalog__split${openClusterLabels ? '' : ' svc-catalog__split--flush'}`}
+          className={`svc-catalog__split${openClusterLabels && !firstClusterUnlabeled ? '' : ' svc-catalog__split--flush'}`}
         >
           <div
             key={group}
@@ -115,7 +118,7 @@ export function Services() {
           >
             {clusters.map((cluster, clusterIndex) => (
               <div key={cluster.label} className="teaser-cluster">
-                {clusters.length === 1 && t.clusterLeads[cluster.label] ? null : (
+                {activeClusterLead && cluster.label === activeCluster?.label ? null : (
                   <ScrollReveal delay={clusterIndex * 70}>
                     <h3 className="teaser-cluster__label">
                       {t.clusters[cluster.label] ?? cluster.label}
@@ -211,7 +214,7 @@ function ServicePlans({ service }: { service: Service }) {
             <Link className="btn btn--pink btn--slide" to={discussTo}>
               <span>
                 <span>{t.catalog.discuss}</span>
-                <span>{t.catalog.discuss}</span>
+                <span aria-hidden="true">{t.catalog.discuss}</span>
               </span>
             </Link>
           </article>

@@ -7,32 +7,36 @@ export function Why() {
   return (
     <section className="why" id="why" data-scene="why">
       <Reveal className="why__kicker">
-        <h2 className="eyebrow">{t.why.title}</h2>
+        <h2>{t.why.title}</h2>
       </Reveal>
-      <Reveal className="why__copy">
-        <div className="section-head why__head">
-          <p className="why__intro">{t.why.text}</p>
-          <h3>{t.why.lead}</h3>
-          <p>{t.why.leadText}</p>
-        </div>
+      <Reveal className="why__lede-wrap">
+        <p className="why__lede">{t.why.text}</p>
       </Reveal>
-      <ul className="why__grid">
-        {t.why.points.map((point, index) => (
-          <li key={point.title}>
-            <Reveal delay={index * 200} from="right">
-              <article className={`why__card why__card--${index + 1}`}>
-                <span
-                  className="why__planet"
-                  aria-hidden="true"
-                  style={{ backgroundImage: `url(${moon})` }}
-                />
-                <h4 className="why__card-title">{point.title}</h4>
-                <p>{point.text}</p>
-              </article>
-            </Reveal>
-          </li>
-        ))}
-      </ul>
+      <div className="why__split">
+        <Reveal className="why__copy">
+          <div className="why__head">
+            <h3>{t.why.lead}</h3>
+            <p className="why__intro">{t.why.leadText}</p>
+          </div>
+        </Reveal>
+        <ul className="why__grid">
+          {t.why.points.map((point, index) => (
+            <li key={point.title}>
+              <Reveal delay={index * 200} from="right">
+                <article className={`why__card why__card--${index + 1}`}>
+                  <span
+                    className="why__planet"
+                    aria-hidden="true"
+                    style={{ backgroundImage: `url(${moon})` }}
+                  />
+                  <h4 className="why__card-title">{point.title}</h4>
+                  <p>{point.text}</p>
+                </article>
+              </Reveal>
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   )
 }

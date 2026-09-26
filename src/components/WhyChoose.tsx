@@ -9,8 +9,8 @@ export function WhyChoose() {
     <section className="why-choose" id="why-choose" data-scene="ink">
       <Reveal once>
         <div className="why-choose__head">
-          <p className="eyebrow">{block.kicker}</p>
           <h2>{block.title}</h2>
+          <p className="why-choose__lede">{block.text}</p>
         </div>
       </Reveal>
       <ol className="why-choose__rows">
@@ -18,7 +18,7 @@ export function WhyChoose() {
           const Heading = point.heading
           return (
             <li key={point.title}>
-              <Reveal delay={index * 160} from="up" once>
+              <Reveal delay={index * 220} from="up" once>
                 <article className="reason">
                   <span className="reason__n" aria-hidden="true">
                     {index + 1}

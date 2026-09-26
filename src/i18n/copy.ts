@@ -28,6 +28,7 @@ export type Copy = {
   whyChoose: {
     kicker: string
     title: string
+    text: string
     points: { title: string; text: string; heading: 'h3' | 'h4' }[]
   }
   servicesTeaser: {
@@ -92,6 +93,7 @@ export type Copy = {
   contact: {
     kicker: string
     title: string
+    lead: string
     text: string
     notes: [string, string]
     received: string
@@ -186,7 +188,7 @@ export const copy: Record<Locale, Copy> = {
     why: {
       kicker: 'DemWay',
       title: 'Про нас',
-      text: 'DemWay - діджитал агентство, яке допомагає бізнесу вибудувати зрозумілу digital-систему без необхідності самостійно розбиратися в маркетингу. Ми поєднуємо стратегію, креатив і технології, щоб маркетингові рішення відповідали цілям бізнесу, його можливостям та бюджету.',
+      text: 'DemWay — діджитал агентство, яке допомагає бізнесу вибудувати зрозумілу digital-систему без необхідності самостійно розбиратися в маркетингу. Ми поєднуємо стратегію, креатив і технології, щоб маркетингові рішення відповідали цілям бізнесу, його можливостям та бюджету.',
       lead: 'Digital-маркетинг як система для розвитку бізнесу',
       leadText:
         'Digital-маркетинг — це не окремі рекламні інструменти, а система, у якій кожен канал працює на спільну ціль. Ми допомагаємо вибудувати послідовний шлях від першого контакту з брендом до залучення та утримання клієнта.',
@@ -204,28 +206,29 @@ export const copy: Record<Locale, Copy> = {
     whyChoose: {
       kicker: 'Чому ми',
       title: 'Чому обирають наше діджитал агентство',
+      text: 'DemWay — це не шаблонний набір маркетингових послуг. Спочатку розбираємося в задачі бізнесу, а потім пропонуємо рішення, які мають практичний сенс і відповідають доступним ресурсам. Будуємо не сайти і стратегії. Будуємо причини обрати вас.',
       points: [
         {
           title: 'Рішення під конкретний бізнес',
           heading: 'h3',
-          text: 'Не шаблон «для всіх». Сайт, SEO і рекламу збираємо під нішу, продукт і бюджет.',
+          text: 'Ви знаєте, яким має бути ваш бізнес. Ми знаємо, як допомогти це реалізувати. Не використовуємо однаковий підхід для всіх, а враховуємо кожне важливе побажання та відкрито обговорюємо рішення.',
         },
         {
           title: 'Прозорий процес роботи',
           heading: 'h4',
-          text: 'Дедлайни й зона відповідальності зрозумілі. Не обіцяємо неможливе і не зникаємо після запуску.',
+          text: 'Ви розумієте, що ми робимо, навіщо це потрібно та на якому етапі перебуває проєкт. Відкрито комунікуємо щодо процесу та тримаємо вас у курсі результатів.',
         },
         {
           title: 'Орієнтація на результат',
           heading: 'h4',
-          text: 'Кожен інструмент працює на заявки, продажі й розвиток, а не на «просто бути в інтернеті».',
+          text: 'Зосереджуємося не лише на виконанні завдань, а й на тому, який результат вони приносять бізнесу.',
         },
       ],
     },
     servicesTeaser: {
       kicker: 'Послуги',
       title: 'Послуги діджитал агентства',
-      text: 'Ми зібрали ключові маркетингові послуги в одному місці, щоб бізнесу не доводилося збирати діджитал по частинках. Від створення сайту та SEO-оптимізації до реклами та ремаркетингу - будуємо систему, де кожен інструмент працює на спільну ціль.',
+      text: 'Ми зібрали ключові маркетингові послуги в одному місці, щоб бізнесу не доводилося збирати діджитал по частинках. Від створення сайту та SEO-оптимізації до реклами та ремаркетингу — будуємо систему, де кожен канал працює на спільну ціль.',
       catalog: 'Увесь каталог пакетів',
       openTab: 'Відкрити вкладку «{name}» і подивитись пакети',
       go: 'Відкрити вкладку з пакетами',
@@ -233,7 +236,7 @@ export const copy: Record<Locale, Copy> = {
     openingOffers: {
       kicker: 'Пакети',
       title: 'Оберіть формат запуску',
-      text: 'Не збирайте сайт, рекламу і SEO з окремих послуг. Три готові збірки зі знижкою 15% - під етап, на якому зараз ваш бізнес.',
+      text: 'Не збирайте сайт, рекламу і SEO з окремих послуг. Три готові збірки зі знижкою 15% — під етап, на якому зараз ваш бізнес.',
       includes: 'Що входить',
       resultLabel: 'Результат',
       save: '−15%',
@@ -287,6 +290,7 @@ export const copy: Record<Locale, Copy> = {
       SEO: 'SEO',
       Реклама: 'Реклама',
       Системи: 'Системи',
+      Айдентика: 'Айдентика',
     },
     clusters: {
       'Новий сайт': 'Новий сайт',
@@ -298,6 +302,7 @@ export const copy: Record<Locale, Copy> = {
       'Email-маркетинг': 'Email-маркетинг',
       Системи: 'Системи',
       'CRM та автоматизація': 'CRM та автоматизація',
+      Айдентика: 'Айдентика',
       Бренд: 'Бренд',
     },
     clusterLeads: {
@@ -313,6 +318,10 @@ export const copy: Record<Locale, Copy> = {
         'Будуємо digital-системи, які спрощують роботу з клієнтами, продажами та маркетингом. Поєднуємо інструменти так, щоб дані не залишалися окремо в різних сервісах.',
       'CRM та автоматизація':
         'Структуруємо процес роботи з потенційними клієнтами, щоб жодна заявка не губилася, а команда розуміла, на якому етапі перебуває кожен контакт.',
+      Айдентика:
+        'Створюємо впізнаваний візуальний образ бренду, який допомагає виділятися та послідовно працює в digital та офлайн-комунікації.',
+      Бренд:
+        'Створюємо цілісний образ бренду — від візуальної подачі до деталей, які допомагають компанії виділятися серед конкурентів, залишатися впізнаваною та запам’ятатись клієнтам.',
     },
     groupLeads: {
       Сайти:
@@ -324,6 +333,8 @@ export const copy: Record<Locale, Copy> = {
         'Запускаємо рекламу там, де потенційні клієнти вже шукають рішення або взаємодіють із брендами. Підбираємо рекламні канали відповідно до цілей, аудиторії та доступного бюджету.',
       Системи:
         'Будуємо digital-системи, які спрощують роботу з клієнтами, продажами та маркетингом. Поєднуємо інструменти так, щоб дані не залишалися окремо в різних сервісах.',
+      Айдентика:
+        'Створюємо впізнаваний візуальний образ бренду, який допомагає виділятися та послідовно працює в digital та офлайн-комунікації.',
     },
     teaserBlurbs: {
       Сайти: 'Лендінг, візитка чи каталог — сайт під заявку й запуск реклами.',
@@ -353,74 +364,75 @@ export const copy: Record<Locale, Copy> = {
         {
           title: 'Аналіз бізнесу та цілей',
           heading: 'h3',
-          text: 'Обговорюємо бізнес, продукт, цілі й очікування. Фіксуємо, що має змінитись після запуску.',
+          text: 'Вивчаємо бізнес, його аудиторію, конкурентів, поточну digital-присутність і цілі. Будуємо маркетингові рішення, які відповідають реальним потребам вашого бізнесу.',
         },
         {
           title: 'Формування digital-стратегії',
           heading: 'h4',
-          text: 'Обираємо пріоритети: лендінг, CRM, SEO чи реклама. План робіт і терміни — до першого макета.',
+          text: 'Визначаємо основні цілі, точки росту та послідовність дій. Формуємо digital-стратегію, яка враховує ресурси бізнесу та потенціал кожного каналу.',
         },
         {
           title: 'Вибір каналів просування',
           heading: 'h4',
-          text: 'Дивимось нішу, конкурентів, попит і поточні канали. Без цього не збираємо архітектуру навмання.',
+          text: 'Підбираємо канали та інструменти не за принципом «треба бути всюди», а відповідно до цільової аудиторії, цілей та бюджету.',
         },
         {
           title: 'Реалізація та запуск',
           heading: 'h3',
-          text: 'Дизайн, збірка, інтеграції, креативи. Публікуємо, підключаємо форми, касу, рекламу — система починає збирати заявки.',
+          text: 'Перетворюємо стратегію на конкретні дії — створюємо, налаштовуємо інструменти, запускаємо кампанії та контролюємо їхню роботу.',
         },
         {
           title: 'A/B тестування',
           heading: 'h4',
-          text: 'Перевіряємо гіпотези на живих сторінках і креативах. Лишаємо те, що дає заявки, а не «гарніше виглядає».',
+          text: 'Порівнюємо різні варіанти рекламних креативів, сторінок або комунікації, щоб визначити, які рішення краще працюють на поставлену ціль.',
         },
         {
           title: 'Оптимізація результатів',
           heading: 'h4',
-          text: 'Міряємо заявки, видимість, угоди. Тестуємо й підкручуємо, щоб ріст не зупинявся після старту.',
+          text: 'Аналізуємо отримані дані та вдосконалюємо кампанії, щоб покращувати їхню ефективність.',
         },
       ],
     },
     faq: {
       kicker: 'FAQ',
-      title: 'Питання, які часто задають',
+      title: 'Часті запитання',
       text: 'Коротко про запуск, строки й комунікацію. Якщо вашого питання немає — напишіть у форму, відповімо в той самий канал.',
       items: [
         {
           q: 'Як почати працювати з DemWay?',
-          a: 'Напишіть задачу в формі нижче або через Telegram: хто ви, що вже є і що має зʼявитись після запуску. Відповідаємо в обраний канал, уточнюємо обсяг і строки — далі прорахунок. Без шаблонної презентації й довгої анкети.',
+          a: 'Розкажіть нам про свій бізнес, поточну ситуацію та завдання в формі нижче. Ми проаналізуємо запит, запропонуємо можливі рішення та визначимо оптимальний формат подальшої роботи.',
         },
         {
           q: 'Який термін реалізації проєкту?',
-          a: 'Все залежить від послуги та обсягу роботи. Після першої консультації ми формуємо чіткий план, етапи роботи та погоджуємо терміни. Якщо йдеться про комплексний маркетинговий супровід, це системна довгострокова робота з регулярним аналізом і коригуванням стратегії.',
+          a: 'Термін залежить від обсягу завдання, формату проєкту та кількості робіт. Перед стартом погоджуємо етапи й орієнтовні строки, щоб ви розуміли, коли очікувати результат. Якщо йдеться про комплексний маркетинговий супровід, це системна довгострокова робота з регулярним аналізом і коригуванням стратегії.',
         },
         {
           q: 'Як відбувається комунікація?',
-          a: 'Комунікація відбувається у спільному робочому чаті, де погоджуємо матеріали, обговорюємо поточні задачі та оперативно вирішуємо робочі питання. Ви завжди розумієте, що зараз у роботі та на якому етапі знаходиться проєкт.',
+          a: 'Узгоджуємо зручний для вас канал комунікації та підтримуємо звʼязок протягом усього проєкту. Важливі рішення, етапи та результати фіксуємо прозоро й зрозуміло. Ви завжди розумієте, що зараз у роботі та на якому етапі знаходиться проєкт.',
         },
         {
           q: 'Як формується бюджет?',
-          a: 'Спочатку обсяг і строки, потім цифри. Пакети в каталозі — орієнтир. Фінальна сума залежить від інтеграцій, контенту й того, чи беремо одну послугу, чи систему. Після узгодження без прихованих доплат.',
+          a: 'Вартість залежить від завдань, обсягу робіт і складності проєкту. Спочатку визначаємо, що саме потрібно бізнесу, а потім формуємо пропозицію без навʼязування непотрібних послуг.',
         },
         {
-          q: 'Чи можна замовити одну послугу, а не повний пакет?',
-          a: 'Так. Можна стартувати з лендінгу, SEO, реклами, CRM або айдентики. Якщо далі знадобиться повний контур — зберемо його навколо вже зробленого, без перезапуску з нуля.',
+          q: 'Чи можна замовити окрему послугу, а не повний пакет?',
+          a: 'Так. Не обовʼязково замовляти комплексне ведення digital-маркетингу. Ви можете звернутися за окремою послугою. Якщо далі знадобиться повний контур — зберемо його навколо вже зробленого, без перезапуску з нуля.',
         },
         {
-          q: 'Є ідея, але немає чіткого розуміння,яким має бути мій бренд. Що робити?',
-          a: 'Короткий опис бізнесу, доступ до поточних каналів, якщо вони вже є, і людина з вашого боку для швидких рішень. Тексти й фото можемо зібрати разом. Ідеальне ТЗ не чекаємо.',
+          q: 'Є ідея, але немає чіткого розуміння, яким має бути мій бренд. Що робити?',
+          a: 'Не обовʼязково приходити з готовим рішенням. Ми допоможемо структурувати ідею, визначити напрям і перетворити задум на бренд, який обирають.',
         },
         {
           q: 'Які результати очікувати від співпраці?',
-          a: 'Працююча точка входу для клієнтів, зрозумілий канал заявок і план, що робити далі. Цифри залежать від ніші й бюджету — фіксуємо після старту, без обіцянок «гарантованих продажів».',
+          a: 'Результат залежить від обраних цілей, інструментів і стартової ситуації бізнесу. Ми визначаємо показники на початку роботи та аналізуємо динаміку, щоб розуміти, що працює, а що потребує оптимізації.',
         },
       ],
     },
     contact: {
       kicker: 'Контакти',
-      title: 'Напишіть задачу — зберемо прорахунок',
-      text: 'Без анкети на два екрани. Коротко: хто ви, що треба запустити, як зручно відповісти.',
+      title: 'Контакти',
+      lead: 'Заповніть коротку форму, щоб зв’язатись з нами',
+      text: 'Є ідея, проблема або просто хочете покращити онлайн-присутність? Розкажіть нам про свій проєкт — разом визначимо, з чого варто почати.',
       notes: [
         'Відповідаємо в той самий канал, який оберете.',
         'Спочатку обсяг і строки, потім цифри — без шаблонної презентації.',
@@ -579,22 +591,23 @@ export const copy: Record<Locale, Copy> = {
     },
     whyChoose: {
       kicker: 'Why us',
-      title: 'Why choose DemWay',
+      title: 'Why choose our digital agency',
+      text: 'DemWay is not a template pack of marketing services. First we understand the business task, then we offer solutions that make practical sense and fit the resources you have. We do not just build websites and strategies. We build reasons to choose you.',
       points: [
         {
           title: 'Built for your business',
           heading: 'h3',
-          text: 'Not a template pack. Site, SEO and ads match your niche, product and budget.',
+          text: 'You know what your business should be. We know how to help make it real. We do not use the same approach for everyone: we take each important request into account and discuss decisions openly.',
         },
         {
           title: 'A transparent process',
           heading: 'h4',
-          text: 'Deadlines and ownership stay clear. We do not promise the impossible or disappear after launch.',
+          text: 'You understand what we are doing, why it matters, and where the project stands. We communicate openly about the process and keep you in the loop on results.',
         },
         {
           title: 'Focused on results',
           heading: 'h4',
-          text: 'Every tool works toward leads, sales and growth — not just being online.',
+          text: 'We focus not only on completing tasks, but on the result those tasks bring to the business.',
         },
       ],
     },
@@ -663,6 +676,7 @@ export const copy: Record<Locale, Copy> = {
       SEO: 'SEO',
       Реклама: 'Ads',
       Системи: 'Systems',
+      Айдентика: 'Identity',
     },
     clusters: {
       'Новий сайт': 'New site',
@@ -674,6 +688,7 @@ export const copy: Record<Locale, Copy> = {
       'Email-маркетинг': 'Email marketing',
       Системи: 'Systems',
       'CRM та автоматизація': 'CRM and automation',
+      Айдентика: 'Identity',
       Бренд: 'Brand',
     },
     clusterLeads: {
@@ -689,6 +704,10 @@ export const copy: Record<Locale, Copy> = {
         'We build digital systems that make work with clients, sales and marketing simpler. We connect tools so data does not sit apart in different services.',
       'CRM та автоматизація':
         'We structure how you work with potential clients so no lead is lost and the team can see which stage each contact is at.',
+      Айдентика:
+        'We create a recognizable visual brand that helps you stand out and works consistently in digital and offline communication.',
+      Бренд:
+        'We build a coherent brand image — from visual presentation to the details that help the company stand out from competitors, stay recognizable and stick in the client’s memory.',
     },
     groupLeads: {
       Сайти:
@@ -700,6 +719,8 @@ export const copy: Record<Locale, Copy> = {
         'We run ads where potential clients already look for a solution or engage with brands. We pick channels to match goals, audience and budget.',
       Системи:
         'We build digital systems that make work with clients, sales and marketing simpler. We connect tools so data does not sit apart in different services.',
+      Айдентика:
+        'We create a recognizable visual brand that helps you stand out and works consistently in digital and offline communication.',
     },
     teaserBlurbs: {
       Сайти: 'Landing, brochure or catalog — a site built for leads and ads.',
@@ -729,70 +750,75 @@ export const copy: Record<Locale, Copy> = {
         {
           title: 'Business and goals analysis',
           heading: 'h3',
-          text: 'We talk through the business, product, goals and expectations. We lock what should change after launch.',
+          text: 'We study the business, its audience, competitors, current digital presence and goals. We build marketing decisions that match the real needs of your business.',
         },
         {
-          title: 'Digital strategy',
+          title: 'Building a digital strategy',
           heading: 'h4',
-          text: 'We pick priorities: landing, CRM, SEO or ads. Scope and timeline — before the first mockup.',
+          text: 'We define core goals, growth points and the sequence of actions. We form a digital strategy that accounts for business resources and the potential of each channel.',
         },
         {
           title: 'Choosing promotion channels',
           heading: 'h4',
-          text: 'We look at the niche, competitors, demand and current channels. No architecture on a guess.',
+          text: 'We pick channels and tools not by the “be everywhere” rule, but according to the target audience, goals and budget.',
         },
         {
           title: 'Delivery and launch',
           heading: 'h3',
-          text: 'Design, development, integrations, creatives. We publish, connect forms, checkout and ads so the system starts collecting inquiries.',
+          text: 'We turn strategy into concrete actions — we create, set up tools, launch campaigns and keep their work under control.',
         },
         {
           title: 'A/B testing',
           heading: 'h4',
-          text: 'We test hypotheses on live pages and creatives. We keep what brings inquiries, not what merely looks better.',
+          text: 'We compare variants of ad creatives, pages or communication to see which decisions work better toward the stated goal.',
         },
         {
           title: 'Result optimization',
           heading: 'h4',
-          text: 'We measure leads, visibility, deals. Then we test and tune so growth does not stop after go-live.',
+          text: 'We analyse the data we get and refine campaigns to improve their performance.',
         },
       ],
     },
     faq: {
       kicker: 'FAQ',
-      title: 'Questions people ask before we start',
+      title: 'Frequently asked questions',
       text: 'A short take on kickoff, timelines and communication. If yours is missing — write in the form and we reply in the same channel.',
       items: [
         {
           q: 'How do we start working with DemWay?',
-          a: 'Write in the form below or on Telegram: who you are, what you already have, and what should exist after launch. We reply in the channel you pick, clarify scope and timeline, then send an estimate. No pitch deck, no long form.',
+          a: 'Tell us about your business, the current situation and the task in the form below. We will review the request, suggest possible solutions and define the best format for the next steps.',
         },
         {
           q: 'How long does a project take?',
-          a: 'It depends on the service and the scope of work. After the first consultation we put together a clear plan, work stages and agreed timelines. Ongoing marketing support is long-term systemic work, with regular analysis and strategy adjustments.',
+          a: 'The timeline depends on the scope, the project format and the amount of work. Before we start we agree on stages and estimated dates so you know when to expect a result. Ongoing marketing support is long-term systemic work, with regular analysis and strategy adjustments.',
         },
         {
           q: 'How does communication work?',
-          a: 'We work in a shared project chat: we approve materials, discuss current tasks and resolve day-to-day questions quickly. You always know what is in progress and which stage the project is at.',
+          a: 'We agree on a channel that works for you and stay in touch throughout the project. Key decisions, stages and results are recorded clearly. You always know what is in progress and which stage the project is at.',
         },
         {
           q: 'How is the budget set?',
-          a: 'Scope and timeline first, then numbers. Catalog packages are a guide. The final sum depends on integrations, content and whether we take one service or a full system. No hidden extras after we agree.',
+          a: 'Cost depends on the tasks, the scope of work and the complexity of the project. First we define what the business actually needs, then we make an offer without pushing extra services.',
         },
         {
-          q: 'Can I order one service, not a full system?',
-          a: 'Yes. You can start with a landing page, SEO, ads, CRM or identity. If you later need the full loop, we build it around what is already done — without starting from scratch.',
+          q: 'Can I order a single service, not a full package?',
+          a: 'Yes. You do not have to order full-cycle digital marketing. You can come for a single service. If you later need the full loop, we build it around what is already done — without starting from scratch.',
         },
         {
-          q: 'What do you need from me to start?',
-          a: 'A short description of the business, access to current channels if they exist, and someone on your side for fast decisions. Copy and photos we can gather together. We do not wait for a perfect spec.',
+          q: 'I have an idea, but no clear picture of what my brand should be. What should I do?',
+          a: 'You do not need to arrive with a finished solution. We help structure the idea, set a direction and turn the concept into a brand people choose.',
+        },
+        {
+          q: 'What results should I expect from working together?',
+          a: 'The result depends on the goals you set, the tools we use and where the business starts. We define metrics at the beginning and track the dynamics so we can see what works and what needs to be optimized.',
         },
       ],
     },
     contact: {
       kicker: 'Contact',
-      title: 'Write the task — we will estimate the work',
-      text: 'No two-screen questionnaire. Short: who you are, what to launch, how to reply.',
+      title: 'Contact',
+      lead: 'Fill in a short form to get in touch',
+      text: 'Have an idea, a problem, or just want to improve your online presence? Tell us about your project — together we will decide where to start.',
       notes: [
         'We reply in the same channel you choose.',
         'Scope and timeline first, then numbers — no template pitch.',

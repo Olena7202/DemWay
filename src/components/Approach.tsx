@@ -150,6 +150,9 @@ export function Approach() {
     return () => stage.removeEventListener('scroll', sync)
   }, [reduced, phone, steps.length])
 
+  const stepHeading = (step: (typeof steps)[number]) =>
+    step.heading === 'h4' ? <h4>{step.title}</h4> : <h3>{step.title}</h3>
+
   if (reduced) {
     return (
       <section className="approach approach--plain" id="approach" data-scene="ink">
@@ -162,7 +165,7 @@ export function Approach() {
             <li key={step.n}>
               <article className="step-card">
                 <span>{step.n}</span>
-                {step.heading === 'h4' ? <h4>{step.title}</h4> : <h3>{step.title}</h3>}
+                {stepHeading(step)}
                 <p>{step.text}</p>
               </article>
             </li>
@@ -200,11 +203,7 @@ export function Approach() {
                       <span className="approach-slide__ghost" aria-hidden="true">
                         {step.n}
                       </span>
-                      {step.heading === 'h4' ? (
-                        <h4>{step.title}</h4>
-                      ) : (
-                        <h3>{step.title}</h3>
-                      )}
+                      {stepHeading(step)}
                       <p>{step.text}</p>
                     </article>
                   </li>
@@ -215,10 +214,7 @@ export function Approach() {
             <div className="approach-nav" aria-hidden="true">
               <ol className="approach-dots">
                 {steps.map((step, index) => (
-                  <li
-                    key={step.n}
-                    className={index === active ? 'is-on' : ''}
-                  />
+                  <li key={step.n} className={index === active ? 'is-on' : ''} />
                 ))}
               </ol>
               <div className="approach-progress">
