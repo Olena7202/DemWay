@@ -20,7 +20,6 @@ export type Copy = {
   why: {
     kicker: string
     title: string
-    lead: string
     text: string
     points: { title: string; text: string }[]
   }
@@ -175,7 +174,7 @@ export const copy: Record<Locale, Copy> = {
     },
     hero: {
       titleName: 'DemWay-',
-      titleAgency: 'digital-агенція повного циклу.',
+      titleAgency: 'digital-агенція повного циклу',
       lede: 'Кожне рішення будуємо навколо вашого бізнесу: сайти й лендінги, CRM, пошук, реклама та айдентика — від першого контакту до покупки.',
       discuss: 'Обговорити задачу',
       cases: 'Дивитись послуги',
@@ -183,20 +182,19 @@ export const copy: Record<Locale, Copy> = {
     why: {
       kicker: 'DemWay',
       title: 'Про нас',
-      lead: 'Digital-маркетинг як система для розвитку бізнесу',
-      text: 'Ми створюємо сайти та лендінги, впроваджуємо CRM-рішення, працюємо з SEO та рекламою, формуємо айдентику бренду. Кожне рішення будуємо навколо вашого бізнесу, його цілей і шляху клієнта - від першого контакту до покупки.',
+      text: 'DemWay — діджитал агентство, яке допомагає бізнесу вибудувати зрозумілу digital-систему без необхідності самостійно розбиратися в маркетингу. Ми поєднуємо стратегію, креатив і технології, щоб маркетингові рішення відповідали цілям бізнесу, його можливостям та бюджету.',
       points: [
         {
+          title: 'Digital-маркетинг як система для розвитку бізнесу',
+          text: 'Digital-маркетинг — це не окремі рекламні інструменти, а система, у якій кожен канал працює на спільну ціль. Ми допомагаємо вибудувати послідовний шлях від першого контакту з брендом до залучення та утримання клієнта.',
+        },
+        {
           title: 'Для кого ми працюємо',
-          text: 'Для малого й середнього бізнесу, якому потрібні сайт, реклама й SEO як одна система — не розрізнені послуги «на потім».',
+          text: 'Працюємо з бізнесами, які хочуть розвиватись онлайн, але не мають власного маркетолога або чіткого digital-плану. Допомагаємо як новим проєктам, так і компаніям, які прагнуть оновити сайт, покращити просування чи систематизувати маркетинг.',
         },
         {
           title: 'Від ідеї до результату з чіткою стратегією',
-          text: 'Спочатку ціль і етапи, потім дизайн і запуск. Ви бачите план, строки й що буде на виході — без хаотичних правок по дорозі.',
-        },
-        {
-          title: 'Результат',
-          text: 'Заявки, продажі й ріст, а не «просто сайт». Кожен інструмент працює на конкретну бізнес-ціль, яку фіксуємо на старті.',
+          text: 'Не просто виконуємо окремі завдання, а формуємо стратегію, визначаємо пріоритети й підбираємо маркетингові рішення, які відповідають вашим цілям та бюджету.',
         },
       ],
     },
@@ -318,27 +316,33 @@ export const copy: Record<Locale, Copy> = {
       title: 'Наш підхід до роботи',
       steps: [
         {
-          title: 'Знайомство',
+          title: 'Аналіз бізнесу та цілей',
+          heading: 'h3',
           text: 'Обговорюємо бізнес, продукт, цілі й очікування. Фіксуємо, що має змінитись після запуску.',
         },
         {
-          title: 'Аналіз',
-          text: 'Дивимось нішу, конкурентів, попит і поточні канали. Без цього не збираємо архітектуру навмання.',
-        },
-        {
-          title: 'Стратегія',
+          title: 'Формування digital-стратегії',
+          heading: 'h4',
           text: 'Обираємо пріоритети: лендінг, CRM, SEO чи реклама. План робіт і терміни — до першого макета.',
         },
         {
-          title: 'Реалізація',
-          text: 'Дизайн, збірка, інтеграції, креативи. Віддаємо робочий продукт, а не концепт на слайді.',
+          title: 'Вибір каналів просування',
+          heading: 'h4',
+          text: 'Дивимось нішу, конкурентів, попит і поточні канали. Без цього не збираємо архітектуру навмання.',
         },
         {
-          title: 'Запуск',
-          text: 'Публікуємо, підключаємо форми, касу, рекламу. Система починає збирати заявки.',
+          title: 'Реалізація та запуск',
+          heading: 'h3',
+          text: 'Дизайн, збірка, інтеграції, креативи. Публікуємо, підключаємо форми, касу, рекламу — система починає збирати заявки.',
         },
         {
-          title: 'Аналіз і розвиток',
+          title: 'A/B тестування',
+          heading: 'h4',
+          text: 'Перевіряємо гіпотези на живих сторінках і креативах. Лишаємо те, що дає заявки, а не «гарніше виглядає».',
+        },
+        {
+          title: 'Оптимізація результатів',
+          heading: 'h4',
           text: 'Міряємо заявки, видимість, угоди. Тестуємо й підкручуємо, щоб ріст не зупинявся після старту.',
         },
       ],
@@ -515,7 +519,7 @@ export const copy: Record<Locale, Copy> = {
     },
     hero: {
       titleName: 'DemWay-',
-      titleAgency: 'full-cycle digital agency.',
+      titleAgency: 'full-cycle digital agency',
       lede: 'Every solution is built around your business: websites and landing pages, CRM, search, ads and identity — from first contact to purchase.',
       discuss: 'Discuss a project',
       cases: 'See services',
@@ -523,20 +527,19 @@ export const copy: Record<Locale, Copy> = {
     why: {
       kicker: 'DemWay',
       title: 'About us',
-      lead: 'Digital marketing as a system for business growth',
-      text: 'We build websites and landing pages, implement CRM, work with SEO and ads, and shape brand identity. Each decision is built around your business, its goals and the customer path — from first contact to purchase.',
+      text: 'DemWay is a digital agency that helps businesses build a clear digital system without having to figure out marketing on their own. We combine strategy, creative and technology so marketing decisions match the business goals, capacity and budget.',
       points: [
         {
+          title: 'Digital marketing as a system for business growth',
+          text: 'Digital marketing is not a set of separate ad tools, but a system where every channel works toward one goal. We help build a consistent path from the first contact with the brand to attracting and retaining the client.',
+        },
+        {
           title: 'Who we work with',
-          text: 'Owners and teams that need a site, ads and SEO as one system — not separate services “for later”.',
+          text: 'We work with businesses that want to grow online but do not have an in-house marketer or a clear digital plan. We help both new projects and companies that want to refresh a site, improve promotion or systematize marketing.',
         },
         {
           title: 'From idea to result with a clear strategy',
-          text: 'Goal and stages first, then design and launch. You see the plan, timeline and outcome — no random edits along the way.',
-        },
-        {
-          title: 'Results',
-          text: 'Leads, sales and growth, not “just a website”. Every tool serves the business goal we lock in at kickoff.',
+          text: 'We do not just execute separate tasks: we form a strategy, set priorities and pick marketing solutions that match your goals and budget.',
         },
       ],
     },
@@ -655,30 +658,36 @@ export const copy: Record<Locale, Copy> = {
     },
     approach: {
       kicker: 'Approach',
-      title: 'From the first call to a working system',
+      title: 'Our approach to work',
       steps: [
         {
-          title: 'Intro',
+          title: 'Business and goals analysis',
+          heading: 'h3',
           text: 'We talk through the business, product, goals and expectations. We lock what should change after launch.',
         },
         {
-          title: 'Research',
-          text: 'We look at the niche, competitors, demand and current channels. No architecture on a guess.',
-        },
-        {
-          title: 'Strategy',
+          title: 'Digital strategy',
+          heading: 'h4',
           text: 'We pick priorities: landing, CRM, SEO or ads. Scope and timeline — before the first mockup.',
         },
         {
-          title: 'Build',
-          text: 'Design, development, integrations, creatives. You get a working product, not a slide deck.',
+          title: 'Choosing promotion channels',
+          heading: 'h4',
+          text: 'We look at the niche, competitors, demand and current channels. No architecture on a guess.',
         },
         {
-          title: 'Launch',
-          text: 'We publish, connect forms, checkout and ads. The system starts collecting inquiries.',
+          title: 'Delivery and launch',
+          heading: 'h3',
+          text: 'Design, development, integrations, creatives. We publish, connect forms, checkout and ads so the system starts collecting inquiries.',
         },
         {
-          title: 'Grow',
+          title: 'A/B testing',
+          heading: 'h4',
+          text: 'We test hypotheses on live pages and creatives. We keep what brings inquiries, not what merely looks better.',
+        },
+        {
+          title: 'Result optimization',
+          heading: 'h4',
           text: 'We measure leads, visibility, deals. Then we test and tune so growth does not stop after go-live.',
         },
       ],

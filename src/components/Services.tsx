@@ -141,9 +141,6 @@ export function Services() {
           {current ? (
             <div key={current.slug} className="svc-picked" id="svc-detail">
               <header className="section-head svc-detail__head">
-                <p className="svc-detail__code">
-                  {t.groups[group]} · {t.catalog.picked}
-                </p>
                 <p className="svc-detail__title">{localizeService(current, locale).title}</p>
                 <p>{localizeService(current, locale).text}</p>
               </header>
@@ -175,15 +172,23 @@ function ServicePlans({ service }: { service: Service }) {
             key={plan.name}
             className={`plan${planIndex === 0 ? ' plan--base' : ''}`}
           >
-            {plan.name ? <p className="plan__name">{plan.name}</p> : null}
+            {plan.name || plan.term ? (
+              <p className="plan__meta">
+                {plan.name ? <span className="plan__name">{plan.name}</span> : null}
+                {plan.name && plan.term ? (
+                  <span className="plan__sep" aria-hidden="true">
+                    ·
+                  </span>
+                ) : null}
+                {plan.term ? (
+                  <span className="plan__term">
+                    {t.catalog.term} {plan.term}
+                  </span>
+                ) : null}
+              </p>
+            ) : null}
             {hintWithPrice && plan.note ? (
               <p className="plan__hint">{plan.note}</p>
-            ) : null}
-            {plan.term ? (
-              <p className="plan__term">
-                <span>{t.catalog.term}</span>
-                {plan.term}
-              </p>
             ) : null}
             {plan.items.length ? (
               <PlanItems key={`${service.slug}-${plan.name}`} slug={service.slug} items={plan.items} />
